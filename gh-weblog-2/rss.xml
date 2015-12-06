@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Sun, 06 Dec 2015 22:18:54 GMT</lastBuildDate>
-<pubDate>Sun, 06 Dec 2015 22:18:54 GMT</pubDate>
+<lastBuildDate>Sun, 06 Dec 2015 22:18:58 GMT</lastBuildDate>
+<pubDate>Sun, 06 Dec 2015 22:18:58 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> OpenType: what's the difference between TTF and OTF??</title>
@@ -29,6 +29,7 @@
 &lt;p&gt;In order to just get these posts out I'm going to keep some of them short, and this is one of the shorter ones, but rest assured that there's a lot to say about OpenType fonts, including how little most people know about them. And that's not an indictment, unless it's people espousing the virtue of one over the other without even realising they're both just OpenType fonts, only differing in the outline language, which is a large part of, but most certainly not the definitive aspect of, modern fonts.&lt;/p&gt;
 &lt;p&gt;Next time I'll try to go into that statement a bit more: modern OpenType fonts are pretty dang complex pieces of software, and you could take the outline shapes for granted and still have a lot of amazingly detailed and rich data left to work with.&lt;/p&gt;
 </description>
+<category>Fonts</category>
 <category>OpenType</category>
 <category>TrueType</category>
 <category>Type2</category>
