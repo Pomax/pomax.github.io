@@ -3003,7 +3003,7 @@ module.exports = React.createClass({displayName: "exports",
           React.createElement("h1", null, React.createElement("a", {href: entryURL}, this.state.title)), 
           React.createElement("h2", null, "Originally posted on ", posted, ", last updated on ", updated)
         ), 
-        React.createElement(MarkDown, {ref: "markdown", hidden: this.state.editing, text: this.state.postdata, onClick: this.edit}), 
+        React.createElement(MarkDown, {ref: "markdown", hidden: this.state.editing, text: this.state.postdata, onClick: this.edit, unfold: this.unfold}), 
         React.createElement(Editor, {ref: "editor", hidden: !this.state.editing, text: text, update: this.update, view: this.view, delete: this.delete}), 
         React.createElement("a", {className: "comments", href: this.props.issues}, "leave a comment on github"), 
         React.createElement(Tags, {disabled: !this.props.editable, tags: this.state.tags, onChange: this.updateTags}), 
@@ -3093,6 +3093,13 @@ var React = (window.React);
 var marked = require("../bower_components/marked/lib/marked");
 
 module.exports = React.createClass({displayName: "exports",
+  componentDidMount: function(prevProps, prevState) {
+    // FIXME: this should be a controlled setting
+    var nd = this.refs.post.getDOMNode();
+    if (nd.children < 8) {
+      this.props.unfold();
+    }
+  },
   render: function() {
     var html = {__html: marked(this.props.text)};
     return React.createElement("div", {ref: "post", 
