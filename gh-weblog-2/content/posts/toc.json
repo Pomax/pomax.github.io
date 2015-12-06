@@ -851,7 +851,7 @@
     "title": " Bezier curves are not invariant under conformal mapping",
     "created": 1449335750620,
     "published": 1449335750620,
-    "updated": 1449338541025,
+    "updated": 1449423564937,
     "tags": [
       "Maths",
       "Bezier Curves"
@@ -867,7 +867,14 @@
       "Github",
       "Blog",
       "Rebuilds"
-    ],
-    "folded": false
+    ]
+  },
+  "2015-12-06-21-41-55": {
+    "id": "2015-12-06-21-41-55",
+    "title": " OpenType: what's the difference between TTF and OTF??",
+    "created": 1449438115186,
+    "published": 1449438115186,
+    "updated": 1449439971288,
+    "tags": []
   }
 }
