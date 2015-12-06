@@ -2974,7 +2974,7 @@ module.exports = React.createClass({displayName: "exports",
       tags: [],
       editing: false,
       postdata: "",
-      folded: (!this.props.singleton && !this.props.authenticated)
+      folded: !this.props.editable
     };
   },
 
@@ -2984,6 +2984,7 @@ module.exports = React.createClass({displayName: "exports",
     this.setState(state, function() {
       var ccount = this.refs.markdown.getChildCount();
       if (this.state.folded && ccount < 8) {
+        console.log("unfolding "+this.state.title+" ("+ccount+" children)");
         this.unfold();
       }
     });
@@ -3000,10 +3001,9 @@ module.exports = React.createClass({displayName: "exports",
     }
     var posted = (new Date(this.state.published)).toLocaleString();
     var updated = (new Date(this.state.updated)).toLocaleString();
-    var folded = this.state.folded;
 
     return (
-      React.createElement("div", {className: classnames("entry", {folded: folded}), id: id}, 
+      React.createElement("div", {className: classnames("entry", {folded: this.state.folded}), id: id}, 
         deletebutton, 
         React.createElement("header", null, 
           React.createElement("h1", null, React.createElement("a", {href: entryURL}, this.state.title)), 
@@ -3013,7 +3013,7 @@ module.exports = React.createClass({displayName: "exports",
         React.createElement(Editor, {ref: "editor", hidden: !this.state.editing, text: text, update: this.update, view: this.view, delete: this.delete}), 
         React.createElement("a", {className: "comments", href: this.props.issues}, "leave a comment on github"), 
         React.createElement(Tags, {disabled: !this.props.editable, tags: this.state.tags, onChange: this.updateTags}), 
-         folded ? React.createElement("div", {className: "viewmore"}, React.createElement("button", {onClick: this.unfold}, "View the rest of this post")) : false
+         this.state.folded ? React.createElement("div", {className: "viewmore"}, React.createElement("button", {onClick: this.unfold}, "View the rest of this post")) : false
       )
     );
   },
@@ -3340,8 +3340,6 @@ module.exports = React.createClass({displayName: "exports",
                     metadata: entry.metadata, 
                     postdata: entry.postdata, 
                     editable: !self.state.singleton && self.state.authenticated, 
-                    authenticated: self.state.authenticated, 
-                    singleton: self.state.singleton, 
                     runProcessors: self.runProcessors, 
                     onSave: self.save, 
                     onDelete: self.delete});
