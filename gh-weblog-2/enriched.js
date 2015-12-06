@@ -3798,7 +3798,12 @@ module.exports = {
       console.log("rebinding path as " + path);
     }
     var settings = window.localStorage[this.settingsName];
-    if(!settings) return false;
+    if(!settings) {
+      if (window.WebLogSettings) {
+        return window.WebLogSettings;
+      }
+      return false;
+    }
     settings = JSON.parse(settings);
     settings.path = path;
     return settings;
