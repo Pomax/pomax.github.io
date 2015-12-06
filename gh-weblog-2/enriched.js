@@ -3115,6 +3115,7 @@ var Navigation = React.createClass({displayName: "Navigation",
     var component = this;
     var xhr = new XMLHttpRequest();
     var settings = this.getSettings();
+    console.log("nav setting", settings);
     var url = settings.path + "/content/posts/toc.json";
     console.log("download the goddamn toc:", url);
 
