@@ -2980,9 +2980,10 @@ module.exports = React.createClass({displayName: "exports",
   componentDidMount: function() {
     var state = this.props.metadata;
     state.postdata = this.props.postdata;
-    this.setState(state);
-    var nd = this.refs.markdown.getChildCount();
-    console.log(this.state.title, ":", nd);
+    this.setState(state, function() {
+      var nd = this.refs.markdown.getChildCount();
+      console.log(this.state.title, ":", nd);
+    });
   },
 
   render: function() {
