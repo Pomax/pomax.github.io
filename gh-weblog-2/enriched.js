@@ -3838,12 +3838,16 @@ module.exports = {
 
   getSettings: function() {
     var settings = window.localStorage[this.settingsName];
+
     if(!settings) {
+      console.log("no settings in local storage");
       if (window.WebLogSettings) {
+        console.log("settings found as window.WebLogSettings:", window.WebLogSettings);
         return window.WebLogSettings;
       }
       return false;
     }
+
     return JSON.parse(settings);
   },
 
