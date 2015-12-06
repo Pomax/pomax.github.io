@@ -2996,6 +2996,7 @@ module.exports = React.createClass({displayName: "exports",
     var posted = (new Date(this.state.published)).toLocaleString();
     var updated = (new Date(this.state.updated)).toLocaleString();
     var folded = !this.props.singleton && this.state.folded;
+    console.log(title, this.props.singleton, this.state.folded, folded);
     return (
       React.createElement("div", {className: classnames("entry", {folded: folded}), id: id}, 
         deletebutton, 
