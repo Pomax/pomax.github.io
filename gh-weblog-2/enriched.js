@@ -2965,7 +2965,7 @@ module.exports = React.createClass({displayName: "exports",
   ],
 
   getInitialState: function() {
-    this.folded = this.props.folded;
+    this.folded = this.props.folded && !this.props.singleton;
     return {
       id: -1,
       title: "",
@@ -3339,6 +3339,7 @@ module.exports = React.createClass({displayName: "exports",
                     metadata: entry.metadata, 
                     postdata: entry.postdata, 
                     editable: editable, 
+                    singleton: self.state.singleton, 
                     folded: !editable, 
                     runProcessors: self.runProcessors, 
                     onSave: self.save, 
