@@ -3519,7 +3519,7 @@ module.exports = {
 
       if (window.WebLogSettings) {
         path = window.WebLogSettings.path;
-        contentPath = window.WebLogSettings.contenPath;
+        contentPath = window.WebLogSettings.contentPath;
       }
 
       if (path) this.options.path = path;
