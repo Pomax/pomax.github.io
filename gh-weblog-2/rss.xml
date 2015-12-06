@@ -5,9 +5,34 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Sun, 06 Dec 2015 17:39:36 GMT</lastBuildDate>
-<pubDate>Sun, 06 Dec 2015 17:39:36 GMT</pubDate>
+<lastBuildDate>Sun, 06 Dec 2015 22:08:30 GMT</lastBuildDate>
+<pubDate>Sun, 06 Dec 2015 22:08:30 GMT</pubDate>
 <ttl>1440</ttl>
+<item>
+<title> OpenType: what's the difference between TTF and OTF??</title>
+<description>&lt;p&gt;This is going to be a multiparter, because I've been trying to write this as a single long read and it's just not working. So as the first part in part of an OpenType series: ttf and otf... what's the difference?&lt;/p&gt;
+&lt;h2 id="first-it-s-all-opentype"&gt;First, it's all OpenType&lt;/h2&gt;
+&lt;p&gt;One thing that most people don't know is that both TTF and OTF font are OpenType fonts. OpenType is a binary format, with an open specification (i.e. it's free to implement codecs for, and you can sign up for the opentype mailing list and influence future verisons), that contains outline data (for drawing letters), tons of metadata used for things ranging from typesetting to hardware memory management, and language-specific typesetting rules like contextual substitutions and positioning. &lt;/p&gt;
+&lt;p&gt;When people talk about "TTF" or "OTF" what they really mean is "files that end in &lt;code&gt;.ttf&lt;/code&gt; and &lt;code&gt;.otf&lt;/code&gt;", and those are two kinds of OpenType font: fonts ending in &lt;code&gt;.ttf&lt;/code&gt; are generally OpenType fonts that use the glyf/loca data blocks, with "TrueType" outlines, whereas fonts ending in &lt;code&gt;.otf&lt;/code&gt; are OpenType fonts that use a CFF data block, with "Type2" outlines. So the difference is in the outline language used.&lt;/p&gt;
+&lt;p&gt;We're not going to look at all the fine differences between the two in this post, but let's look at the ones that is easy to talk about and already make a big difference:&lt;/p&gt;
+&lt;h3 id="truetype-tiny-simple-and-hardcoded-hinting"&gt;TrueType - tiny, simple, and hardcoded hinting&lt;/h3&gt;
+&lt;p&gt;TrueType outlines are incredibly straight forward: you get lines and quadratic curves, and that's pretty much it. It's really easy to define shapes in, but the curves are "too" simple so you need quite a few of them. If you have decent design tool, that's mostly irrelevant, and the only thing you'll notice is that an OpenType font that uses TrueType outlines tends to be bigger than an OpenType font with Type2 outlines for the same shapes.&lt;/p&gt;
+&lt;p&gt;The other way in which TrueType differs is in how "hinting" works. Hinting is a mechanism to tell font engines "if you need to scale this outline down to fit in the font size we need, and that leads to weird sub pixel positioning, here's how you should resolve that:..." When using TrueType, the hinting is explicit: all the information is stored in the TrueType data, so a font engine can be "dumb" about hinting and simply do what the font tells it to. That makes TrueType, again, a little bigger compared to Type2, but taken together with the simplicity of the language means it's really easy for people to write parsers that do the right thing. Not a lot of instructions, and the hinting is in-font.&lt;/p&gt;
+&lt;h3 id="type2-rich-complicated-and-only-hinted-"&gt;Type2 - rich, complicated, and "only" hinted.&lt;/h3&gt;
+&lt;p&gt;On the other hand, the Type2 language is super rich, with lots of nuanced outline operations possible (including some 'if humans can tell this is gently curve, curve it, otherwise make this a flat line" instructions!), as well as supporting a small programming language that lets you do some amazing things... if the font engine that's rendering the font supports them. Because most of them don't: Type2 supports lines and cubic curves, and these are generally supported by font engines, but they also support more esoteric operations that a lot of font engines simply don't bother to support. That sucks, and hopefully that will change as time goes on, but right now, that's how it is. To make matters worse, the hinting in a Type2 outline is really only hints. Type2 outlines can mark certain edges and points as needing to line up in some way, but it is up to the font engine to make sure that "lining up" happens sensibly, and again because this is not a trivial task, a lot of font engines just ... don't bother.&lt;/p&gt;
+&lt;p&gt;This leads people who are used to working with software that comes with a simple, or incomplete, font engine to claim that TTF is better than OTF because they look better, even though they don't: it's just the font engine not being good enough to deal with the space-optimised Type2 outline language, rather than the simplistic but "everything up front" TrueType outline language.&lt;/p&gt;
+&lt;h2 id="-which-should-i-use-"&gt;"Which should I use?"&lt;/h2&gt;
+&lt;p&gt;The real question tends to be which format you should use. If you're  a typeface designer, or a font engineer, I don't have to tell you which is to use, you already know the answer based on what you need to make, but if you're a font &lt;strong&gt;user&lt;/strong&gt;, which should you use? &lt;/p&gt;
+&lt;p&gt;It depends entirely on what's available, and which engine you're going to use. If the font (or, font family) you want to use is only available in &lt;code&gt;.otf&lt;/code&gt; form, and you're going to use it in an excellent font engine like Adobe's own engine, then clearly: pick &lt;code&gt;.otf&lt;/code&gt;. If, on the other hand, you want a font that works best on the web, then it's really a toss-up between &lt;code&gt;.ttf&lt;/code&gt; and &lt;code&gt;.otf&lt;/code&gt; and the only real answer is "try them both, and see which one looks best". It might even be that at low point sizes the &lt;code&gt;.ttf&lt;/code&gt; looks best, but at higher point sizes, the &lt;code&gt;.otf&lt;/code&gt; looks better. If they're small fonts (i.e. the size of a JPEG image, which most fonts comfortably fall under) then why not just use both?&lt;/p&gt;
+&lt;h2 id="more-to-come"&gt;More to come&lt;/h2&gt;
+&lt;p&gt;In order to just get these posts out I'm going to keep some of them short, and this is one of the shorter ones, but rest assured that there's a lot to say about OpenType fonts, including how little most people know about them. And that's not an indictment, unless it's people espousing the virtue of one over the other without even realising they're both just OpenType fonts, only differing in the outline language, which is a large part of, but most certainly not the definitive aspect of, modern fonts.&lt;/p&gt;
+&lt;p&gt;Next time I'll try to go into that statement a bit more: modern OpenType fonts are pretty dang complex pieces of software, and you could take the outline shapes for granted and still have a lot of amazingly detailed and rich data left to work with.&lt;/p&gt;
+</description>
+
+<link>http://pomax.github.io/#gh-weblog-1449438115186</link>
+<guid>http://pomax.github.io/#gh-weblog-1449438115186</guid>
+<pubDate>Sun, 06 Dec 2015 21:41:55 GMT</pubDate>
+</item>
 <item>
 <title> Github broke my blog, so I had to reset it...</title>
 <description>&lt;p&gt;Github is usually pretty good when it comes to gh-pages and github.io hosting, but for some reason, an update to my pomax.github.io repository had broken whatever it is that github does when it deploys websites, to the point where even deleting my repository and then rebuilding it made things simply "not work".&lt;/p&gt;
@@ -1293,190 +1318,5 @@ var Editor = React.createClass({
 <link>http://pomax.github.io/#gh-weblog-1430852362036</link>
 <guid>http://pomax.github.io/#gh-weblog-1430852362036</guid>
 <pubDate>Tue, 05 May 2015 18:59:22 GMT</pubDate>
-</item>
-<item>
-<title> Touch events, Reactjs, and Android. Good luck.</title>
-<description>&lt;p&gt;We're doing a bit of prototype work over at the &lt;a href="https://webmaker.org"&gt;Mozilla Foundation&lt;/a&gt;, playing around with what possible future ways of interacting with makable web things could look like (can that &lt;em&gt;be&lt;/em&gt; more vague?), and one of these prototypes takes the shape of dropping HTML elements onto a page and, photo book style, moving them around (or rather, moving, rotating, and scaling, using CSS3) without necessarily affecting the markup ordering.&lt;/p&gt;
-&lt;p&gt;And that works well! We're currently exploring &lt;a href="https://facebook.github.io/react"&gt;React.js&lt;/a&gt; (which comes with a refreshing look at what programming for the web can look like) and so I figured I'd try my hand at the idea by writing a React component/mixin that could be used in conjunction with arbitrary content to magically make it movable, rotatable and scalable. And in desktop browsers, it works really well!&lt;/p&gt;
-&lt;p&gt;Unfortunately, we also need things to work on mobile devices, where there are no mouse cursors, and instead you have to work with touch. Touch changes some things (the CSS :hover state, for instance, becomes meaningless) but for the most part if your code worked with &lt;code&gt;mousedown&lt;/code&gt;, &lt;code&gt;mousemove&lt;/code&gt; and &lt;code&gt;mouseup&lt;/code&gt;, those map fairly straight forward to &lt;code&gt;touchstart&lt;/code&gt;, &lt;code&gt;touchmove&lt;/code&gt; and &lt;code&gt;touchend&lt;/code&gt;. Add the touch listeners and make them do the same as the mouse listeners, and done. Or, you would be, if these generated the same data. They don't, so you have a bit more work to do for getting the correct coordinates out of the touch events (mouse events have &lt;code&gt;evt.clientX&lt;/code&gt;, touch events are an array of possible multitouch, so you end up with &lt;code&gt;evt.touches[0].pageX&lt;/code&gt;, for instance). Still, entirely doable.&lt;/p&gt;
-&lt;p&gt;Unfortunately, things get weird when you do these things and then try to use them on, say, Android. Android has bugs when it comes touch events. Outside of the expected, that is. First, it turns out that Android won't fire off &lt;code&gt;touchend&lt;/code&gt; events, even if they occur, if you never told Android to "&lt;a href="http://developer.android.com/guide/webapps/migrating.html#TouchCancel"&gt;prevent the default behaviour&lt;/a&gt;" on a &lt;code&gt;touchstart&lt;/code&gt; or &lt;code&gt;touchmove&lt;/code&gt;. Why? Because if you don't, Android will treat the finger gesture first as what you needed to do, and then as "oh but the default behaviour should still happen, the user wants to scroll the page" and then the touchend that stops Android from listening to page scroll gets consumed and never sent on to your code. If you didn't know about that, you're wasting quite a bit of time figuring out what the heck is going on.&lt;/p&gt;
-&lt;p&gt;But now you know about that, so adding &lt;code&gt;evt.preventDefault()&lt;/code&gt; in your start and move handling should fix things, right? Well... no. It turns out there's another, far more magical, feature in Android that does what should reasonably be impossible in any programming setting. Have a look at this code:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var element = ...;
-element.addEventListener("touchstart", handleTouchStart);
-element.addEventListener("touchmove", handleTouchMove);
-element.addEventListener("touchend", handleTouchEnd);
-
-function handleTouchStart(evt) {
-  console.log("touch started");
-}
-
-function handleTouchMove(evt) {
-  console.log("touch move");
-}
-
-function handleTouchEnd(evt) {
-  console.log("touch ended");
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This works great. Loading pages with code like this on Android will show that all three events fire if you put down your finger, move it around a bit, and take it off the screen again. But, we might want to know where all those events happen, so let's write a helper function and modify the handlers:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;function fixEvtCoords(evt) {
-  evt.clientX = evt.clientX || evt.touches[0].pageX;
-  evt.clientY = evt.clientY || evt.touches[0].pageY;
-}
-...
-function handleTouchStart(evt) {
-  fixEvtCoords(evt);
-  console.log("touch started at " + evt.clientX + "," + evt.clientY);
-}
-
-function handleTouchMove(evt) {
-  fixEvtCoords(evt);
-  console.log("touch move at " + evt.clientX + "," + evt.clientY);
-}
-
-function handleTouchEnd(evt) {
-  fixEvtCoords(evt);
-  console.log("touch ended at " + evt.clientX + "," + evt.clientY);
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;That looks perfectly reasonable, and start and move now show the coordinates at which the events are generated. But &lt;code&gt;touchend&lt;/code&gt; no longer works... what? It gets more interesting: what if we don't fix the coordinates for the end event?&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;function handleTouchEnd(evt) {
-  console.log("touch ended at " + evt.clientX + "," + evt.clientY);
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This logs "&lt;code&gt;touch ended at undefined,undefined&lt;/code&gt;", which makes sense because touch events don't have the &lt;code&gt;.clientX&lt;/code&gt; and &lt;code&gt;.clientY&lt;/code&gt; properties. So, let's change those to the real thing:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;function handleTouchEnd(evt) {
-  console.log("touch ended at " + evt.touches[0].pageX + "," + evt.touches[0].pageY);
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This won't actually do anything. There is nothing in &lt;code&gt;.touches[0]&lt;/code&gt; anymore, so there will be a JS error and the code won't run. So what do we do? The simplest solution is to rely on the fact that we're only using single finger interaction, and just assume that if a &lt;code&gt;touchend&lt;/code&gt; fired at all, we no longer have any fingers on the screen:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;function handleTouchEnd(evt) {
-  console.log("touch ended");
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This is weird for several reasons: if we want to deal with multi touch, how do we track &lt;em&gt;which&lt;/em&gt; finger just stopped being on the screen? You'd be tempted to try something like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;function handleTouchEnd(evt) {
-  console.log("touch ended", JSON.stringify(evt, false, 2));
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;To get an easy to debug bit of string data to tell us what's in that event, but if we do this, more JS errors and the log call will throw instead of logging useful data.&lt;/p&gt;
-&lt;p&gt;The worst is you just read this in a matter of a few minutes, but discovering all this, if you don't really work with Android all that much, is pretty much hours and hours of trying things, not understanding why they work on desktop but not on Android, trying more things, case reducing, starting from scratch, noticing things do work, slowly building things back up, noticing they break at some point, going back to where things weren't broken, and slowly figuring out what's going wrong because you home in on specific calls and patterns that just don't seem to work.&lt;/p&gt;
-&lt;p&gt;Over the course of 6 hours I went from not knowing these things to knowing both how to deal with this in the future, as well as knowing how to write my React code in such a way that touch events will propagate properly. Fun fact: if you're using React in an Android WebView "browser", there are some things you can do that work perfectly fine on desktop, and will not work at all on Android, too.&lt;/p&gt;
-&lt;p&gt;For instance, React has &lt;code&gt;onTouchStart&lt;/code&gt;, &lt;code&gt;onTouchMove&lt;/code&gt; and &lt;code&gt;onTouchEnd&lt;/code&gt; component &lt;a href="https://facebook.github.io/react/docs/events.html#touch-events"&gt;event handlers&lt;/a&gt;, with augmented events to make sure every browser will work the same. That's great, except it has bugs. The event augmentation does &lt;em&gt;something&lt;/em&gt; (and without looking at the React source code, I have no real idea what that something is) that breaks event propagation. So, this code doesn't work:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var Positionable = ... ({
-  render: function() {
-    return (
-      &amp;lt;div onTouchStart={this.handleTouchStart}&amp;gt;
-        &amp;lt;RotationControls /&amp;gt;
-        &amp;lt;ScaleControls /&amp;gt;
-      &amp;lt;/div&amp;gt;
-    );
-  }
-})
-
-var RotationControls = ... ({
-  render: function() {
-    return (
-      &amp;lt;div onTouchStart={this.handleTouchStart}&amp;gt;
-        ...
-      &amp;lt;/div&amp;gt;
-    );
-  }
-})
-
-var ScaleControls = ... ({
-  render: function() {
-    return (
-      &amp;lt;div onTouchStart={this.handleTouchStart}&amp;gt;
-        ...
-      &amp;lt;/div&amp;gt;
-    );
-  }
-})
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;You might think it would, but nope: not on Android. While this works fine on desktop, trying this on Android and tapping the &lt;code&gt;RotationControls&lt;/code&gt; element actually gets sent to the higher level &lt;code&gt;Positionable&lt;/code&gt; instead. No matter how much you tap, that touch event is not going to make it into the handler defined in &lt;code&gt;RotationControls&lt;/code&gt; to rotate our element. So, ultimately, despite React having code in place to make working with touch events nicer, we actually need to go back to the drawing board and use the good old low level &lt;code&gt;addEventListener('touchstart', ...)&lt;/code&gt; and friends in order to make sure that nothing interferes with event propagation.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var TouchMixin = {
-  componentDidMount: function() {
-    var localNode = this.getDOMNode();
-    localNode.addEventListener('touchstart', this.handleTouchStart);
-  },
-  componentWillUnmount: function() {
-    var localNode = this.getDOMNode();
-    localNode.removeEventListener('touchstart', this.handleTouchStart);
-  }
-};
-
-var Positionable = ... ({
-  mixins: [
-    TouchMixin
-  ],
-  render: function() {
-    return (
-      &amp;lt;div&amp;gt;
-        &amp;lt;RotationControls /&amp;gt;
-        &amp;lt;ScaleControls /&amp;gt;
-      &amp;lt;/div&amp;gt;
-    );
-  }
-})
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;With similar changes in &lt;code&gt;RotationControls&lt;/code&gt; and &lt;code&gt;ScaleControls&lt;/code&gt;. Fun!&lt;/p&gt;
-&lt;p&gt;But wait, there's more. The component I'm writing also has a &lt;code&gt;ZIndexController&lt;/code&gt;, which gives you two buttons for changing a number, and that number gets communicated up, and used as z-index for the element on the page:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var Positionable = ... ({
-  render: function() {
-    return (
-      &amp;lt;divb&amp;gt;
-        &amp;lt;RotationControls /&amp;gt;
-        &amp;lt;ScaleControls /&amp;gt;
-        &amp;lt;ZIndexController /&amp;gt;
-        { this.props.children }
-      &amp;lt;/div&amp;gt;
-    );
-  }
-})
-
-var ZIndexController = ... ({
-  getInitialState: function() {
-    return { zIndex: this.props.zIndex || 0 };
-  },
-  render: function() {
-    return (
-      &amp;lt;div className="zindex-controller"&amp;gt;
-        layer position:
-        &amp;lt;span className="zmod left" onClick={this.zDown}&amp;gt;◀&amp;lt;/span&amp;gt;
-        { this.state.zIndex }
-        &amp;lt;span className="zmod right" onClick={this.zUp}&amp;gt;▶&amp;lt;/span&amp;gt;
-      &amp;lt;/div&amp;gt;
-    );
-  },
-  zUp: function(evt) {
-    evt.stopPropagation();
-    this.setState({ zIndex: this.state.zIndex + 1 }, function() {
-      this.props.onChange(this.state.zIndex);
-    });
-  },
-  zDown: function(evt) {
-    evt.stopPropagation();
-    this.setState({ zIndex: Math.max(0, this.state.zIndex - 1) }, function() {
-      this.props.onChange(this.state.zIndex);
-    });
-  }
-})
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Again, this works great in desktop browsers, but does not work on Android. What's going on? As it turns out, React events like &lt;code&gt;onClick&lt;/code&gt; work because React intercepts all events at the document level and then routes them on further based on which things registered first, rather than "the most specific thing first". We can try to work around this, to try to force the ordering that we want, but that's just making a bad situation worse should more touch propagation need to happen in the future: instead the only workable solution that I've found is to just say "alright, forget it, make touch regions non-overlapping". As such, rather than a positionable thing with rotation and scale controls, the solution is to have an inert "thing" with positioning, rotation, and scale controls instead. That way the touch events for moving the element around do not overlap with, for instance, the z-index controls, and things work. It's less nice, but the only tractible solution:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var Positionable = ... ({
-  render: function() {
-    return (
-      &amp;lt;divb&amp;gt;
-        &amp;lt;PlacementController /&amp;gt;
-        &amp;lt;RotationControls /&amp;gt;
-        &amp;lt;ScaleControls /&amp;gt;
-        &amp;lt;ZIndexController /&amp;gt;
-        { this.props.children }
-      &amp;lt;/div&amp;gt;
-    );
-  }
-})
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And with that, things work. New technologies have a great way of bringing back the pain you thought you'd left behind.&lt;/p&gt;
-</description>
-<category>Mozilla</category>
-<category>React</category>
-<category>Android</category>
-<category>Touch</category>
-<category>Webmaker</category>
-<link>http://pomax.github.io/#gh-weblog-1428529484183</link>
-<guid>http://pomax.github.io/#gh-weblog-1428529484183</guid>
-<pubDate>Wed, 08 Apr 2015 21:44:44 GMT</pubDate>
 </item></channel>
 </rss>
