@@ -2981,6 +2981,8 @@ module.exports = React.createClass({displayName: "exports",
     var state = this.props.metadata;
     state.postdata = this.props.postdata;
     this.setState(state);
+    var nd = this.refs.markdown.getChildCount();
+    console.log(this.state.title, ":", nd);
   },
 
   render: function() {
@@ -2995,7 +2997,6 @@ module.exports = React.createClass({displayName: "exports",
     var posted = (new Date(this.state.published)).toLocaleString();
     var updated = (new Date(this.state.updated)).toLocaleString();
     var folded = !this.props.singleton && !this.props.authenticated;
-    console.log('"' + this.state.title + '"', this.props.singleton, this.props.authenticated, folded);
 
     return (
       React.createElement("div", {className: classnames("entry", {folded: folded}), id: id}, 
@@ -3004,7 +3005,7 @@ module.exports = React.createClass({displayName: "exports",
           React.createElement("h1", null, React.createElement("a", {href: entryURL}, this.state.title)), 
           React.createElement("h2", null, "Originally posted on ", posted, ", last updated on ", updated)
         ), 
-        React.createElement(MarkDown, {ref: "markdown", hidden: this.state.editing, text: this.state.postdata, onClick: this.edit, unfold: this.unfold}), 
+        React.createElement(MarkDown, {ref: "markdown", hidden: this.state.editing, text: this.state.postdata, onClick: this.edit}), 
         React.createElement(Editor, {ref: "editor", hidden: !this.state.editing, text: text, update: this.update, view: this.view, delete: this.delete}), 
         React.createElement("a", {className: "comments", href: this.props.issues}, "leave a comment on github"), 
         React.createElement(Tags, {disabled: !this.props.editable, tags: this.state.tags, onChange: this.updateTags}), 
@@ -3094,24 +3095,19 @@ var React = (window.React);
 var marked = require("../bower_components/marked/lib/marked");
 
 module.exports = React.createClass({displayName: "exports",
-  getInitialState: function() {
-    return {
-      html: {__html: marked(this.props.text)}
-    };
-  },
-  componentDidMount: function(prevProps, prevState) {
-    var nd = this.refs.post.getDOMNode();
-    console.log(nd.children.length + " children");
-  },
   render: function() {
+    var html = {__html: marked(this.props.text)};
     return React.createElement("div", {ref: "post", 
                 className: "post", 
                 hidden: this.props.hidden, 
                 onClick: this.props.onClick, 
-                dangerouslySetInnerHTML: this.state.html})
+                dangerouslySetInnerHTML: html})
   },
   getHTML: function() {
     return this.refs.post.getDOMNode().innerHTML
+  },
+  getChildCount: function() {
+    return this.refs.post.getDOMNode().children.length;
   }
 });
 
