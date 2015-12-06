@@ -3288,6 +3288,7 @@ module.exports = React.createClass({displayName: "exports",
   componentDidMount: function() {
     // are we authenticataed?
     var settings = this.getSettings();
+    console.log(settings);
     if(settings) {
       this.connector = new this.Connector(settings);
       if(settings.token) { this.setState({ authenticated: true }); }
@@ -3548,6 +3549,7 @@ module.exports = {
 
     var Connector = function(options) {
       console.log(options);
+      console.trace();
       if(options) {
         if(options.token && options.token.trim()) {
           this.options = options;
@@ -3836,7 +3838,12 @@ module.exports = {
 
   getSettings: function() {
     var settings = window.localStorage[this.settingsName];
-    if(!settings) return false;
+    if(!settings) {
+      if (window.WebLogSettings) {
+        return window.WebLogSettings;
+      }
+      return false;
+    }
     return JSON.parse(settings);
   },
 
