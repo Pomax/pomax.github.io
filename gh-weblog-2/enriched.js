@@ -3006,7 +3006,7 @@ module.exports = React.createClass({displayName: "exports",
         React.createElement(Editor, {ref: "editor", hidden: !this.state.editing, text: text, update: this.update, view: this.view, delete: this.delete}), 
         React.createElement("a", {className: "comments", href: this.props.issues}, "leave a comment on github"), 
         React.createElement(Tags, {disabled: !this.props.editable, tags: this.state.tags, onChange: this.updateTags}), 
-         !this.props.singleton && this.state.folded ? React.createElement("div", {class: "viewmore"}, React.createElement("button", {onClick: this.unfold}, "View the rest of this post")) : false
+         !this.props.singleton && this.state.folded ? React.createElement("div", {className: "viewmore"}, React.createElement("button", {onClick: this.unfold}, "View the rest of this post")) : false
       )
     );
   },
