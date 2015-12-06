@@ -3324,7 +3324,6 @@ module.exports = React.createClass({displayName: "exports",
   generateEntries: function(entries) {
     entries = entries || this.getSlice();
     var self = this;
-    console.log(this.state);
     return entries.map(function(entry) {
       return React.createElement(Entry, {key: entry.metadata.created, 
                     ref: entry.metadata.id, 

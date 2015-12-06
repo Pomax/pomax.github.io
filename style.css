@@ -140,6 +140,5 @@ a:hover {
 }
 
 #gh-weblog .entry.folded div.viewmore button {
-  position: relative;
-  top: 10px;
+  box-shadow: 0 0 15px 11px white;
 }
