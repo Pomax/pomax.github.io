@@ -3094,17 +3094,21 @@ var React = (window.React);
 var marked = require("../bower_components/marked/lib/marked");
 
 module.exports = React.createClass({displayName: "exports",
+  getInitialState: function() {
+    return {
+      html: {__html: marked(this.props.text)}
+    };
+  },
   componentDidMount: function(prevProps, prevState) {
     var nd = this.refs.post.getDOMNode();
     console.log(nd.children.length + " children");
   },
   render: function() {
-    var html = {__html: marked(this.props.text)};
     return React.createElement("div", {ref: "post", 
                 className: "post", 
                 hidden: this.props.hidden, 
                 onClick: this.props.onClick, 
-                dangerouslySetInnerHTML: html})
+                dangerouslySetInnerHTML: this.state.html})
   },
   getHTML: function() {
     return this.refs.post.getDOMNode().innerHTML
