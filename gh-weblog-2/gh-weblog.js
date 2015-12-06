@@ -3556,7 +3556,7 @@ module.exports = {
         };
       }
       if (options.path) {
-        this.optionss.path = options.path;
+        this.options.path = options.path;
       }
     };
 
