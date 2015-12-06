@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
-<atom:link href="http://pomax.github.io/undefined/rss.xml" rel="self" type="application/rss+xml" />
+<atom:link href="http://pomax.github.io/gh-weblog-2/rss.xml" rel="self" type="application/rss+xml" />
 <title>Pomax.github.io</title>
 <description>My blog on github [Mozilla posts only]</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Sat, 05 Dec 2015 18:02:23 GMT</lastBuildDate>
-<pubDate>Sat, 05 Dec 2015 18:02:23 GMT</pubDate>
+<lastBuildDate>Sun, 06 Dec 2015 06:27:37 GMT</lastBuildDate>
+<pubDate>Sun, 06 Dec 2015 06:27:37 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> "Whose state is it, anyway?" — Further thoughts about React</title>
