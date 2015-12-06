@@ -2965,6 +2965,7 @@ module.exports = React.createClass({displayName: "exports",
   ],
 
   getInitialState: function() {
+    this.folded = this.props.folded;
     return {
       id: -1,
       title: "",
@@ -2973,18 +2974,16 @@ module.exports = React.createClass({displayName: "exports",
       updated: Date.now(),
       tags: [],
       editing: false,
-      postdata: "",
-      folded: !this.props.editable
+      postdata: ""
     };
   },
 
   componentDidMount: function() {
     var state = this.props.metadata;
     state.postdata = this.props.postdata;
-    console.log("binding ", state);
     this.setState(state, function() {
       var ccount = this.refs.markdown.getChildCount();
-      if (this.state.folded && ccount < 8) {
+      if (this.folded && ccount < 8) {
         console.log("unfolding "+this.state.title+" ("+ccount+" children)");
         this.unfold();
       }
@@ -3004,7 +3003,7 @@ module.exports = React.createClass({displayName: "exports",
     var updated = (new Date(this.state.updated)).toLocaleString();
 
     return (
-      React.createElement("div", {className: classnames("entry", {folded: this.state.folded}), id: id}, 
+      React.createElement("div", {className: classnames("entry", {folded: this.folded }), id: id}, 
         deletebutton, 
         React.createElement("header", null, 
           React.createElement("h1", null, React.createElement("a", {href: entryURL}, this.state.title)), 
@@ -3014,15 +3013,14 @@ module.exports = React.createClass({displayName: "exports",
         React.createElement(Editor, {ref: "editor", hidden: !this.state.editing, text: text, update: this.update, view: this.view, delete: this.delete}), 
         React.createElement("a", {className: "comments", href: this.props.issues}, "leave a comment on github"), 
         React.createElement(Tags, {disabled: !this.props.editable, tags: this.state.tags, onChange: this.updateTags}), 
-         this.state.folded ? React.createElement("div", {className: "viewmore"}, React.createElement("button", {onClick: this.unfold}, "View the rest of this post")) : false
+         this.folded ? React.createElement("div", {className: "viewmore"}, React.createElement("button", {onClick: this.unfold}, "View the rest of this post")) : false
       )
     );
   },
 
   unfold: function() {
-    this.setState({
-      folded: false
-    });
+    this.folded = false;
+    this.setState(this.state);
   },
 
   componentDidUpdate: function() {
@@ -3342,6 +3340,7 @@ module.exports = React.createClass({displayName: "exports",
                     metadata: entry.metadata, 
                     postdata: entry.postdata, 
                     editable: editable, 
+                    folded: !editable, 
                     runProcessors: self.runProcessors, 
                     onSave: self.save, 
                     onDelete: self.delete});
