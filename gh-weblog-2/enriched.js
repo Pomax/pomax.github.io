@@ -3836,19 +3836,20 @@ module.exports = {
   }()),
 
   getSettings: function() {
-    var settings = window.localStorage[this.settingsName];
-    console.log("immediate settings:", settings);
+    // always prefer hardcoded settingss
+    var wlp = "gh-weblog";
+    if (window.WebLogSettings && window.WebLogSettings.path) {
+      wlp = window.WebLogSettings.path;
+    }
 
+    var settings = window.localStorage[this.settingsName];
     if(!settings) {
-      console.log("no settings in local storage");
-      if (window.WebLogSettings) {
-        console.log("settings found as window.WebLogSettings:", window.WebLogSettings);
-        return window.WebLogSettings;
-      }
       return false;
     }
 
-    return JSON.parse(settings);
+    settings = JSON.parse(settings);
+    settings.path = wlp;
+    return settings;
   },
 
   saveSettings: function(settings) {
