@@ -3409,6 +3409,15 @@ module.exports = {
           path: "gh-weblog"
         };
       }
+
+      var path = false;
+      if (window.WebLogSettings && window.WebLogSettings.path) {
+        path = window.WebLogSettings.path;
+        console.log("rebinding path as " + path + " for goddamn reals");
+      }
+      if (path) {
+        thiss.options.path = path;
+      }
     };
 
     Connector.prototype = {
