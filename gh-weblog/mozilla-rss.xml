@@ -1,0 +1,1053 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+<atom:link href="http://pomax.github.io/undefined/rss.xml" rel="self" type="application/rss+xml" />
+<title>Pomax.github.io</title>
+<description>My blog on github [Mozilla posts only]</description>
+<link>http://pomax.github.io</link>
+<lastBuildDate>Sat, 05 Dec 2015 18:02:23 GMT</lastBuildDate>
+<pubDate>Sat, 05 Dec 2015 18:02:23 GMT</pubDate>
+<ttl>1440</ttl>
+<item>
+<title> "Whose state is it, anyway?" — Further thoughts about React</title>
+<description>&lt;p&gt;A look at thoughts that have come from working with React at the &lt;a href="https://www.mozilla.org/foundation"&gt;Mozilla Foundation&lt;/a&gt;, where we use it extensively for our &lt;a href="https://github.com/mozilla/webmaker-android/"&gt;Webmaker Android app&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="first-off-the-single-most-important-note-about-react-i-ever-wrote-"&gt;First off, the single most important note about React I ever wrote.&lt;/h2&gt;
+&lt;p&gt;Let me start this blog post with the most important thing about React, so that we understand why things happen the way they do:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;If used correctly, your users will think they are manipulating a UI, when in fact they are manipulating React, which &lt;em&gt;may&lt;/em&gt; then update the UI&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Sounds simple, doesn't it? But it has a profound effect on how UI interactions work, and how you should be thinking about data flow in React applications. For instance, let's say we have a properly written React application that consists of a page with some text, and a slider for changing the text's opacity. I move the slider. What happens?&lt;/p&gt;
+&lt;p&gt;In traditional HTML, I move the slider, a change event is triggered, and if I had an eventListener hooked up for that, I could then do things based on that change.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;React doesn't work like that&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Another short and sweet sentence: React doesn't work with "changes to the UI" as you make them; React doesn't &lt;strong&gt;allow&lt;/strong&gt; changes to the UI without its consent. Instead, &lt;strong&gt;React intercepts changes to the UI so they don't happen&lt;/strong&gt;, then triggers the components that are tied to the UI the user thinks they're interacting with, so that those components can decide whether or not a UI update is necessary.&lt;/p&gt;
+&lt;p&gt;In a well written React application, this happens:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;I try to move the slider.&lt;/li&gt;
+&lt;li&gt;The event is &lt;em&gt;intercepted&lt;/em&gt; by React and killed off.&lt;/li&gt;
+&lt;li&gt;As far as the browser knows, &lt;em&gt;nothing has happened&lt;/em&gt; to that slider.&lt;/li&gt;
+&lt;li&gt;React then takes the information about my UI interaction, and sends it to the component that owns the slider I tried to manipulate.&lt;/li&gt;
+&lt;li&gt;If that component accepts my attempt at changing the UI, it will update its state such that it now renders in a way that makes it look identical to the traditional HTML case:&lt;/li&gt;
+&lt;li&gt;As far as I'm concerned, as a user, I just moved the slider. Except in reality I didn't, my UI interaction asked React to have that interaction processed and that processing caused a UI update.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This is so different from traditional HTML that you're going to forget that. And every time you do, things will feel weird, and bugs might even be born. So, just to hopefully at least address that a tiny bit, once more:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;If used correctly, your users will think they are manipulating a UI, when in fact they are manipulating React, which &lt;em&gt;may&lt;/em&gt; then update the UI&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Now then, try to remember this forever (I know, simple request, right?) and let's move on.&lt;/p&gt;
+&lt;h2 id="revisiting-the-core-concepts-of-modeling-your-stuff-with-react"&gt;Revisiting the core concepts of modeling "your stuff" with React&lt;/h2&gt;
+&lt;p&gt;If you've been working with React for a while it's easy to forget where "your mental construct of a thing" ends and where your UI components begin, and that makes it hard to reason about when to use React's state, when to use props, when to use instance variables, and when to offload things entirely to imported functionality objects. So, a quick refresher on the various bits that we're going to be looking at, and how to make use of them:&lt;/p&gt;
+&lt;h3 id="your-thing"&gt;Your thing&lt;/h3&gt;
+&lt;p&gt;This is an abstract idea, and generally breaks up into lots of tiny things that all need to "do something" to combine into a larger whole that actual humans like to think in. "A blog post", "A page", or "a markdown editor" all fall into this category. When thinking about "your thing", it's tempting to call the specific instantiation of everything that this thing needs "its state", but I'm going to have to be curt and tell you to not do that. At least, let's be specific: whenever we talk about the thing's state, let's call it "the full state". That way we won't get confused later. If it doesn't have "full" in the description, it's not your thing's abstract meta all encompassing state.&lt;/p&gt;
+&lt;h3 id="react-components"&gt;React components&lt;/h3&gt;
+&lt;p&gt;These are extremely concrete things, representing UI elements that your users will interact with. Components need not map one-to-one to those abstract ideas you have in your head. Think of components as things with three levels of data: properties, state, and "plain old javascript stuffs".&lt;/p&gt;
+&lt;h4 id="component-properties-this-props-"&gt;Component properties: "this.props"&lt;/h4&gt;
+&lt;p&gt;These are "constructor" properties, and are dictated by whoever creates an instance of the component. However, React is pretty clever and can deal with some situations in ways you may not expect coming at React from a traditional HTML programming paradigm. Let's say we have the following React XML - also known as JSX (This isn't HTML or even XML, it's just a more convenient way to write out programming intent, and maps directly to a React.createElement call. You can write React code without ever using JSX, and JSX is always first transformed back to plain JS before React runs it. Which is why you can get JavaScript errors "in your XML", which makes no sense if you still think that stuff you wrote really is XML):&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Parent = React.createClass({
+  render() {
+    return (&amp;lt;div&amp;gt;
+      &amp;lt;...&amp;gt;
+      &amp;lt;Child content={ getCurrentChildContent() }/&amp;gt;
+      &amp;lt;...&amp;gt;
+    &amp;lt;/div&amp;gt;);
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The child's position is always the same in this case, and when the Parent first renders, it will create this Child with some content. But this isn't what really happens. React actually adds a level of indirection between the code you wrote, and the stuff you see client-side (e.g. the browser, a native device, etc.): a VIRTUAL DOM has been created based on your JSX, and it is that VIRTUAL DOM that actually controls how things are changed client-side. Not your code. So the diffrence kicks in when we change the content that should be in that child and we rerender, to effect a new child:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Something happens to Parent that changes the output of &lt;code&gt;getCurrentChildContent&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Parent renders itself, which means the &lt;code&gt;&amp;lt;Child&amp;gt;&lt;/code&gt; has changed.&lt;/li&gt;
+&lt;li&gt;React updates the VIRTUAL element associated with the Parent, and one of the updates is for the VIRTUAL Child element, which has a new property value&lt;/li&gt;
+&lt;li&gt;Rather than destroying the old Child and building a new one with the new property, React simply updates the VIRTUAL element so that it is indistinguishable from what things would have been had we destroyed and created anew.&lt;/li&gt;
+&lt;li&gt;the VIRTUAL DOM, once marked as fully updated, then reflects itself onto client the so that users see an updated UI.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The idea is that React is supposed to do this so fast you can't tell. And the reason React is so popular is that it actually does. React is fast. &lt;em&gt;Really fast&lt;/em&gt;. &lt;/p&gt;
+&lt;p&gt;Where in traditional HTML you might remove(old) and then append(new), React will always, ALWAYS, first try to apply a "difference patch", so that it doesn't need to waste time on expensive construction and garbage collection. That makes React super fast, but also means you need to think of your components as "I am supplying a structure, and that structure will get updated" instead of "I am writing HTML elements". You're not.&lt;/p&gt;
+&lt;h4 id="component-state-this-state-"&gt;Component state: "this.state"&lt;/h4&gt;
+&lt;p&gt;This is the state of the &lt;strong&gt;React component&lt;/strong&gt;. A react component that represents a piece of interactive text, for instance, will have that text bound as its state, because that state can be changed &lt;em&gt;by the component itself&lt;/em&gt;. Components do not control what's in their props (beyond the limited 'use these default values for props that were not passed along during construction'), but they do control their state, and every update to the state triggers a &lt;code&gt;render()&lt;/code&gt; call.&lt;/p&gt;
+&lt;p&gt;This can have some interesting side effects, and requires some extra thinking: If you have a text element, and you type to change that text, that change needs to be reflected to the state before it will actually happen.&lt;/p&gt;
+&lt;p&gt;Remember that important sentence from the start of the post:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;If used correctly, your users will think they are manipulating a UI, when in fact they are manipulating React, which &lt;em&gt;may&lt;/em&gt; then update the UI&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;And then let's look at what happens:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;the user types a letter in what they think is a text input field of some sort&lt;/li&gt;
+&lt;li&gt;the event gets sent to React, which kills it off immediately so the browser never deals with it, and then sends it on to the component belonging to the VIRTUAL element that backs the UI that the user interacted with&lt;/li&gt;
+&lt;li&gt;the component handles the event by extracting the data and updating its state so that its text reflects the new text&lt;/li&gt;
+&lt;li&gt;the component renders itself, which updates the VIRTUAL element that backs the UI that the user sees, replacing its old text (pre-user-input) with the next text (what-the-user-thinks-they-wrote). This change is then reflected to the UI.&lt;/li&gt;
+&lt;li&gt;the user sees the updated content, and all of this happened so fast that they never even notice that all this happens behind the scenes. As far as they know, they simply typed a letter.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If we didn't use this state reflecting, instead this would happen:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;user types a letter&lt;/li&gt;
+&lt;li&gt;React kills off the event to the VIRTUAL element&lt;/li&gt;
+&lt;li&gt;there is no handler to accept the event, extract its value, and update the component state, so:&lt;/li&gt;
+&lt;li&gt;nothing happens.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The user keeps hitting the keyboard, but no text shows up, because nothing changes &lt;em&gt;in React&lt;/em&gt;, and so nothing changes in the UI. As such, state is extremely important to get right, and remembering how React works is of crucial importance.&lt;/p&gt;
+&lt;h4 id="semantically-refactored-state-mixins"&gt;Semantically refactored state: mixins&lt;/h4&gt;
+&lt;p&gt;In additional to properties and state, React has a "mixin" concept, which allows you to write utility code that can tack into/onto any React class you're working with. For instance, let's look at an input component:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var Thing = React.createClass({
+  getInitialState: function() {
+    return { input: this.props.input || "" };
+  },
+  render: function() {
+    return &amp;lt;input value={this.state.input} onChange={this.updateInput}/&amp;gt;
+  },
+  updateInput: function(evt) {
+    this.setState({ input: evt.target.value }, function() {
+      if (this.props.onUpdate) {
+        this.props.onUpdate(this.state.input);
+      }
+    });
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Perfectly adequate, but if we have lots of components that all need to work with inputs, we can also do this:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var inputMixin = {
+  getInitialState: function() {
+    return {
+      input: this.props.input || ""
+    };
+  },
+  updateInput: function(evt) {
+    this.setState({ input: evt.target.value }, function() {
+      if (this.props.onUpdate) {
+        this.props.onUpdate(this.state.input);
+      }
+    });
+  }
+};
+
+var Thing = React.createClass({
+  mixins: [ inputMixin ],
+  render: function() {
+    return &amp;lt;input value={this.state.input} onChange={this.updateInput}/&amp;gt;
+  },
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;We've delegated the notion of input state tracking and UI handling to a "plain JavaScript" object. But, one that hooks into React's lifecycle functions, so even though we define the state variable &lt;code&gt;input&lt;/code&gt; in the mixin, the component will end up owning it and &lt;code&gt;this.state.input&lt;/code&gt; anywhere in its code will resolve just fine.&lt;/p&gt;
+&lt;p&gt;Mixins allow you to, effectively, organise state and behaviour in a finer-grained way than just components allow. Multiple components that have nothing in common with respects to your abstract model can be very efficiently implemented by looking at which purely UI bits they share, and modeling those with single mixins. Less repetition, smaller components, better control. &lt;/p&gt;
+&lt;p&gt;Of course, it gets tricky if you refer to a state variable that a mixin introduces &lt;em&gt;outside&lt;/em&gt; of that mixin, so that's a pitfall: ideally, mixins capture "everything" so that your components don't need to know they can do certain things, "they just work". As such, I like to rewrite the previous code to the following, for instance:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var inputMixin = {
+  getInitialState: function() {
+    return {
+      input: this.props.input || ""
+    };
+  },
+  updateInput: function(evt) {
+    this.setState({ input: evt.target.value }, function() {
+      if (this.props.onUpdate) {
+        this.props.onUpdate(this.state.input);
+      }
+    });
+  },
+  // JSX generator function, so components using this mixin don't need to
+  // know anything about the mixin "internals".
+  generateInputJSX: function() {
+    return &amp;lt;input value={this.state.input} onChange={this.updateInput}/&amp;gt;
+  }
+};
+
+var Thing = React.createClass({
+  mixins: [ inputMixin ],
+  render: function() {
+    return (
+      &amp;lt;div&amp;gt;
+        ...
+        { this.generateInputJSX() }
+        ...
+      &amp;lt;/div&amp;gt;
+    );
+  },
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Now the mixin controls all the things it needs to, and the component simply relies on the fact that if it's loaded a mixing &lt;code&gt;somethingsometingMixin&lt;/code&gt;, it can render whatever that mixin introduces in terms of JSX with a call to the &lt;code&gt;generateSomethingsomethingJSX&lt;/code&gt; function, which will do the right thing. If the state for this component needs to be saved, saving &lt;code&gt;this.state&lt;/code&gt; will include everything that was relevant to the component &lt;em&gt;and&lt;/em&gt; the mixin, and loading the state in from somewhere with a &lt;code&gt;setState(stateFromSomewhere())&lt;/code&gt; call will also do the right thing.&lt;/p&gt;
+&lt;p&gt;So now we can have two completely different components, such as a "Portfolio" component and a "User Signup" component, which have absolutely nothing to do with each other, except that they will both need the UI and functionality that the &lt;code&gt;inputMixin&lt;/code&gt; can provide.&lt;/p&gt;
+&lt;p&gt;(Note that while it is tempting to use Mixins for everything, there is a very simple criterium for whether or not to model something using mixins: does it rely on hooking into React class/lifecycle functions like getInitialState, componentDidUpdate, componentWillUnmount, etc.? If not, don't use a mixin. If you just want to put common functions in a mixin, don't. Just use a library import, that's what they're for)&lt;/p&gt;
+&lt;h4 id="instance-variables-and-externals"&gt;Instance variables and externals&lt;/h4&gt;
+&lt;p&gt;These things are handy for supporting the component, but as far as React is concerned they "don't matter", because updates to them do nothing for the UI unless there is extra code for manually triggering a state change. And you can't trigger a state change on an instance variable, state changes happen through &lt;code&gt;setState&lt;/code&gt; and property updates by parents.&lt;/p&gt;
+&lt;p&gt;That said, React components are just plain JavaScript, so there is nothing preventing you from using the same JS constructs that we use outside of React:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var library = require("libname");
+var Thing = React.createClass({
+  mixins: [
+    require("somemixin"),
+    require("someothermixin")
+  ],
+  getInitialState: function() {
+    this.elements = library.getStandardList();
+    return { elements: this.elements };
+  },
+  addElement: function(e) {
+    this.elements.push(e);
+    this.setState({ elements: this.elements });
+  },   
+  render: function() {
+    return this.state.elements.map(...);
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Perfect: in fact, using instance variables sometimes drastically increases legibility and ease of development, such as in this example. Calling &lt;code&gt;addElement()&lt;/code&gt; several times in rapid succession, without &lt;code&gt;this.elements&lt;/code&gt;, has the potential to lose state updates, effectively doing this:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;var l1 = this.state.elements;&lt;/code&gt; + &lt;code&gt;l1.push(e)&lt;/code&gt; + &lt;code&gt;setState({ elements: l1 });&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;var l2 = this.state.elements;&lt;/code&gt; + &lt;code&gt;l2.push(e)&lt;/code&gt; + &lt;code&gt;setState({ elements: l2 });&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;var l3 = this.state.elements;&lt;/code&gt; + &lt;code&gt;l3.push(e)&lt;/code&gt; + &lt;code&gt;setState({ elements: l3 });&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Now, if &lt;code&gt;l3&lt;/code&gt; is created before setState for &lt;code&gt;l2&lt;/code&gt; has finished, then &lt;code&gt;l3&lt;/code&gt; is going to be &lt;em&gt;identical&lt;/em&gt; to &lt;code&gt;l1&lt;/code&gt;, and after it's set, &lt;code&gt;l2&lt;/code&gt; could be drop over it, losing us data twice!&lt;/p&gt;
+&lt;p&gt;Instance variables to the rescue.&lt;/p&gt;
+&lt;h4 id="static-properties-on-the-component-class"&gt;Static properties on the component class&lt;/h4&gt;
+&lt;p&gt;Finally, components can also be defined with a set of static properties, meaning they exist "on the class", not on specific instances:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var Thing = React.createClass({
+  statics: [
+    mimetypes: require("mimetypes")
+  ],
+  render() {
+    return &amp;lt;div&amp;gt;I am a { this.props.type }!&amp;lt;/div&amp;gt;;
+  }
+});
+
+var OtherThing = React.createClass({
+  render: function() {
+    &amp;lt;Thing type={ Thing.mimetypes.font } /&amp;gt;
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Of course like all good JS, statics can be any legal JS reference, not just primitives, so they can be objects or functions and things will work quite well. &lt;/p&gt;
+&lt;h2 id="back-to-react-hooking-up-components"&gt;Back to React: hooking up components&lt;/h2&gt;
+&lt;p&gt;The actual point of this blog post, in addition to the opener sentence, was to look at how components can be hooked up, by choosing how to a) model state ownership, b) model component interactions, and c) data propagation from one component to another.&lt;/p&gt;
+&lt;p&gt;This is going to be lengthy (but hopefully worth it) so let's just do this the itemized list way and work our way through. We have two lists:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;State ownership:&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;centralized ownership&lt;/li&gt;
+&lt;li&gt;delegated ownership&lt;/li&gt;
+&lt;li&gt;fragmented ownership&lt;/li&gt;
+&lt;li&gt;black box ownership&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;Component interactions:&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Parent to Child&lt;/li&gt;
+&lt;li&gt;Parent to Descendant&lt;/li&gt;
+&lt;li&gt;Child to Parent&lt;/li&gt;
+&lt;li&gt;Child to Ancestor&lt;/li&gt;
+&lt;li&gt;Sibling to Sibling&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;Data propagation:&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;this.props chains&lt;/li&gt;
+&lt;li&gt;targeted events using publish/subscribe&lt;/li&gt;
+&lt;li&gt;blind events broadcasting&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;So I'm going to run through these, and then hopefully at the end tie things back together by looking at which of these things work best, and why I think that is the case (with which you are fully allowed to disagree and we should talk! Talking is super useful).&lt;/p&gt;
+&lt;h2 id="deciding-on-state-ownership"&gt;Deciding on State Ownership&lt;/h2&gt;
+&lt;h3 id="centralized-ownership"&gt;Centralized ownership&lt;/h3&gt;
+&lt;p&gt;The model that fits the traditional HTML programming model best is the centralized approach, where one thing "owns" all the data, and all changes go through it. In our editor app, we can model this as one master component, "Parent", with two child components, "Post" and "Editor", which take care of simply showing the post, and editing the post, respectively.&lt;/p&gt;
+&lt;p&gt;Out post will consist of:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var marked = require("marked");
+var Post = React.createClass({
+  render: function() {
+    var innerHTML = {
+      dangerouslySetInnerHTML: {
+        __html: marked(this.props.content);
+      }
+    };
+    return &amp;lt;div {...innerHTML}/&amp;gt;;
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Our editor will consist of:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var tinyMCE = require("tinymce");
+var Editor = React.createClass({
+  render: function() {
+    var innerHTML = {
+      dangerouslySetInnerHTML: {
+        __html: tinymce({
+          content: this.props.content,
+          updateHandler: this.onUpdate
+        });
+      }
+    };
+    return &amp;lt;div {...innerHTML}/&amp;gt;;
+  },
+  onUpdate: function(evt) {
+    this.props.onUpdate(evt);
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And our parent component will wrap these two as:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var Parent = React.createClass({
+  getInitialState: function() {
+    return {
+      content: "",
+      editing: false
+    };
+  },
+
+  render: function() {
+    return (&amp;lt;div className="post"&amp;gt;
+      &amp;lt;Post   hidden={this.state.editing}  content={this.state.content} onClick={this.switchToEditor}/&amp;gt;
+      &amp;lt;Editor hidden={!this.state.editing} content={this.state.content} onUpdate={this.onUpdate}/&amp;gt;
+    &amp;lt;/div&amp;gt;);
+  },
+
+  // triggered when we click the post
+  switchToEditor: function() {
+    this.setState({
+      editing: true
+    });
+  },
+
+  // Called by the editor component
+  onUpdate: function(evt) {
+    this.setState({
+      content: evt.updatedContent,
+      editing: false
+    });
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;In this setup, the Parent is the lord and master, and any changes to the content must run through it. Saving and loading of the post to and from a data repository would, logically, happen in this Parent class. When a user clicks on the post, the "hidden" flag is toggled, which causes the Parent to render with the Editor loaded instead of the Post, and the user can modify the content to their heart's content. Upon completion, the Editor uses the API that the Parent passed down to ensure that its latest data gets reflected, and we return to the Post view.&lt;/p&gt;
+&lt;p&gt;The important question is "where do we put &lt;code&gt;save&lt;/code&gt; and &lt;code&gt;load&lt;/code&gt;", and in this case that choice is obvious: in Parent.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var staterecorder = {
+  componentWillMount: function() {
+    this.register(this, function loadState(state) {
+      this.setState(state);
+    });
+  },
+
+  register
+
+  componentWillUnmount: function() {
+    this.unregister(this);
+  },
+}
+
+var Parent = React.createClass({
+  mixins: [
+    require("staterecorder")
+  ]
+
+  getInitialState: function() {
+    ...
+  },
+
+  getDefaultProps: function() {
+    return { id: 1};
+  },
+
+  render: function() {
+    ...
+  },
+
+  ...
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;But: why would the Parent be in control? While this design mirrors our "abstract idea", this is certainly not the only way we can model things. And look closely: why would that Post not be the authoritative source for the actual post? After all, that's what we called it. Let's have a look at how we could model the idea of "a Post" by acknowledging that our UI should simply "show the right thing", not necessary map 1-on-1 to our abstract idea.&lt;/p&gt;
+&lt;h3 id="delegated-state-management"&gt;Delegated state management&lt;/h3&gt;
+&lt;p&gt;In the delegated approach, each component controls what it controls. No more, no less, and this changes things a little. Let's look at our new component layout:&lt;/p&gt;
+&lt;p&gt;Out post is almost the same, except it now controls the content, and as such, this is now its state and it has an API function for updating the content if a user makes an edit (somehow) outside of the Post:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var marked = require("marked");
+var database = require("database");
+var Post = React.createClass({
+  getInitialState: function() {
+    content: ""
+  },
+
+  componentWillMount: function() {
+    database.getPostFor({id : this.props.id}, function(result) {
+      this.setState({ content: result });
+    };
+  },
+
+  render: function() {
+    var innerHTML = {
+      dangerouslySetInnerHTML: {
+        __html: marked(this.props.content);
+      }
+    };
+    return &amp;lt;div {...innerHTML}/&amp;gt;;
+  },
+
+  setContent: function(newContent) {
+    this.setState({
+      content: newContent
+    });
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Our editor is still the same, and it will do pretty much what it did before:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var tinyMCE = require("tinymce");
+var Editor = React.createClass({
+  render: function() {
+    var innerHTML = {
+      dangerouslySetInnerHTML: {
+        __html: tinymce({
+          content: this.props.content,
+          updateHandler: this.onUpdate
+        });
+      }
+    };
+    return &amp;lt;div {...innerHTML}/&amp;gt;;
+  },
+  onUpdate: function(evt) {
+    this.props.onUpdate(evt);
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And our parent, however, has rather changed. It no longer controls the content, it is simply a convenient construct that marries the authoritative component, with some id, to an editor when the user needs it:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var Parent = React.createClass({
+  getInitialState: function() {
+    return {
+      editing: false
+    };
+  },
+
+  render: function() {
+    return (&amp;lt;div className="post"&amp;gt;
+      &amp;lt;Post   hidden={this.state.editing}  id={...} onClick={this.switchToEditor}/&amp;gt;
+      &amp;lt;Editor hidden={!this.state.editing} onUpdate={this.onUpdate}/&amp;gt;
+    &amp;lt;/div&amp;gt;);
+  },
+
+  // triggered when we click the post
+  switchToEditor: function() {
+
+    ??????
+
+    this.setState({
+      editing: true
+    });
+  },
+
+  // Called by the editor component
+  onUpdate: function(evt) {
+    this.setState({
+      editing: false
+    }, function() {
+      this.refs.setContent(evt.newContent);
+    });
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;You may have spotted the question marks: how do we now make sure that when we click the post, we get its content loaded into the editor? There is no convenient "this.props" binding that we can exploit, so how do we make sure we don't duplicate things all over the place? For instance, the following would work, but it would also be a little ridiculous:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var Parent = React.createClass({
+  getInitialState: function() {
+    return {
+      editing: false,
+      localContent: ""
+    };
+  },
+
+  render: function() {
+    return (&amp;lt;div className="post"&amp;gt;
+      &amp;lt;Post   ref="post" hidden={this.state.editing}  id={...} onClick={this.switchToEditor}/&amp;gt;
+      &amp;lt;Editor hidden={!this.state.editing} content={this.state.localContent} onUpdate={this.onUpdate}/&amp;gt;
+    &amp;lt;/div&amp;gt;);
+  },
+
+  bindContent: function(newContent) {
+    this.setSTate({
+      localContent: newContrent
+    });
+  },
+
+  // triggered when we click the post
+  switchToEditor: function() {
+    this.setState({
+      editing: true
+    });
+  },
+
+  // Called by the editor component
+  onUpdate: function(evt) {
+    this.setState({
+      editing: false
+    }, function() {
+      this.refs.post.setContent(evt.newContent);
+    });
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;We've basically turned the Parent into a surrogate Post now, again with its own content state variables, even though the set out to eliminate that. This is not a path to success. We could try to circumvent this by linking the Post to the Editor directly in the function handlers:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var Parent = React.createClass({
+  getInitialState: function() {
+    return {
+      editing: false
+    };
+  },
+
+  render: function() {
+    return (&amp;lt;div className="post"&amp;gt;
+      &amp;lt;Post   ref="post" id={...} hidden={this.state.editing} onClick={this.switchToEditor}/&amp;gt;
+      &amp;lt;Editor ref="editor" hidden={!this.state.editing} onUpdate={this.onUpdate}/&amp;gt;
+    &amp;lt;/div&amp;gt;);
+  },
+
+  // triggered when we click the post
+  switchToEditor: function() {
+    this.refs.editor.setContent(this.refs.post.getContent(), function() {
+      this.setState({
+        editing: true
+      });
+    });
+  },
+
+  // Called by the editor component
+  onUpdate: function(evt) {
+    this.setState({
+      editing: false
+    }, function() {
+      this.refs.post.setContent(evt.newContent);
+    });
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This might seem better, but we've certainly not made the code easier to read by putting in all those async interruptions...&lt;/p&gt;
+&lt;h3 id="fragmenting-state-across-the-ui"&gt;Fragmenting state across the UI&lt;/h3&gt;
+&lt;p&gt;What if we took the genuinely distributed approach? What if we don't have "a Parent", with the Post and Editor being, structurally, sibling elements? This would certainly rule out the notion of duplicated state, but also introduces the issue of "how do we get data from the editor into the post":&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var Post = React.createClass({
+  getInitialState: function() {
+    content: ""
+  },
+
+  componentWillMount: function() {
+    database.getPostFor({id : this.props.id}, function(result) {
+      this.setState({ content: result });
+    };
+
+    somewhere.listenFor("editor:update", this.setContent);
+  },
+
+  render: function() {
+    var innerHTML = {
+      dangerouslySetInnerHTML: {
+        __html: marked(this.props.content);
+      },
+      onClick: this.onClick
+    };
+    return &amp;lt;div {...innerHTML}/&amp;gt;;
+  },
+
+  onClick: function() {
+    // somehow get an editor, somewhere, to open...
+    somewhere.trigger("post:edit", { content: this.state.content });
+  },
+
+  setContent: function(newContent) {
+    this.setState({
+      content: newContent
+    });
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The obvious thing to notice is that the post now needs to somehow be able to trigger "an editor", as well as listen for updates.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var Editor = React.createClass({
+  componentWillMount: function() {
+    somewhere.listenFor("post:edit", function(evt) {
+      this.contentString = evt.content;
+    });
+  },
+
+  render: function() {
+    var innerHTML = {
+      dangerouslySetInnerHTML: {
+        __html: tinymce({
+          content: this.contentString,
+          updateHandler: this.onUpdate
+        });
+      }
+    };
+    return &amp;lt;div {...innerHTML}/&amp;gt;;
+  },
+  onUpdate: function(evt) {
+    somewhere.trigger("editor:update", evt);
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Again, this seems less than ideal. While the Post and Editor are now nice models, we're spending an aweful lot of time in magical-async-event-land, and as designers, programmers, and contributors, we basically have no idea what's going on without code diving.&lt;/p&gt;
+&lt;p&gt;Remember, you're not just writing code for you, you're also writing code for people you haven't met yet. We want to make sure we can onboard them without going "here are the design documents and flowcharts, if you see anything you don't understand, please reach out and good luck". We want to go "here's the code. It's pretty immediately obvious how everything works, just hit F3 in your code editor to follow the function calls".&lt;/p&gt;
+&lt;h3 id="delegating-all-state-to-an-external-black-box"&gt;Delegating all state to an external black box&lt;/h3&gt;
+&lt;p&gt;There is one last thing we can try: delegating all state synchronizing to some black box object that "knows how to state, yo". For instance, a database interfacing thing through which we perform lookups and save/load all state changes. Of all the options we have, this is the one that is absolutely the most distributed, but it also comes with some significant drawbacks.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var api = {
+  save: function(component, state) {
+    // update our data store, and once that succeeds, update the component
+    datastore.update(component, state).success(function() {
+      component.setState(state);
+    });
+  }
+};
+
+var Post = React.createClass({
+  ...
+  componentWillMount: function() {
+    api.load(this, function(state) {
+      this.setState(state);
+    });
+  },
+  setContent: function(newContent) {
+    api.save(this, {
+      content: newContent
+    });
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This seems pretty handy! we don't update our UI until we know the datastore has the up to date state, so are application is now super portable, and multiple people can, in theory, all work on the same data. That's awesome, free collaboration!&lt;/p&gt;
+&lt;p&gt;The downside is that this is a UI blocking approach, meaning that if for some reason the data store fails, components won't get updated despite there being no &lt;em&gt;technical&lt;/em&gt; reason for that to happen, or worse, the data store can be very slow, leading to actions the user took earlier conflicting with their current actions because the updates happen while the user's already trying to make the UI do something else.&lt;/p&gt;
+&lt;p&gt;Of course, we can reverse the order of commits and UI updates, but that introduces an even harder problem: invalidating the UI if it turns out the changes cannot be committed. While the api approach has neat benefits, they rely on your infrastructure being reliable, and fast. If that cannot be guaranteed, then contacting a data store for committing states manually may be a better solution because it limits the store interactions to bootstrapping (i.e. loading previously modified components) and user-initiated synchronization (save buttons, etc).&lt;/p&gt;
+&lt;h2 id="dealing-with-component-relations"&gt;Dealing with Component Relations&lt;/h2&gt;
+&lt;h3 id="parent-to-child-construction-properties"&gt;Parent to Child: construction properties&lt;/h3&gt;
+&lt;p&gt;This is the classic example of using construction properties. Typically the parent should &lt;em&gt;never&lt;/em&gt; tell the Child to do things via API calls or the like, but simply set up need property values, so that the Child can do "whatever it needs to do based on those".&lt;/p&gt;
+&lt;h3 id="parent-to-descendant-a-modeling-error"&gt;Parent to Descendant: a modeling error&lt;/h3&gt;
+&lt;p&gt;In React, this relationship is essentially void. Parents should only be concerned about what their children look like, and nothing else. If there are things hanging under those children, those things should be irrelevant to the Parent. If they're not, this is a sign that the choice of which components map to which abstract concepts was not thought out well enough (yet), and needs redoing.&lt;/p&gt;
+&lt;h3 id="child-to-parent-this-props"&gt;Child to Parent: this.props&lt;/h3&gt;
+&lt;p&gt;Children can trigger behaviour in their Parents as long as the Parent supplies the API to do so via construction properties. If a Parent has an API for "doing something based on a Child doing something", that API can be passed into along during Child construction in the same way that primitive properties are passed in. React's JSX is just 'JavaScript, with easier to read syntax' so the following:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;render: function() {
+  return &amp;lt;Child content={this.state.content} onUpdate={this.handleChildUpdate}/&amp;gt;;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;is equivalent to:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;render: function() {
+  return React.createElement("Child", {
+    content: this.state.content,
+    onUpdate: this.handleChildUpdate
+  });
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And the child can call &lt;code&gt;this.props.onUpdate&lt;/code&gt; locally whenever it needs the Parent to "do whatever it needs to do".&lt;/p&gt;
+&lt;h3 id="child-to-ancestor-a-modeling-error"&gt;Child to Ancestor: a modeling error&lt;/h3&gt;
+&lt;p&gt;Just like how Parents should not rely on descendants, only direct children, Children should never care about their Ancestors, only their Parents. If the Child needs to talk to its ancestor, this is a sign that the choice of which components map to which abstract concepts was, again, not thought out well enough (yet), and needs redoing.&lt;/p&gt;
+&lt;h3 id="sibling-to-sibling-"&gt;Sibling to Sibling:&lt;/h3&gt;
+&lt;p&gt;As "intuitive" as it might seem for siblings to talk to each other (after all, we do this in traditional HTML setting all the time), in React the notion of "siblings" is irrelevant. If a child relies on a sibling to do its own job, this is yet another sign that the choice of which components map to which abstract concepts was not thought out well enough (yet), and needs redoing.&lt;/p&gt;
+&lt;h2 id="deciding-on-how-to-propagate-data"&gt;Deciding on how to propagate data&lt;/h2&gt;
+&lt;h3 id="chains-of-this-props-fname-function-calls"&gt;Chains of this.props.fname() function calls&lt;/h3&gt;
+&lt;p&gt;The most obvious way to effect communication is via construction properties (on the Parent side) and &lt;code&gt;this.props&lt;/code&gt; (on the Child side). For simple Parent-Child relationships this is pretty much obvious, after all it's what makes React as a technology, but what if we have several levels of components? Let's look at a page with menu system:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Page → menu → submenu → option
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;When the user clicks on the option, the page should do something. This &lt;em&gt;feels&lt;/em&gt; like the option, or perhaps the submenu, should be able to tell the Page that something happened, but this isn't entirely true: the &lt;em&gt;semantics&lt;/em&gt; of the user interaction changes at each level, and having a chain of this.props calls might feel "verbose", but accurately describes what should happen, and follows React methodology. So let's look at those things:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var Options = React.createClass({
+  render: function() {
+    return &amp;lt;li onClick={this.props.optionPicked}&amp;gt;{ this.props.label }&amp;lt;/li&amp;gt;;
+  }
+});
+
+var Submenu = React.createClass({
+  render: function() {
+    var options = this.props.options.map(function(option) {
+      return &amp;lt;Option key={option.label}
+                     label={option.label}
+                     optionPicked={function() { this.select(option.label); }} /&amp;gt;  
+    });
+    return &amp;lt;ul className={ ["menu", this.menuName].join(" ") }&amp;gt;{ options }&amp;lt;/ul&amp;gt;;
+  },
+  select: function(label) {
+    this.props.
+  }
+});
+
+var Menu = React.createClass({
+  render: function() {
+    var submenus = this.props.menus.map(function(menu) {
+      return &amp;lt;Submenu key={menu.name}
+                      menuName={menu.name}
+                      options={menu.options}
+                      onOptionChosen={function(option) { this.select(menu.name, option); }}/&amp;gt;
+    });
+  },
+  select: function(menu, option) {
+    this.props.onSelect(menu, option);
+  }
+});
+
+var Page = React.createClass({
+  render: function() {
+    return (&amp;lt;div&amp;gt;
+      &amp;lt;Header&amp;gt;
+        &amp;lt;Menu menus={require("menusystem")} onSelect={this.navigate}/&amp;gt;
+      &amp;lt;/Header&amp;gt;
+      { this.formSections() }
+      &amp;lt;Footer ... /&amp;gt;
+    &amp;lt;/diV&amp;gt;);
+  },
+  navigate: function(category, topic) {
+    // load in the appropriate section for the category/topic pair given.
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;At each stage, the meaning of what started with "a click" changes. Yes, ultimately this leads to some content being swapped in in the Page component, but that behaviour only matters inside the Page component. Inside the menu component, the important part is learning what the user picked as submenu and option, and communicating that up. Similarly, in the Submenu the important part is known which option the user picked. Contrast this to the menu, where it is also important to know which submenu that "pick" happened in. Those are similar, but different, behaviours. Finally in the Option, the only thing we care about is "hey parent: the user clicked us. Do something with that information".&lt;/p&gt;
+&lt;p&gt;"But this is arduous, why would I need to have a full chain when I know that Menu and Submenu don't care?" Well, for starters, they probably do care, because they'll probably want to style themselves when the user picks an option, such that it's obvious what they picked. It's pretty unusual to see a straight up, pass-along chain of this.props calls, usually a little more happens at each stage.&lt;/p&gt;
+&lt;p&gt;But what if you genuinely need to do something where the "chain" doesn't matter? For instance, you need to have any component be able to throw "an error" at an error log or notifying component that lives "somewhere" in the app and you don't know (nor care) where? Then we need one of the following two solutions. &lt;/p&gt;
+&lt;h3 id="targeted-events-using-the-publish-subscribe-model"&gt;Targeted events using the Publish/Subscribe model&lt;/h3&gt;
+&lt;p&gt;The publish/subscribe model for event handling is the system where you have a mechanism to fire off events "at an event monitor", who will then deliver (copies of) that event to anyone who registered as a listener. In Java, this is the "EventListener" interface, in JavaScript's it's basically the &lt;code&gt;document.addEventListener&lt;/code&gt; + &lt;code&gt;document.dispatch(new CustomEvent)&lt;/code&gt; approach. Things are pretty straight forward, although we need to make sure to &lt;strong&gt;never, ever&lt;/strong&gt; use plain strings for our event names, because hot damn is that asking for bugs once someone starts to refactor the code:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var EventNames = require("eventnames");
+
+var SomeThingSomewhere = React.createClass({
+  mixins: [
+    pubsub: require(...)
+  ],
+  componentWillMount: function() {
+    if (retrieval of something crucial failed) {
+      this.pubsub.generate(EventNames.ERROR, {
+        msg: "something went terribly wrong",
+        code: 13
+      }); 
+    }
+  },
+  render: function() {
+    ...
+  },
+  ...
+});
+
+var ErrorNotifier = React.createClass({
+  mixins: [
+    pubsub: require(...)
+  ],
+  getInitialState: function() {
+    return { errors: [] };
+  },
+  componentWillMount: function() {
+    pubsub.register(EventNames.ERROR, this.showError);
+  },
+  render() {
+    ...
+  },
+  showError: function(err) {
+    this.setState({
+      errors: this.state.errors.slice().concat([err])
+    });
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;We can send off error messages into "the void" using the publish/subscribe event manager, and have the ErrorNotifier trigger each time an error event comes flying by. The reason we can do this is crucial: when a component has "data that someone might be able to use, but is meaningless to myself" then sending that data off over an event manager is an excellent plan. If, however, the data does have meaning to the component itself, like in the menu system above, then the pub/sub approach is tempting, but arguably taking shortcuts without good justification.&lt;/p&gt;
+&lt;p&gt;Of course we can take the publish/subscribe model one step further, by removing the need to subscribe...&lt;/p&gt;
+&lt;h3 id="events-on-steroids-the-broadcasting-approach"&gt;Events on steroids: the broadcasting approach&lt;/h3&gt;
+&lt;p&gt;In the walkie-talkie method of event management, events are sent into the manager, but &lt;em&gt;everybody gets a copy&lt;/em&gt;, no ifs, no buts, the events are simply thrown at you and if you can't do anything with them, then you ignore them, a bit like a bus or taxi dispatcher, when everyone's listening in on the same radio frequency, which is why in the &lt;a href=""&gt;Flux&lt;/a&gt; pattern this kind of event manager is called the &lt;a href="https://facebook.github.io/react/blog/2014/07/30/flux-actions-and-the-dispatcher.html"&gt;Dispatcher&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;A Dispatcher pattern simplifies life by not needing to explicitly subscribe for specific events, you just see all the events fly by and if you know that you need to do something based on one or more of them, you just "do your job". The downside of course is that there will generally be more events that you don't care about than events that you do, so the Dispatcher pattern is great for applications with lots of independent "data generators" and "consumers", but not so great if you have a well modelled application, where you (as designer) can point at various components and say what they should reasonably care about in terms of blind events.&lt;/p&gt;
+&lt;h2 id="you-promised-to-circle-back-so-what-should-i-go-with-"&gt;You promised to circle back, so: what should I go with?&lt;/h2&gt;
+&lt;p&gt;Perhaps not surprisingly, I can't really tell you, at least not with authority. I have my own preferences, but need trumps preference, so choose wisely.&lt;/p&gt;
+&lt;p&gt;If you're working with React, then depending on where you are in your development cycle, as well as learning curve, many of the topics covered are things you're going to run into, and it's going to make life weird, and you'll need to make decisions on how to proceed based on what you need.&lt;/p&gt;
+&lt;p&gt;As far as I'm concerned, my preference is to "stick with React" as much as you can: a well modeled centralized component that maintains state, with &lt;code&gt;this.props&lt;/code&gt; chaining to propagate and process updates, letting &lt;code&gt;render()&lt;/code&gt; take care of keeping the UI in sync with what the user thinks they're doing, dipping sparingly into the publish/subscribe event model when you have to (such as a passive reflector component, like an error notifier that has no "parent" or "child" relationships, it's just a bin to throw data into).&lt;/p&gt;
+&lt;p&gt;I also prefer to solve problems before they become problems by modeling things in a way that takes advantage of everything it has to offer, which means I'm not the biggest fan of the Dispatcher model, because it feels like when that becomes necessary, an irreparable breakdown of your model has occurred.&lt;/p&gt;
+&lt;p&gt;I also don't think you should be writing your components in a way that blocks them from doing the very thing you use React for: having a lightning fast, easy to maintain user interface. While I do think you should be saving and syncing your state, I have strong opinions on "update first, then sync" because the user should never feel like they're waiting. The challenge then is error handling after the fact, but that's something you generally want to analyse and solve on a case-by-case basis.&lt;/p&gt;
+&lt;p&gt;I think you should use state to reflect the &lt;em&gt;component&lt;/em&gt; state, no more, no less, and wherever possible, make that overlap with the "full state" that fits your abstract notion of the thing you're modeling; the more you can props-delegate, and the less you need to rely on blind events, the better off your code base is going to be. Not just for you, but also for other developers and, hopefully, contributors.&lt;/p&gt;
+&lt;h2 id="and-before-closing-an-example-implementing-editable-elements-"&gt;And before closing, an example: implementing editable elements.&lt;/h2&gt;
+&lt;p&gt;Let's look at something that is typical of the "how do we do this right?" problem: editable forms. And I mean generic forms, so in this case, it's a form that lets you control various aspects of an HTML element.&lt;/p&gt;
+&lt;p&gt;This sounds simple, and in traditional HTML, sort of &lt;em&gt;is&lt;/em&gt; simple: set up a form with fields you can change, tie their events to "your thing"s settings, and then update your thing based on user interaction with the form. In React things have to necessarily happen a little differently, but to the user it should &lt;em&gt;feel&lt;/em&gt; the same. Change form → update element.&lt;/p&gt;
+&lt;p&gt;Let's start with something simple: the element. I know, React already has pre-made components for HTML elements, but we want a freely transformable and stylable one. In abstract, we want something like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;element:
+  attributeset:
+  - src
+  - alt
+  - title  
+  transform:
+  - translation
+  - rotation
+  - scale
+  - origin
+  styling:
+  - opacity
+  - border
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Which, at a first stab, could be the following React component:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var utils = require("handyHelperUtilities");
+
+var Element = React.createClass({
+  getInitialState: function() {
+    return utils.getDefaultElementDefinition(this.props);
+  }, 
+  render: function() {
+    var CSS = utils.convertToCSS(this.state);
+    return (&amp;lt;div style={CSS}&amp;gt;
+      &amp;lt;img src={this.state.src} alt={this.state.alt} title={this.state.title}/&amp;gt;
+    &amp;lt;/div&amp;gt;);
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;But, does that make sense? Should this component ever be able to change its internal state? Yes, the abstract model as expressed as, for instance, a database record would certainly treat "changed data" as the same record with new values but the same id, but &lt;em&gt;functionally&lt;/em&gt;, the component is just "expressing a bunch of values via the medium of a UI component", so there isn't actually any reason for these values to be "state", as such. Let's try this again, but this time making the Image a "dumb" element, that simply renders what it is given: &lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var utils = require("handyHelperUtilities");
+
+var Element = React.createClass({
+  getInitialProps: function() {
+    return utils.getDefaultElementDefinition(this.props);
+  },
+  render: function() {
+    var CSS = utils.convertToCSS(this.props);
+    return (&amp;lt;div style={CSS}&amp;gt;
+      &amp;lt;img src={this.props.src} alt={this.props.alt} title={this.props.title}/&amp;gt;
+    &amp;lt;/div&amp;gt;);
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Virtually identical, but this is a drastically different thing: instead of suggesting that the values it expresses is controlled by itself, this is simply a UI component that draws "something" based on the data we pass it when we use it. But we know these values can change, so we need something that &lt;em&gt;does&lt;/em&gt; get to manipulate values. We could call that an Editor, but we're also going to use it to show the element without any editorial options, so let's make sure we use a name that describes what we have:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var EditableElement = React.createClass({
+  getInitialState: function() {
+    return ...?
+  },
+  componentWillMount: function() {
+    ...?
+  },
+   render: function() {
+    var flatProperties = utils.flatten(this.state);
+    return &amp;lt;Element {...flatProperties}/&amp;gt;;
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Let's build that out: we want to be able to edit this editable element, so let's also write an editor:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var utils = require(...) = {
+  ...
+  generateEditorComponents: function (properties, updateCallback) {
+    return properties.map(name =&amp;gt; {
+      utils.getEditorComponent(name, properties[name], updateCallback);
+    });
+  },
+  getEditorComponent: function(name, value, updateCallback) {
+    var Controller = utils.getReactComponent(name);
+    return &amp;lt;Controller value={value} onUpdate={updateCallback} /&amp;gt;;
+  },
+  ...
+};
+
+var Editor = React.createClass({
+  render: function() {
+    return (&amp;lt;div&amp;gt;
+      {utils.generateEditorComponents(this.props, this.onUpdate)}
+    &amp;lt;/div&amp;gt;);
+  },
+  onUpdate: function(propertyLookup, newValue) {
+    ...?
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Now: how do we get these components linked up? &lt;/p&gt;
+&lt;h2 id="editableelement-editor-image-"&gt;EditableElement → (Editor, Image)&lt;/h2&gt;
+&lt;p&gt;The simplest solution is to rely on props to just "do the right thing", with updates triggering state changes, which trigger a &lt;code&gt;render()&lt;/code&gt; which will consequently just do the right thing some more:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var EditableElement = React.createClass({
+  ...
+  render: function() {
+    var flatProperties = utils.flatten(this.state);
+    flatProperties.onUpdate = this.onUpdate;
+    return (&amp;lt;div&amp;gt;
+      { this.state.editing ? &amp;lt;Editor {...flatProperties}/&amp;gt; : &amp;lt;Element {...flatProperties}/&amp;gt; }
+    &amp;lt;/div&amp;gt;);
+  },
+  onUpdate: function(propName, newValue) {
+    var curState = this.state;
+    var updatedState = utils.update(curState, propName, newValue);
+    this.setState(updatedState);
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;In fact, with this layout, we can even make sure the Editor has a preview of the element we're editing:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var Editor = React.createClass({
+  render: function() {
+    return (&amp;lt;div&amp;gt;
+      &amp;lt;div className="preview"&amp;gt;
+        &amp;lt;Element {...this.props}/&amp;gt;
+      &amp;lt;/div&amp;gt;
+      &amp;lt;div className="controls"&amp;gt;
+        {utils.generateEditorComponents(this.props, this.onUpdate)}
+      &amp;lt;/div&amp;gt;
+    &amp;lt;/div&amp;gt;);
+  },
+  onUpdate: function(propertyLookup, newValue) {
+    this.props.onUpdate(propertyLookup, newValue);
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Excellent! The thing to notice here is that the EditableElement holds all the strings: it decides whether to show a plain element, or the editor-wrapped version, and it tells the editor that any changes it makes, it should communicate back, directly, via the &lt;code&gt;onUpdate&lt;/code&gt; function call. If an update is sent over, the EditableElement updates its state to reflect this change, and the render chain ensures that everything "downstream" updates accordingly.&lt;/p&gt;
+&lt;h3 id="doesn-t-that-mean-we-re-updating-too-much-"&gt;Doesn't that mean we're updating too much?&lt;/h3&gt;
+&lt;p&gt;Let's say the Editor has a slider for controlling opacity, and we drag it from &lt;code&gt;1.0&lt;/code&gt; to &lt;code&gt;0.5&lt;/code&gt;. The Editor calls &lt;code&gt;this.props.onUpdate("opacity", 0.5)&lt;/code&gt;, which makes the EditableElement call &lt;code&gt;setState({opacity: 0.5})&lt;/code&gt;, which calls &lt;code&gt;render()&lt;/code&gt;, which sees an update in state, which means React propages the new values to the Editor, which sees an update in its properties and so calls its own &lt;code&gt;render()&lt;/code&gt;, which then redraws the UI to match the exact same thing as what we just turned it into. Aren't we wasting time and processing on this? We're just getting the Editor's slider value up into the Element, we don't need a full redraw, do we?&lt;/p&gt;
+&lt;p&gt;Time to repeat that sentence one more time:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;If used correctly, your users will think they are manipulating a UI, when in fact they are manipulating React, which &lt;em&gt;may&lt;/em&gt; then update the UI&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;In redux, this means we &lt;em&gt;did not&lt;/em&gt; first change that slider to &lt;code&gt;0.5&lt;/code&gt;, and so we definitely need that redraw, because &lt;em&gt;nothing has changed yet&lt;/em&gt;! You're initiating a change-event that React gets, after which updates may happen, but the slider hasn't updated yet. React takes your requested change, kills it off as far as the browser is concerned, and then forwards the "suggestion" in your event to whatever handles value changes. If those changes get rejected, nothing happens. For example, if our element is set to ignore opacity changes, then despite us trying to drag the opacity slider, that slider will not budge, no matter how much we tug on it.&lt;/p&gt;
+&lt;h3 id="extended-editorial-control"&gt;Extended editorial control&lt;/h3&gt;
+&lt;p&gt;We can extend the editor so that it becomes more and more detailed, while sticking with this pattern. For instance, say that in addition to the simple editing, we also want some expert editing: there's some "basic" controls with sliders, and some "expert" controls with input fields:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var SimpleControls = React.createClass({
+  render: function() {
+    return utils.generateSimpleEditorComponents(this.props, this.onUpdate);
+  }
+});
+
+var ExpertControls = React.createClass({
+  render: function() {
+    return utils.generateExpertEditorComponents(this.props, this.onUpdate);
+  }
+});
+
+var Editor = React.createClass({
+  render: function() {
+    return (&amp;lt;div&amp;gt;
+      &amp;lt;div className="preview"&amp;gt;
+        &amp;lt;Element {...this.props}/&amp;gt;
+      &amp;lt;/div&amp;gt;
+      &amp;lt;div className="controls"&amp;gt;
+        &amp;lt;SimpleControls properties={this.props} onUpdate={this.onUpdate}/&amp;gt;
+        &amp;lt;ExpertControls properties={this.props} onUpdate={this.onUpdate}/&amp;gt;
+      &amp;lt;/div&amp;gt;
+    &amp;lt;/div&amp;gt;);
+  },
+  onUpdate: function(propertyLookup, newValue) {
+    this.props.onUpdate(propertyLookup, newValue);
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Done. The &lt;code&gt;Editor&lt;/code&gt; is still responsible for moving data up to the &lt;code&gt;EditableElement&lt;/code&gt;, and the simple vs. expert controls simply tap into the exact same properties. If the parent is rendered with updates, they will "instantly" propagate down.&lt;/p&gt;
+&lt;h1 id="and-that-s-it-"&gt;And that's it...&lt;/h1&gt;
+&lt;p&gt;If you made it all the way to the bottom, I've taken up a lot of your time, so first off: thanks for reading! But more importantly, I hope there was some new information in this post that helps you understand React a little better. And if there's anything in this post that you disagree with, or feel is weirdly explained, or &lt;em&gt;know&lt;/em&gt; is outright wrong: let me know! I'm not done learning either!&lt;/p&gt;
+</description>
+<category>Mozilla</category>
+<category>React</category>
+<category>JavaScript</category>
+<category>Development</category>
+<link>http://pomax.github.io/#gh-weblog-1433888478288</link>
+<guid>http://pomax.github.io/#gh-weblog-1433888478288</guid>
+<pubDate>Tue, 09 Jun 2015 22:21:18 GMT</pubDate>
+</item>
+<item>
+<title> Touch events, Reactjs, and Android. Good luck.</title>
+<description>&lt;p&gt;We're doing a bit of prototype work over at the &lt;a href="https://webmaker.org"&gt;Mozilla Foundation&lt;/a&gt;, playing around with what possible future ways of interacting with makable web things could look like (can that &lt;em&gt;be&lt;/em&gt; more vague?), and one of these prototypes takes the shape of dropping HTML elements onto a page and, photo book style, moving them around (or rather, moving, rotating, and scaling, using CSS3) without necessarily affecting the markup ordering.&lt;/p&gt;
+&lt;p&gt;And that works well! We're currently exploring &lt;a href="https://facebook.github.io/react"&gt;React.js&lt;/a&gt; (which comes with a refreshing look at what programming for the web can look like) and so I figured I'd try my hand at the idea by writing a React component/mixin that could be used in conjunction with arbitrary content to magically make it movable, rotatable and scalable. And in desktop browsers, it works really well!&lt;/p&gt;
+&lt;p&gt;Unfortunately, we also need things to work on mobile devices, where there are no mouse cursors, and instead you have to work with touch. Touch changes some things (the CSS :hover state, for instance, becomes meaningless) but for the most part if your code worked with &lt;code&gt;mousedown&lt;/code&gt;, &lt;code&gt;mousemove&lt;/code&gt; and &lt;code&gt;mouseup&lt;/code&gt;, those map fairly straight forward to &lt;code&gt;touchstart&lt;/code&gt;, &lt;code&gt;touchmove&lt;/code&gt; and &lt;code&gt;touchend&lt;/code&gt;. Add the touch listeners and make them do the same as the mouse listeners, and done. Or, you would be, if these generated the same data. They don't, so you have a bit more work to do for getting the correct coordinates out of the touch events (mouse events have &lt;code&gt;evt.clientX&lt;/code&gt;, touch events are an array of possible multitouch, so you end up with &lt;code&gt;evt.touches[0].pageX&lt;/code&gt;, for instance). Still, entirely doable.&lt;/p&gt;
+&lt;p&gt;Unfortunately, things get weird when you do these things and then try to use them on, say, Android. Android has bugs when it comes touch events. Outside of the expected, that is. First, it turns out that Android won't fire off &lt;code&gt;touchend&lt;/code&gt; events, even if they occur, if you never told Android to "&lt;a href="http://developer.android.com/guide/webapps/migrating.html#TouchCancel"&gt;prevent the default behaviour&lt;/a&gt;" on a &lt;code&gt;touchstart&lt;/code&gt; or &lt;code&gt;touchmove&lt;/code&gt;. Why? Because if you don't, Android will treat the finger gesture first as what you needed to do, and then as "oh but the default behaviour should still happen, the user wants to scroll the page" and then the touchend that stops Android from listening to page scroll gets consumed and never sent on to your code. If you didn't know about that, you're wasting quite a bit of time figuring out what the heck is going on.&lt;/p&gt;
+&lt;p&gt;But now you know about that, so adding &lt;code&gt;evt.preventDefault()&lt;/code&gt; in your start and move handling should fix things, right? Well... no. It turns out there's another, far more magical, feature in Android that does what should reasonably be impossible in any programming setting. Have a look at this code:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var element = ...;
+element.addEventListener("touchstart", handleTouchStart);
+element.addEventListener("touchmove", handleTouchMove);
+element.addEventListener("touchend", handleTouchEnd);
+
+function handleTouchStart(evt) {
+  console.log("touch started");
+}
+
+function handleTouchMove(evt) {
+  console.log("touch move");
+}
+
+function handleTouchEnd(evt) {
+  console.log("touch ended");
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This works great. Loading pages with code like this on Android will show that all three events fire if you put down your finger, move it around a bit, and take it off the screen again. But, we might want to know where all those events happen, so let's write a helper function and modify the handlers:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function fixEvtCoords(evt) {
+  evt.clientX = evt.clientX || evt.touches[0].pageX;
+  evt.clientY = evt.clientY || evt.touches[0].pageY;
+}
+...
+function handleTouchStart(evt) {
+  fixEvtCoords(evt);
+  console.log("touch started at " + evt.clientX + "," + evt.clientY);
+}
+
+function handleTouchMove(evt) {
+  fixEvtCoords(evt);
+  console.log("touch move at " + evt.clientX + "," + evt.clientY);
+}
+
+function handleTouchEnd(evt) {
+  fixEvtCoords(evt);
+  console.log("touch ended at " + evt.clientX + "," + evt.clientY);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;That looks perfectly reasonable, and start and move now show the coordinates at which the events are generated. But &lt;code&gt;touchend&lt;/code&gt; no longer works... what? It gets more interesting: what if we don't fix the coordinates for the end event?&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function handleTouchEnd(evt) {
+  console.log("touch ended at " + evt.clientX + "," + evt.clientY);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This logs "&lt;code&gt;touch ended at undefined,undefined&lt;/code&gt;", which makes sense because touch events don't have the &lt;code&gt;.clientX&lt;/code&gt; and &lt;code&gt;.clientY&lt;/code&gt; properties. So, let's change those to the real thing:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function handleTouchEnd(evt) {
+  console.log("touch ended at " + evt.touches[0].pageX + "," + evt.touches[0].pageY);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This won't actually do anything. There is nothing in &lt;code&gt;.touches[0]&lt;/code&gt; anymore, so there will be a JS error and the code won't run. So what do we do? The simplest solution is to rely on the fact that we're only using single finger interaction, and just assume that if a &lt;code&gt;touchend&lt;/code&gt; fired at all, we no longer have any fingers on the screen:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function handleTouchEnd(evt) {
+  console.log("touch ended");
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This is weird for several reasons: if we want to deal with multi touch, how do we track &lt;em&gt;which&lt;/em&gt; finger just stopped being on the screen? You'd be tempted to try something like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function handleTouchEnd(evt) {
+  console.log("touch ended", JSON.stringify(evt, false, 2));
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;To get an easy to debug bit of string data to tell us what's in that event, but if we do this, more JS errors and the log call will throw instead of logging useful data.&lt;/p&gt;
+&lt;p&gt;The worst is you just read this in a matter of a few minutes, but discovering all this, if you don't really work with Android all that much, is pretty much hours and hours of trying things, not understanding why they work on desktop but not on Android, trying more things, case reducing, starting from scratch, noticing things do work, slowly building things back up, noticing they break at some point, going back to where things weren't broken, and slowly figuring out what's going wrong because you home in on specific calls and patterns that just don't seem to work.&lt;/p&gt;
+&lt;p&gt;Over the course of 6 hours I went from not knowing these things to knowing both how to deal with this in the future, as well as knowing how to write my React code in such a way that touch events will propagate properly. Fun fact: if you're using React in an Android WebView "browser", there are some things you can do that work perfectly fine on desktop, and will not work at all on Android, too.&lt;/p&gt;
+&lt;p&gt;For instance, React has &lt;code&gt;onTouchStart&lt;/code&gt;, &lt;code&gt;onTouchMove&lt;/code&gt; and &lt;code&gt;onTouchEnd&lt;/code&gt; component &lt;a href="https://facebook.github.io/react/docs/events.html#touch-events"&gt;event handlers&lt;/a&gt;, with augmented events to make sure every browser will work the same. That's great, except it has bugs. The event augmentation does &lt;em&gt;something&lt;/em&gt; (and without looking at the React source code, I have no real idea what that something is) that breaks event propagation. So, this code doesn't work:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var Positionable = ... ({
+  render: function() {
+    return (
+      &amp;lt;div onTouchStart={this.handleTouchStart}&amp;gt;
+        &amp;lt;RotationControls /&amp;gt;
+        &amp;lt;ScaleControls /&amp;gt;
+      &amp;lt;/div&amp;gt;
+    );
+  }
+})
+
+var RotationControls = ... ({
+  render: function() {
+    return (
+      &amp;lt;div onTouchStart={this.handleTouchStart}&amp;gt;
+        ...
+      &amp;lt;/div&amp;gt;
+    );
+  }
+})
+
+var ScaleControls = ... ({
+  render: function() {
+    return (
+      &amp;lt;div onTouchStart={this.handleTouchStart}&amp;gt;
+        ...
+      &amp;lt;/div&amp;gt;
+    );
+  }
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;You might think it would, but nope: not on Android. While this works fine on desktop, trying this on Android and tapping the &lt;code&gt;RotationControls&lt;/code&gt; element actually gets sent to the higher level &lt;code&gt;Positionable&lt;/code&gt; instead. No matter how much you tap, that touch event is not going to make it into the handler defined in &lt;code&gt;RotationControls&lt;/code&gt; to rotate our element. So, ultimately, despite React having code in place to make working with touch events nicer, we actually need to go back to the drawing board and use the good old low level &lt;code&gt;addEventListener('touchstart', ...)&lt;/code&gt; and friends in order to make sure that nothing interferes with event propagation.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var TouchMixin = {
+  componentDidMount: function() {
+    var localNode = this.getDOMNode();
+    localNode.addEventListener('touchstart', this.handleTouchStart);
+  },
+  componentWillUnmount: function() {
+    var localNode = this.getDOMNode();
+    localNode.removeEventListener('touchstart', this.handleTouchStart);
+  }
+};
+
+var Positionable = ... ({
+  mixins: [
+    TouchMixin
+  ],
+  render: function() {
+    return (
+      &amp;lt;div&amp;gt;
+        &amp;lt;RotationControls /&amp;gt;
+        &amp;lt;ScaleControls /&amp;gt;
+      &amp;lt;/div&amp;gt;
+    );
+  }
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;With similar changes in &lt;code&gt;RotationControls&lt;/code&gt; and &lt;code&gt;ScaleControls&lt;/code&gt;. Fun!&lt;/p&gt;
+&lt;p&gt;But wait, there's more. The component I'm writing also has a &lt;code&gt;ZIndexController&lt;/code&gt;, which gives you two buttons for changing a number, and that number gets communicated up, and used as z-index for the element on the page:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var Positionable = ... ({
+  render: function() {
+    return (
+      &amp;lt;divb&amp;gt;
+        &amp;lt;RotationControls /&amp;gt;
+        &amp;lt;ScaleControls /&amp;gt;
+        &amp;lt;ZIndexController /&amp;gt;
+        { this.props.children }
+      &amp;lt;/div&amp;gt;
+    );
+  }
+})
+
+var ZIndexController = ... ({
+  getInitialState: function() {
+    return { zIndex: this.props.zIndex || 0 };
+  },
+  render: function() {
+    return (
+      &amp;lt;div className="zindex-controller"&amp;gt;
+        layer position:
+        &amp;lt;span className="zmod left" onClick={this.zDown}&amp;gt;◀&amp;lt;/span&amp;gt;
+        { this.state.zIndex }
+        &amp;lt;span className="zmod right" onClick={this.zUp}&amp;gt;▶&amp;lt;/span&amp;gt;
+      &amp;lt;/div&amp;gt;
+    );
+  },
+  zUp: function(evt) {
+    evt.stopPropagation();
+    this.setState({ zIndex: this.state.zIndex + 1 }, function() {
+      this.props.onChange(this.state.zIndex);
+    });
+  },
+  zDown: function(evt) {
+    evt.stopPropagation();
+    this.setState({ zIndex: Math.max(0, this.state.zIndex - 1) }, function() {
+      this.props.onChange(this.state.zIndex);
+    });
+  }
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Again, this works great in desktop browsers, but does not work on Android. What's going on? As it turns out, React events like &lt;code&gt;onClick&lt;/code&gt; work because React intercepts all events at the document level and then routes them on further based on which things registered first, rather than "the most specific thing first". We can try to work around this, to try to force the ordering that we want, but that's just making a bad situation worse should more touch propagation need to happen in the future: instead the only workable solution that I've found is to just say "alright, forget it, make touch regions non-overlapping". As such, rather than a positionable thing with rotation and scale controls, the solution is to have an inert "thing" with positioning, rotation, and scale controls instead. That way the touch events for moving the element around do not overlap with, for instance, the z-index controls, and things work. It's less nice, but the only tractible solution:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var Positionable = ... ({
+  render: function() {
+    return (
+      &amp;lt;divb&amp;gt;
+        &amp;lt;PlacementController /&amp;gt;
+        &amp;lt;RotationControls /&amp;gt;
+        &amp;lt;ScaleControls /&amp;gt;
+        &amp;lt;ZIndexController /&amp;gt;
+        { this.props.children }
+      &amp;lt;/div&amp;gt;
+    );
+  }
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And with that, things work. New technologies have a great way of bringing back the pain you thought you'd left behind.&lt;/p&gt;
+</description>
+<category>Mozilla</category>
+<category>React</category>
+<category>Android</category>
+<category>Touch</category>
+<category>Webmaker</category>
+<link>http://pomax.github.io/#gh-weblog-1428529484183</link>
+<guid>http://pomax.github.io/#gh-weblog-1428529484183</guid>
+<pubDate>Wed, 08 Apr 2015 21:44:44 GMT</pubDate>
+</item></channel>
+</rss>
