@@ -3288,7 +3288,6 @@ module.exports = React.createClass({displayName: "exports",
   componentDidMount: function() {
     // are we authenticataed?
     var settings = this.getSettings();
-    console.log(settings);
     if(settings) {
       this.connector = new this.Connector(settings);
       if(settings.token) { this.setState({ authenticated: true }); }
@@ -3838,6 +3837,7 @@ module.exports = {
 
   getSettings: function() {
     var settings = window.localStorage[this.settingsName];
+    console.log("immediate settings:", settings);
 
     if(!settings) {
       console.log("no settings in local storage");
