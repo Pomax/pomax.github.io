@@ -3682,6 +3682,7 @@ module.exports = {
     if (window.WebLogSettings && window.WebLogSettings.path) {
       // always respect this, when set.
       path = window.WebLogSettings.path;
+      console.log("rebinding path as " + path);
     }
     var settings = window.localStorage[this.settingsName];
     if(!settings) return false;
