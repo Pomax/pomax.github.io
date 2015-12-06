@@ -1,12 +1,48 @@
 <!doctype html>
 <html>
   <head>
+    <script>
+      /**
+       * This script works in conjunction with the replaceState code on the
+       * actual content renderer so that URLs like:
+       *
+       *   http://pomax.github.io/1427947755216
+       *
+       * or:
+       *
+       *   http://pomax.github.io/1427947755216/Even-more-kintsugi-(before-the-金)
+       *
+       * get redirected to the dynamic generator URL:
+       *
+       *   http://pomax.github.io/#gh-weblog-1427947755216
+       *
+       * Which, when rendered, rewrites the dynamic URL back to the "real" URL
+       * by using history.replaceState().
+       *
+       * This lets us do content loading by fragment ID, while maintaining the
+       * integrity of the URL: requesting a plain URL will always work, and the
+       * fact that "under the hood" we temporarily rely on fragment IDs to get
+       * the content does not affect the user, who should always only see the
+       * "real" URL for the content they're requesting.
+       *
+       * Note this uses the "a" rather than new URL() approach, because IE...
+       */ 
+      var url = document.createElement("a");
+      url.href = window.location.toString()
+      if(!!url.pathname) {
+        var postid = url.pathname.match(/^\/?(\d+)\/?/);
+        if(!!postid && !!postid[0]) {
+          // redirect to post
+          window.location = url.protocol + "//" + url.hostname + "/#gh-weblog-" + postid[1];
+        }
+      }
+    </script>
     <meta charset="utf-8">
-    <title>Temporarily relocated while github fixes its dns</title>
+    <title>Post redirect</title>
   </head>
   <body>
-    <script>
-      window.location = "http://pomax.github.io/temp-blog" + window.location.pathname + window.location.search;
-    </script>
+    <h1>Post redirection</h1>
+    <p>Please note that if you have JavaScript disabled, this redirect will fail.</p>
+    <!-- gh-pages rebuild = true -->
   </body>
 </html>
