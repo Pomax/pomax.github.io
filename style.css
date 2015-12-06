@@ -1,0 +1,120 @@
+html {
+  background: white;
+}
+
+body {
+  width: 960px;
+  margin: 0 auto;
+  padding: 1em;
+  font-family: Lato;
+  background: #233651;
+  min-height: 100%;
+  border: 1px solid black;
+  border-width: 0 1px;
+  box-shadow: 0 0 50px 5px gray;
+}
+
+body > header h1, h2 {
+  font-family: "Eagle Lake";
+  margin: 0;
+}
+
+body > header h1 {
+  font-size: 250%;
+}
+
+body > header h1 .deved {
+  font-family: Verdana;
+  color: #CBCBCB;
+  font-size: 65%;
+  font-weight: normal;
+  display: inline-block;
+  height: 0.5em;
+  vertical-align: 0.25em;
+  margin-left: 1em;
+}
+
+body > header h2 {
+  font-size: 110%;
+  text-indent: 2em;
+  margin-bottom: 1em;
+  color: #FFF2E7;
+}
+
+body > header h6 {
+  position: absolute;
+  top: -1em;
+  left: calc(50% + 480px - 3em);
+}
+
+body > header h6 a {
+  display: block;
+  height: 1.8em;
+  background: rgba(255,255,255,0.1);
+  padding: 4px;
+  vertical-align: middle;
+  text-align: center;
+  border-radius: 5px;
+  width: 1.9em;
+  border: 1px solid #555;
+}
+
+body > header h6 a + a {
+  top: 1em;
+  margin-top: 1em;
+}
+
+body > header h6 a img {
+  width: 2em !important;
+  height: 1.75em !important;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-family: Lustria;
+}
+
+a, a:active, a:hover, a:visited {
+  text-decoration: none;
+  color: #0D23CC;
+}
+
+h1 a, h1 a:active, h1 a:hover, h1 a:visited {
+  color: #4494C6;
+}
+
+a:hover {
+  color: rgb(80,140,200);
+}
+
+#gh-weblog button.authenticate {
+  font-size: 1rem;
+}
+
+#gh-weblog-nav {
+  max-height: calc(5 * 1.25em);
+  background: white;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 1em;
+}
+
+#gh-weblog-nav ul {
+  list-style: none;
+  padding: 0;
+  padding-left: 0.5em;
+  margin:  0;
+}
+
+#gh-weblog-nav ul li {
+  white-space: nowrap;
+  text-overflow: ellipse;
+}
+
+#gh-weblog-nav ul li a {
+  color: #4494C6;
+}
+
+.pubday { color: #555; }
+.pubyear { color: #CCC; }
