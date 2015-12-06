@@ -2995,8 +2995,9 @@ module.exports = React.createClass({displayName: "exports",
     }
     var posted = (new Date(this.state.published)).toLocaleString();
     var updated = (new Date(this.state.updated)).toLocaleString();
+    var folded = !this.props.singleton && this.state.folded;
     return (
-      React.createElement("div", {className: classnames("entry", {folded: this.state.folded}), id: id}, 
+      React.createElement("div", {className: classnames("entry", {folded: folded}), id: id}, 
         deletebutton, 
         React.createElement("header", null, 
           React.createElement("h1", null, React.createElement("a", {href: entryURL}, this.state.title)), 
@@ -3006,7 +3007,7 @@ module.exports = React.createClass({displayName: "exports",
         React.createElement(Editor, {ref: "editor", hidden: !this.state.editing, text: text, update: this.update, view: this.view, delete: this.delete}), 
         React.createElement("a", {className: "comments", href: this.props.issues}, "leave a comment on github"), 
         React.createElement(Tags, {disabled: !this.props.editable, tags: this.state.tags, onChange: this.updateTags}), 
-         !this.props.singleton && this.state.folded ? React.createElement("div", {className: "viewmore"}, React.createElement("button", {onClick: this.unfold}, "View the rest of this post")) : false
+         folded ? React.createElement("div", {className: "viewmore"}, React.createElement("button", {onClick: this.unfold}, "View the rest of this post")) : false
       )
     );
   },
@@ -3323,6 +3324,7 @@ module.exports = React.createClass({displayName: "exports",
   generateEntries: function(entries) {
     entries = entries || this.getSlice();
     var self = this;
+    console.log(this.state);
     return entries.map(function(entry) {
       return React.createElement(Entry, {key: entry.metadata.created, 
                     ref: entry.metadata.id, 
