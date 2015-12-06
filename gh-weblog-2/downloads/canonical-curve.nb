@@ -1,0 +1,489 @@
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["Start a curve with four arbitrary points:", "Text"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   SubscriptBox["p", "1"], " ", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      SubscriptBox["x", "1"], "}"}], ",", 
+     RowBox[{"{", 
+      SubscriptBox["y", "1"], "}"}], ",", 
+     RowBox[{"{", "1", "}"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["p", "2"], " ", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      SubscriptBox["x", "2"], "}"}], ",", 
+     RowBox[{"{", 
+      SubscriptBox["y", "2"], "}"}], ",", 
+     RowBox[{"{", "1", "}"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["p", "3"], " ", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      SubscriptBox["x", "3"], "}"}], ",", 
+     RowBox[{"{", 
+      SubscriptBox["y", "3"], "}"}], ",", 
+     RowBox[{"{", "1", "}"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["p", "4"], " ", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      SubscriptBox["x", "4"], "}"}], ",", 
+     RowBox[{"{", 
+      SubscriptBox["y", "4"], "}"}], ",", 
+     RowBox[{"{", "1", "}"}]}], "}"}]}], ";"}]}], "Input"],
+
+Cell["\<\
+[1] Translate the curve to (0, 0):\
+\>", "Text"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   SubscriptBox["T", "1"], "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "0", ",", 
+       RowBox[{"-", 
+        SubscriptBox["x", "1"]}]}], "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "1", ",", 
+       RowBox[{"-", 
+        SubscriptBox["y", "1"]}]}], "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0", ",", "1"}], "}"}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["u", "1"], "=", 
+   RowBox[{
+    SubscriptBox["T", "1"], ".", 
+    SubscriptBox["p", "1"]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["u", "2"], "=", 
+   RowBox[{
+    SubscriptBox["T", "1"], ".", 
+    SubscriptBox["p", "2"]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["u", "3"], "=", 
+   RowBox[{
+    SubscriptBox["T", "1"], ".", 
+    SubscriptBox["p", "3"]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["u", "4"], "=", 
+   RowBox[{
+    SubscriptBox["T", "1"], ".", 
+    SubscriptBox["p", "4"]}]}], ";"}]}], "Input"],
+
+Cell["\<\
+[2] X-Shear curve to align point 2 with x = 0:\
+\>", "Text"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   SubscriptBox["shear", "x"], "=", " ", 
+   RowBox[{"-", 
+    FractionBox[
+     RowBox[{
+      SubscriptBox["u", "2"], "[", 
+      RowBox[{"[", 
+       RowBox[{"1", ",", "1"}], "]"}], "]"}], 
+     RowBox[{
+      SubscriptBox["u", "2"], "[", 
+      RowBox[{"[", 
+       RowBox[{"2", ",", "1"}], "]"}], "]"}]]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["T", "2"], "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", 
+       SubscriptBox["shear", "x"], ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "1", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0", ",", "1"}], "}"}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["v", "1"], "=", 
+   RowBox[{
+    SubscriptBox["T", "2"], ".", 
+    SubscriptBox["u", "1"]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["v", "2"], "=", 
+   RowBox[{
+    SubscriptBox["T", "2"], ".", 
+    SubscriptBox["u", "2"]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["v", "3"], "=", 
+   RowBox[{
+    SubscriptBox["T", "2"], ".", 
+    SubscriptBox["u", "3"]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["v", "4"], "=", 
+   RowBox[{
+    SubscriptBox["T", "2"], ".", 
+    SubscriptBox["u", "4"]}]}], ";"}]}], "Input"],
+
+Cell["\<\
+[3] Scale coordinates to boundaries (0, 0)--(s, s):\
+\>", "Text"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   SubscriptBox["scale", "x"], "=", 
+   FractionBox["s", 
+    RowBox[{
+     SubscriptBox["v", "3"], "[", 
+     RowBox[{"[", 
+      RowBox[{"1", ",", "1"}], "]"}], "]"}]]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["scale", "y"], "=", 
+   FractionBox["s", 
+    RowBox[{
+     SubscriptBox["v", "2"], "[", 
+     RowBox[{"[", 
+      RowBox[{"2", ",", "1"}], "]"}], "]"}]]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["T", "3"], "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       SubscriptBox["scale", "x"], ",", "0", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", 
+       SubscriptBox["scale", "y"], ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0", ",", "1"}], "}"}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["w", "1"], "=", 
+   RowBox[{
+    SubscriptBox["T", "3"], ".", 
+    SubscriptBox["v", "1"]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["w", "2"], "=", 
+   RowBox[{
+    SubscriptBox["T", "3"], ".", 
+    SubscriptBox["v", "2"]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["w", "3"], "=", 
+   RowBox[{
+    SubscriptBox["T", "3"], ".", 
+    SubscriptBox["v", "3"]}]}], ";", 
+  RowBox[{
+   SubscriptBox["w", "4"], "=", 
+   RowBox[{
+    SubscriptBox["T", "3"], ".", 
+    SubscriptBox["v", "4"]}]}], ";"}]}], "Input"],
+
+Cell["\<\
+[4] Y-Shear so that point 3 lines up with (1,1):\
+\>", "Text"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   SubscriptBox["shear", "y"], " ", "=", 
+   FractionBox[
+    RowBox[{"s", " ", "-", " ", 
+     RowBox[{
+      SubscriptBox["w", "3"], "[", 
+      RowBox[{"[", 
+       RowBox[{"2", ",", "1"}], "]"}], "]"}]}], 
+    RowBox[{
+     SubscriptBox["w", "3"], "[", 
+     RowBox[{"[", 
+      RowBox[{"1", ",", "1"}], "]"}], "]"}]]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["T", "4"], "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "0", ",", "0"}], "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{
+       SubscriptBox["shear", "y"], ",", "1", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0", ",", "1"}], "}"}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["f", "1"], "=", 
+   RowBox[{
+    SubscriptBox["T", "4"], ".", 
+    SubscriptBox["w", "1"]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["f", "2"], "=", 
+   RowBox[{
+    SubscriptBox["T", "4"], ".", 
+    SubscriptBox["w", "2"]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["f", "3"], "=", 
+   RowBox[{
+    SubscriptBox["T", "4"], ".", 
+    SubscriptBox["w", "3"]}]}], ";", 
+  RowBox[{
+   SubscriptBox["f", "4"], "=", 
+   RowBox[{
+    SubscriptBox["T", "4"], ".", 
+    SubscriptBox["w", "4"]}]}], ";"}]}], "Input"],
+
+Cell["\<\
+[5] Points 1, 2, and 3 now lie on (0,0), (0,1), and (1,1) respectively. Our \
+only free coordinate now lies on:\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  SubscriptBox["mapped", "x"], "=", 
+  RowBox[{
+   SubscriptBox["f", "4"], "[", 
+   RowBox[{"[", 
+    RowBox[{"1", ",", "1"}], "]"}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ FractionBox[
+  RowBox[{"s", " ", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"-", 
+      SubscriptBox["x", "1"]}], "+", 
+     SubscriptBox["x", "4"], "-", 
+     FractionBox[
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"-", 
+          SubscriptBox["x", "1"]}], "+", 
+         SubscriptBox["x", "2"]}], ")"}], " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"-", 
+          SubscriptBox["y", "1"]}], "+", 
+         SubscriptBox["y", "4"]}], ")"}]}], 
+      RowBox[{
+       RowBox[{"-", 
+        SubscriptBox["y", "1"]}], "+", 
+       SubscriptBox["y", "2"]}]]}], ")"}]}], 
+  RowBox[{
+   RowBox[{"-", 
+    SubscriptBox["x", "1"]}], "+", 
+   SubscriptBox["x", "3"], "-", 
+   FractionBox[
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"-", 
+        SubscriptBox["x", "1"]}], "+", 
+       SubscriptBox["x", "2"]}], ")"}], " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"-", 
+        SubscriptBox["y", "1"]}], "+", 
+       SubscriptBox["y", "3"]}], ")"}]}], 
+    RowBox[{
+     RowBox[{"-", 
+      SubscriptBox["y", "1"]}], "+", 
+     SubscriptBox["y", "2"]}]]}]]], "Output",
+ FontSize->18]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  SubscriptBox["mapped", "y"], "=", 
+  RowBox[{
+   SubscriptBox["f", "4"], "[", 
+   RowBox[{"[", 
+    RowBox[{"2", ",", "1"}], "]"}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  FractionBox[
+   RowBox[{"s", " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"-", 
+       SubscriptBox["y", "1"]}], "+", 
+      SubscriptBox["y", "4"]}], ")"}]}], 
+   RowBox[{
+    RowBox[{"-", 
+     SubscriptBox["y", "1"]}], "+", 
+    SubscriptBox["y", "2"]}]], "+", 
+  FractionBox[
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"s", "-", 
+      FractionBox[
+       RowBox[{"s", " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"-", 
+           SubscriptBox["y", "1"]}], "+", 
+          SubscriptBox["y", "3"]}], ")"}]}], 
+       RowBox[{
+        RowBox[{"-", 
+         SubscriptBox["y", "1"]}], "+", 
+        SubscriptBox["y", "2"]}]]}], ")"}], " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"-", 
+       SubscriptBox["x", "1"]}], "+", 
+      SubscriptBox["x", "4"], "-", 
+      FractionBox[
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"-", 
+           SubscriptBox["x", "1"]}], "+", 
+          SubscriptBox["x", "2"]}], ")"}], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"-", 
+           SubscriptBox["y", "1"]}], "+", 
+          SubscriptBox["y", "4"]}], ")"}]}], 
+       RowBox[{
+        RowBox[{"-", 
+         SubscriptBox["y", "1"]}], "+", 
+        SubscriptBox["y", "2"]}]]}], ")"}]}], 
+   RowBox[{
+    RowBox[{"-", 
+     SubscriptBox["x", "1"]}], "+", 
+    SubscriptBox["x", "3"], "-", 
+    FractionBox[
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"-", 
+         SubscriptBox["x", "1"]}], "+", 
+        SubscriptBox["x", "2"]}], ")"}], " ", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"-", 
+         SubscriptBox["y", "1"]}], "+", 
+        SubscriptBox["y", "3"]}], ")"}]}], 
+     RowBox[{
+      RowBox[{"-", 
+       SubscriptBox["y", "1"]}], "+", 
+      SubscriptBox["y", "2"]}]]}]]}]], "Output",
+ FontSize->18]
+}, Open  ]],
+
+Cell["\<\
+[6] Now, if we translate this free point by some (dx, dy) the original point \
+4 needs to be moved by some distance. We run the matrices in reverse:\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"h", " ", "=", " ", 
+   RowBox[{"Simplify", "[", 
+    RowBox[{
+     RowBox[{"Inverse", "[", 
+      SubscriptBox["T", "1"], "]"}], ".", 
+     RowBox[{"Inverse", "[", 
+      SubscriptBox["T", "2"], "]"}], ".", 
+     RowBox[{"Inverse", "[", 
+      SubscriptBox["T", "3"], "]"}], ".", 
+     RowBox[{"Inverse", "[", 
+      SubscriptBox["T", "4"], "]"}], ".", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         SubscriptBox["mapped", "x"], "+", "dx"}], "}"}], ",", " ", 
+       RowBox[{"{", 
+        RowBox[{
+         SubscriptBox["mapped", "y"], "+", "dy"}], "}"}], ",", 
+       RowBox[{"{", "1", "}"}]}], "}"}]}], " ", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  SubscriptBox["moved", "x"], " ", "=", " ", 
+  RowBox[{"h", "[", 
+   RowBox[{"[", 
+    RowBox[{"1", ",", "1"}], "]"}], "]"}]}]}], "Input"],
+
+Cell[BoxData[
+ FractionBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{"-", "dy"}], " ", 
+    SubscriptBox["x", "1"]}], "+", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"-", "dx"}], "+", "dy"}], ")"}], " ", 
+    SubscriptBox["x", "2"]}], "+", 
+   RowBox[{"dx", " ", 
+    SubscriptBox["x", "3"]}], "+", 
+   RowBox[{"s", " ", 
+    SubscriptBox["x", "4"]}]}], "s"]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  SubscriptBox["moved", "y"], " ", "=", " ", 
+  RowBox[{"h", "[", 
+   RowBox[{"[", 
+    RowBox[{"2", ",", "1"}], "]"}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ FractionBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{"-", "dy"}], " ", 
+    SubscriptBox["y", "1"]}], "+", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"-", "dx"}], "+", "dy"}], ")"}], " ", 
+    SubscriptBox["y", "2"]}], "+", 
+   RowBox[{"dx", " ", 
+    SubscriptBox["y", "3"]}], "+", 
+   RowBox[{"s", " ", 
+    SubscriptBox["y", "4"]}]}], "s"]], "Output"]
+}, Open  ]]
+},
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)

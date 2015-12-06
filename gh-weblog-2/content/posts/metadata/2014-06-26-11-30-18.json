@@ -1,0 +1,13 @@
+{
+  "id": "2014-06-26-11-30-18",
+  "title": "Ancient SQLite APIs and PHP 5.4",
+  "created": 1403782218264,
+  "published": 1403782218264,
+  "updated": 1403782422894,
+  "tags": [
+    "SQLite",
+    "PHP",
+    "Shim"
+  ],
+  "author": "Pomax"
+}
