@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Sun, 06 Dec 2015 06:27:58 GMT</lastBuildDate>
-<pubDate>Sun, 06 Dec 2015 06:27:58 GMT</pubDate>
+<lastBuildDate>Sun, 06 Dec 2015 17:39:36 GMT</lastBuildDate>
+<pubDate>Sun, 06 Dec 2015 17:39:36 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Github broke my blog, so I had to reset it...</title>
@@ -24,8 +24,8 @@
 <item>
 <title> Bezier curves are not invariant under conformal mapping</title>
 <description>&lt;p&gt;That's not a post title that'll sound very appealing to many people, but it's a question without an easy-to-google answer that I get asked more often than makes sense to keep answering on a case by case basis. So let me turn it into a URL on the internet instead.&lt;/p&gt;
-&lt;p&gt;Invariance is defined as "anything operation you can apply to the control points that define a Bezier curve will be the same as if you broke up the curve as a  sequence of individual points, and applied that operation to each of those, separately".&lt;/p&gt;
-&lt;p&gt;Bezier curve are invariant under &lt;a href="https://en.wikipedia.org/wiki/Affine_transformation"&gt;affine linear transforms&lt;/a&gt;, which are those transforms that preserve parallel lines, but not necessarily distance between points or angles between lines. Basic affine linear transforms &lt;a href="https://en.wikipedia.org/wiki/Linear_map#Examples_of_linear_transformation_matrices"&gt;are&lt;/a&gt; rotation, reflection, translation, shearing, scaling, and projection.&lt;/p&gt;
+&lt;p&gt;Invariance is defined as "any operation you can apply to the control points that define a Bezier curve, and then forming the curve, will yield the same curve as if you broke up the curve as a  sequence of individual points, and applied that operation to each of those, separately".&lt;/p&gt;
+&lt;p&gt;Bezier curves are invariant under &lt;a href="https://en.wikipedia.org/wiki/Affine_transformation"&gt;affine linear transforms&lt;/a&gt;, which are those transforms that preserve parallel lines, but not necessarily distance between points or angles between lines. Basic affine linear transforms &lt;a href="https://en.wikipedia.org/wiki/Linear_map#Examples_of_linear_transformation_matrices"&gt;are&lt;/a&gt; rotation, reflection, translation, shearing, scaling, and projection.&lt;/p&gt;
 &lt;p&gt;However, this is not the only class of transforms (obviously), and another transform that people tend to be interested in are &lt;a href="https://en.wikipedia.org/wiki/Conformal_map"&gt;conformal mappings&lt;/a&gt;, which preserve the (local) angle between lines, and this is a problem for Bezier curves.&lt;/p&gt;
 &lt;p&gt;The simplest conformal mapping I can think of is the &lt;a href="https://en.wikipedia.org/wiki/Uniform_tilings_in_hyperbolic_plane"&gt;hyperbolic tiling&lt;/a&gt;, which maps the Euclidean ("rectangular") plane onto a circle plane instead, with a neat property:&lt;/p&gt;
 &lt;ul&gt;
