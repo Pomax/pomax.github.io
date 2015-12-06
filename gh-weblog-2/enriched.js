@@ -3528,13 +3528,14 @@ module.exports = {
 
     Connector.prototype = {
       setProperties: function(options) {
-        this.path = options.path;
         // We're not requiring Octokit, because doing so will cause it to
         // think it's running in node-mode, and complain that it's missing
         // a million dependencies that we don't want baked into the build!
         var octokit = new Octokit({ token: options.token });
         this.repo = octokit.getRepo(options.user, options.repo);
         this.branch = this.repo.getBranch(options.branch);
+        this.path = options.path || "gh-weblog";
+        this.contentPath = options.contentPath || "gh-weblog";
       },
 
       // We don't need zepto or jquery for an xhr .get()
