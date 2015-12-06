@@ -3547,16 +3547,16 @@ module.exports = {
   Connector: (function() {
 
     var Connector = function(options) {
-      if(options && options.token && options.token.trim()) {
-        this.options = options;
+      console.log(options);
+      if(options) {
+        if(options.token && options.token.trim()) {
+          this.options = options;
+        }
         this.setProperties(options);
       } else {
         this.options = {
           path: "gh-weblog"
         };
-      }
-      if (options.path) {
-        this.options.path = options.path;
       }
     };
 
@@ -3573,6 +3573,8 @@ module.exports = {
 
       // We don't need zepto or jquery for an xhr .get()
       get: function(url, options, processData) {
+        console.log(url);
+        console.trace();
         if(options && !processData) {
           processData = options;
           options = {};
