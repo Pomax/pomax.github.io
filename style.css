@@ -131,7 +131,8 @@ a:hover {
     display: none;
 }
 
-#gh-weblog .entry.folded button {
+#gh-weblog .entry.folded div.viewmore {
   position: absolute;
-  left: 40%;
+  bottom: 10%;
+  text-align: center;
 }
