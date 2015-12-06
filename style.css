@@ -133,9 +133,13 @@ a:hover {
 
 #gh-weblog .entry.folded div.viewmore {
   position: relative;
-  width: 98%;
-  padding: 10px;
-  position: relative;
   top: -36px;
+  text-align: center;
+  padding: 10px;
   box-shadow: 0 -29px 25px 3px white inset;
+}
+
+#gh-weblog .entry.folded div.viewmore button {
+  position: relative;
+  top: 10px;
 }
