@@ -2973,7 +2973,8 @@ module.exports = React.createClass({displayName: "exports",
       updated: Date.now(),
       tags: [],
       editing: false,
-      postdata: ""
+      postdata: "",
+      folded: (!this.props.singleton && !this.props.authenticated)
     };
   },
 
@@ -2981,8 +2982,10 @@ module.exports = React.createClass({displayName: "exports",
     var state = this.props.metadata;
     state.postdata = this.props.postdata;
     this.setState(state, function() {
-      var nd = this.refs.markdown.getChildCount();
-      console.log(this.state.title, ":", nd);
+      var ccount = this.refs.markdown.getChildCount();
+      if (this.state.folded && ccount < 8) {
+        this.unfold();
+      }
     });
   },
 
@@ -2997,7 +3000,7 @@ module.exports = React.createClass({displayName: "exports",
     }
     var posted = (new Date(this.state.published)).toLocaleString();
     var updated = (new Date(this.state.updated)).toLocaleString();
-    var folded = !this.props.singleton && !this.props.authenticated;
+    var folded = this.state.folded;
 
     return (
       React.createElement("div", {className: classnames("entry", {folded: folded}), id: id}, 
