@@ -118,3 +118,12 @@ a:hover {
 
 .pubday { color: #555; }
 .pubyear { color: #CCC; }
+
+#gh-weblog div.folded .entry {
+  position: relative;
+}
+
+#gh-weblog div.folded button {
+  position: absolute;
+  left: 40%;
+}
