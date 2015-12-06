@@ -119,6 +119,13 @@ a:hover {
 .pubday { color: #555; }
 .pubyear { color: #CCC; }
 
+/**
+
+  "more" button styling
+
+**/
+
+
 #gh-weblog .entry {
   position: relative;
 }

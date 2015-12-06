@@ -2984,7 +2984,6 @@ module.exports = React.createClass({displayName: "exports",
     this.setState(state, function() {
       var ccount = this.refs.markdown.getChildCount();
       if (this.folded && ccount < 8) {
-        console.log("unfolding "+this.state.title+" ("+ccount+" children)");
         this.unfold();
       }
     });
