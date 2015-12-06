@@ -2972,7 +2972,8 @@ module.exports = React.createClass({displayName: "exports",
       updated: Date.now(),
       tags: [],
       editing: false,
-      postdata: ""
+      postdata: "",
+      folded: !this.props.authenticated
     };
   },
 
@@ -3000,12 +3001,19 @@ module.exports = React.createClass({displayName: "exports",
           React.createElement("h1", null, React.createElement("a", {href: entryURL}, this.state.title)), 
           React.createElement("h2", null, "Originally posted on ", posted, ", last updated on ", updated)
         ), 
-        React.createElement(MarkDown, {ref: "markdown", hidden: this.state.editing, text: this.state.postdata, onClick: this.edit, authenticated: this.props.authenticated}), 
+        React.createElement(MarkDown, {ref: "markdown", hidden: this.state.editing, text: this.state.postdata, onClick: this.edit, folded: this.props.folded}), 
         React.createElement(Editor, {ref: "editor", hidden: !this.state.editing, text: text, update: this.update, view: this.view, delete: this.delete}), 
         React.createElement("a", {className: "comments", href: this.props.issues}, "leave a comment on github"), 
-        React.createElement(Tags, {disabled: !this.props.editable, tags: this.state.tags, onChange: this.updateTags})
+        React.createElement(Tags, {disabled: !this.props.editable, tags: this.state.tags, onChange: this.updateTags}), 
+         !this.props.singleton && this.state.folded ? React.createElement("button", {onClick: this.unfold}, "View the rest of this post") : false
       )
     );
+  },
+
+  unfold: function() {
+    this.setState({
+      folded: false
+    });
   },
 
   componentDidUpdate: function() {
@@ -3086,7 +3094,7 @@ module.exports = React.createClass({displayName: "exports",
   render: function() {
     var html = {__html: marked(this.props.text)};
     return React.createElement("div", {ref: "post", 
-                className: classnames("post", {folded: !this.props.authenticated}), 
+                className: classnames("post", {folded: this.props.folded}), 
                 hidden: this.props.hidden, 
                 onClick: this.props.onClick, 
                 dangerouslySetInnerHTML: html})
@@ -3116,10 +3124,7 @@ var Navigation = React.createClass({displayName: "Navigation",
     var component = this;
     var xhr = new XMLHttpRequest();
     var settings = this.getSettings();
-    console.log("nav setting", settings);
     var url = settings.path + "/content/posts/toc.json";
-    console.log("download the goddamn toc:", url);
-
     var cachebuster = "?cb="+Date.now();
     xhr.open("GET", url + cachebuster, true);
     xhr.onreadystatechange = function(evt) {
@@ -3325,6 +3330,7 @@ module.exports = React.createClass({displayName: "exports",
                     postdata: entry.postdata, 
                     editable: !self.state.singleton && self.state.authenticated, 
                     authenticated: self.state.authenticated, 
+                    singleton: self.state.singleton, 
                     runProcessors: self.runProcessors, 
                     onSave: self.save, 
                     onDelete: self.delete});
@@ -3796,11 +3802,11 @@ module.exports = {
   }()),
 
   getSettings: function() {
-    var path = "gh-weblog";
-    if (window.WebLogSettings && window.WebLogSettings.path) {
-      // always respect this, when set.
-      path = window.WebLogSettings.path;
-      console.log("rebinding path as " + path);
+    var path = "gh-weblog", contentPath = path;
+    if (window.WebLogSettings) {
+      // always respect these, when set.
+      path = window.WebLogSettings.path || path;
+      contentPath = window.WebLogSettings.contentPath || contentPath;
     }
     var settings = window.localStorage[this.settingsName];
     if(!settings) {
@@ -3811,6 +3817,7 @@ module.exports = {
     }
     settings = JSON.parse(settings);
     settings.path = path;
+    settings.contentPath = contentPath;
     return settings;
   },
 
