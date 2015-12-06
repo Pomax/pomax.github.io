@@ -1,0 +1,1491 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+<atom:link href="http://pomax.github.io/undefined/rss.xml" rel="self" type="application/rss+xml" />
+<title>Pomax.github.io</title>
+<description>My blog on github</description>
+<link>http://pomax.github.io</link>
+<lastBuildDate>Sat, 05 Dec 2015 18:02:22 GMT</lastBuildDate>
+<pubDate>Sat, 05 Dec 2015 18:02:22 GMT</pubDate>
+<ttl>1440</ttl>
+<item>
+<title> Bezier curves are not invariant under conformal mapping</title>
+<description>&lt;p&gt;That's not a post title that'll sound very appealing to many people, but it's a question without an easy-to-google answer that I get asked more often than makes sense to keep answering on a case by case basis. So let me turn it into a URL on the internet instead.&lt;/p&gt;
+&lt;p&gt;Invariance is defined as "anything operation you can apply to the control points that define a Bezier curve will be the same as if you broke up the curve as a  sequence of individual points, and applied that operation to each of those, separately".&lt;/p&gt;
+&lt;p&gt;Bezier curve are invariant under &lt;a href="https://en.wikipedia.org/wiki/Affine_transformation"&gt;affine linear transforms&lt;/a&gt;, which are those transforms that preserve parallel lines, but not necessarily distance between points or angles between lines. Basic affine linear transforms &lt;a href="https://en.wikipedia.org/wiki/Linear_map#Examples_of_linear_transformation_matrices"&gt;are&lt;/a&gt; rotation, reflection, translation, shearing, scaling, and projection.&lt;/p&gt;
+&lt;p&gt;However, this is not the only class of transforms (obviously), and another transform that people tend to be interested in are &lt;a href="https://en.wikipedia.org/wiki/Conformal_map"&gt;conformal mappings&lt;/a&gt;, which preserve the (local) angle between lines, and this is a problem for Bezier curves.&lt;/p&gt;
+&lt;p&gt;The simplest conformal mapping I can think of is the &lt;a href="https://en.wikipedia.org/wiki/Uniform_tilings_in_hyperbolic_plane"&gt;hyperbolic tiling&lt;/a&gt;, which maps the Euclidean ("rectangular") plane onto a circle plane instead, with a neat property:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;the center of the Euclidean plane is the center of the circle.&lt;/li&gt;
+&lt;li&gt;draw a line from the center, outward to infinity; this is a straight line in both the Euclidean plane and on the circle, but:&lt;/li&gt;
+&lt;li&gt;a point along that line at distance D from the center of the Euclidean plane will lie at some distance D'&amp;lt;D from the "center" of the circle, and,&lt;/li&gt;
+&lt;li&gt;any point along that line at twice the distance, E = 2D, on the Euclidean plane will lie on distance E' &amp;lt; 2D' - that is, outward travel at constant speed in the Euclidean plane, covering infinite distance, turns into monotone decreasing travel in terms of speed and distance, covering finite distance: you will never cross the "edge" of the circle, you just keep going slower and slower as you get closer and closer.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;There are an infinite number of functions that achieve this kind of mapping, but all of them preserve local angles: If two straight lines crossed each other at 37 degrees on the Euclidean plane, then the lines themselves will no longer be straight, but at the exact point of their intersection, the angle between them will still be 37 degrees.&lt;/p&gt;
+&lt;p&gt;Now, if you conformally map  the points that define a Bezier curve, and then draw a new curve with those mapped points, you are not guaranteed to get the same curve as if you'd treated the curve a sequence of points that together draw the curve, and then conformally mapped all of those instead. And we can prove this with a single example:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A mapping that turns straight lines into circular arcs is a conformal mapping, preserving local angles of intersection.&lt;/li&gt;
+&lt;li&gt;Bezier curves can perfectly represent straight lines.&lt;/li&gt;
+&lt;li&gt;Bezier curves cannot perfectly represent circular arcs.&lt;/li&gt;
+&lt;li&gt;This mapping will turn geometry that can be represented by Bezier curves into geometry that cannot be represented by Bezier curves&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://en.wikipedia.org/wiki/Q.E.D."&gt;QED&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Another way to think about this is that Bezier curves are formed using (iterated) linear interpolation, which relies on straight lines staying linear. If we deform them to some non-linear form, then we cannot use linear interpolation and still find the same resulting points.&lt;/p&gt;
+&lt;p&gt;So there you have it. Are Bezier curves invariant under conformal mapping? No, they are not.&lt;/p&gt;
+</description>
+<category>Maths</category>
+<category>Bezier Curves</category>
+<link>http://pomax.github.io/#gh-weblog-1449335750620</link>
+<guid>http://pomax.github.io/#gh-weblog-1449335750620</guid>
+<pubDate>Sat, 05 Dec 2015 17:15:50 GMT</pubDate>
+</item>
+<item>
+<title> A Love letter to Flickr</title>
+<description>&lt;h2 id="-dear-flickr"&gt;“Dear Flickr&lt;/h2&gt;
+&lt;p&gt;“&lt;a href="https://www.flickr.com/Pomax"&gt;We go back a few years, don't we&lt;/a&gt;. We started hanging out in 2006, and officially hooked up in May of 2007, and have been together since. I've not always spent as much time with you as I would have liked, but the relationship was steady, and when I took photographs, you showed them to the world, in the hopes that others would enjoy them as much as we did.&lt;/p&gt;
+&lt;p&gt;“Over the years, you started to take the helm more and more, deciding what we could show our visitors, taking way the short descriptions I worked so hard on to make sure visitors understood what they were looking at, turning my gallery into a "wallpaper" because some of your friends saw other people do that and it looked cool, adding ways to display my photographs for me that I didn't appreciate, and most recently, claiming that people prefer to view my works as if they were looking through my portfolio as a "camera roll".&lt;/p&gt;
+&lt;p&gt;“I think you need to come back to me and sit down for a bit, so we can talk about this. You've started running this Photography exhibit on your own, without so much as even asking me, or letting me say "no, this is not how I want people to experience our shared efforts, they are bad", just steamrolling ahead like you know what's best for us.&lt;/p&gt;
+&lt;h2 id="-you-used-to-be-about-showing-the-world-photographs"&gt;“You used to be about showing the world photographs&lt;/h2&gt;
+&lt;p&gt;“Remember when you loved photography? You were enthusiastic about tons of people having photos they wanted to show the world, with as much detail as possible, curated the way they thought the photos worked best, with a default exhibit space that allowed people to browse the walls, walk up to photos that looked interesting, and read the descriptions, even letting them walk over to the more detailed floor guide for each work to get all the additional information that we, the curators, thought would be pertinent.&lt;/p&gt;
+&lt;p&gt;“Those were happy times. You ran the art gallery, I had the art, and people could come in and immediately enjoy what we, together, had to offer.&lt;/p&gt;
+&lt;p&gt;“But then you shut down the art gallery, and started a hip, new, place. One I did not understand.&lt;/p&gt;
+&lt;h2 id="-i-just-wanted-the-world-to-enjoy-my-work"&gt;“I just wanted the world to enjoy my work&lt;/h2&gt;
+&lt;p&gt;“Your hip new place took the works I had made, and instead of hanging them on the wall, easy to walk past, with titles and descriptions that people could read and feel good about, you decided to just tile a single wall with every photo I ever took. I don't know how you did it, but the wall ran on forever. Every photograph we ever exhibited was on it, but none of them said what they were of, or gave any details about why it was taken, or worth looking at.&lt;/p&gt;
+&lt;p&gt;“I confess, I didn't understand why you did it. I hated it. What use is a wall that is so long that people can't even get to the end? Is there even an end? I never got to it - much like everyone else, after walking for 5 minutes I was so overstimulated with just contextless, meaningless "pictures" that I left my own exhibit and went across town to galleries like &lt;a href="http://imgur.com"&gt;Imgur&lt;/a&gt;, and if I felt particularly depressed, &lt;a href="http://fukung.net"&gt;Fukung&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;“You made me unhappy.&lt;/p&gt;
+&lt;h2 id="-you-did-realise-you-were-hurting-our-relationship-i-think-"&gt;“You did realise you were hurting our relationship, I think...&lt;/h2&gt;
+&lt;p&gt;“I stuck with you, but I wasn't happy. You were doing things that I saw didn't just hurt me, but were hurting everyone around us. All our friends who you represented felt the same. Some of them initially liked the hip new look, but many of them just didn't understand it. How did this help people enjoy our work?&lt;/p&gt;
+&lt;p&gt;“So you backed off a little. You spaced out the artworks a bit, so people wouldn't experience sensory overload so much, but you still left off the descriptions, saying people would reach for the exhibit guide if they wanted more information.&lt;/p&gt;
+&lt;p&gt;“But that's not how exhibits work, and user visits for individual works plummeted.&lt;/p&gt;
+&lt;p&gt;“I think you noticed that, too. I had hoped you would do the sensible thing, but I think you took it the wrong way and started doing things that felt, to me, like desperation. Instead of focussing on better exhibit organisation, and playbooks for how to set up specific kinds of exhibits, you decided to move our gallery to the conference center you just bought, and open it up to everyone, for free, with unlimited gallery space for all.&lt;/p&gt;
+&lt;p&gt;“When I asked you how you were paying for all of this, you smiled and said "we're getting sponsored by some big name companies, and we'll be hanging their product posters in between photographs". I can't believe you said that, it's like I was talking to someone who didn't care about photography anymore, or even exhibiting good collections of art works. &lt;/p&gt;
+&lt;p&gt;“This was someone who had lost interest and was finding pleasures in figuring out new and creative ways to make numbers go up.&lt;/p&gt;
+&lt;p&gt;“You even tried to cancel our exhibition contract, saying that because you now allowed everyone, of course that included me.&lt;/p&gt;
+&lt;p&gt;“That hurt.&lt;/p&gt;
+&lt;h2 id="-and-you-became-a-bit-anti-social-too-"&gt;“And you became a bit anti-social, too.&lt;/h2&gt;
+&lt;p&gt;“Remember how we could see what friends were exhibiting in your other galleries? You changed that so that it wasn't even possible to see what a single friend was doing. Where we used to be able to see that seven friends had updated their exhibition space, now we needed to scroll through a long, unorganized list of updates. It became impossible to keep tabs on what other people were doing in the photograph space we once ran together. &lt;/p&gt;
+&lt;p&gt;“What's the point of recommending following "people I might know", for instance, (I think you liked Twitter, you clearly just repeated what they were doing, but they had a reason for it, and you, I think, didn't) if I then cannot see what these people have been doing? It was confusing.&lt;/p&gt;
+&lt;p&gt;“You were confusing me, Flickr.&lt;/p&gt;
+&lt;h2 id="-it-s-true-i-tried-going-it-alone-for-a-bit"&gt;“It's true: I tried going it alone for a bit&lt;/h2&gt;
+&lt;p&gt;“You were driving me away, to the point where I was looking for ways to get my artwork back from you, in a way that would let me exhibit it the way we used to do. Letting people walk around the space, and lean over to read a description here and there, grabbing the exhibit guide when they really wanted, and letting them get as close to the works as they wanted. Remember that blank wall we used to have where people could take individual photographs and hang them up, on their own? I wanted to add that back in, too.&lt;/p&gt;
+&lt;p&gt;“I couldn't find any art galleries that would do what you used to do. So I rented a space, and &lt;a href="http://flickr.nihongoresources.com/Pomax"&gt;started my own&lt;/a&gt;. I wrote a playbook on how to &lt;a href="https://github.com/Pomax/flickrmirror"&gt;set up a gallery in our old style&lt;/a&gt;, and for a while I was happy. I could tell people to just visit my gallery while you did you own thing at your corporate conference center and I could ignore you.&lt;/p&gt;
+&lt;p&gt;“I even came up with some ideas that worked for me, like a film strip while navigating, and I sent you text messages telling you what I'd done and that I didn't like what you were doing right now, but felt it would benefit everyone if you copied those ideas. I think you acted on some of those texts, although of course not on all of them.&lt;/p&gt;
+&lt;p&gt;“Ultimately, of course, I couldn't drive enough people to my own little art gallery. They all knew about your conference center, and while I had a small clique of friends who knew where my exhibits "really" ran, it was too much effort to keep up with multiple exhibitions across town.&lt;/p&gt;
+&lt;h2 id="-it-feels-like-you-re-coming-back-though"&gt;“It feels like you're coming back, though&lt;/h2&gt;
+&lt;p&gt;“I've not been the nicest to you, I know. We drifted apart, but it feels like you realised that. Or, at least, understand that what you've been doing has perhaps been more about "just making numbers go up" than about "getting the world to love the exhibits you run", and you've started to change your ways a little.&lt;/p&gt;
+&lt;p&gt;“I very recently posted a short notice in a local paper about how I would love it if you brought back personal contracts, so that we could track exhibit numbers together, and the next day you announced that was coming back. I was overjoyed!&lt;/p&gt;
+&lt;p&gt;“There's a ways to go yet, but it feels like we're at a point in this relationship where I can either walk away, or I can confess all these frustrations I've had over the last seven years, and hope that some of them make sense to you, even if they make you angry because I'm pointing them out. I think you deserve to be angry at me, as long as we can work together to channel that anger, and bring back the joy of exhibiting photographs to the world.&lt;/p&gt;
+&lt;p&gt;“There's some odd things I don't understand, that maybe you can explain, or maybe you can look at and go "yeah, these things don't make much sense, I was just trying out things to see whether any of it would stick". The Camera Roll, for instance, serves no purpose that I can tell. Maybe you have a plan for it, but it feels like something you should take back out until you know what that is.&lt;/p&gt;
+&lt;p&gt;“You're still just showing photographs on the walls, instead of putting up the little description plaques next to them. &lt;/p&gt;
+&lt;p&gt;“It's still very hard for people to see the full size photographs, too. Instead of letting people walk up close to each work, you did something clever with lenses, and instead when people try to walk closer, you keep them where they are and just zoom in on the reduced work. I... don't think that's a nice thing to do to people.&lt;/p&gt;
+&lt;p&gt;“Sure, you added "lots of interactions" for people, but you haven't labeled any of them. They're just hieroglyphs that people need to guess at, and there are so many of them that it feels like you're, at least at this point in your life, preferring option overload over just letting people experience the works at their own pace.&lt;/p&gt;
+&lt;p&gt;“But you're also improved some things, and that's the part that I think matters most.&lt;/p&gt;
+&lt;h2 id="-let-s-talk-"&gt;“Let's talk?&lt;/h2&gt;
+&lt;p&gt;“I'm writing you this letter because I don't know how to talk to you right now. I tried calling a few times, but it goes to an answering machine that tells me to come to the conference center and leave my issues with the info desk. That's not fair, I think. Of course, you need an info desk for regular questions, or reports of where your exhibits got damaged, or a door got stuck, stuff like that, but the info desk is not a place where you and I can talk about the fundamental changes that I think are hurting not just you and I, but also this town we live in. It used to be full of art galleries, and you've slowly turned it into a wallpaper farm.&lt;/p&gt;
+&lt;p&gt;“That wasn't nice, and I'm sorry for having said that, but that's where we are. Can we talk?&lt;/p&gt;
+&lt;h2 id="-i-still-love-you-but-it-s-hard"&gt;“I still love you, but it's hard&lt;/h2&gt;
+&lt;p&gt;“I don't know what to do, hopefully you still want to be friends, and we can talk this through, but I have no powerful punchline to end this letter with. We both want, I think, to show the world great art, but the way you've been doing it the last few years and allowed other towns to do it better, and rather than learning from that, you've just been adding more and more things that drive more and more people away. I want to help you fix that. I want to bring back spontaneous, discoverable, enjoyable exhibits to our town. Without destroying everything you built up.&lt;/p&gt;
+&lt;h2 id="-with-more-love-than-my-friends-tell-me-you-deserve-"&gt;“With more love than my friends tell me you deserve,&lt;/h2&gt;
+&lt;p&gt;— Pomax”&lt;/p&gt;
+</description>
+<category>Flickr</category>
+<category>Photography</category>
+<category>Love letter</category>
+<link>http://pomax.github.io/#gh-weblog-1438539341719</link>
+<guid>http://pomax.github.io/#gh-weblog-1438539341719</guid>
+<pubDate>Sun, 02 Aug 2015 18:15:41 GMT</pubDate>
+</item>
+<item>
+<title> We are really terrible at digital colours, and digital photography.</title>
+<description>&lt;p&gt;Look around you. Look at the room you're in, look out the window, simply look at things and now imagine "what would this look like if I took a photograph". I'll spoil the answer: it'll basically look nothing like what you're seeing. The reasons for this are varied, but it basically boils down to "we settled for good enough, at a time when we didn't know what good enough meant".&lt;/p&gt;
+&lt;h2 id="how-many-colours-are-there-"&gt;How many colours are there?&lt;/h2&gt;
+&lt;p&gt;Short answer: that question makes no sense.&lt;/p&gt;
+&lt;p&gt;Longer answer: this depends on the definition of "colour" you go with, and before you object, there isn't just one definition so this is &lt;em&gt;super&lt;/em&gt; important. Physically speaking (as in, based on physics) "a colour" isn't really a thing: it's just a word that is used —grounded in a specific cultural understanding— to describe a collection of frequencies and intensities of light.&lt;/p&gt;
+&lt;p&gt;Take the basic English colours "blue" and "red": these are not really one, exact, frequency, at one, exact, intensity each. They're clusters of frequencies at clusters of intensities. And while they may seems a basic colour, not all cultures agree on that. for instance, Hungarian has &lt;a href="https://en.wikipedia.org/wiki/Hungarian_language#Two_words_for_.22red.22"&gt;two different words&lt;/a&gt;  for different, non-overlapping colours both of which are just "red" in English, and even though Japanese has a word for blue, &lt;a href="https://en.wikipedia.org/wiki/Ao_(color)"&gt;青 ("ao")&lt;/a&gt; it doesn't quite match the same &lt;em&gt;kinds&lt;/em&gt; of blue that an English speaker might think of (the Japanese term includes &lt;a href="https://en.wikipedia.org/wiki/Teal"&gt;teals&lt;/a&gt;, for instance,  which many English speakers will identify as a color distinct from blue, in between blue and green). Colours are words, not actual frequencies in the &lt;a href="https://en.wikipedia.org/wiki/Light#Electromagnetic_spectrum_and_visible_light"&gt;visible light part of the electro-magnetic spectrum&lt;/a&gt; that we know from physics.&lt;/p&gt;
+&lt;p&gt;So, asking "how many colours" there are isn't going to get us anywhere, so let's look at that visible light part of the electro-magnetic spectrum instead:&lt;/p&gt;
+&lt;h2 id="how-wide-is-the-physical-colours-spectrum-"&gt;How wide is the "physical colours" spectrum?&lt;/h2&gt;
+&lt;p&gt;Now we're thinking with science: there are a (perhaps surprisingly) countable number of frequencies in the visible light spectrum, and an (again, perhaps surprisingly) countable number of intensities of light. However, the reason the frequencies and intensities are countable is due to quantum mechanics, and for any practical purpose we're not going to be able to count them. However, we can certainly plot them in a graph, to get a bit of insight into what we might be able to do if we want to capture light accurately.&lt;/p&gt;
+&lt;p&gt;I'm going to go with the &lt;a href="https://en.wikipedia.org/wiki/CIE_1931_color_space"&gt;CIE 1931 representation of visible light&lt;/a&gt;, which is a model based on (admittedly, old) research on how the human eye deals with colour, and it plots "all" the colours we can see, inside a "horseshoe" (seriously, that's what the world has decided to call this outline) that represents the EM spectral frequencies. Along the outer curve are all the "physically real" colours, i.e. distinct frequencies of light that we humans experience as "having a colour" (extend the curve on the lower left and you get into, to humans, invisible ultra-violet light, and extend it on the right and you get into, again invisible to humans, infra-red light), and on the inside are all the colours we can get by blending one or more of these frequencies.&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/CIE-1931_diagram_in_LAB_space.svg" style="width:500px"&gt;&lt;/p&gt;
+&lt;p&gt;So something fun to note: there are "colours" in our language(s) that are not "frequencies of light" in physics. These are colours of which people will gleefully say "they are not colours" and then explain the difference between a word and an EM frequency, so, let's go:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;The "colour" black is the absence of light. No surprise there. It's a colour, as word, but not a colour, as frequency of light. It's technically every frequency, in any mixture, at intensity zero, which is the colour theory equivalent of a division by zero, and great to debate over drinks, but for science, meaningless. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;The "colour" white is an even mixture of "enough frequencies". It's not just one colour, it's "lots of colours, mixed in the right way".&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Technically, in order for something to look white to the human eye, you just need an even mixture of light are a frequency of 420–440 nm ("violet blue"), 534–555 nm ("green") and 564–580 nm ("orange"), because &lt;a href="https://en.wikipedia.org/wiki/Cone_cell#Types"&gt;those are the peak frequencies for the light-sensing molecules in our retinae&lt;/a&gt; (our eyes are not digital displays, and they don't work best for blue, green, and red: those are just the colours digital displays need to use because those describe the &lt;em&gt;extremes&lt;/em&gt; of what our eyes can see. Although not really: more on that in a bit). However, you can mix many colours in many ways and get a colour that to the human eye looks "neutral", and as long as the intensity is high enough, the human eye will say that it "is white".&lt;/p&gt;
+&lt;p&gt;So black and white are generally understood but:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;We also see that the colour "purple" isn't a physical colour: all the colours from blueish purple all the way to red, are mixtures. Purple doesn't exist as "single" frequency in the real world. When you think you're seeing purple, your eyes are seeing a mixture of (predominantly) reds and blues, and while your eyes &lt;em&gt;are&lt;/em&gt; registering the purple as two different colours at the receptor level, your brain —which is responsible for interpreting the signals— simply assigns the combination of signals it sees a single category, in the same way it will make you think you're seeing "green" regardless of whether you're seeing a pure green, or a mixture of blue and yellow. That's very useful for you, but not very useful for digitally encoding colours from real life. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="so-given-all-physical-colours-how-bad-is-digital-colour-"&gt;So, given "all physical colours", how bad is digital colour?&lt;/h2&gt;
+&lt;p&gt;Let's just get this out of the way: &lt;strong&gt;all the digital colours you are used to from daily interaction are &lt;em&gt;absolutely terrible&lt;/em&gt; at representing physical colours&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;The problem here is historical: when we first went from analog to digital, technology was expensive, digital circuitry was really still in its infancy, and computation was slow. So, a minimal solution for "getting colour" was chosen: we can't reproduce all frequencies in all intensities, so lets pick a minimum number of colours that we &lt;em&gt;can&lt;/em&gt; generate at varying intensity, in such a way that they can be mixed to form a reasonable number of colours.&lt;/p&gt;
+&lt;p&gt;And so we did.&lt;/p&gt;
+&lt;p&gt;Initially we had &lt;a href="https://en.wikipedia.org/wiki/Monochrome_monitor"&gt;monochrome displays&lt;/a&gt; and printers, then we slowly increased the palettes: &lt;a href="https://en.wikipedia.org/wiki/Color_depth"&gt;from 16 "common" colours to 256 colours (8 bit colour), and then when the technology allowed for it, 8 bits for three specific primary colours each that we could mix to get about 16 million colours: 24 bit colour (and, if we include the transparency of a colour, 32 bit colour)&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In 1996, the &lt;a href="https://en.wikipedia.org/wiki/SRGB"&gt;"Standard RGB"&lt;/a&gt; model (known today as sRGB) was proposed by HP and Microsoft, as a 24 bit colour scheme that would work across monitors and printers (so you could print "what you saw on the screen"), and it used a Red, Green and Blue as primary, which allowed it to express quite a lot of different colours:&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://upload.wikimedia.org/wikipedia/commons/6/60/Cie_Chart_with_sRGB_gamut_by_spigget.png" style="width:500px"&gt;&lt;/p&gt;
+&lt;p&gt;While this worked, the triangle of possible colours, called a &lt;a href="https://en.wikipedia.org/wiki/Gamut"&gt;"Gamut"&lt;/a&gt;, was fairly restricted, and in 1998 Adobe released their own, competing model called &lt;a href="https://en.wikipedia.org/wiki/Adobe_RGB_color_space"&gt;AdobeRGB&lt;/a&gt; (also known as aRGB, to contrast sRGB) with colours that lined up better with the CMYK colours in industrial printers, and because it captures more physical colours, kind of "won": aRGB is likely the model that your monitor, camera, cellphone, etc, uses. The main difference is that it uses a different primary "green", and thus captures more colours: &lt;/p&gt;
+&lt;p&gt;&lt;img src="https://upload.wikimedia.org/wikipedia/commons/0/0f/CIExy1931_AdobeRGB_vs_sRGB.png" style="width:500px"&gt;&lt;/p&gt;
+&lt;p&gt;Better as this is, it's still essentially worthless if you're interested in taking "colours you see in real life, and getting them digitally encoded" because while aRGB covers more real world colours, it still fails at representing about &lt;strong&gt;half of all colours&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;(And to bring matters into immediate focus: even though aRGB is wider, virtually all regular computer monitors only do sRGB.)&lt;/p&gt;
+&lt;h2 id="what-if-we-made-a-big-triangle-e-g-with-primaries-at-380nm-515nm-700nm-"&gt;What if we made a big triangle, e.g. with primaries at 380nm / 515nm / 700nm?&lt;/h2&gt;
+&lt;p&gt;Great idea! While we'd still have a triangular gamut, we'd capture so much more! In fact, if you've heard of &lt;a href="https://en.wikipedia.org/wiki/Ultra-high-definition_television"&gt;Ultra High Definition Television&lt;/a&gt;, this is exactly what they've done with the &lt;a href="https://en.wikipedia.org/wiki/Rec._2020"&gt;Rec2020&lt;/a&gt; colour model, which is intended for "4K" devices (which aren't actually 4k; they're 3840 by 2160 points):&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://upload.wikimedia.org/wikipedia/commons/b/b6/CIExy1931_Rec_2020.svg" style="width:500px"&gt;&lt;/p&gt;
+&lt;p&gt;A great example of a company that's succeeded with this is &lt;a href="https://www.blackmagicdesign.com/products/cinemacameras"&gt;Blackmagic Design&lt;/a&gt;, who make digital film equipment, and have carved a spectacular niche for themselves in the 4k pro-and-consumer market. Unfortunately, while it might seem like digital film equipment could have a ripple effect on digital stills equipment, that hasn't really been the case.&lt;/p&gt;
+&lt;p&gt;Another thing is that if we wanted to be able to &lt;em&gt;print&lt;/em&gt; these colours, we'd have to come up with new printer inks. For television, this is not a concern: you wouldn't print movies (what would that even mean?) but for photography, the notion of printing is still very much extant, so... we &lt;em&gt;could&lt;/em&gt; reformulate the printer inks, but if we're going to switch up the printer inks, we can probably do better.&lt;/p&gt;
+&lt;h2 id="-better-like-virtual-colours-"&gt;"Better", like virtual colours?&lt;/h2&gt;
+&lt;p&gt;"Wait, what? Virtual colours?" And why not: we can &lt;em&gt;encode&lt;/em&gt; colours using entirely virtual primaries, so that the triangle they span completely covers the real world colour spectrum. Sure, there are combinations of those primaries that have no meaning, but whatever: we just don't store values that don't make sense, and done. In fact, the &lt;a href="https://en.wikipedia.org/wiki/ProPhoto_RGB_color_space"&gt;ProPhoto model&lt;/a&gt; does this:&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://upload.wikimedia.org/wikipedia/commons/e/eb/CIExy1931_ProPhoto.svg" style="width:500px"&gt; &lt;/p&gt;
+&lt;p&gt;Most of the real world colours fall inside its gamut, with primaries picked such that there aren't &lt;em&gt;too&lt;/em&gt; many meaningless combinations possible.&lt;/p&gt;
+&lt;p&gt;Unfortunately, of course, this colour space cannot be printed using primary inks because they'd need to be in colours that, rather crucially, &lt;strong&gt;cannot exist in our universe&lt;/strong&gt;. Furthermore, we also can't &lt;em&gt;record&lt;/em&gt; colours in terms of these primaries, since we'd have to create sensors that act as primaries, and they'd have to trigger based on negative frequencies. It... gets weird. So PhotoPro RGB is rather useful as digital storage format, but &lt;em&gt;only&lt;/em&gt; as digital storage format: showing what it looks like is always going to lead to problems.&lt;/p&gt;
+&lt;h2 id="what-about-more-primaries-"&gt;What about more primaries?&lt;/h2&gt;
+&lt;p&gt;Now you've got your thinking-cap on: why are we still sampling the real world with only three sensors? Sure, the human eye works that way, but humans have weird conditions (some people can see four distinct colours, not three, we call them &lt;a href="https://en.wikipedia.org/wiki/Tetrachromacy#Human_tetrachromats"&gt;tetrachromats&lt;/a&gt;; some people can't even see three: we call them &lt;a href="https://en.wikipedia.org/wiki/Color_blindness"&gt;color blind&lt;/a&gt; but they can see light just fine, and simply see different ranges of colour, in which some colours that trichomats see as distinct are seen as the same. No blindness there).&lt;/p&gt;
+&lt;p&gt;Why don't we just record colours using more sensors? We could use one red (680ish), three different greens (545,518,505), a cyan (490) and a blue (say 460ish) and now we'd be able to at least &lt;em&gt;capture&lt;/em&gt; virtually all the colours that exist in the real world.&lt;/p&gt;
+&lt;p&gt;&lt;img src="/gh-weblog/images/cie-six-point.jpg" style="width:500px"&gt;&lt;/p&gt;
+&lt;p&gt;Does this make sense? From a computer science point of view: yes, totally. After all, this is our base data that we probably want to do things to, like lighten/darken, hue shift, blend, etc and only encoding the values that the human eye can see, rather than all the colours we actually have in real life, means that lots of colour operations are going to do "the wrong thing" for colours that live at the edges of the Gamut. Remove those edges, and things get much better.&lt;/p&gt;
+&lt;p&gt;We can even efficiently store the numbers, because even though we have six primaries, we only ever need three primaries to form any colour, and then the other primaries can simply contribute a neutral intensity:&lt;/p&gt;
+&lt;p&gt;&lt;img src="/gh-weblog/images/cie-six-point-q.jpg" style="width:500px"&gt;&lt;/p&gt;
+&lt;p&gt;We have six primaries, so we have four quadrants, so we can neatly prefix any colour with two bits to indicate which quadrant it falls in, and then the intensities for the three primaries involved in that quadrant: a "green" would be "00" + {three intensities}, for instance.&lt;/p&gt;
+&lt;h2 id="but-how-would-recording-this-even-work-six-sensors-"&gt;But how would recording this even work? Six sensors?&lt;/h2&gt;
+&lt;p&gt;To be fair, if you think six sensors to capture colour is a problem, realize that &lt;a href="https://en.wikipedia.org/wiki/Color_filter_array#List_of_color_filter_arrays"&gt;using three is also a problem&lt;/a&gt;: we don't really capture the colours of things, we capture &lt;a href="https://en.wikipedia.org/wiki/Image_sensor#Color_separation"&gt;single colour channels&lt;/a&gt; of things, and then assume that we can reasonably accurately construct points &lt;em&gt;between&lt;/em&gt; our sensor points by mixing the colours around it. As long as our points are small enough, that works, but it can leads to interesting problems such as &lt;a href="https://en.wikipedia.org/wiki/Demosaicing"&gt;demosaicing&lt;/a&gt; and dealing with &lt;a href="https://en.wikipedia.org/wiki/Moir%C3%A9_pattern"&gt;Moiré patterns&lt;/a&gt;.  &lt;/p&gt;
+&lt;p&gt;Having six, rather than three, colours basically makes this problem a little harder, although we can mitigate this by having a point layout that we can perform reasonable post-processing with. It's a problem, but not more so than it already is.&lt;/p&gt;
+&lt;h2 id="what-about-intensities-"&gt;What about intensities?&lt;/h2&gt;
+&lt;p&gt;The human eye is &lt;em&gt;really good&lt;/em&gt; at distinguishing light intensity values, although only given some ambient lighting value. The human eye is a &lt;em&gt;contrast&lt;/em&gt; detector, and is really good at that job, with &lt;a href="https://en.wikipedia.org/wiki/Lux#Illuminance"&gt;a huge range of intensity detection&lt;/a&gt;, ranging from contrasts at ambient values of 0.01 lux for a moonlight night to a 25,000 lux on a sunny day, to being able to distinguish features at even higher lux values (pretty much in direct sunlight). Basically, the human eye is much better than a digital camera at recording light intensities. So digital cameras make do:   &lt;/p&gt;
+&lt;p&gt;Modern digital cameras will record at 14ish bits worth of intensity, which gives 16384 distinct base intensity values per pixel, and so for any image pixel that is built up of three primaries, we can actually get three times that range, although most of the range will have bias for some specific primary colour:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;RGB (0,0,0) is pure black, without bias&lt;/li&gt;
+&lt;li&gt;(1,0,0) and (0,1,0) and (0,0,1) are "lighter than black" but "fainter than the faintest grey"&lt;/li&gt;
+&lt;li&gt;(1,1,0) and (1,0,1) and (0,1,1) are even "lighter than black" and a little less "fainter than the faintest grey"&lt;/li&gt;
+&lt;li&gt;RGB (1,1,1) is the faintest of greys, without bias&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We see that between each pure grey level, there are six more nuanced intensities, but each expressing a primary bias. The six is actually 3! ("three factorial"), which is the number of unique &lt;a href="https://en.wikipedia.org/wiki/Permutation"&gt;permutations&lt;/a&gt; three elements allow. With six primaries, we get 720 (6!) possible nuances.  &lt;/p&gt;
+&lt;p&gt;In addition, because the human eye is better at distinguishing contrast in darks and less good at distinguishing contasts in lights, the intensities are stored &lt;a href="http://dcinema.me/2014/09/film-look-more-on-linear-log-gamma-curves"&gt;after a logarithmic transform,&lt;/a&gt;, which you will probably know about due to &lt;a href="https://en.wikipedia.org/wiki/Gamma_correction"&gt;gamma correction&lt;/a&gt; (although gamma correction is what you apply &lt;em&gt;afterwards&lt;/em&gt;, to transform the logarithmically stored data back to a linear gradient on a screen) so that we use more bits to store darks, because they're more important, and fewer bits to store lights, because they're less important.&lt;/p&gt;
+&lt;h2 id="so-what-happens-when-we-add-more-primaries-"&gt;So what happens when we add more primaries?&lt;/h2&gt;
+&lt;p&gt;If we wanted to add more primaries, in order to capture more colours, we would:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;capture &lt;strong&gt;vastly&lt;/strong&gt; more physical colours.&lt;/li&gt;
+&lt;li&gt;increases the grey scale nuance,&lt;/li&gt;
+&lt;li&gt;increases the colour bias per colour point,&lt;/li&gt;
+&lt;li&gt;decreases the "wrongness" of that colour bias per colour point,&lt;/li&gt;
+&lt;li&gt;increases the colour accuracy of the point,&lt;/li&gt;
+&lt;li&gt;decrease the possible colour brightness, due to "inactive" color channels per quadrant (unless we make render devices that "mix in
+whites in order to deal with that. And that's not a problem you want to be payed to solve, it's pretty hard),&lt;/li&gt;
+&lt;li&gt;may decrease the number of distinct points we can sample per square unit of surface,&lt;/li&gt;
+&lt;li&gt;increases the number of &lt;em&gt;types&lt;/em&gt; of sensors we need to do our sampling, &lt;/li&gt;
+&lt;li&gt;does nothing for the size of the data that our recording device will end up creating.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id="but-we-can-do-better"&gt;But we can do better&lt;/h1&gt;
+&lt;p&gt;The title of this article is "We are really terrible at digital colours, &lt;em&gt;and digital photography&lt;/em&gt;" and I think it's time to explain why the latter is the case.&lt;/p&gt;
+&lt;p&gt;In ye olden days, photography meant exposing a film that consisted of multiple layers of "reactive-to-certain-color-ranges" emulsion, to a focused light source, and then washing off all the stuff that didn't react. To then actually &lt;em&gt;see&lt;/em&gt; the photograph, you'd either have to shine a bright light through the film (for &lt;a href="https://en.wikipedia.org/wiki/Reversal_film"&gt;"positive"&lt;/a&gt; film), or capture the light as it was filtered by the film on photosensitive paper (for &lt;a href="https://en.wikipedia.org/wiki/Negative_%28photography%29"&gt;"negative"&lt;/a&gt; film). Or, if you used a polaroid, the paper WAS the film, and basically &lt;a href="https://en.wikipedia.org/wiki/Instant_film"&gt;magic happened&lt;/a&gt;. &lt;/p&gt;
+&lt;p&gt;Now, again, historical baggage has held us back: the first digital cameras really couldn't do much more than mimic this film process, with using a digital sensor: the shutter opens, light falls on the sensor, each point on the sensor "fills up" to some degree, the shutter closes, and then we ask each point "how much light did you collect?". This is exactly the same process as analog film, just done with digital sensors instead of reactive film emulsion.&lt;/p&gt;
+&lt;p&gt;But we're &lt;strong&gt;still&lt;/strong&gt; doing that today, after decades of digital camera technology, and it really makes no sense anymore: why are we still lump-sum recording light instead of using sensors that can tell how much light passes through it per time unit, instead of "filling up"? What if instead of this:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;pixel 1: MAX light units after exposing for Y milliseconds (possibly blown out)&lt;/li&gt;
+&lt;li&gt;pixel 2: MAX light units after exposing for Y milliseconds (possibly blown out)&lt;/li&gt;
+&lt;li&gt;pixel 3: MAX light units after exposing for Y milliseconds (possibly blown out)&lt;/li&gt;
+&lt;li&gt;pixel 4: 9900 light units after exposing for Y milliseconds&lt;/li&gt;
+&lt;li&gt;pixel 5: 9700 light units after exposing for Y milliseconds&lt;/li&gt;
+&lt;li&gt;...&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;we can record this, instead:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;pixel 1: strong light-induced resistance Ω₁ =&amp;gt; encode as MAX/1200 lumen/ms&lt;/li&gt;
+&lt;li&gt;pixel 2: strong light-induced resistance Ω₂ =&amp;gt; encode as MAX/1201 lumen/ms&lt;/li&gt;
+&lt;li&gt;pixel 3: strong light-induced resistance Ω₃ =&amp;gt; encode as MAX/1202 lumen/ms&lt;/li&gt;
+&lt;li&gt;pixel 4: less strong light-induced resistance Ω₄ =&amp;gt; encode as MAX/1305 lumen/ms&lt;/li&gt;
+&lt;li&gt;pixel 5: even less strong light-induced resistance Ω₅ =&amp;gt; encode as MAX/1510 lumen/ms&lt;/li&gt;
+&lt;li&gt;...&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Instead of starting a sensor, letting light fall on it, and then turning it off and asking it how much light it found, we have the technological capability to make sensors that change &lt;a href="https://en.wikipedia.org/wiki/Photoresistor"&gt;electrical resistance based on how strong a light hits them&lt;/a&gt;. And &lt;strong&gt;that&lt;/strong&gt; information is truly digital: instead of a single exposure's worth of values, we can capture the entire exposure function for all points. And having &lt;strong&gt;those&lt;/strong&gt; values means that all the algorithms we use on a daily basis for digital photography go from "hard problems" to "stupidly simple":&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;the need for &lt;a href="https://en.wikipedia.org/wiki/High-dynamic-range_imaging"&gt;HDR&lt;/a&gt; using multiple exposures &lt;em&gt;disappears&lt;/em&gt;, because we have the exposure functions themselves that we can work with. HDR is simply "which exposure transformation would you like to apply?"&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://en.wikipedia.org/wiki/Exposure_%28photography%29"&gt;overexposure&lt;/a&gt; at the sensor-level becomes virtually impossible. You'd have to be pointing the camera at something truly incredibly bright.&lt;/li&gt;
+&lt;li&gt;leveling photographs becomes trivial because we no longer have to "guess" which parts of an image had high or low lighting coefficients.&lt;/li&gt;
+&lt;li&gt;standard exposure control becomes trivial, since this is simply a variable you plug into the exposure functions for each pixel.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="what-would-go-into-the-raw-data-then-"&gt;What would go into the "RAW" data, then?&lt;/h2&gt;
+&lt;p&gt;Right now, cameras encode the "how much light did you collect over X amount of time", plus camera setting as meta data, as&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{
+  header,
+  metadata,
+  raw data: {I₁, I₂, I₃, I₄, I₅, ...}
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Each colour channel is a (possibly compressed) 14 bit integer representing that point's recorded amount of light. The channels don't have "a colour", they're basically just greyscale sensors (implementing full spectrum sensors would be amazing, but is so complicated it'd be a post on its own), but the light that falls into them will have been filtered such that a particular sensor will have recorded the intensity of a particular (interval) of wavelenght(s) of physical light, and the information on which sensor recorded which "colour" comes from knowing which colour pattern is used by which camera. &lt;/p&gt;
+&lt;p&gt;So, in the same manner we could instead record:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{
+  header,
+  metadata,
+  raw data: {Ω₁, Ω₂, Ω₃, Ω₄, Ω₅, ...}
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;to describe the light-induced resistance per point, with the information about which channel has which colour, and what the value represents, encoded in the meta data.&lt;/p&gt;
+&lt;h2 id="wouldn-t-we-be-missing-the-base-offsets-upon-which-the-coefficients-build-"&gt;Wouldn't we be missing the base offsets, upon which the coefficients build?&lt;/h2&gt;
+&lt;p&gt;If you're observant, you'll have noticed that each sensor is basically used to evaluate the function &lt;code&gt;f(t) = a*t + b&lt;/code&gt;, where &lt;code&gt;f(t)&lt;/code&gt; is the final amount of light gathered, &lt;code&gt;t&lt;/code&gt; is the time interval, &lt;code&gt;b&lt;/code&gt; is some base value and &lt;code&gt;a&lt;/code&gt; is the lighting coefficient. Current digital cameras capture only &lt;code&gt;f(t)&lt;/code&gt; (the final value), and the proposed scheme only encodes &lt;code&gt;a&lt;/code&gt;, the light coefficient, so we're effectively treating &lt;code&gt;b&lt;/code&gt; as if it is zero. &lt;/p&gt;
+&lt;p&gt;And that's true, but here's an important thing to bear in mind: these two approaches yield &lt;em&gt;exactly the same values&lt;/em&gt; when using the same exposure values. It's not until you start messing with the exposure time after the fact that the missing &lt;code&gt;b&lt;/code&gt; starts to matter, and we clearly already know how to deal with that (since Lightroom etc. come with exposure control that seems to work at least sort of passably). Of course, ultimately we want a sensor that can record both a base offset and the coefficient but even if we have a sensor that can't, we're still strictly improving the technology.&lt;/p&gt;
+&lt;p&gt;In fact, let's talk about that for moment, because it's worth discussing: why do we reject improvements that we feel aren't the perfect solution, instead of applauding it for keeping things, at worst, the same, but on average, improved?       &lt;/p&gt;
+&lt;h2 id="if-this-is-so-crazy-good-why-aren-t-we-already-doing-this-"&gt;If this is so crazy good, why aren't we already doing this?&lt;/h2&gt;
+&lt;p&gt;Pretty much "because money". Digital photography is basically a monopoly between a very low number of players, and even if you have a fantastic idea, you're not likely to succeed because you're making something people don't understand they need. Think about the following:&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Why would you pay for a camera that doesn't do what you've come to expect a camera to do, especially when the technology it relies on is still in its infancy?&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;We —people with money who can afford cameras &lt;em&gt;and&lt;/em&gt; care about the technology— are really very irrational, and extremely dumb when it comes to investing in a better future: we'll reject technological solutions just because they are going to, necessarily, be clunky at first. We make for absolutely terrible early adopters.&lt;/p&gt;
+&lt;p&gt;A great example of this is &lt;a href="https://lytro.com/"&gt;Lytro&lt;/a&gt;, who make a camera that records a (partial) &lt;a href="https://en.wikipedia.org/wiki/Light-field_camera"&gt;light field&lt;/a&gt;. You have (likely) no idea what that means, so: it means you don't get information about "light focused at this point" for each image pixel, but you get information about "the various rays of light that ended up at this point arrived there by traveling through the lens at the following angles".&lt;/p&gt;
+&lt;p&gt;That is amazing! By tracking the angle by which light travels through the camera the very &lt;em&gt;notion&lt;/em&gt; of focus has been made obsolete: "focus" is now a thing you can play with &lt;strong&gt;after&lt;/strong&gt; taking a photograph. &lt;strong&gt;That's a game changer!!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;But, alas, Lytro of course had to spend lots of money on researching the technology and making it production ready, and in order to make back that money, their cameras are expensive, and their file format is closed source, so you need &lt;em&gt;their&lt;/em&gt; software to work with "light field photographs", rather than being able to load them up in something like Lightroom or Aperture, with a plugin to control the front and rear focal plane distances. Would you pay for something that restricts your workflow that much? I wouldn't. I love the idea of Lytro, but like almost everyone else, I'm still waiting for them to release an affordable camera with a Lightroom plugin.&lt;/p&gt;
+&lt;p&gt;Would uptake be better if they'd priced the devices competitively, and hadn't locked down their file format? Sure. Would they make enough money to go &lt;strong&gt;beyond&lt;/strong&gt; that initial investment in the technology and improve upon it, to the point where it can actually compete on quality with already existing digital cameras? Probably not.&lt;/p&gt;
+&lt;p&gt;They're on their second camera as I write this, which costs US$1200 and while able to generate an amazing kind of data file, yields data that can only generate images measuring 2450 by 1634 pixels, with a fixed lens that is 30-250mm equivalent, with a whopping 3.2 crop factor sensor. Now, if you know digital photography, you might be thinking  that those values mean something, because you're used to hearing them, and you might be thinking that an equivalent dSLR made by Nikon or Canon, price wise, gets you a camera that has a four times higher resolution, with better interchangable lenses (30-250mm? &lt;em&gt;think of the distortion!&lt;/em&gt;) , and a 1.5-1.2 crop factor.&lt;/p&gt;
+&lt;p&gt;Of course, 2450 by 1634 pixels is wider than what you're publishing to the internet, and of course that zoom range means nothing in terms of what you're used to from "interchangeable SLR lenses" since the lens has to work for light fields, not planar recording, and you've never worked with a lens that has to do that, so your knowledge of what is a "safe" zoom range for dSLR is absolutely irrelevant for a Lytro camera, but you're going to lie to yourself and pretend you know what you're talking about, and you won't be buying a Lytro camera, and that's the battle we're fighting:&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;our own biased nature.&lt;/em&gt; &lt;/p&gt;
+&lt;p&gt;Unless you're made of money, you're simply not going bother with a Lytro camera, because it does less, while costing more. But, if no one buys it, Lytro will probably lose out on money they need to improve the technology they have to the point where their cameras are on par with the equivalent Nikon or Canon. And if they start losing money, it's a good bet someone like Nikon or Canon will buy them. And then bury them. Because it doesn't fit into their money making scheme.  &lt;/p&gt;
+&lt;h2 id="so-the-bottom-line-is-"&gt;So... the bottom line is...&lt;/h2&gt;
+&lt;p&gt;These improvements aren't going to happen. At least not in any immediate future, and certainly not unless those improvements solve "shortcomings in photography". And, because we've been using dSLRs for so long now, no one really seems to think about how incredibly huge the shortcomings are, given where we could be if we tried a little harder.&lt;/p&gt;
+&lt;p&gt;The real problem is that this deficiency is not losing Nikon and Canon any money (and let's be honest: yes, there are other manufacturers and no: they are utterly irrelevant when it comes to moving the market). I could write the most amazing white paper, with all the tech specs worked out, the sensors described to the last pin, the control board attached as digital PCB file, the image codecs implemented in C, Java, Python and Nodejs-flavoured JavaScript, with a freely hosted fully functional, cross-platform demonstration editor that shows off everything that you can easily do now that was hard before, and we'd &lt;strong&gt;still&lt;/strong&gt; get nowhere because all Nikon and Canon have to do is ignore it, and the idea will die all on its own. I don't have the funds to build the actual camera and compete in a market that doesn't realise how non-digital the technology is, nor how good the technology &lt;em&gt;could&lt;/em&gt; be if they demanded the improvements.&lt;/p&gt;
+&lt;p&gt;The digital revolution brought many cool things when it happened, but the fallout is that hardware wise, we're still suffering from the decisions that were made based on conditions that haven't applied for years now, and the people with the power to change that don't care. As much as I love the new consumer circuitry revolution, with cheap &lt;a href="https://www.arduino.cc"&gt;arduinos&lt;/a&gt; and the &lt;a href="https://www.raspberrypi.org"&gt;raspberry pis&lt;/a&gt; and &lt;a href="http://www.adafruit.com"&gt;adafruit&lt;/a&gt; at the forefront, these things are not enough to disrupt an industry at the chip level. Creating a new image sensor is not on the same level as writing a free Photoshop alternative, or a free quadcopter design - there are no DIY solutions for this problem. Hopefully "yet", but I kind of suspect "full stop". I can't even create a six-colour filter for fitting on top of an existing image sensor without RGB bayer filter because there just aren't any DIY ways to achieve that, and I'm not a student or retired engineer with enough spare time to make this work. Unless I quit my job. Which wouldn't be a very smart thing to do.&lt;/p&gt;
+&lt;p&gt;I can't make this real, no matter how much I want it to be: &lt;strong&gt;sometimes, the future is not now. Sometimes, the future is far, far away.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;And that makes me sad.&lt;/p&gt;
+&lt;p&gt;And if you are now sufficiently angry because you feel "you can totally do this" then I hereby officially challenge you to go do it. I don't care who makes it happen: if you think you can make it happen, &lt;em&gt;make it happen&lt;/em&gt;, and I will buy your camera. Because I want you to succeed.&lt;/p&gt;
+&lt;h2 id="addendum-answers-to-questions-from-readers"&gt;Addendum: answers to questions from readers&lt;/h2&gt;
+&lt;p&gt;Some people had some questions about whether this was practical or theoretical, and —quite legitimately— wondering whether any of this actually matters. After all, traditional film didn't have full coverage either. &lt;/p&gt;
+&lt;p&gt;So, first off: it is entirely true that traditional film doesn't cover the full gamut either, but traditional film worked a little differently from digital sensors - their gamuts aren't "triangular", they're far more wobbly (as &lt;a href="https://twitter.com/duncanwilcox/status/620892975468572673"&gt;Duncan Wilcox&lt;/a&gt; points out, for instance), and they're not all restricted to a single gamut; different films cover different colour ranges. So film lets us at least partially deal with the issue of bad color spaces: the wobbliness actually gives us far more nuance in areas where it matters. In the same way that digitizing audio by throwing away "the parts we can't really hear" is a great way to bring down signal complexity, it's important to throw away "the parts that don't matter" in the visual spectrum too, and the problem there is that the triangular gamuts throw away "too much". The nuances in green are lost in virtually all colour spaces, while traditional film preserves them. Certainly, they will come out looking a little different from film type to film type, but that's the other reasons why film at least had a solution: if you knew what you were shooting, you could pick the film to match that. While it was a hassle, this was a workable thing, allowing you to preserve the nuance you needed in those parts of the spectrum where it mattered (the digital equivalent would be to swap out image sensors based on the gamut you need, which isn't really a thing digital cameras can do). So film was certainly not perfect either, but it wasn't perfect in a slightly different way, and allowed users to work around the limitations to some extent.&lt;/p&gt;
+&lt;p&gt;Now, &lt;em&gt;technically&lt;/em&gt; digital cameras also have "wobbly" sensors, but if you shoot in "not RAW", the camera will force the image data to fit the aRGB gamut, and even if you shoot RAW you're probably missing out on a fair bit of colour. The older &lt;a href="http://www.amateurphotographer.co.uk/reviews/dslrs/nikon-d300s/8"&gt;Nikon D300s&lt;/a&gt;, or newer &lt;a href="http://www.amateurphotographer.co.uk/reviews/dslrs/canon-eos-7d/8"&gt;Canon EOS D7&lt;/a&gt;, for instance, can capture those rich purples in RAW mode, but physically cannot record a fair number of greens that even aRGB covers, so if that data has to be "compressed" back into aRGB for putting online (kind of what everyone is doing these days) then we don't just lose those rich colours, we also distort our greens.  That plain old sucks.&lt;/p&gt;
+&lt;p&gt;Then: the question "Is this problem academic?" and to that I have to categorically say "No, not even slightly".  Every time you pick up a digital camera and walk out to take a picture of blue or purple flowers, or some particularly inspiring mixture of green leaves, you'll end up disappointed that the digital result looks nothing like what you actually saw before you took the picture, simply because real life has tons of colours that simply don't fit in your camera's digital colour space. They get "capped off" at the edge of the gamut. Even a colour-calibrated workflow won't help here: I have four digital cameras and a high resolution scanner and two large monitors, all of which get colour-calibrated independently (the monitors with an ICC profile that gets rechecked every two weeks, the cameras by way of a colour calibration sheet that is shot along with subjects and then corrected for in Adobe Lightroom). However, even with colour calibration you cannot solve the problem of "trying to record colours that &lt;em&gt;don't fit&lt;/em&gt; in the sensor's gamut" because the sensor literally cannot record them. Colours close to the edge will sort-of trigger the sensor and yield a faint signal of the wrong colour, and colours further from the edge simply don't trigger anything. They don't exist, as far as the sensor knows, in the same way UV and IR don't make it into your photographs (unless you bought a dedicated uv/ir camera, or hacked your sensor filter).&lt;/p&gt;
+&lt;p&gt;And it's not just nature: I've spent weeks trying to properly digitise sheets with some 500+ different fountain pen inks, in all the colours of the rainbow (and a few that aren't in it, I'm sure), trying differing calibrations and devices to try to get "at least most of the colours" to match. That process just grinds to a halt because of limitations in technology every time. You basically end up slicing up each photograph and then manually trying to correct each individual ink to match what's on paper, which isn't even possible for a fair number of colours because they're gorgeous, and absolutely nowhere inside the aRGB gamut. So, unfortunately, this is a real problem that I run into so often that the built up frustration over it culminated in the article you just read.&lt;/p&gt;
+&lt;p&gt;Finally, to those people who feel I need an editor: &lt;em&gt;I absolutely agree&lt;/em&gt;, which is why I generally try to reread my articles a few days after posting so I'm reading it with a fresh eye. Until then, if you spot horrible typos or weird phrases, my blog &lt;em&gt;including the posts&lt;/em&gt; are open source, so &lt;a href="https://github.com/Pomax/Pomax.github.io/blob/master/gh-weblog/content/posts/markdown/2015-07-14-01-12-40.md"&gt;have a look at the source for this post&lt;/a&gt; and rewrite it for me if you think that'll improve the phrasing!&lt;/p&gt;
+</description>
+<category>Digital photography</category>
+<category>RGB</category>
+<category>Gamut</category>
+<category>Colours</category>
+<link>http://pomax.github.io/#gh-weblog-1436836360570</link>
+<guid>http://pomax.github.io/#gh-weblog-1436836360570</guid>
+<pubDate>Tue, 14 Jul 2015 01:12:40 GMT</pubDate>
+</item>
+<item>
+<title> Making X at home is so much cheaper than store-bought!</title>
+<description>&lt;p&gt;Sounds tempting! But, as those who put a little thought into statements will point out, that "$10 item you can make at home for $1!" generally needs something like $100 worth of supplies, so is it worth it?&lt;/p&gt;
+&lt;p&gt;Let's look at the "Making X at home is way cheaper than buying it pre-made" argument for something relevant to my daily life: french bread. As in real french bread, the kind you buy in a rural boulangerie in France. Your local bakery or supermarket will sell something they call French bread for $2.99, but the kind we're talking about here is more the specialty "artisan baguette" your not-France bakery will happily charge you $5.99 for instead.&lt;/p&gt;
+&lt;p&gt;I'm going to stay optimistic and pretend that what the supermarket sells is our price target. For the sake of this article. Because outside of the following fictional bit of economics, that's an assumption so shaky you couldn't even set up a game of Jenga! on it.&lt;/p&gt;
+&lt;h2 id="let-s-look-at-baguettes"&gt;Let's look at baguettes&lt;/h2&gt;
+&lt;p&gt;So, a store bought baguette will set you back $2.99, but we can make it at home for something like $0.80. Wow! So cheap! Why would you not?!&lt;/p&gt;
+&lt;p&gt;Except of course it's not just $0.80 to make at home, you also need all the equipment and ingredients to make baguette at home, and that will cost a fair bit of money. Let's pretend we have nothing in our kitchen. What would the command "go make baguettes at home!" cost us?&lt;/p&gt;
+&lt;h3 id="base-equipment-"&gt;Base equipment:&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;$5 for some measuring spoons,&lt;/li&gt;
+&lt;li&gt;$15 for some Pyrex measuring cups,&lt;/li&gt;
+&lt;li&gt;$10 for a baking tray/sheet,&lt;/li&gt;
+&lt;li&gt;$5 for a spray bottle,&lt;/li&gt;
+&lt;li&gt;$15 for a very sharp pairing knife (or "lame"),&lt;/li&gt;
+&lt;li&gt;$5 for 100' of parchment paper,&lt;/li&gt;
+&lt;li&gt;$45 for a decent sized baking stone, or rectangular "pizza" stone (yes, for baguettes this is a basic necessity).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="optional"&gt;Optional&lt;/h3&gt;
+&lt;p&gt;These are things that make baking a lot more predictable, and thus more likely to consistently turn out right, instead of baking-blunder:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$15 for a digital scale,&lt;/li&gt;
+&lt;li&gt;$40 for a heating pad,&lt;/li&gt;
+&lt;li&gt;$30 for a digital thermostat,&lt;/li&gt;
+&lt;li&gt;$25 for a ~27 liter/quart roasting pan,&lt;/li&gt;
+&lt;li&gt;$10 for a scraper.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The first is for obvious reasons: measure your ingredients so you always use exactly the same amount, to get the same result.&lt;/p&gt;
+&lt;p&gt;The latter three improve on that formula by giving you a controlled heating surface for rising your dough on, with the heating pad generating a "I can still put my hand on this" heat, the thermostat regulating when the pad should kick in (to effect a specific temperature), and the roasting pan being a nice large reasonably-sealing non reactive but heat conducting container that you can put on top of the heating pad, with the thermostat's thermometer hung inside the roasting pan.&lt;/p&gt;
+&lt;p&gt;Done, you can now always rise your dough at exactly the same temperature, whether it's a hot summer's day or a freezing winter morning.&lt;/p&gt;
+&lt;p&gt;The last item is pretty much to make your life easier when working with dough. You could use a knife, but a scraper's safer, and makes cleaning a little easier, too.&lt;/p&gt;
+&lt;h3 id="tactically-optional-a-good-mixer"&gt;Tactically optional: a good mixer&lt;/h3&gt;
+&lt;p&gt;Now, if you're going to do all your kneading by hand, add another $10 for a decent mixing bowl, or if you're going the stand mixer route, that's anywhere from $75 to $500 for anything from a shitty to an excellent stand mixer. And I can strongly recommend buying a stand mixer. I remember being poor, and working dough by hand (it's good exercise), but I also remember saving up and getting a mixer and things getting so much easier, and much more reliable. (and not just bread. Many things kitchen related benefit from a stand mixer)&lt;/p&gt;
+&lt;h3 id="in-summary-"&gt;In summary:&lt;/h3&gt;
+&lt;p&gt;So our total equipment cost before we've made a single bread varies a little:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;$135&lt;/strong&gt; for the basics&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;$220&lt;/strong&gt; for the basics, plus some things that add consistent reproducibility&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;$320&lt;/strong&gt; for reproducible basics and a mixer that'll break in a year or two&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;$500&lt;/strong&gt; for reproducible basics and a good mixer (like a Kitchenaid Artisan)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;$850&lt;/strong&gt; for reproducible basics and an excellent mixer (like a Kitchenaid Professional)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="um-you-know-money-isn-t-free-right-"&gt;Um, you know money isn't free, right?&lt;/h2&gt;
+&lt;p&gt;I know. And I know you're also not made of money. And I completely understand, because I started baking as a student (And the modern kind: I left university about $100k in debt, so yeah: I know what it's like to be poor). However, I'm still going to say "get a Kitchenaid or something similar".&lt;/p&gt;
+&lt;p&gt;Why? Because we can still do maths: cheap plastic mixers are not capable of mixing dough without overheating their motors and breaking down relatively soon after purchasing. They will last 1 to 2 years tops and over the course of 10 years that's five mixers, and that's idiotic.&lt;/p&gt;
+&lt;p&gt;For the same amount of money you can buy a high quality mixer with a motor that can deliver the torque necessary to mix dough without overheating, and that comes with a 10 year or even longer warranty, so you can get it replaced, usually for free, if it breaks down from normal wear. Think about this stuff, because it only affects one of the most important aspects of your life: being able to make good, tasty food, fast, instead of having to labour and giving up in favour of shitty food.&lt;/p&gt;
+&lt;p&gt;You may be poor, but you'll eat well. Or more realistically, you and your house mates will, because you understand the concept of splitting the cost.&lt;/p&gt;
+&lt;h2 id="oh-we-also-need-an-oven-"&gt;Oh, we also need an oven!&lt;/h2&gt;
+&lt;p&gt;Now, the last one's kind of important since we're discussing baguette: You need to have an oven that can do 260C/500F... if your place of residence doesn't come with one, you could buy one but they're really expensive, so as a student I made sure to rent places that simply came with a decent oven. If you don't have access to an oven, then this is the end of our story: buy store bread. This is the only thing I can't think of a "hack" for. You &lt;em&gt;might&lt;/em&gt; be able to use a temperature-controllable BBQ as oven substitute, but I'll be honest: I never tried. &lt;/p&gt;
+&lt;h2 id="right-let-s-start-making-bread"&gt;Right: let's start making bread&lt;/h2&gt;
+&lt;p&gt;Now then, with the matter of equipment settled, we can finally start baking... provided we have the ingredients to do so, so let's buy some.&lt;/p&gt;
+&lt;p&gt;First point: buy these in bulk, for obvious reasons. Bulk sounds like you might buy more than you'll use in a timely fashion and ingredients might go bad, but if you eat bread a lot (and if you're not Asian, odds are you eat bread a lot), then you'll be fine. &lt;/p&gt;
+&lt;p&gt;Now, again: we're going to do some maths, because while baguettes only have four ingredients, the ratios are fairly stable and so we can prime how much we buy of each based on those values: I use 485gr flour, on 9gr salt, on 3gr yeast, on "it doesn't matter how much water because it's near-as-makes-no-difference free, but 250gr, ish ". The total weight ends up being around 750 grams, with a yield of three baguettes of around 250 each.&lt;/p&gt;
+&lt;p&gt;So what do we buy?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$10 for a 2kg box of plain table salt, enough for 222 batches. Salt is cheap (well, it is these days).&lt;/li&gt;
+&lt;li&gt;$15 for 10kg all purpose flour, enough for 40 batches.&lt;/li&gt;
+&lt;li&gt;$10 for 4oz active dry yeast = 120 grams = enough for 40 batches. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Total supplies cost: I'm going to say $25, because that salt will last you —essentially— as many years as you bought kilograms.&lt;/p&gt;
+&lt;h2 id="maths-time-"&gt;Maths time!&lt;/h2&gt;
+&lt;p&gt;Now, with all of this written down, when does it become cheaper to "make our own X" as opposed to "buying store-made X", where X is baguettes?&lt;/p&gt;
+&lt;h3 id="a-ludicrous-assumption-we-re-only-ever-making-baguettes-"&gt;A ludicrous assumption: we're &lt;em&gt;only ever&lt;/em&gt; making baguettes.&lt;/h3&gt;
+&lt;p&gt;If the only thing we made were baguettes, then those $25 worth of ingredients will make us 40 batches of 3 baguettes each. That's 120 baguettes. However, these are half-size baguettes because your oven is absolutely not going to be wide enough to make full length baguettes, so effectively we're making the equivalent to 60 store-bought baguettes, and at $3 each that's $180 for store bought, versus $25 for home made.&lt;/p&gt;
+&lt;p&gt;Net win: $155, with comes out to $3.875 per batch.&lt;/p&gt;
+&lt;p&gt;And a batch lasts you anywhere between 1 and 3 days depending on your voracity and enthusiasm. You may, of course, end up with stale bread, but that you may also end up making bread pudding. There is no downside, really. Anyway: &lt;em&gt;great&lt;/em&gt;! This is saving us tons of money!&lt;/p&gt;
+&lt;p&gt;...But we still need to make back our initial investment, so how many batches do we need to make?  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$135 for the basics = &lt;strong&gt;35 batches&lt;/strong&gt;, or —loosely— counted in months of eating bread: 1–3&lt;/li&gt;
+&lt;li&gt;$220 for reproducible basics = &lt;strong&gt;57 batches&lt;/strong&gt;, 2–6 months&lt;/li&gt;
+&lt;li&gt;$320 for reproducible basics, cheap mixer = &lt;strong&gt;83 batches&lt;/strong&gt;, 3–9 months &lt;/li&gt;
+&lt;li&gt;$500 for reproducible basics, good mixer = &lt;strong&gt;129 batches&lt;/strong&gt;, 4 months to a year&lt;/li&gt;
+&lt;li&gt;$850 for reproducible basics, excellent mixer = &lt;strong&gt;220 batches&lt;/strong&gt;... that's enough to use up all our salt over the course of 8 months to 2 years O_O!&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;So it can take two years to "break even". That's... well that's kind of long, isn't it?&lt;/p&gt;
+&lt;p&gt;Actually: &lt;em&gt;no, it's not&lt;/em&gt;. Unless you only have 2 years to live, the kitchen supplies we bought will last far longer than 2 years (unless you bought a shitty mixer. That &lt;em&gt;will&lt;/em&gt; break down) so we pretty much invariable end up saving money in the long run, with tasty bread at every turn (and as anyone with a sense of money will tell you, the long run is the one that actually makes a difference).&lt;/p&gt;
+&lt;h2 id="better-maths-time-"&gt;Better maths time.&lt;/h2&gt;
+&lt;p&gt;But of course, we don't just make bread. All the supplies we bought are things that anyone who cares even slightly about having what they need to do any sort of cooking (especially poor students) will typically end up buying anyway, because there's loads of stuff you use them all for outside of just making bread (... except for the lame, which is why I use an extremely sharp knife and a $10 &lt;a href="http://speedysharp.com"&gt;http://speedysharp.com&lt;/a&gt; sharpener). If we sum up all the things we can make with those supplies that we couldn't, without, then the cost-benefit analysis moves that "break even" point closer and closer. &lt;/p&gt;
+&lt;h2 id="in-summary"&gt;In summary&lt;/h2&gt;
+&lt;p&gt;Yes, all those "make X at home" tips cost &lt;em&gt;lots&lt;/em&gt; in equipment. But if you already have most of the equipment, and you buy those exes often enough, turns out it's usually worth buying the equipment you're missing to make it yourself and very quickly reach the "I am now saving money" point.&lt;/p&gt;
+&lt;p&gt;That's really all I wanted to point out. Thanks for reading.&lt;/p&gt;
+</description>
+<category>Bread</category>
+<category>Maths</category>
+<category>Economics</category>
+<link>http://pomax.github.io/#gh-weblog-1435557902917</link>
+<guid>http://pomax.github.io/#gh-weblog-1435557902917</guid>
+<pubDate>Mon, 29 Jun 2015 06:05:02 GMT</pubDate>
+</item>
+<item>
+<title> "Whose state is it, anyway?" — Further thoughts about React</title>
+<description>&lt;p&gt;A look at thoughts that have come from working with React at the &lt;a href="https://www.mozilla.org/foundation"&gt;Mozilla Foundation&lt;/a&gt;, where we use it extensively for our &lt;a href="https://github.com/mozilla/webmaker-android/"&gt;Webmaker Android app&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="first-off-the-single-most-important-note-about-react-i-ever-wrote-"&gt;First off, the single most important note about React I ever wrote.&lt;/h2&gt;
+&lt;p&gt;Let me start this blog post with the most important thing about React, so that we understand why things happen the way they do:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;If used correctly, your users will think they are manipulating a UI, when in fact they are manipulating React, which &lt;em&gt;may&lt;/em&gt; then update the UI&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Sounds simple, doesn't it? But it has a profound effect on how UI interactions work, and how you should be thinking about data flow in React applications. For instance, let's say we have a properly written React application that consists of a page with some text, and a slider for changing the text's opacity. I move the slider. What happens?&lt;/p&gt;
+&lt;p&gt;In traditional HTML, I move the slider, a change event is triggered, and if I had an eventListener hooked up for that, I could then do things based on that change.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;React doesn't work like that&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Another short and sweet sentence: React doesn't work with "changes to the UI" as you make them; React doesn't &lt;strong&gt;allow&lt;/strong&gt; changes to the UI without its consent. Instead, &lt;strong&gt;React intercepts changes to the UI so they don't happen&lt;/strong&gt;, then triggers the components that are tied to the UI the user thinks they're interacting with, so that those components can decide whether or not a UI update is necessary.&lt;/p&gt;
+&lt;p&gt;In a well written React application, this happens:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;I try to move the slider.&lt;/li&gt;
+&lt;li&gt;The event is &lt;em&gt;intercepted&lt;/em&gt; by React and killed off.&lt;/li&gt;
+&lt;li&gt;As far as the browser knows, &lt;em&gt;nothing has happened&lt;/em&gt; to that slider.&lt;/li&gt;
+&lt;li&gt;React then takes the information about my UI interaction, and sends it to the component that owns the slider I tried to manipulate.&lt;/li&gt;
+&lt;li&gt;If that component accepts my attempt at changing the UI, it will update its state such that it now renders in a way that makes it look identical to the traditional HTML case:&lt;/li&gt;
+&lt;li&gt;As far as I'm concerned, as a user, I just moved the slider. Except in reality I didn't, my UI interaction asked React to have that interaction processed and that processing caused a UI update.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This is so different from traditional HTML that you're going to forget that. And every time you do, things will feel weird, and bugs might even be born. So, just to hopefully at least address that a tiny bit, once more:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;If used correctly, your users will think they are manipulating a UI, when in fact they are manipulating React, which &lt;em&gt;may&lt;/em&gt; then update the UI&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Now then, try to remember this forever (I know, simple request, right?) and let's move on.&lt;/p&gt;
+&lt;h2 id="revisiting-the-core-concepts-of-modeling-your-stuff-with-react"&gt;Revisiting the core concepts of modeling "your stuff" with React&lt;/h2&gt;
+&lt;p&gt;If you've been working with React for a while it's easy to forget where "your mental construct of a thing" ends and where your UI components begin, and that makes it hard to reason about when to use React's state, when to use props, when to use instance variables, and when to offload things entirely to imported functionality objects. So, a quick refresher on the various bits that we're going to be looking at, and how to make use of them:&lt;/p&gt;
+&lt;h3 id="your-thing"&gt;Your thing&lt;/h3&gt;
+&lt;p&gt;This is an abstract idea, and generally breaks up into lots of tiny things that all need to "do something" to combine into a larger whole that actual humans like to think in. "A blog post", "A page", or "a markdown editor" all fall into this category. When thinking about "your thing", it's tempting to call the specific instantiation of everything that this thing needs "its state", but I'm going to have to be curt and tell you to not do that. At least, let's be specific: whenever we talk about the thing's state, let's call it "the full state". That way we won't get confused later. If it doesn't have "full" in the description, it's not your thing's abstract meta all encompassing state.&lt;/p&gt;
+&lt;h3 id="react-components"&gt;React components&lt;/h3&gt;
+&lt;p&gt;These are extremely concrete things, representing UI elements that your users will interact with. Components need not map one-to-one to those abstract ideas you have in your head. Think of components as things with three levels of data: properties, state, and "plain old javascript stuffs".&lt;/p&gt;
+&lt;h4 id="component-properties-this-props-"&gt;Component properties: "this.props"&lt;/h4&gt;
+&lt;p&gt;These are "constructor" properties, and are dictated by whoever creates an instance of the component. However, React is pretty clever and can deal with some situations in ways you may not expect coming at React from a traditional HTML programming paradigm. Let's say we have the following React XML - also known as JSX (This isn't HTML or even XML, it's just a more convenient way to write out programming intent, and maps directly to a React.createElement call. You can write React code without ever using JSX, and JSX is always first transformed back to plain JS before React runs it. Which is why you can get JavaScript errors "in your XML", which makes no sense if you still think that stuff you wrote really is XML):&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Parent = React.createClass({
+  render() {
+    return (&amp;lt;div&amp;gt;
+      &amp;lt;...&amp;gt;
+      &amp;lt;Child content={ getCurrentChildContent() }/&amp;gt;
+      &amp;lt;...&amp;gt;
+    &amp;lt;/div&amp;gt;);
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The child's position is always the same in this case, and when the Parent first renders, it will create this Child with some content. But this isn't what really happens. React actually adds a level of indirection between the code you wrote, and the stuff you see client-side (e.g. the browser, a native device, etc.): a VIRTUAL DOM has been created based on your JSX, and it is that VIRTUAL DOM that actually controls how things are changed client-side. Not your code. So the diffrence kicks in when we change the content that should be in that child and we rerender, to effect a new child:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Something happens to Parent that changes the output of &lt;code&gt;getCurrentChildContent&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Parent renders itself, which means the &lt;code&gt;&amp;lt;Child&amp;gt;&lt;/code&gt; has changed.&lt;/li&gt;
+&lt;li&gt;React updates the VIRTUAL element associated with the Parent, and one of the updates is for the VIRTUAL Child element, which has a new property value&lt;/li&gt;
+&lt;li&gt;Rather than destroying the old Child and building a new one with the new property, React simply updates the VIRTUAL element so that it is indistinguishable from what things would have been had we destroyed and created anew.&lt;/li&gt;
+&lt;li&gt;the VIRTUAL DOM, once marked as fully updated, then reflects itself onto client the so that users see an updated UI.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The idea is that React is supposed to do this so fast you can't tell. And the reason React is so popular is that it actually does. React is fast. &lt;em&gt;Really fast&lt;/em&gt;. &lt;/p&gt;
+&lt;p&gt;Where in traditional HTML you might remove(old) and then append(new), React will always, ALWAYS, first try to apply a "difference patch", so that it doesn't need to waste time on expensive construction and garbage collection. That makes React super fast, but also means you need to think of your components as "I am supplying a structure, and that structure will get updated" instead of "I am writing HTML elements". You're not.&lt;/p&gt;
+&lt;h4 id="component-state-this-state-"&gt;Component state: "this.state"&lt;/h4&gt;
+&lt;p&gt;This is the state of the &lt;strong&gt;React component&lt;/strong&gt;. A react component that represents a piece of interactive text, for instance, will have that text bound as its state, because that state can be changed &lt;em&gt;by the component itself&lt;/em&gt;. Components do not control what's in their props (beyond the limited 'use these default values for props that were not passed along during construction'), but they do control their state, and every update to the state triggers a &lt;code&gt;render()&lt;/code&gt; call.&lt;/p&gt;
+&lt;p&gt;This can have some interesting side effects, and requires some extra thinking: If you have a text element, and you type to change that text, that change needs to be reflected to the state before it will actually happen.&lt;/p&gt;
+&lt;p&gt;Remember that important sentence from the start of the post:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;If used correctly, your users will think they are manipulating a UI, when in fact they are manipulating React, which &lt;em&gt;may&lt;/em&gt; then update the UI&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;And then let's look at what happens:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;the user types a letter in what they think is a text input field of some sort&lt;/li&gt;
+&lt;li&gt;the event gets sent to React, which kills it off immediately so the browser never deals with it, and then sends it on to the component belonging to the VIRTUAL element that backs the UI that the user interacted with&lt;/li&gt;
+&lt;li&gt;the component handles the event by extracting the data and updating its state so that its text reflects the new text&lt;/li&gt;
+&lt;li&gt;the component renders itself, which updates the VIRTUAL element that backs the UI that the user sees, replacing its old text (pre-user-input) with the next text (what-the-user-thinks-they-wrote). This change is then reflected to the UI.&lt;/li&gt;
+&lt;li&gt;the user sees the updated content, and all of this happened so fast that they never even notice that all this happens behind the scenes. As far as they know, they simply typed a letter.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If we didn't use this state reflecting, instead this would happen:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;user types a letter&lt;/li&gt;
+&lt;li&gt;React kills off the event to the VIRTUAL element&lt;/li&gt;
+&lt;li&gt;there is no handler to accept the event, extract its value, and update the component state, so:&lt;/li&gt;
+&lt;li&gt;nothing happens.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The user keeps hitting the keyboard, but no text shows up, because nothing changes &lt;em&gt;in React&lt;/em&gt;, and so nothing changes in the UI. As such, state is extremely important to get right, and remembering how React works is of crucial importance.&lt;/p&gt;
+&lt;h4 id="semantically-refactored-state-mixins"&gt;Semantically refactored state: mixins&lt;/h4&gt;
+&lt;p&gt;In additional to properties and state, React has a "mixin" concept, which allows you to write utility code that can tack into/onto any React class you're working with. For instance, let's look at an input component:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var Thing = React.createClass({
+  getInitialState: function() {
+    return { input: this.props.input || "" };
+  },
+  render: function() {
+    return &amp;lt;input value={this.state.input} onChange={this.updateInput}/&amp;gt;
+  },
+  updateInput: function(evt) {
+    this.setState({ input: evt.target.value }, function() {
+      if (this.props.onUpdate) {
+        this.props.onUpdate(this.state.input);
+      }
+    });
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Perfectly adequate, but if we have lots of components that all need to work with inputs, we can also do this:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var inputMixin = {
+  getInitialState: function() {
+    return {
+      input: this.props.input || ""
+    };
+  },
+  updateInput: function(evt) {
+    this.setState({ input: evt.target.value }, function() {
+      if (this.props.onUpdate) {
+        this.props.onUpdate(this.state.input);
+      }
+    });
+  }
+};
+
+var Thing = React.createClass({
+  mixins: [ inputMixin ],
+  render: function() {
+    return &amp;lt;input value={this.state.input} onChange={this.updateInput}/&amp;gt;
+  },
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;We've delegated the notion of input state tracking and UI handling to a "plain JavaScript" object. But, one that hooks into React's lifecycle functions, so even though we define the state variable &lt;code&gt;input&lt;/code&gt; in the mixin, the component will end up owning it and &lt;code&gt;this.state.input&lt;/code&gt; anywhere in its code will resolve just fine.&lt;/p&gt;
+&lt;p&gt;Mixins allow you to, effectively, organise state and behaviour in a finer-grained way than just components allow. Multiple components that have nothing in common with respects to your abstract model can be very efficiently implemented by looking at which purely UI bits they share, and modeling those with single mixins. Less repetition, smaller components, better control. &lt;/p&gt;
+&lt;p&gt;Of course, it gets tricky if you refer to a state variable that a mixin introduces &lt;em&gt;outside&lt;/em&gt; of that mixin, so that's a pitfall: ideally, mixins capture "everything" so that your components don't need to know they can do certain things, "they just work". As such, I like to rewrite the previous code to the following, for instance:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var inputMixin = {
+  getInitialState: function() {
+    return {
+      input: this.props.input || ""
+    };
+  },
+  updateInput: function(evt) {
+    this.setState({ input: evt.target.value }, function() {
+      if (this.props.onUpdate) {
+        this.props.onUpdate(this.state.input);
+      }
+    });
+  },
+  // JSX generator function, so components using this mixin don't need to
+  // know anything about the mixin "internals".
+  generateInputJSX: function() {
+    return &amp;lt;input value={this.state.input} onChange={this.updateInput}/&amp;gt;
+  }
+};
+
+var Thing = React.createClass({
+  mixins: [ inputMixin ],
+  render: function() {
+    return (
+      &amp;lt;div&amp;gt;
+        ...
+        { this.generateInputJSX() }
+        ...
+      &amp;lt;/div&amp;gt;
+    );
+  },
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Now the mixin controls all the things it needs to, and the component simply relies on the fact that if it's loaded a mixing &lt;code&gt;somethingsometingMixin&lt;/code&gt;, it can render whatever that mixin introduces in terms of JSX with a call to the &lt;code&gt;generateSomethingsomethingJSX&lt;/code&gt; function, which will do the right thing. If the state for this component needs to be saved, saving &lt;code&gt;this.state&lt;/code&gt; will include everything that was relevant to the component &lt;em&gt;and&lt;/em&gt; the mixin, and loading the state in from somewhere with a &lt;code&gt;setState(stateFromSomewhere())&lt;/code&gt; call will also do the right thing.&lt;/p&gt;
+&lt;p&gt;So now we can have two completely different components, such as a "Portfolio" component and a "User Signup" component, which have absolutely nothing to do with each other, except that they will both need the UI and functionality that the &lt;code&gt;inputMixin&lt;/code&gt; can provide.&lt;/p&gt;
+&lt;p&gt;(Note that while it is tempting to use Mixins for everything, there is a very simple criterium for whether or not to model something using mixins: does it rely on hooking into React class/lifecycle functions like getInitialState, componentDidUpdate, componentWillUnmount, etc.? If not, don't use a mixin. If you just want to put common functions in a mixin, don't. Just use a library import, that's what they're for)&lt;/p&gt;
+&lt;h4 id="instance-variables-and-externals"&gt;Instance variables and externals&lt;/h4&gt;
+&lt;p&gt;These things are handy for supporting the component, but as far as React is concerned they "don't matter", because updates to them do nothing for the UI unless there is extra code for manually triggering a state change. And you can't trigger a state change on an instance variable, state changes happen through &lt;code&gt;setState&lt;/code&gt; and property updates by parents.&lt;/p&gt;
+&lt;p&gt;That said, React components are just plain JavaScript, so there is nothing preventing you from using the same JS constructs that we use outside of React:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var library = require("libname");
+var Thing = React.createClass({
+  mixins: [
+    require("somemixin"),
+    require("someothermixin")
+  ],
+  getInitialState: function() {
+    this.elements = library.getStandardList();
+    return { elements: this.elements };
+  },
+  addElement: function(e) {
+    this.elements.push(e);
+    this.setState({ elements: this.elements });
+  },   
+  render: function() {
+    return this.state.elements.map(...);
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Perfect: in fact, using instance variables sometimes drastically increases legibility and ease of development, such as in this example. Calling &lt;code&gt;addElement()&lt;/code&gt; several times in rapid succession, without &lt;code&gt;this.elements&lt;/code&gt;, has the potential to lose state updates, effectively doing this:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;var l1 = this.state.elements;&lt;/code&gt; + &lt;code&gt;l1.push(e)&lt;/code&gt; + &lt;code&gt;setState({ elements: l1 });&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;var l2 = this.state.elements;&lt;/code&gt; + &lt;code&gt;l2.push(e)&lt;/code&gt; + &lt;code&gt;setState({ elements: l2 });&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;var l3 = this.state.elements;&lt;/code&gt; + &lt;code&gt;l3.push(e)&lt;/code&gt; + &lt;code&gt;setState({ elements: l3 });&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Now, if &lt;code&gt;l3&lt;/code&gt; is created before setState for &lt;code&gt;l2&lt;/code&gt; has finished, then &lt;code&gt;l3&lt;/code&gt; is going to be &lt;em&gt;identical&lt;/em&gt; to &lt;code&gt;l1&lt;/code&gt;, and after it's set, &lt;code&gt;l2&lt;/code&gt; could be drop over it, losing us data twice!&lt;/p&gt;
+&lt;p&gt;Instance variables to the rescue.&lt;/p&gt;
+&lt;h4 id="static-properties-on-the-component-class"&gt;Static properties on the component class&lt;/h4&gt;
+&lt;p&gt;Finally, components can also be defined with a set of static properties, meaning they exist "on the class", not on specific instances:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var Thing = React.createClass({
+  statics: [
+    mimetypes: require("mimetypes")
+  ],
+  render() {
+    return &amp;lt;div&amp;gt;I am a { this.props.type }!&amp;lt;/div&amp;gt;;
+  }
+});
+
+var OtherThing = React.createClass({
+  render: function() {
+    &amp;lt;Thing type={ Thing.mimetypes.font } /&amp;gt;
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Of course like all good JS, statics can be any legal JS reference, not just primitives, so they can be objects or functions and things will work quite well. &lt;/p&gt;
+&lt;h2 id="back-to-react-hooking-up-components"&gt;Back to React: hooking up components&lt;/h2&gt;
+&lt;p&gt;The actual point of this blog post, in addition to the opener sentence, was to look at how components can be hooked up, by choosing how to a) model state ownership, b) model component interactions, and c) data propagation from one component to another.&lt;/p&gt;
+&lt;p&gt;This is going to be lengthy (but hopefully worth it) so let's just do this the itemized list way and work our way through. We have two lists:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;State ownership:&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;centralized ownership&lt;/li&gt;
+&lt;li&gt;delegated ownership&lt;/li&gt;
+&lt;li&gt;fragmented ownership&lt;/li&gt;
+&lt;li&gt;black box ownership&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;Component interactions:&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Parent to Child&lt;/li&gt;
+&lt;li&gt;Parent to Descendant&lt;/li&gt;
+&lt;li&gt;Child to Parent&lt;/li&gt;
+&lt;li&gt;Child to Ancestor&lt;/li&gt;
+&lt;li&gt;Sibling to Sibling&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;Data propagation:&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;this.props chains&lt;/li&gt;
+&lt;li&gt;targeted events using publish/subscribe&lt;/li&gt;
+&lt;li&gt;blind events broadcasting&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;So I'm going to run through these, and then hopefully at the end tie things back together by looking at which of these things work best, and why I think that is the case (with which you are fully allowed to disagree and we should talk! Talking is super useful).&lt;/p&gt;
+&lt;h2 id="deciding-on-state-ownership"&gt;Deciding on State Ownership&lt;/h2&gt;
+&lt;h3 id="centralized-ownership"&gt;Centralized ownership&lt;/h3&gt;
+&lt;p&gt;The model that fits the traditional HTML programming model best is the centralized approach, where one thing "owns" all the data, and all changes go through it. In our editor app, we can model this as one master component, "Parent", with two child components, "Post" and "Editor", which take care of simply showing the post, and editing the post, respectively.&lt;/p&gt;
+&lt;p&gt;Out post will consist of:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var marked = require("marked");
+var Post = React.createClass({
+  render: function() {
+    var innerHTML = {
+      dangerouslySetInnerHTML: {
+        __html: marked(this.props.content);
+      }
+    };
+    return &amp;lt;div {...innerHTML}/&amp;gt;;
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Our editor will consist of:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var tinyMCE = require("tinymce");
+var Editor = React.createClass({
+  render: function() {
+    var innerHTML = {
+      dangerouslySetInnerHTML: {
+        __html: tinymce({
+          content: this.props.content,
+          updateHandler: this.onUpdate
+        });
+      }
+    };
+    return &amp;lt;div {...innerHTML}/&amp;gt;;
+  },
+  onUpdate: function(evt) {
+    this.props.onUpdate(evt);
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And our parent component will wrap these two as:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var Parent = React.createClass({
+  getInitialState: function() {
+    return {
+      content: "",
+      editing: false
+    };
+  },
+
+  render: function() {
+    return (&amp;lt;div className="post"&amp;gt;
+      &amp;lt;Post   hidden={this.state.editing}  content={this.state.content} onClick={this.switchToEditor}/&amp;gt;
+      &amp;lt;Editor hidden={!this.state.editing} content={this.state.content} onUpdate={this.onUpdate}/&amp;gt;
+    &amp;lt;/div&amp;gt;);
+  },
+
+  // triggered when we click the post
+  switchToEditor: function() {
+    this.setState({
+      editing: true
+    });
+  },
+
+  // Called by the editor component
+  onUpdate: function(evt) {
+    this.setState({
+      content: evt.updatedContent,
+      editing: false
+    });
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;In this setup, the Parent is the lord and master, and any changes to the content must run through it. Saving and loading of the post to and from a data repository would, logically, happen in this Parent class. When a user clicks on the post, the "hidden" flag is toggled, which causes the Parent to render with the Editor loaded instead of the Post, and the user can modify the content to their heart's content. Upon completion, the Editor uses the API that the Parent passed down to ensure that its latest data gets reflected, and we return to the Post view.&lt;/p&gt;
+&lt;p&gt;The important question is "where do we put &lt;code&gt;save&lt;/code&gt; and &lt;code&gt;load&lt;/code&gt;", and in this case that choice is obvious: in Parent.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var staterecorder = {
+  componentWillMount: function() {
+    this.register(this, function loadState(state) {
+      this.setState(state);
+    });
+  },
+
+  register
+
+  componentWillUnmount: function() {
+    this.unregister(this);
+  },
+}
+
+var Parent = React.createClass({
+  mixins: [
+    require("staterecorder")
+  ]
+
+  getInitialState: function() {
+    ...
+  },
+
+  getDefaultProps: function() {
+    return { id: 1};
+  },
+
+  render: function() {
+    ...
+  },
+
+  ...
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;But: why would the Parent be in control? While this design mirrors our "abstract idea", this is certainly not the only way we can model things. And look closely: why would that Post not be the authoritative source for the actual post? After all, that's what we called it. Let's have a look at how we could model the idea of "a Post" by acknowledging that our UI should simply "show the right thing", not necessary map 1-on-1 to our abstract idea.&lt;/p&gt;
+&lt;h3 id="delegated-state-management"&gt;Delegated state management&lt;/h3&gt;
+&lt;p&gt;In the delegated approach, each component controls what it controls. No more, no less, and this changes things a little. Let's look at our new component layout:&lt;/p&gt;
+&lt;p&gt;Out post is almost the same, except it now controls the content, and as such, this is now its state and it has an API function for updating the content if a user makes an edit (somehow) outside of the Post:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var marked = require("marked");
+var database = require("database");
+var Post = React.createClass({
+  getInitialState: function() {
+    content: ""
+  },
+
+  componentWillMount: function() {
+    database.getPostFor({id : this.props.id}, function(result) {
+      this.setState({ content: result });
+    };
+  },
+
+  render: function() {
+    var innerHTML = {
+      dangerouslySetInnerHTML: {
+        __html: marked(this.props.content);
+      }
+    };
+    return &amp;lt;div {...innerHTML}/&amp;gt;;
+  },
+
+  setContent: function(newContent) {
+    this.setState({
+      content: newContent
+    });
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Our editor is still the same, and it will do pretty much what it did before:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var tinyMCE = require("tinymce");
+var Editor = React.createClass({
+  render: function() {
+    var innerHTML = {
+      dangerouslySetInnerHTML: {
+        __html: tinymce({
+          content: this.props.content,
+          updateHandler: this.onUpdate
+        });
+      }
+    };
+    return &amp;lt;div {...innerHTML}/&amp;gt;;
+  },
+  onUpdate: function(evt) {
+    this.props.onUpdate(evt);
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And our parent, however, has rather changed. It no longer controls the content, it is simply a convenient construct that marries the authoritative component, with some id, to an editor when the user needs it:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var Parent = React.createClass({
+  getInitialState: function() {
+    return {
+      editing: false
+    };
+  },
+
+  render: function() {
+    return (&amp;lt;div className="post"&amp;gt;
+      &amp;lt;Post   hidden={this.state.editing}  id={...} onClick={this.switchToEditor}/&amp;gt;
+      &amp;lt;Editor hidden={!this.state.editing} onUpdate={this.onUpdate}/&amp;gt;
+    &amp;lt;/div&amp;gt;);
+  },
+
+  // triggered when we click the post
+  switchToEditor: function() {
+
+    ??????
+
+    this.setState({
+      editing: true
+    });
+  },
+
+  // Called by the editor component
+  onUpdate: function(evt) {
+    this.setState({
+      editing: false
+    }, function() {
+      this.refs.setContent(evt.newContent);
+    });
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;You may have spotted the question marks: how do we now make sure that when we click the post, we get its content loaded into the editor? There is no convenient "this.props" binding that we can exploit, so how do we make sure we don't duplicate things all over the place? For instance, the following would work, but it would also be a little ridiculous:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var Parent = React.createClass({
+  getInitialState: function() {
+    return {
+      editing: false,
+      localContent: ""
+    };
+  },
+
+  render: function() {
+    return (&amp;lt;div className="post"&amp;gt;
+      &amp;lt;Post   ref="post" hidden={this.state.editing}  id={...} onClick={this.switchToEditor}/&amp;gt;
+      &amp;lt;Editor hidden={!this.state.editing} content={this.state.localContent} onUpdate={this.onUpdate}/&amp;gt;
+    &amp;lt;/div&amp;gt;);
+  },
+
+  bindContent: function(newContent) {
+    this.setSTate({
+      localContent: newContrent
+    });
+  },
+
+  // triggered when we click the post
+  switchToEditor: function() {
+    this.setState({
+      editing: true
+    });
+  },
+
+  // Called by the editor component
+  onUpdate: function(evt) {
+    this.setState({
+      editing: false
+    }, function() {
+      this.refs.post.setContent(evt.newContent);
+    });
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;We've basically turned the Parent into a surrogate Post now, again with its own content state variables, even though the set out to eliminate that. This is not a path to success. We could try to circumvent this by linking the Post to the Editor directly in the function handlers:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var Parent = React.createClass({
+  getInitialState: function() {
+    return {
+      editing: false
+    };
+  },
+
+  render: function() {
+    return (&amp;lt;div className="post"&amp;gt;
+      &amp;lt;Post   ref="post" id={...} hidden={this.state.editing} onClick={this.switchToEditor}/&amp;gt;
+      &amp;lt;Editor ref="editor" hidden={!this.state.editing} onUpdate={this.onUpdate}/&amp;gt;
+    &amp;lt;/div&amp;gt;);
+  },
+
+  // triggered when we click the post
+  switchToEditor: function() {
+    this.refs.editor.setContent(this.refs.post.getContent(), function() {
+      this.setState({
+        editing: true
+      });
+    });
+  },
+
+  // Called by the editor component
+  onUpdate: function(evt) {
+    this.setState({
+      editing: false
+    }, function() {
+      this.refs.post.setContent(evt.newContent);
+    });
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This might seem better, but we've certainly not made the code easier to read by putting in all those async interruptions...&lt;/p&gt;
+&lt;h3 id="fragmenting-state-across-the-ui"&gt;Fragmenting state across the UI&lt;/h3&gt;
+&lt;p&gt;What if we took the genuinely distributed approach? What if we don't have "a Parent", with the Post and Editor being, structurally, sibling elements? This would certainly rule out the notion of duplicated state, but also introduces the issue of "how do we get data from the editor into the post":&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var Post = React.createClass({
+  getInitialState: function() {
+    content: ""
+  },
+
+  componentWillMount: function() {
+    database.getPostFor({id : this.props.id}, function(result) {
+      this.setState({ content: result });
+    };
+
+    somewhere.listenFor("editor:update", this.setContent);
+  },
+
+  render: function() {
+    var innerHTML = {
+      dangerouslySetInnerHTML: {
+        __html: marked(this.props.content);
+      },
+      onClick: this.onClick
+    };
+    return &amp;lt;div {...innerHTML}/&amp;gt;;
+  },
+
+  onClick: function() {
+    // somehow get an editor, somewhere, to open...
+    somewhere.trigger("post:edit", { content: this.state.content });
+  },
+
+  setContent: function(newContent) {
+    this.setState({
+      content: newContent
+    });
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The obvious thing to notice is that the post now needs to somehow be able to trigger "an editor", as well as listen for updates.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var Editor = React.createClass({
+  componentWillMount: function() {
+    somewhere.listenFor("post:edit", function(evt) {
+      this.contentString = evt.content;
+    });
+  },
+
+  render: function() {
+    var innerHTML = {
+      dangerouslySetInnerHTML: {
+        __html: tinymce({
+          content: this.contentString,
+          updateHandler: this.onUpdate
+        });
+      }
+    };
+    return &amp;lt;div {...innerHTML}/&amp;gt;;
+  },
+  onUpdate: function(evt) {
+    somewhere.trigger("editor:update", evt);
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Again, this seems less than ideal. While the Post and Editor are now nice models, we're spending an aweful lot of time in magical-async-event-land, and as designers, programmers, and contributors, we basically have no idea what's going on without code diving.&lt;/p&gt;
+&lt;p&gt;Remember, you're not just writing code for you, you're also writing code for people you haven't met yet. We want to make sure we can onboard them without going "here are the design documents and flowcharts, if you see anything you don't understand, please reach out and good luck". We want to go "here's the code. It's pretty immediately obvious how everything works, just hit F3 in your code editor to follow the function calls".&lt;/p&gt;
+&lt;h3 id="delegating-all-state-to-an-external-black-box"&gt;Delegating all state to an external black box&lt;/h3&gt;
+&lt;p&gt;There is one last thing we can try: delegating all state synchronizing to some black box object that "knows how to state, yo". For instance, a database interfacing thing through which we perform lookups and save/load all state changes. Of all the options we have, this is the one that is absolutely the most distributed, but it also comes with some significant drawbacks.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var api = {
+  save: function(component, state) {
+    // update our data store, and once that succeeds, update the component
+    datastore.update(component, state).success(function() {
+      component.setState(state);
+    });
+  }
+};
+
+var Post = React.createClass({
+  ...
+  componentWillMount: function() {
+    api.load(this, function(state) {
+      this.setState(state);
+    });
+  },
+  setContent: function(newContent) {
+    api.save(this, {
+      content: newContent
+    });
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This seems pretty handy! we don't update our UI until we know the datastore has the up to date state, so are application is now super portable, and multiple people can, in theory, all work on the same data. That's awesome, free collaboration!&lt;/p&gt;
+&lt;p&gt;The downside is that this is a UI blocking approach, meaning that if for some reason the data store fails, components won't get updated despite there being no &lt;em&gt;technical&lt;/em&gt; reason for that to happen, or worse, the data store can be very slow, leading to actions the user took earlier conflicting with their current actions because the updates happen while the user's already trying to make the UI do something else.&lt;/p&gt;
+&lt;p&gt;Of course, we can reverse the order of commits and UI updates, but that introduces an even harder problem: invalidating the UI if it turns out the changes cannot be committed. While the api approach has neat benefits, they rely on your infrastructure being reliable, and fast. If that cannot be guaranteed, then contacting a data store for committing states manually may be a better solution because it limits the store interactions to bootstrapping (i.e. loading previously modified components) and user-initiated synchronization (save buttons, etc).&lt;/p&gt;
+&lt;h2 id="dealing-with-component-relations"&gt;Dealing with Component Relations&lt;/h2&gt;
+&lt;h3 id="parent-to-child-construction-properties"&gt;Parent to Child: construction properties&lt;/h3&gt;
+&lt;p&gt;This is the classic example of using construction properties. Typically the parent should &lt;em&gt;never&lt;/em&gt; tell the Child to do things via API calls or the like, but simply set up need property values, so that the Child can do "whatever it needs to do based on those".&lt;/p&gt;
+&lt;h3 id="parent-to-descendant-a-modeling-error"&gt;Parent to Descendant: a modeling error&lt;/h3&gt;
+&lt;p&gt;In React, this relationship is essentially void. Parents should only be concerned about what their children look like, and nothing else. If there are things hanging under those children, those things should be irrelevant to the Parent. If they're not, this is a sign that the choice of which components map to which abstract concepts was not thought out well enough (yet), and needs redoing.&lt;/p&gt;
+&lt;h3 id="child-to-parent-this-props"&gt;Child to Parent: this.props&lt;/h3&gt;
+&lt;p&gt;Children can trigger behaviour in their Parents as long as the Parent supplies the API to do so via construction properties. If a Parent has an API for "doing something based on a Child doing something", that API can be passed into along during Child construction in the same way that primitive properties are passed in. React's JSX is just 'JavaScript, with easier to read syntax' so the following:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;render: function() {
+  return &amp;lt;Child content={this.state.content} onUpdate={this.handleChildUpdate}/&amp;gt;;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;is equivalent to:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;render: function() {
+  return React.createElement("Child", {
+    content: this.state.content,
+    onUpdate: this.handleChildUpdate
+  });
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And the child can call &lt;code&gt;this.props.onUpdate&lt;/code&gt; locally whenever it needs the Parent to "do whatever it needs to do".&lt;/p&gt;
+&lt;h3 id="child-to-ancestor-a-modeling-error"&gt;Child to Ancestor: a modeling error&lt;/h3&gt;
+&lt;p&gt;Just like how Parents should not rely on descendants, only direct children, Children should never care about their Ancestors, only their Parents. If the Child needs to talk to its ancestor, this is a sign that the choice of which components map to which abstract concepts was, again, not thought out well enough (yet), and needs redoing.&lt;/p&gt;
+&lt;h3 id="sibling-to-sibling-"&gt;Sibling to Sibling:&lt;/h3&gt;
+&lt;p&gt;As "intuitive" as it might seem for siblings to talk to each other (after all, we do this in traditional HTML setting all the time), in React the notion of "siblings" is irrelevant. If a child relies on a sibling to do its own job, this is yet another sign that the choice of which components map to which abstract concepts was not thought out well enough (yet), and needs redoing.&lt;/p&gt;
+&lt;h2 id="deciding-on-how-to-propagate-data"&gt;Deciding on how to propagate data&lt;/h2&gt;
+&lt;h3 id="chains-of-this-props-fname-function-calls"&gt;Chains of this.props.fname() function calls&lt;/h3&gt;
+&lt;p&gt;The most obvious way to effect communication is via construction properties (on the Parent side) and &lt;code&gt;this.props&lt;/code&gt; (on the Child side). For simple Parent-Child relationships this is pretty much obvious, after all it's what makes React as a technology, but what if we have several levels of components? Let's look at a page with menu system:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Page → menu → submenu → option
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;When the user clicks on the option, the page should do something. This &lt;em&gt;feels&lt;/em&gt; like the option, or perhaps the submenu, should be able to tell the Page that something happened, but this isn't entirely true: the &lt;em&gt;semantics&lt;/em&gt; of the user interaction changes at each level, and having a chain of this.props calls might feel "verbose", but accurately describes what should happen, and follows React methodology. So let's look at those things:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var Options = React.createClass({
+  render: function() {
+    return &amp;lt;li onClick={this.props.optionPicked}&amp;gt;{ this.props.label }&amp;lt;/li&amp;gt;;
+  }
+});
+
+var Submenu = React.createClass({
+  render: function() {
+    var options = this.props.options.map(function(option) {
+      return &amp;lt;Option key={option.label}
+                     label={option.label}
+                     optionPicked={function() { this.select(option.label); }} /&amp;gt;  
+    });
+    return &amp;lt;ul className={ ["menu", this.menuName].join(" ") }&amp;gt;{ options }&amp;lt;/ul&amp;gt;;
+  },
+  select: function(label) {
+    this.props.
+  }
+});
+
+var Menu = React.createClass({
+  render: function() {
+    var submenus = this.props.menus.map(function(menu) {
+      return &amp;lt;Submenu key={menu.name}
+                      menuName={menu.name}
+                      options={menu.options}
+                      onOptionChosen={function(option) { this.select(menu.name, option); }}/&amp;gt;
+    });
+  },
+  select: function(menu, option) {
+    this.props.onSelect(menu, option);
+  }
+});
+
+var Page = React.createClass({
+  render: function() {
+    return (&amp;lt;div&amp;gt;
+      &amp;lt;Header&amp;gt;
+        &amp;lt;Menu menus={require("menusystem")} onSelect={this.navigate}/&amp;gt;
+      &amp;lt;/Header&amp;gt;
+      { this.formSections() }
+      &amp;lt;Footer ... /&amp;gt;
+    &amp;lt;/diV&amp;gt;);
+  },
+  navigate: function(category, topic) {
+    // load in the appropriate section for the category/topic pair given.
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;At each stage, the meaning of what started with "a click" changes. Yes, ultimately this leads to some content being swapped in in the Page component, but that behaviour only matters inside the Page component. Inside the menu component, the important part is learning what the user picked as submenu and option, and communicating that up. Similarly, in the Submenu the important part is known which option the user picked. Contrast this to the menu, where it is also important to know which submenu that "pick" happened in. Those are similar, but different, behaviours. Finally in the Option, the only thing we care about is "hey parent: the user clicked us. Do something with that information".&lt;/p&gt;
+&lt;p&gt;"But this is arduous, why would I need to have a full chain when I know that Menu and Submenu don't care?" Well, for starters, they probably do care, because they'll probably want to style themselves when the user picks an option, such that it's obvious what they picked. It's pretty unusual to see a straight up, pass-along chain of this.props calls, usually a little more happens at each stage.&lt;/p&gt;
+&lt;p&gt;But what if you genuinely need to do something where the "chain" doesn't matter? For instance, you need to have any component be able to throw "an error" at an error log or notifying component that lives "somewhere" in the app and you don't know (nor care) where? Then we need one of the following two solutions. &lt;/p&gt;
+&lt;h3 id="targeted-events-using-the-publish-subscribe-model"&gt;Targeted events using the Publish/Subscribe model&lt;/h3&gt;
+&lt;p&gt;The publish/subscribe model for event handling is the system where you have a mechanism to fire off events "at an event monitor", who will then deliver (copies of) that event to anyone who registered as a listener. In Java, this is the "EventListener" interface, in JavaScript's it's basically the &lt;code&gt;document.addEventListener&lt;/code&gt; + &lt;code&gt;document.dispatch(new CustomEvent)&lt;/code&gt; approach. Things are pretty straight forward, although we need to make sure to &lt;strong&gt;never, ever&lt;/strong&gt; use plain strings for our event names, because hot damn is that asking for bugs once someone starts to refactor the code:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var EventNames = require("eventnames");
+
+var SomeThingSomewhere = React.createClass({
+  mixins: [
+    pubsub: require(...)
+  ],
+  componentWillMount: function() {
+    if (retrieval of something crucial failed) {
+      this.pubsub.generate(EventNames.ERROR, {
+        msg: "something went terribly wrong",
+        code: 13
+      }); 
+    }
+  },
+  render: function() {
+    ...
+  },
+  ...
+});
+
+var ErrorNotifier = React.createClass({
+  mixins: [
+    pubsub: require(...)
+  ],
+  getInitialState: function() {
+    return { errors: [] };
+  },
+  componentWillMount: function() {
+    pubsub.register(EventNames.ERROR, this.showError);
+  },
+  render() {
+    ...
+  },
+  showError: function(err) {
+    this.setState({
+      errors: this.state.errors.slice().concat([err])
+    });
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;We can send off error messages into "the void" using the publish/subscribe event manager, and have the ErrorNotifier trigger each time an error event comes flying by. The reason we can do this is crucial: when a component has "data that someone might be able to use, but is meaningless to myself" then sending that data off over an event manager is an excellent plan. If, however, the data does have meaning to the component itself, like in the menu system above, then the pub/sub approach is tempting, but arguably taking shortcuts without good justification.&lt;/p&gt;
+&lt;p&gt;Of course we can take the publish/subscribe model one step further, by removing the need to subscribe...&lt;/p&gt;
+&lt;h3 id="events-on-steroids-the-broadcasting-approach"&gt;Events on steroids: the broadcasting approach&lt;/h3&gt;
+&lt;p&gt;In the walkie-talkie method of event management, events are sent into the manager, but &lt;em&gt;everybody gets a copy&lt;/em&gt;, no ifs, no buts, the events are simply thrown at you and if you can't do anything with them, then you ignore them, a bit like a bus or taxi dispatcher, when everyone's listening in on the same radio frequency, which is why in the &lt;a href=""&gt;Flux&lt;/a&gt; pattern this kind of event manager is called the &lt;a href="https://facebook.github.io/react/blog/2014/07/30/flux-actions-and-the-dispatcher.html"&gt;Dispatcher&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;A Dispatcher pattern simplifies life by not needing to explicitly subscribe for specific events, you just see all the events fly by and if you know that you need to do something based on one or more of them, you just "do your job". The downside of course is that there will generally be more events that you don't care about than events that you do, so the Dispatcher pattern is great for applications with lots of independent "data generators" and "consumers", but not so great if you have a well modelled application, where you (as designer) can point at various components and say what they should reasonably care about in terms of blind events.&lt;/p&gt;
+&lt;h2 id="you-promised-to-circle-back-so-what-should-i-go-with-"&gt;You promised to circle back, so: what should I go with?&lt;/h2&gt;
+&lt;p&gt;Perhaps not surprisingly, I can't really tell you, at least not with authority. I have my own preferences, but need trumps preference, so choose wisely.&lt;/p&gt;
+&lt;p&gt;If you're working with React, then depending on where you are in your development cycle, as well as learning curve, many of the topics covered are things you're going to run into, and it's going to make life weird, and you'll need to make decisions on how to proceed based on what you need.&lt;/p&gt;
+&lt;p&gt;As far as I'm concerned, my preference is to "stick with React" as much as you can: a well modeled centralized component that maintains state, with &lt;code&gt;this.props&lt;/code&gt; chaining to propagate and process updates, letting &lt;code&gt;render()&lt;/code&gt; take care of keeping the UI in sync with what the user thinks they're doing, dipping sparingly into the publish/subscribe event model when you have to (such as a passive reflector component, like an error notifier that has no "parent" or "child" relationships, it's just a bin to throw data into).&lt;/p&gt;
+&lt;p&gt;I also prefer to solve problems before they become problems by modeling things in a way that takes advantage of everything it has to offer, which means I'm not the biggest fan of the Dispatcher model, because it feels like when that becomes necessary, an irreparable breakdown of your model has occurred.&lt;/p&gt;
+&lt;p&gt;I also don't think you should be writing your components in a way that blocks them from doing the very thing you use React for: having a lightning fast, easy to maintain user interface. While I do think you should be saving and syncing your state, I have strong opinions on "update first, then sync" because the user should never feel like they're waiting. The challenge then is error handling after the fact, but that's something you generally want to analyse and solve on a case-by-case basis.&lt;/p&gt;
+&lt;p&gt;I think you should use state to reflect the &lt;em&gt;component&lt;/em&gt; state, no more, no less, and wherever possible, make that overlap with the "full state" that fits your abstract notion of the thing you're modeling; the more you can props-delegate, and the less you need to rely on blind events, the better off your code base is going to be. Not just for you, but also for other developers and, hopefully, contributors.&lt;/p&gt;
+&lt;h2 id="and-before-closing-an-example-implementing-editable-elements-"&gt;And before closing, an example: implementing editable elements.&lt;/h2&gt;
+&lt;p&gt;Let's look at something that is typical of the "how do we do this right?" problem: editable forms. And I mean generic forms, so in this case, it's a form that lets you control various aspects of an HTML element.&lt;/p&gt;
+&lt;p&gt;This sounds simple, and in traditional HTML, sort of &lt;em&gt;is&lt;/em&gt; simple: set up a form with fields you can change, tie their events to "your thing"s settings, and then update your thing based on user interaction with the form. In React things have to necessarily happen a little differently, but to the user it should &lt;em&gt;feel&lt;/em&gt; the same. Change form → update element.&lt;/p&gt;
+&lt;p&gt;Let's start with something simple: the element. I know, React already has pre-made components for HTML elements, but we want a freely transformable and stylable one. In abstract, we want something like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;element:
+  attributeset:
+  - src
+  - alt
+  - title  
+  transform:
+  - translation
+  - rotation
+  - scale
+  - origin
+  styling:
+  - opacity
+  - border
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Which, at a first stab, could be the following React component:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var utils = require("handyHelperUtilities");
+
+var Element = React.createClass({
+  getInitialState: function() {
+    return utils.getDefaultElementDefinition(this.props);
+  }, 
+  render: function() {
+    var CSS = utils.convertToCSS(this.state);
+    return (&amp;lt;div style={CSS}&amp;gt;
+      &amp;lt;img src={this.state.src} alt={this.state.alt} title={this.state.title}/&amp;gt;
+    &amp;lt;/div&amp;gt;);
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;But, does that make sense? Should this component ever be able to change its internal state? Yes, the abstract model as expressed as, for instance, a database record would certainly treat "changed data" as the same record with new values but the same id, but &lt;em&gt;functionally&lt;/em&gt;, the component is just "expressing a bunch of values via the medium of a UI component", so there isn't actually any reason for these values to be "state", as such. Let's try this again, but this time making the Image a "dumb" element, that simply renders what it is given: &lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var utils = require("handyHelperUtilities");
+
+var Element = React.createClass({
+  getInitialProps: function() {
+    return utils.getDefaultElementDefinition(this.props);
+  },
+  render: function() {
+    var CSS = utils.convertToCSS(this.props);
+    return (&amp;lt;div style={CSS}&amp;gt;
+      &amp;lt;img src={this.props.src} alt={this.props.alt} title={this.props.title}/&amp;gt;
+    &amp;lt;/div&amp;gt;);
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Virtually identical, but this is a drastically different thing: instead of suggesting that the values it expresses is controlled by itself, this is simply a UI component that draws "something" based on the data we pass it when we use it. But we know these values can change, so we need something that &lt;em&gt;does&lt;/em&gt; get to manipulate values. We could call that an Editor, but we're also going to use it to show the element without any editorial options, so let's make sure we use a name that describes what we have:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var EditableElement = React.createClass({
+  getInitialState: function() {
+    return ...?
+  },
+  componentWillMount: function() {
+    ...?
+  },
+   render: function() {
+    var flatProperties = utils.flatten(this.state);
+    return &amp;lt;Element {...flatProperties}/&amp;gt;;
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Let's build that out: we want to be able to edit this editable element, so let's also write an editor:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var utils = require(...) = {
+  ...
+  generateEditorComponents: function (properties, updateCallback) {
+    return properties.map(name =&amp;gt; {
+      utils.getEditorComponent(name, properties[name], updateCallback);
+    });
+  },
+  getEditorComponent: function(name, value, updateCallback) {
+    var Controller = utils.getReactComponent(name);
+    return &amp;lt;Controller value={value} onUpdate={updateCallback} /&amp;gt;;
+  },
+  ...
+};
+
+var Editor = React.createClass({
+  render: function() {
+    return (&amp;lt;div&amp;gt;
+      {utils.generateEditorComponents(this.props, this.onUpdate)}
+    &amp;lt;/div&amp;gt;);
+  },
+  onUpdate: function(propertyLookup, newValue) {
+    ...?
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Now: how do we get these components linked up? &lt;/p&gt;
+&lt;h2 id="editableelement-editor-image-"&gt;EditableElement → (Editor, Image)&lt;/h2&gt;
+&lt;p&gt;The simplest solution is to rely on props to just "do the right thing", with updates triggering state changes, which trigger a &lt;code&gt;render()&lt;/code&gt; which will consequently just do the right thing some more:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var EditableElement = React.createClass({
+  ...
+  render: function() {
+    var flatProperties = utils.flatten(this.state);
+    flatProperties.onUpdate = this.onUpdate;
+    return (&amp;lt;div&amp;gt;
+      { this.state.editing ? &amp;lt;Editor {...flatProperties}/&amp;gt; : &amp;lt;Element {...flatProperties}/&amp;gt; }
+    &amp;lt;/div&amp;gt;);
+  },
+  onUpdate: function(propName, newValue) {
+    var curState = this.state;
+    var updatedState = utils.update(curState, propName, newValue);
+    this.setState(updatedState);
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;In fact, with this layout, we can even make sure the Editor has a preview of the element we're editing:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var Editor = React.createClass({
+  render: function() {
+    return (&amp;lt;div&amp;gt;
+      &amp;lt;div className="preview"&amp;gt;
+        &amp;lt;Element {...this.props}/&amp;gt;
+      &amp;lt;/div&amp;gt;
+      &amp;lt;div className="controls"&amp;gt;
+        {utils.generateEditorComponents(this.props, this.onUpdate)}
+      &amp;lt;/div&amp;gt;
+    &amp;lt;/div&amp;gt;);
+  },
+  onUpdate: function(propertyLookup, newValue) {
+    this.props.onUpdate(propertyLookup, newValue);
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Excellent! The thing to notice here is that the EditableElement holds all the strings: it decides whether to show a plain element, or the editor-wrapped version, and it tells the editor that any changes it makes, it should communicate back, directly, via the &lt;code&gt;onUpdate&lt;/code&gt; function call. If an update is sent over, the EditableElement updates its state to reflect this change, and the render chain ensures that everything "downstream" updates accordingly.&lt;/p&gt;
+&lt;h3 id="doesn-t-that-mean-we-re-updating-too-much-"&gt;Doesn't that mean we're updating too much?&lt;/h3&gt;
+&lt;p&gt;Let's say the Editor has a slider for controlling opacity, and we drag it from &lt;code&gt;1.0&lt;/code&gt; to &lt;code&gt;0.5&lt;/code&gt;. The Editor calls &lt;code&gt;this.props.onUpdate("opacity", 0.5)&lt;/code&gt;, which makes the EditableElement call &lt;code&gt;setState({opacity: 0.5})&lt;/code&gt;, which calls &lt;code&gt;render()&lt;/code&gt;, which sees an update in state, which means React propages the new values to the Editor, which sees an update in its properties and so calls its own &lt;code&gt;render()&lt;/code&gt;, which then redraws the UI to match the exact same thing as what we just turned it into. Aren't we wasting time and processing on this? We're just getting the Editor's slider value up into the Element, we don't need a full redraw, do we?&lt;/p&gt;
+&lt;p&gt;Time to repeat that sentence one more time:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;If used correctly, your users will think they are manipulating a UI, when in fact they are manipulating React, which &lt;em&gt;may&lt;/em&gt; then update the UI&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;In redux, this means we &lt;em&gt;did not&lt;/em&gt; first change that slider to &lt;code&gt;0.5&lt;/code&gt;, and so we definitely need that redraw, because &lt;em&gt;nothing has changed yet&lt;/em&gt;! You're initiating a change-event that React gets, after which updates may happen, but the slider hasn't updated yet. React takes your requested change, kills it off as far as the browser is concerned, and then forwards the "suggestion" in your event to whatever handles value changes. If those changes get rejected, nothing happens. For example, if our element is set to ignore opacity changes, then despite us trying to drag the opacity slider, that slider will not budge, no matter how much we tug on it.&lt;/p&gt;
+&lt;h3 id="extended-editorial-control"&gt;Extended editorial control&lt;/h3&gt;
+&lt;p&gt;We can extend the editor so that it becomes more and more detailed, while sticking with this pattern. For instance, say that in addition to the simple editing, we also want some expert editing: there's some "basic" controls with sliders, and some "expert" controls with input fields:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var SimpleControls = React.createClass({
+  render: function() {
+    return utils.generateSimpleEditorComponents(this.props, this.onUpdate);
+  }
+});
+
+var ExpertControls = React.createClass({
+  render: function() {
+    return utils.generateExpertEditorComponents(this.props, this.onUpdate);
+  }
+});
+
+var Editor = React.createClass({
+  render: function() {
+    return (&amp;lt;div&amp;gt;
+      &amp;lt;div className="preview"&amp;gt;
+        &amp;lt;Element {...this.props}/&amp;gt;
+      &amp;lt;/div&amp;gt;
+      &amp;lt;div className="controls"&amp;gt;
+        &amp;lt;SimpleControls properties={this.props} onUpdate={this.onUpdate}/&amp;gt;
+        &amp;lt;ExpertControls properties={this.props} onUpdate={this.onUpdate}/&amp;gt;
+      &amp;lt;/div&amp;gt;
+    &amp;lt;/div&amp;gt;);
+  },
+  onUpdate: function(propertyLookup, newValue) {
+    this.props.onUpdate(propertyLookup, newValue);
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Done. The &lt;code&gt;Editor&lt;/code&gt; is still responsible for moving data up to the &lt;code&gt;EditableElement&lt;/code&gt;, and the simple vs. expert controls simply tap into the exact same properties. If the parent is rendered with updates, they will "instantly" propagate down.&lt;/p&gt;
+&lt;h1 id="and-that-s-it-"&gt;And that's it...&lt;/h1&gt;
+&lt;p&gt;If you made it all the way to the bottom, I've taken up a lot of your time, so first off: thanks for reading! But more importantly, I hope there was some new information in this post that helps you understand React a little better. And if there's anything in this post that you disagree with, or feel is weirdly explained, or &lt;em&gt;know&lt;/em&gt; is outright wrong: let me know! I'm not done learning either!&lt;/p&gt;
+</description>
+<category>Mozilla</category>
+<category>React</category>
+<category>JavaScript</category>
+<category>Development</category>
+<link>http://pomax.github.io/#gh-weblog-1433888478288</link>
+<guid>http://pomax.github.io/#gh-weblog-1433888478288</guid>
+<pubDate>Tue, 09 Jun 2015 22:21:18 GMT</pubDate>
+</item>
+<item>
+<title> My response to "The 10 Most Toxic Items At Dollar Stores"</title>
+<description>&lt;p&gt;This is a story of science, common sense, and humans still screwing up. Plot twist: that human was me.  It's also about articles like "The 10 most toxic items at dollar stores" as found over on, for instance, &lt;a href="https://www.yahoo.com/health/the-10-most-toxic-items-at-dollar-stores-116677429238.html"&gt;https://www.yahoo.com/health/the-10-most-toxic-items-at-dollar-stores-116677429238.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Before we begin: this is not a post on how people are dumb for claiming safe materials are dangerous and oh my god how can you trust anything. This is about how people's conclusions can be &lt;em&gt;right&lt;/em&gt;, even if their own arguments are complete nonsense. I'm going to give some different arguments, and they'll lead to the same conclusion: many plastics are pretty dangerous for humans to be around. But only because people (well, clearly not us, of course, you and I are smart people, right?) use them in ways that makes them dangerous. Which we do. A lot.&lt;/p&gt;
+&lt;h1 id="point-the-first-arguments-of-logic-have-nothing-to-do-with-chemistry-"&gt;Point the first: arguments of logic have nothing to do with chemistry.&lt;/h1&gt;
+&lt;p&gt;If you combine a bunch of red and green M&amp;amp;Ms in a bowl, you have a bunch of red and green M&amp;amp;Ms, and the content of the bowl still behaves as red and green M&amp;amp;Ms. If you combine two chemicals to form another chemical, you're instead almost guaranteed that &lt;em&gt;virtually nothing&lt;/em&gt; about the original ingredients still applies to the result. Chlorine is extremely toxic, Sodium explodes when it comes into contact with water. Combine the two and you get table salt, which is safe even in ridiculously high incidental doses, even when dissolved into water, where it dissolves into individual sodium and chlorine ions. That's right, sodium explodes in water. Sodium ions in water do pretty much nothing at all (other than help make the water conductive).&lt;/p&gt;
+&lt;p&gt;Most of the entries in this "13 things that something something" article (and many other like it) are based on the fairly ridiculous "X is dangerous, Y uses X as a compound, therefore Y is dangerous", which is a kind of logic that works in arguments about compositional linguistics, but makes absolutely no sense to try to even pretend bears any relevance to chemistry and chemical composition.&lt;/p&gt;
+&lt;h1 id="plot-twist-that-doens-t-mean-y-isn-t-dangerous"&gt;Plot twist: that doens't mean Y &lt;em&gt;isn't&lt;/em&gt; dangerous&lt;/h1&gt;
+&lt;p&gt;However, while most of the entries are of the "X is made with Y, and X is bad, so Y is bad!" inclination, they do contain an element of truth and if you're the kind of person who reads these and then tweets &lt;code&gt;omg lol so much fail #sheeple #wtf&lt;/code&gt;, then maybe you need to come back to the class, too. Your dismissal is too fast. These articles may be click bait by playing into people's fear of what they don't know anything about, but in a Shyamalanian twist they're not exactly wrong either. Just not for the reasons you'd think.&lt;/p&gt;
+&lt;p&gt;So let's start with this statement:&lt;/p&gt;
+&lt;h3 id="-just-because-a-substance-contains-a-component-that-unbound-is-dangerous-doesn-t-make-the-subtance-dangerous-"&gt;&lt;strong&gt;Just because a substance contains a component that, unbound, is dangerous, doesn't make the subtance dangerous.&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;If these substances were to break down, that could be bad. So the real question is: what are the conditions under which these substances break down, and are you likely to run into those conditions? Hold on to your seat, it's science time.&lt;/p&gt;
+&lt;h2 id="pvc"&gt;PVC&lt;/h2&gt;
+&lt;p&gt;Take &lt;a href="https://en.wikipedia.org/wiki/Polyvinyl_chloride"&gt;PVC&lt;/a&gt;, for instance. PVC is extremely stable and imminently safe, exactly because of the P: the normally dangerous &lt;a href="https://en.wikipedia.org/wiki/Vinyl_chloride"&gt;vinyl chloride&lt;/a&gt; has been polymerized into inert chains that plain can't react the way individual VC molecules can. If they could spontaneously unbind, it'd be rather toxic and a carcinogenic, but you pretty much need to vapourise the PVC for that to happen. Yes, electrical cords can be made of PVC, and those can get hot and start vapourising  the PVC, but the &lt;strong&gt;reason&lt;/strong&gt; they can get hot is because of bad wiring: either the wire inside the plastic is too thin to carry the charge being pumped through it, basically melting it inside the plastic, or the casing is shoddy and your live and neutral wires get to close or even touch, resulting in molten plastic and possibly a short circuit. In all these cases, you should not have been sold that cable, because it was faulty. Oh, also you might now have a house fire. The problem here isn't actually the PVC in the slightest, that's just a drop in a bucket of "this has already gone catastrophically wrong" when we reach the point where vinyl chlorides are being released.&lt;/p&gt;
+&lt;h2 id="bfrs"&gt;BFRs&lt;/h2&gt;
+&lt;p&gt;Number 2 on the list in the aforementioned article is pretty interesting, but again for reasons you wouldn't think of, until you actually &lt;em&gt;do&lt;/em&gt; some thinking: &lt;a href="https://en.wikipedia.org/wiki/Brominated_flame_retardant"&gt;BFRs&lt;/a&gt; on their own are safe, even if "&lt;a href="https://en.wikipedia.org/wiki/Bromine"&gt;bromine&lt;/a&gt;" itself is rather toxic. But, put it in kitchen utensils like spatulas and it's not so hard to imagine that people will buy that spatula and then use it to shuffle food around in a hot pan (despite hopefully having been taught to use a wooden spatula instead). So now we have an environment where there is a contact surface on which those BFR can break down, and we have potential toxin release happening in a place that is in pretty much constant contact with your food. This is not &lt;em&gt;necessarily&lt;/em&gt; a problem: BFRs don't just break down into elemental bromine, but the breakdown products aren't exactly healthy, either. Then again: wait, we're doing &lt;em&gt;what&lt;/em&gt;?? All kidding aside, why on earth would you use something made of a material that will break down when it melts,  &lt;strong&gt;under conditions that melt it&lt;/strong&gt;?&lt;/p&gt;
+&lt;h2 id="dehps"&gt;DEHPs&lt;/h2&gt;
+&lt;p&gt;Then we have &lt;a href="https://en.wikipedia.org/wiki/Bis%282-ethylhexyl%29_phthalate"&gt;DEHPs&lt;/a&gt; (the chemical that makes plastics bendy, like the bendy straws from the article), which are interesting because as long as the plastic they're in remains cool, it stays in the plastic and the product is pretty much 100% safe. Even the quantities you might ingest from, say, a warmed up straw are typically just fine (a normal human body is perfectly capable of dealing with some DEHP. Do you live in an industrialised country? Congratulations, you're in almost constant contact with DEHPs). But, you can take the exposure too far: if you drink a lot of hot drinks, and you like to drink them through straws (you were a kid once, tea with a bendy straw is &lt;em&gt;teh amazeballs&lt;/em&gt;, you'd do it every day if you could), and you do that all day every day for a while, then yes: after a few weeks you're pretty much guaranteed to suffer an acute reaction because you've accumulated more than your body can comfortably deal with, and it will let you know that in no uncertain terms.&lt;/p&gt;
+&lt;h1 id="the-bottom-line-give-things-some-thought-"&gt;The bottom line: give things some thought.&lt;/h1&gt;
+&lt;p&gt;For all of these "dangerous things" that the Dollar Stores sell,  it's not actually the materials they're made of that are inherently dangerous, it's whether you use them under conditions that make their materials break down. And this is (still!) something people tend to forget, because that's simply not something you need to consider for traditional materials like woods, metals, or ceramics. You are never in a million years going to run into the conditions necessary to make those toxic. Sure, you could burn your wooden spatula and inhale the fumes, and yes, you could cut yourself with a rusty knife, but these are freak accidents that take some serious and obvious oversight on your part.&lt;/p&gt;
+&lt;p&gt;Not so for plastics. The problem comes from using plastic items incorrectly, inappropriately, or downright stupidly, and so rather than complaining that it's irresponsible or dangerous for Dollar Stores to sell these things, which so many articles try to suggest so that you will virally spread the word, the real problem is &lt;em&gt;you&lt;/em&gt;, the person buying these things: &lt;em&gt;you&lt;/em&gt; need to ask yourself whether you're being sensible when you're holding that product in your hands and are considering walking over to the checkout counter with it to take home.&lt;/p&gt;
+&lt;p&gt;Are you tempted to buy that cheap plastic spatula? It's cheap, so that's a good deal. And if you're going to use it to flip cold pancakes, go for it, 100% safe. But Let's be realistic: you're going to use it to stir and flip things in a hot pan, and you're going to slowly melt your spatula over time. Really? What are you thinking? Put it back, and think about how you'd use a thing that you're buying, and whether that might be dangerous.&lt;/p&gt;
+&lt;h2 id="and-of-course-even-then-people-will-make-mistakes-"&gt;And of course, even then, people will make mistakes.&lt;/h2&gt;
+&lt;p&gt;Even with that kind of knowledge it's entirely possible to forget to think about these things because they pop up in settings where you simply don't realise you should have taken a moment to think about your use until it's too late.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Take me, for instance.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;I know my science, but I forgot to take into account that the bin I was using to proof my bread dough (a bin which was not food rated) would, if sat in a warm spot, breathe  DEHP, which would then attach to my dough. That sounds "super dangerous oh my god!" but remember that thinking is important: the doses we're talking about here would require a very long exposure before they'd become a problem.&lt;/p&gt;
+&lt;p&gt;And of course, that happened. If DEHP landing on my dough had been the only thing to happen then this would still have been perfectly safe, as the bread gets baked at 550F, which is certainly high enough to destroy DEHP; it breaks down into mostly harmless stuff. However, I'd also work the dough by hand during the rising/proofing process, and DEHP dissolves in oils, which your skin is saturate with, so I got a lot more DEHP exposure.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;But even then&lt;/em&gt; the amount that got into my system would have pretty much &lt;em&gt;still&lt;/em&gt; been safe if I hadn't been making bread almost every day for a month straight. So &lt;em&gt;finally&lt;/em&gt; we have all the factors necessary to make DEHP actually dangerous. It's a bizarre compounding of factors, but I managed to hit that sweet cocktail of bad decisions and after four weeks of continuous exposure: BAM! Acute eczema of both hands for two weeks.&lt;/p&gt;
+&lt;h2 id="-and-making-mistakes-is-fine-as-long-as-you-learn-from-them-"&gt;...and making mistakes is fine. As long as you learn from them.&lt;/h2&gt;
+&lt;p&gt;Even with all that, the human body is much more robust than you generally give it credit for. It can recover from the effects of plastics poisoning just fine if you just... stop poisoning yourself: like a rational person, I stopped using that particular bin (while still using plenty of items made of plastic in the kitchen, because they're rated food-safe), my hands recovered, and I've had an excellent learning experience, reminding me to think things through more thoroughly in the future.&lt;/p&gt;
+&lt;p&gt;And I will be paying more attention to which plastics I use for which purpose for at least the next few years!&lt;/p&gt;
+</description>
+<category>Critical Thinking</category>
+<category>Plastics</category>
+<category>Click Bait</category>
+<link>http://pomax.github.io/#gh-weblog-1430980643433</link>
+<guid>http://pomax.github.io/#gh-weblog-1430980643433</guid>
+<pubDate>Thu, 07 May 2015 06:37:23 GMT</pubDate>
+</item>
+<item>
+<title>Finally, a new watch.</title>
+<description>&lt;p&gt;I've had a Pulsar Titanium Chronograph watch (matte metal with gold accents) for the last... 15 years. Possibly longer. It's finally on its way out (only the main face still works, and of that, even the date is no longer correct. And the button to change it is broken), and so after two years of thinking "maybe I should buy a new watch", I actually did. &lt;/p&gt;
+&lt;p&gt;Although what I really got was a &lt;a href="http://www.amazon.ca/Seiko-SNA411-Flight-Alarm-Chronograph/dp/B00068TJM6"&gt;flight computer with a watch underneath it&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Now, if you've never heard of a flight computer you might think it's some kind of weird specialised digital computery type thingakajigger, but you would be quite wrong: &lt;a href="https://en.wikipedia.org/wiki/Flight_computer"&gt;flight computers&lt;/a&gt; are the most basic, analog of "these things don't break even if everything else does" slide rule style bits of cardboard or metal, that let you perform a million and one different kind of "computations", and are generally extremely useful if you don't have pen and paper and a calculator at the ready. &lt;/p&gt;
+&lt;p&gt;My flight computer just looks a little fancier than the one you'd be familiar with if you fly planes (or have ever seen a flight computer before):&lt;/p&gt;
+&lt;p&gt;&lt;img src="/gh-weblog/images/sna411.jpg" class="border"&gt;&lt;/p&gt;
+&lt;p&gt;You can see the flight computer part of it pretty much all over the face and dial:&lt;/p&gt;
+&lt;p&gt;&lt;img src="/gh-weblog/images/sna411-close.jpg" class="border"&gt;&lt;/p&gt;
+&lt;p&gt;Holy crap that's a lot of things! And half the fun is figuring out &lt;a href="https://www.youtube.com/watch?v=Y7ZlWKeA_c8"&gt;how to do the million computations&lt;/a&gt; this relatively simple (but sturdy) piece of metal will let me do.&lt;/p&gt;
+&lt;p&gt;But, why would I buy this watch at all? Why not just install some apps on my phone? Allow me to explain by showing you a picture of &lt;a href="https://en.wikipedia.org/wiki/Nokia_N900"&gt;my phone&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;img src="/gh-weblog/images/phone.jpg" class="border"&gt;&lt;/p&gt;
+&lt;p&gt;My phone is for making phone calls, sending text messages, and waking me up in the morning.&lt;/p&gt;
+&lt;p&gt;It can't really do "apps" (or, it can, but no one makes apps for it because it's ancient), but on the upside has a battery life of a week or longer. The reason I don't have an iPhone or the like is because in my life, there is no point in owning one: I'm always around wifi, with a laptop, or a workstation, even when traveling. And if I need map navigation, cars come with GPS, and public transport kind of never takes accidental wrong turns. The modern phone basically has nothing to offer me. So instead of spending $600 on an iphone, I spent far less on this watch, and will spend the remainder on buying tasty ingredients for cooking up tasty food.&lt;/p&gt;
+&lt;p&gt;Also this watch is insane. Thank you for reading.&lt;/p&gt;
+</description>
+<category>Seiko</category>
+<category>Watch</category>
+<category>Flight Computer</category>
+<link>http://pomax.github.io/#gh-weblog-1430857088045</link>
+<guid>http://pomax.github.io/#gh-weblog-1430857088045</guid>
+<pubDate>Tue, 05 May 2015 20:18:08 GMT</pubDate>
+</item>
+<item>
+<title>Doing a bit of mathematical graph work, with React.js</title>
+<description>&lt;p&gt;I'm trying to write up a modest, easily accessible, educational and interactive analysis of the &lt;a href="https://en.wikipedia.org/wiki/Collatz_conjecture"&gt;Collatz Conjecture&lt;/a&gt;, and realised that I'm kind of very disappointed at the lack of quick and easy "draw me an interactive tree" libraries for use on the web. Even the ones that are reasonably "simple" rely on SVG and I just don't want to go down that route. So, &lt;a href="http://pomax.github.io/css-node-graph"&gt;I wrote this thing&lt;/a&gt; using &lt;a href="https://facebook.github.io/react/"&gt;React.js&lt;/a&gt; and the simplest &lt;a href="https://github.com/Pomax/css-node-graph/blob/gh-pages/src/js/graph.js"&gt;JS graph implementation&lt;/a&gt; with the simplest JS &lt;a href="https://github.com/Pomax/css-node-graph/blob/gh-pages/src/js/algorithms.js"&gt;graph reflow algorithm&lt;/a&gt;, and presto. Useful interactive graphs.&lt;/p&gt;
+&lt;p&gt;&lt;img src="/gh-weblog/images/css-node-graph.png" class="border"&gt;&lt;/p&gt;
+&lt;p&gt;That's just an image, but &lt;a href="http://pomax.github.io/css-node-graph"&gt;http://pomax.github.io/css-node-graph&lt;/a&gt; lets you play with it. Go and click that link.&lt;/p&gt;
+</description>
+<category>Maths</category>
+<category>React</category>
+<category>HTML</category>
+<category>CSS</category>
+<link>http://pomax.github.io/#gh-weblog-1430852362036</link>
+<guid>http://pomax.github.io/#gh-weblog-1430852362036</guid>
+<pubDate>Tue, 05 May 2015 18:59:22 GMT</pubDate>
+</item>
+<item>
+<title> Touch events, Reactjs, and Android. Good luck.</title>
+<description>&lt;p&gt;We're doing a bit of prototype work over at the &lt;a href="https://webmaker.org"&gt;Mozilla Foundation&lt;/a&gt;, playing around with what possible future ways of interacting with makable web things could look like (can that &lt;em&gt;be&lt;/em&gt; more vague?), and one of these prototypes takes the shape of dropping HTML elements onto a page and, photo book style, moving them around (or rather, moving, rotating, and scaling, using CSS3) without necessarily affecting the markup ordering.&lt;/p&gt;
+&lt;p&gt;And that works well! We're currently exploring &lt;a href="https://facebook.github.io/react"&gt;React.js&lt;/a&gt; (which comes with a refreshing look at what programming for the web can look like) and so I figured I'd try my hand at the idea by writing a React component/mixin that could be used in conjunction with arbitrary content to magically make it movable, rotatable and scalable. And in desktop browsers, it works really well!&lt;/p&gt;
+&lt;p&gt;Unfortunately, we also need things to work on mobile devices, where there are no mouse cursors, and instead you have to work with touch. Touch changes some things (the CSS :hover state, for instance, becomes meaningless) but for the most part if your code worked with &lt;code&gt;mousedown&lt;/code&gt;, &lt;code&gt;mousemove&lt;/code&gt; and &lt;code&gt;mouseup&lt;/code&gt;, those map fairly straight forward to &lt;code&gt;touchstart&lt;/code&gt;, &lt;code&gt;touchmove&lt;/code&gt; and &lt;code&gt;touchend&lt;/code&gt;. Add the touch listeners and make them do the same as the mouse listeners, and done. Or, you would be, if these generated the same data. They don't, so you have a bit more work to do for getting the correct coordinates out of the touch events (mouse events have &lt;code&gt;evt.clientX&lt;/code&gt;, touch events are an array of possible multitouch, so you end up with &lt;code&gt;evt.touches[0].pageX&lt;/code&gt;, for instance). Still, entirely doable.&lt;/p&gt;
+&lt;p&gt;Unfortunately, things get weird when you do these things and then try to use them on, say, Android. Android has bugs when it comes touch events. Outside of the expected, that is. First, it turns out that Android won't fire off &lt;code&gt;touchend&lt;/code&gt; events, even if they occur, if you never told Android to "&lt;a href="http://developer.android.com/guide/webapps/migrating.html#TouchCancel"&gt;prevent the default behaviour&lt;/a&gt;" on a &lt;code&gt;touchstart&lt;/code&gt; or &lt;code&gt;touchmove&lt;/code&gt;. Why? Because if you don't, Android will treat the finger gesture first as what you needed to do, and then as "oh but the default behaviour should still happen, the user wants to scroll the page" and then the touchend that stops Android from listening to page scroll gets consumed and never sent on to your code. If you didn't know about that, you're wasting quite a bit of time figuring out what the heck is going on.&lt;/p&gt;
+&lt;p&gt;But now you know about that, so adding &lt;code&gt;evt.preventDefault()&lt;/code&gt; in your start and move handling should fix things, right? Well... no. It turns out there's another, far more magical, feature in Android that does what should reasonably be impossible in any programming setting. Have a look at this code:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var element = ...;
+element.addEventListener("touchstart", handleTouchStart);
+element.addEventListener("touchmove", handleTouchMove);
+element.addEventListener("touchend", handleTouchEnd);
+
+function handleTouchStart(evt) {
+  console.log("touch started");
+}
+
+function handleTouchMove(evt) {
+  console.log("touch move");
+}
+
+function handleTouchEnd(evt) {
+  console.log("touch ended");
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This works great. Loading pages with code like this on Android will show that all three events fire if you put down your finger, move it around a bit, and take it off the screen again. But, we might want to know where all those events happen, so let's write a helper function and modify the handlers:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function fixEvtCoords(evt) {
+  evt.clientX = evt.clientX || evt.touches[0].pageX;
+  evt.clientY = evt.clientY || evt.touches[0].pageY;
+}
+...
+function handleTouchStart(evt) {
+  fixEvtCoords(evt);
+  console.log("touch started at " + evt.clientX + "," + evt.clientY);
+}
+
+function handleTouchMove(evt) {
+  fixEvtCoords(evt);
+  console.log("touch move at " + evt.clientX + "," + evt.clientY);
+}
+
+function handleTouchEnd(evt) {
+  fixEvtCoords(evt);
+  console.log("touch ended at " + evt.clientX + "," + evt.clientY);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;That looks perfectly reasonable, and start and move now show the coordinates at which the events are generated. But &lt;code&gt;touchend&lt;/code&gt; no longer works... what? It gets more interesting: what if we don't fix the coordinates for the end event?&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function handleTouchEnd(evt) {
+  console.log("touch ended at " + evt.clientX + "," + evt.clientY);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This logs "&lt;code&gt;touch ended at undefined,undefined&lt;/code&gt;", which makes sense because touch events don't have the &lt;code&gt;.clientX&lt;/code&gt; and &lt;code&gt;.clientY&lt;/code&gt; properties. So, let's change those to the real thing:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function handleTouchEnd(evt) {
+  console.log("touch ended at " + evt.touches[0].pageX + "," + evt.touches[0].pageY);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This won't actually do anything. There is nothing in &lt;code&gt;.touches[0]&lt;/code&gt; anymore, so there will be a JS error and the code won't run. So what do we do? The simplest solution is to rely on the fact that we're only using single finger interaction, and just assume that if a &lt;code&gt;touchend&lt;/code&gt; fired at all, we no longer have any fingers on the screen:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function handleTouchEnd(evt) {
+  console.log("touch ended");
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This is weird for several reasons: if we want to deal with multi touch, how do we track &lt;em&gt;which&lt;/em&gt; finger just stopped being on the screen? You'd be tempted to try something like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function handleTouchEnd(evt) {
+  console.log("touch ended", JSON.stringify(evt, false, 2));
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;To get an easy to debug bit of string data to tell us what's in that event, but if we do this, more JS errors and the log call will throw instead of logging useful data.&lt;/p&gt;
+&lt;p&gt;The worst is you just read this in a matter of a few minutes, but discovering all this, if you don't really work with Android all that much, is pretty much hours and hours of trying things, not understanding why they work on desktop but not on Android, trying more things, case reducing, starting from scratch, noticing things do work, slowly building things back up, noticing they break at some point, going back to where things weren't broken, and slowly figuring out what's going wrong because you home in on specific calls and patterns that just don't seem to work.&lt;/p&gt;
+&lt;p&gt;Over the course of 6 hours I went from not knowing these things to knowing both how to deal with this in the future, as well as knowing how to write my React code in such a way that touch events will propagate properly. Fun fact: if you're using React in an Android WebView "browser", there are some things you can do that work perfectly fine on desktop, and will not work at all on Android, too.&lt;/p&gt;
+&lt;p&gt;For instance, React has &lt;code&gt;onTouchStart&lt;/code&gt;, &lt;code&gt;onTouchMove&lt;/code&gt; and &lt;code&gt;onTouchEnd&lt;/code&gt; component &lt;a href="https://facebook.github.io/react/docs/events.html#touch-events"&gt;event handlers&lt;/a&gt;, with augmented events to make sure every browser will work the same. That's great, except it has bugs. The event augmentation does &lt;em&gt;something&lt;/em&gt; (and without looking at the React source code, I have no real idea what that something is) that breaks event propagation. So, this code doesn't work:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var Positionable = ... ({
+  render: function() {
+    return (
+      &amp;lt;div onTouchStart={this.handleTouchStart}&amp;gt;
+        &amp;lt;RotationControls /&amp;gt;
+        &amp;lt;ScaleControls /&amp;gt;
+      &amp;lt;/div&amp;gt;
+    );
+  }
+})
+
+var RotationControls = ... ({
+  render: function() {
+    return (
+      &amp;lt;div onTouchStart={this.handleTouchStart}&amp;gt;
+        ...
+      &amp;lt;/div&amp;gt;
+    );
+  }
+})
+
+var ScaleControls = ... ({
+  render: function() {
+    return (
+      &amp;lt;div onTouchStart={this.handleTouchStart}&amp;gt;
+        ...
+      &amp;lt;/div&amp;gt;
+    );
+  }
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;You might think it would, but nope: not on Android. While this works fine on desktop, trying this on Android and tapping the &lt;code&gt;RotationControls&lt;/code&gt; element actually gets sent to the higher level &lt;code&gt;Positionable&lt;/code&gt; instead. No matter how much you tap, that touch event is not going to make it into the handler defined in &lt;code&gt;RotationControls&lt;/code&gt; to rotate our element. So, ultimately, despite React having code in place to make working with touch events nicer, we actually need to go back to the drawing board and use the good old low level &lt;code&gt;addEventListener('touchstart', ...)&lt;/code&gt; and friends in order to make sure that nothing interferes with event propagation.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var TouchMixin = {
+  componentDidMount: function() {
+    var localNode = this.getDOMNode();
+    localNode.addEventListener('touchstart', this.handleTouchStart);
+  },
+  componentWillUnmount: function() {
+    var localNode = this.getDOMNode();
+    localNode.removeEventListener('touchstart', this.handleTouchStart);
+  }
+};
+
+var Positionable = ... ({
+  mixins: [
+    TouchMixin
+  ],
+  render: function() {
+    return (
+      &amp;lt;div&amp;gt;
+        &amp;lt;RotationControls /&amp;gt;
+        &amp;lt;ScaleControls /&amp;gt;
+      &amp;lt;/div&amp;gt;
+    );
+  }
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;With similar changes in &lt;code&gt;RotationControls&lt;/code&gt; and &lt;code&gt;ScaleControls&lt;/code&gt;. Fun!&lt;/p&gt;
+&lt;p&gt;But wait, there's more. The component I'm writing also has a &lt;code&gt;ZIndexController&lt;/code&gt;, which gives you two buttons for changing a number, and that number gets communicated up, and used as z-index for the element on the page:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var Positionable = ... ({
+  render: function() {
+    return (
+      &amp;lt;divb&amp;gt;
+        &amp;lt;RotationControls /&amp;gt;
+        &amp;lt;ScaleControls /&amp;gt;
+        &amp;lt;ZIndexController /&amp;gt;
+        { this.props.children }
+      &amp;lt;/div&amp;gt;
+    );
+  }
+})
+
+var ZIndexController = ... ({
+  getInitialState: function() {
+    return { zIndex: this.props.zIndex || 0 };
+  },
+  render: function() {
+    return (
+      &amp;lt;div className="zindex-controller"&amp;gt;
+        layer position:
+        &amp;lt;span className="zmod left" onClick={this.zDown}&amp;gt;◀&amp;lt;/span&amp;gt;
+        { this.state.zIndex }
+        &amp;lt;span className="zmod right" onClick={this.zUp}&amp;gt;▶&amp;lt;/span&amp;gt;
+      &amp;lt;/div&amp;gt;
+    );
+  },
+  zUp: function(evt) {
+    evt.stopPropagation();
+    this.setState({ zIndex: this.state.zIndex + 1 }, function() {
+      this.props.onChange(this.state.zIndex);
+    });
+  },
+  zDown: function(evt) {
+    evt.stopPropagation();
+    this.setState({ zIndex: Math.max(0, this.state.zIndex - 1) }, function() {
+      this.props.onChange(this.state.zIndex);
+    });
+  }
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Again, this works great in desktop browsers, but does not work on Android. What's going on? As it turns out, React events like &lt;code&gt;onClick&lt;/code&gt; work because React intercepts all events at the document level and then routes them on further based on which things registered first, rather than "the most specific thing first". We can try to work around this, to try to force the ordering that we want, but that's just making a bad situation worse should more touch propagation need to happen in the future: instead the only workable solution that I've found is to just say "alright, forget it, make touch regions non-overlapping". As such, rather than a positionable thing with rotation and scale controls, the solution is to have an inert "thing" with positioning, rotation, and scale controls instead. That way the touch events for moving the element around do not overlap with, for instance, the z-index controls, and things work. It's less nice, but the only tractible solution:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var Positionable = ... ({
+  render: function() {
+    return (
+      &amp;lt;divb&amp;gt;
+        &amp;lt;PlacementController /&amp;gt;
+        &amp;lt;RotationControls /&amp;gt;
+        &amp;lt;ScaleControls /&amp;gt;
+        &amp;lt;ZIndexController /&amp;gt;
+        { this.props.children }
+      &amp;lt;/div&amp;gt;
+    );
+  }
+})
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And with that, things work. New technologies have a great way of bringing back the pain you thought you'd left behind.&lt;/p&gt;
+</description>
+<category>Mozilla</category>
+<category>React</category>
+<category>Android</category>
+<category>Touch</category>
+<category>Webmaker</category>
+<link>http://pomax.github.io/#gh-weblog-1428529484183</link>
+<guid>http://pomax.github.io/#gh-weblog-1428529484183</guid>
+<pubDate>Wed, 08 Apr 2015 21:44:44 GMT</pubDate>
+</item>
+<item>
+<title>Fixing my blog post URLs</title>
+<description>&lt;p&gt;This blog relied on fragment ID redirection, using JavaScript, in order to fetch content for individual posts (i.e. you were looking at a single post rather than the main pomax.github.io list of posts). That works, but is also pretty horrible for bookmarks and search engine indexing. The reason I did this was because the blog is hosted as a Github pages CMS, so I can't rely on something like an &lt;a href="https://en.wikipedia.org/wiki/.htaccess"&gt;.htaccess&lt;/a&gt; file to do redirects sensibly.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://help.github.com/articles/custom-404-pages"&gt;Or can I?&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Since Github allows you to use custom 404 pages, I can make things point to "nonexistent links" so that they'll hit the 404 page, and then &lt;a href="https://github.com/Pomax/gh-blog/blob/develop/404.html#L6-36"&gt;immediately rewrite the URL&lt;/a&gt; to the fragment form I was relying on before.&lt;/p&gt;
+&lt;p&gt;That alone is not very useful: now we're still stuck with fragment IDs and the original problem is still there... but the content is still dynamically served using JavaScript, and that means there's access to the &lt;a href="https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Manipulating_the_browser_history"&gt;browser history&lt;/a&gt;, which means that once the fragment content loads, the browser &lt;a href="https://github.com/Pomax/gh-blog/blob/develop/gh-weblog/components/WebLog.jsx#L78-84"&gt;can be told&lt;/a&gt; what their URL is &lt;em&gt;supposed&lt;/em&gt; to be, so I can replace the ugly fragment ID with a pretty, human-readable, "real" URL, without any fragment ids.&lt;/p&gt;
+&lt;p&gt;For instance, say you're navigating to this post. Your browser would try to load &lt;a href="http://pomax.github.io/1428265169683/fixing-my-blog-post-urls"&gt;http://pomax.github.io/1428265169683/fixing-my-blog-post-urls&lt;/a&gt;, which doesn't exist as a true file resource on Github. Instead, you hit the 404 page, which looks at the URL, notices it matches the single-post-form for a URL, and redirects you to the original fragment-based URL, &lt;a href="http://pomax.github.io/1428265169683"&gt;http://pomax.github.io/1428265169683&lt;/a&gt;. This causes the site to load content in "singleton mode", loading entry 1428265169683, and the moment the data for that entry has been fetched (so we know it's a real post), the browser is told that this content belongs to the URL you originally looked up, rewriting your URL bar to say you're on &lt;a href="http://pomax.github.io/1428265169683/fixing-my-blog-post-urls"&gt;http://pomax.github.io/1428265169683/fixing-my-blog-post-urls&lt;/a&gt; again.&lt;/p&gt;
+&lt;p&gt;So, while you might see the browser running through three URLs in rapid succession:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://pomax.github.io/1428265169683/fixing-my-blog-post-urls"&gt;http://pomax.github.io/1428265169683/fixing-my-blog-post-urls&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://pomax.github.io/#gh-weblog-1428265169683"&gt;http://pomax.github.io/#gh-weblog-1428265169683&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://pomax.github.io/1428265169683/fixing-my-blog-post-urls"&gt;http://pomax.github.io/1428265169683/fixing-my-blog-post-urls&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The stable URL that you can reliable bookmark, or search-engine-index, is the normal looking, fragment-less URL. And that's important, because &lt;em&gt;the web is URLs&lt;/em&gt;.&lt;/p&gt;
+</description>
+<category>CMS</category>
+<category>blog</category>
+<category>URL</category>
+<link>http://pomax.github.io/#gh-weblog-1428265169683</link>
+<guid>http://pomax.github.io/#gh-weblog-1428265169683</guid>
+<pubDate>Sun, 05 Apr 2015 20:19:29 GMT</pubDate>
+</item></channel>
+</rss>
