@@ -2973,8 +2973,7 @@ module.exports = React.createClass({displayName: "exports",
       updated: Date.now(),
       tags: [],
       editing: false,
-      postdata: "",
-      folded: !this.props.authenticated
+      postdata: ""
     };
   },
 
@@ -2995,8 +2994,8 @@ module.exports = React.createClass({displayName: "exports",
     }
     var posted = (new Date(this.state.published)).toLocaleString();
     var updated = (new Date(this.state.updated)).toLocaleString();
-    var folded = !this.props.singleton && this.state.folded;
-    console.log('"' + this.state.title + '"', this.props.singleton, this.props.authenticated, this.state.folded, folded);
+    var folded = !this.props.singleton && !this.props.authenticated;
+    console.log('"' + this.state.title + '"', this.props.singleton, this.props.authenticated, folded);
 
     return (
       React.createElement("div", {className: classnames("entry", {folded: folded}), id: id}, 
