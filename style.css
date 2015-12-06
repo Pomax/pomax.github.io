@@ -123,6 +123,14 @@ a:hover {
   position: relative;
 }
 
+#gh-weblog .entry.folder .post {
+  position: relative;
+}
+
+#gh-weblog .entry.folded .post :nth-child(n+8) {
+    display: none;
+}
+
 #gh-weblog .entry.folded button {
   position: absolute;
   left: 40%;
