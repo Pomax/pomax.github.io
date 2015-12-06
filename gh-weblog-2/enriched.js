@@ -1511,9 +1511,15 @@ var n=e.firstChild;1===n.data.length?e.removeChild(n):n.deleteData(0,1)}else e.i
 
   React.render(React.createElement(WebLog, settings), target);
 
+  if (settings.nav) {
+    var Navigation = require("./Navigation.jsx");
+    target = document.getElementById(settings.nav);
+    React.render(React.createElement(Navigation, settings), target);
+  }
+
 }());
 
-},{"./WebLog.jsx":8}],2:[function(require,module,exports){
+},{"./Navigation.jsx":7,"./WebLog.jsx":9}],2:[function(require,module,exports){
 (function (global){
 /**
  * marked - a markdown parser
@@ -2902,7 +2908,7 @@ module.exports = React.createClass({displayName: "exports",
 
 });
 
-},{"../mixins/weblogsettings":13}],4:[function(require,module,exports){
+},{"../mixins/weblogsettings":14}],4:[function(require,module,exports){
 var React = (window.React);
 
 module.exports = React.createClass({displayName: "exports",
@@ -3072,7 +3078,7 @@ module.exports = React.createClass({displayName: "exports",
 
 });
 
-},{"../lib/utils":9,"./Editor.jsx":4,"./MarkDown.jsx":6,"./Tags.jsx":7,"react-onclickoutside":14}],6:[function(require,module,exports){
+},{"../lib/utils":10,"./Editor.jsx":4,"./MarkDown.jsx":6,"./Tags.jsx":8,"react-onclickoutside":15}],6:[function(require,module,exports){
 var React = (window.React);
 var marked = require("../bower_components/marked/lib/marked");
 module.exports = React.createClass({displayName: "exports",
@@ -3090,6 +3096,103 @@ module.exports = React.createClass({displayName: "exports",
 });
 
 },{"../bower_components/marked/lib/marked":2}],7:[function(require,module,exports){
+var React = (window.React);
+
+var months = ['January', 'Februaray', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+var Navigation = React.createClass({displayName: "Navigation",
+
+  mixins: [
+    require("../mixins/weblogsettings")
+  ],
+
+  getInitialState: function() {
+    return {};
+  },
+
+  componentWillMount: function() {
+    // get the ToC
+    var component = this;
+    var xhr = new XMLHttpRequest();
+    var settings = this.getSettings();
+    var url = settings.path + "/content/posts/toc.json";
+    console.log("download the goddamn toc:", url);
+
+    var cachebuster = "?cb="+Date.now();
+    xhr.open("GET", url + cachebuster, true);
+    xhr.onreadystatechange = function(evt) {
+      if(xhr.status === 0 || xhr.status===200) {
+        if(xhr.readyState === 4) {
+          var data = evt.target.response;
+          component.processData(data);
+        }
+      }
+    };
+    xhr.onerror = function(evt) {
+      console.error("xhr for "+url+" failed");
+    }
+    xhr.send(null);
+
+    // also listen for which more the app is running in
+    document.addEventListener("singleton-mode", function(evt) {
+      var id = evt.detail.id;
+      this.setState({ singleton: id });
+    }.bind(this));
+  },
+
+  processData: function(tocString) {
+    var toc = JSON.parse(tocString);
+    this.setState(toc);
+  },
+
+  generateFullNav: function(id, meta) {
+    meta = this.state[id];
+    var d = new Date(meta.created);
+    var pubDay = months[d.getMonth()] + ' ' + d.getDate();
+    var pubYear = 1900 + d.getYear();
+    return React.createElement("li", {key: meta.id}, 
+      React.createElement("span", {className: "pubday"}, pubDay, ": "), 
+      React.createElement("a", {href: meta.created}, meta.title), 
+      React.createElement("span", {className: "pubyear"}, " (", pubYear, ")")
+    );
+  },
+
+  generatePrevNext: function(id, pos, meta) {
+    if(!id) return false;
+    meta = this.state[id];
+    return React.createElement("li", {key: meta.id}, 
+      React.createElement("span", {className: "label"},  pos===0 ? 'next' : 'previous', " post: "), 
+      React.createElement("a", {href: '/' + meta.created}, meta.title)
+    );
+  },
+
+  render: function() {
+    var keys = Object.keys(this.state);
+    if(keys.length === 0) return React.createElement("ul", null);
+
+    var singleton = this.state.singleton;
+    var postids = keys.filter(function(v) {
+      return v !== "singleton";
+    });
+
+    postids = postids.sort().reverse();
+
+    if (!!singleton) {
+      var rpos = postids.indexOf(singleton);
+      var newlist = [];
+      newlist[0] = (rpos > 0) ? postids[rpos - 1] : false;
+      newlist[1] = (rpos < postids.length-1) ? postids[rpos + 1] : false;
+      postids = newlist;
+    }
+
+    var items = postids.map(!singleton ? this.generateFullNav : this.generatePrevNext);
+    return React.createElement("ul", {className: {singleton:!!singleton}}, items);
+  }
+});
+
+module.exports = Navigation;
+
+},{"../mixins/weblogsettings":14}],8:[function(require,module,exports){
 var React = (window.React);
 
 module.exports = React.createClass({displayName: "exports",
@@ -3111,7 +3214,7 @@ module.exports = React.createClass({displayName: "exports",
 
 });
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 var React = (window.React);
 var utils = require("../lib/utils");
 
@@ -3381,7 +3484,7 @@ module.exports = React.createClass({displayName: "exports",
 });
 
 
-},{"../lib/utils":9,"../mixins/connector":10,"../mixins/rssgenerator":11,"../mixins/timetoid":12,"../mixins/weblogsettings":13,"./Admin.jsx":3,"./Entry.jsx":5}],9:[function(require,module,exports){
+},{"../lib/utils":10,"../mixins/connector":11,"../mixins/rssgenerator":12,"../mixins/timetoid":13,"../mixins/weblogsettings":14,"./Admin.jsx":3,"./Entry.jsx":5}],10:[function(require,module,exports){
 module.exports = {
   /**
    * Clean up a title so that it'll look good as a vanity URL.
@@ -3395,7 +3498,7 @@ module.exports = {
   }
 };
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 module.exports = {
 
   Connector: (function() {
@@ -3593,7 +3696,7 @@ module.exports = {
   }())
 };
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 module.exports = {
   /**
    * So, this is weird given that
@@ -3663,7 +3766,7 @@ module.exports = {
   }
 };
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 /**
  * Convert "seconds since epoch" timestamps into yyyy-mm-dd-hh-mm-ss format string ids
  */
@@ -3677,7 +3780,7 @@ module.exports = {
   }
 };
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 module.exports = {
   settingsName: (function() {
     var loc = window.location.host;
@@ -3708,7 +3811,7 @@ module.exports = {
     window.localStorage.removeItem(this.settingsName);
   }
 }
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 /**
  * A mixin for handling (effectively) onClickOutside for React components.
  * Note that we're not intercepting any events in this approach, and we're
