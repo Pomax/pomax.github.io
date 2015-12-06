@@ -2952,6 +2952,7 @@ module.exports = React.createClass({displayName: "exports",
 },{}],5:[function(require,module,exports){
 var React = (window.React);
 var utils = require("../lib/utils");
+var classnames = require("classnames");
 
 var MarkDown = require("./MarkDown.jsx");
 var Editor = require("./Editor.jsx");
@@ -2995,13 +2996,13 @@ module.exports = React.createClass({displayName: "exports",
     var posted = (new Date(this.state.published)).toLocaleString();
     var updated = (new Date(this.state.updated)).toLocaleString();
     return (
-      React.createElement("div", {className: "entry", id: id}, 
+      React.createElement("div", {className: classnames("entry", {folded: this.state.folded}), id: id}, 
         deletebutton, 
         React.createElement("header", null, 
           React.createElement("h1", null, React.createElement("a", {href: entryURL}, this.state.title)), 
           React.createElement("h2", null, "Originally posted on ", posted, ", last updated on ", updated)
         ), 
-        React.createElement(MarkDown, {ref: "markdown", hidden: this.state.editing, text: this.state.postdata, onClick: this.edit, folded: this.props.folded}), 
+        React.createElement(MarkDown, {ref: "markdown", hidden: this.state.editing, text: this.state.postdata, onClick: this.edit}), 
         React.createElement(Editor, {ref: "editor", hidden: !this.state.editing, text: text, update: this.update, view: this.view, delete: this.delete}), 
         React.createElement("a", {className: "comments", href: this.props.issues}, "leave a comment on github"), 
         React.createElement(Tags, {disabled: !this.props.editable, tags: this.state.tags, onChange: this.updateTags}), 
@@ -3086,15 +3087,15 @@ module.exports = React.createClass({displayName: "exports",
 
 });
 
-},{"../lib/utils":10,"./Editor.jsx":4,"./MarkDown.jsx":6,"./Tags.jsx":8,"react-onclickoutside":16}],6:[function(require,module,exports){
+},{"../lib/utils":10,"./Editor.jsx":4,"./MarkDown.jsx":6,"./Tags.jsx":8,"classnames":15,"react-onclickoutside":16}],6:[function(require,module,exports){
 var React = (window.React);
 var marked = require("../bower_components/marked/lib/marked");
-var classnames = require("classnames");
+
 module.exports = React.createClass({displayName: "exports",
   render: function() {
     var html = {__html: marked(this.props.text)};
     return React.createElement("div", {ref: "post", 
-                className: classnames("post", {folded: this.props.folded}), 
+                className: "post", 
                 hidden: this.props.hidden, 
                 onClick: this.props.onClick, 
                 dangerouslySetInnerHTML: html})
@@ -3104,7 +3105,7 @@ module.exports = React.createClass({displayName: "exports",
   }
 });
 
-},{"../bower_components/marked/lib/marked":2,"classnames":15}],7:[function(require,module,exports){
+},{"../bower_components/marked/lib/marked":2}],7:[function(require,module,exports){
 var React = (window.React);
 
 var months = ['January', 'Februaray', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
