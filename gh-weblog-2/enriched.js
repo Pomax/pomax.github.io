@@ -3510,18 +3510,20 @@ module.exports = {
         this.setProperties(options);
       } else {
         this.options = {
-          path: "gh-weblog"
+          path: "gh-weblog",
+          contentPath: "gh-weblog"
         };
       }
 
-      var path = false;
-      if (window.WebLogSettings && window.WebLogSettings.path) {
+      var path = false, contentPath = false;
+
+      if (window.WebLogSettings) {
         path = window.WebLogSettings.path;
-        console.log("rebinding path as " + path + " for goddamn reals");
+        contentPath = window.WebLogSettings.contenPath;
       }
-      if (path) {
-        this.options.path = path;
-      }
+
+      if (path) this.options.path = path;
+      if (contentPath) this.options.contentPath = contentPath;
     };
 
     Connector.prototype = {
@@ -3573,7 +3575,7 @@ module.exports = {
       },
 
       loadIndex: function(handleIndex, entryId) {
-        this.json(this.options.path + "/content/posts/index.json", function(err, result) {
+        this.json(this.options.contentPath + "/content/posts/index.json", function(err, result) {
           if (entryId) {
             return handleIndex(err, result ? [entryId] : false);
           }
@@ -3582,13 +3584,13 @@ module.exports = {
       },
 
       loadMetadata: function(id, handleMetadata) {
-        this.json(this.options.path + "/content/posts/metadata/"+id+".json", function(err, result) {
+        this.json(this.options.contentPath + "/content/posts/metadata/"+id+".json", function(err, result) {
           handleMetadata(err, result);
         });
       },
 
       loadEntry: function(id, handleEntry) {
-        this.get(this.options.path + "/content/posts/markdown/"+id+".md", function(err, result) {
+        this.get(this.options.contentPath + "/content/posts/markdown/"+id+".md", function(err, result) {
           handleEntry(err, result);
         });
       },
