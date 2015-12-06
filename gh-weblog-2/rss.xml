@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Sun, 06 Dec 2015 06:27:36 GMT</lastBuildDate>
-<pubDate>Sun, 06 Dec 2015 06:27:36 GMT</pubDate>
+<lastBuildDate>Sun, 06 Dec 2015 06:27:48 GMT</lastBuildDate>
+<pubDate>Sun, 06 Dec 2015 06:27:48 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Github broke my blog, so I had to reset it</title>
@@ -14,7 +14,9 @@
 &lt;p&gt;I ended up completely resetting the repository, which meant deleting it, which means all comments ever left by people are gone (I'm very sorry about that, thankfully the important thing about them was our conversation, not the historical record of that conversastion), and it turns out that github broke on the "gh-weblog" directory in the filessystem.  Renaming it to "gh-weblog-2" made things magically work (and boy do I wish I'd tried that first now, obviously), but creating a new dir "gh-weblog" and dropping files in there will land them into the repo, but keep them inaccesssisble on the github.io site. &lt;/p&gt;
 &lt;p&gt;So if you were wondering where my articles had gone on Saturday, December 5th, now you know =(&lt;/p&gt;
 </description>
-
+<category>Github</category>
+<category>Blog</category>
+<category>Rebuilds</category>
 <link>http://pomax.github.io/#gh-weblog-1449383023410</link>
 <guid>http://pomax.github.io/#gh-weblog-1449383023410</guid>
 <pubDate>Sun, 06 Dec 2015 06:23:43 GMT</pubDate>
