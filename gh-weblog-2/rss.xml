@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Sun, 06 Dec 2015 22:20:25 GMT</lastBuildDate>
-<pubDate>Sun, 06 Dec 2015 22:20:25 GMT</pubDate>
+<lastBuildDate>Sun, 06 Dec 2015 22:20:39 GMT</lastBuildDate>
+<pubDate>Sun, 06 Dec 2015 22:20:39 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> OpenType: what's the difference between TTF and OTF??</title>
@@ -14,7 +14,7 @@
 &lt;h2 id="first-it-s-all-opentype"&gt;First, it's all OpenType&lt;/h2&gt;
 &lt;p&gt;One thing that most people don't know is that both TTF and OTF font are &lt;a href="https://www.microsoft.com/typography/otspec/"&gt;OpenType fonts&lt;/a&gt;. OpenType is a binary format, with an open specification (i.e. it's free to implement codecs for, and you can sign up for the opentype mailing list and influence future versions), that contains outline data (for drawing letters), tons of metadata used for things ranging from typesetting to hardware memory management, and language-specific typesetting rules like contextual substitutions and positioning. &lt;/p&gt;
 &lt;p&gt;When people talk about "TTF" or "OTF" what they really mean is "files that end in &lt;code&gt;.ttf&lt;/code&gt; and &lt;code&gt;.otf&lt;/code&gt;", and those are two kinds of OpenType font: fonts ending in &lt;code&gt;.ttf&lt;/code&gt; are generally OpenType fonts that use the glyf/loca data blocks, with &lt;a href="https://www.microsoft.com/en-us/Typography/SpecificationsOverview.aspx"&gt;"TrueType"&lt;/a&gt; outlines, whereas fonts ending in &lt;code&gt;.otf&lt;/code&gt; are OpenType fonts that use a &lt;a href="https://partners.adobe.com/public/developer/en/font/5176.CFF.pdf"&gt;CFF data block&lt;/a&gt;, with &lt;a href="https://partners.adobe.com/public/developer/en/font/5177.Type2.pdf"&gt;"Type2"&lt;/a&gt; outlines. So the difference is in the outline language used. Everything else is the same, and there's a &lt;em&gt;lot&lt;/em&gt; of "everything else" in an OpenType font.&lt;/p&gt;
-&lt;p&gt;We're not going to look at all the fine differences between the two in this post, but let's look at the ones that is easy to talk about and already make a big difference:&lt;/p&gt;
+&lt;p&gt;We're not going to look at all the fine differences between the two in this post, but let's look at the ones that are easy to talk about and already make a big difference:&lt;/p&gt;
 &lt;h3 id="truetype-tiny-simple-and-hardcoded-hinting"&gt;TrueType - tiny, simple, and hardcoded hinting&lt;/h3&gt;
 &lt;p&gt;TrueType outlines are incredibly straight forward: you get lines and &lt;a href="http://pomax.github.io/bezierinfo/#introduction"&gt;quadratic curves&lt;/a&gt;, and that's pretty much it. It's really easy to define shapes in, but the curves are "too" simple so you need quite a few of them. If you have decent design tool, that's mostly irrelevant, and the only thing you'll notice is that an OpenType font that uses TrueType outlines tends to be bigger than an OpenType font with Type2 outlines for the same shapes.&lt;/p&gt;
 &lt;p&gt;The other way in which TrueType differs is in how &lt;a href="https://www.typotheque.com/articles/hinting"&gt;"hinting"&lt;/a&gt; works. Hinting is a mechanism to tell font engines "if you need to scale this outline down to fit in the font size we need, and that leads to weird sub pixel positioning, here's how you should resolve that:..." When using TrueType, the hinting is explicit: all the information is stored in the TrueType data, so a font engine can be "dumb" about hinting and simply do what the font tells it to. That makes TrueType, again, a little bigger compared to Type2, but taken together with the simplicity of the language means it's really easy for people to write parsers that do the right thing. Not a lot of instructions, and the hinting is in-font.&lt;/p&gt;
