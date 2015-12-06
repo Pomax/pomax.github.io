@@ -3000,7 +3000,7 @@ module.exports = React.createClass({displayName: "exports",
           React.createElement("h1", null, React.createElement("a", {href: entryURL}, this.state.title)), 
           React.createElement("h2", null, "Originally posted on ", posted, ", last updated on ", updated)
         ), 
-        React.createElement(MarkDown, {ref: "markdown", hidden: this.state.editing, text: this.state.postdata, onClick: this.edit}), 
+        React.createElement(MarkDown, {ref: "markdown", hidden: this.state.editing, text: this.state.postdata, onClick: this.edit, authenticated: this.props.authenticated}), 
         React.createElement(Editor, {ref: "editor", hidden: !this.state.editing, text: text, update: this.update, view: this.view, delete: this.delete}), 
         React.createElement("a", {className: "comments", href: this.props.issues}, "leave a comment on github"), 
         React.createElement(Tags, {disabled: !this.props.editable, tags: this.state.tags, onChange: this.updateTags})
@@ -3078,14 +3078,15 @@ module.exports = React.createClass({displayName: "exports",
 
 });
 
-},{"../lib/utils":10,"./Editor.jsx":4,"./MarkDown.jsx":6,"./Tags.jsx":8,"react-onclickoutside":15}],6:[function(require,module,exports){
+},{"../lib/utils":10,"./Editor.jsx":4,"./MarkDown.jsx":6,"./Tags.jsx":8,"react-onclickoutside":16}],6:[function(require,module,exports){
 var React = (window.React);
 var marked = require("../bower_components/marked/lib/marked");
+var classnames = require("classnames");
 module.exports = React.createClass({displayName: "exports",
   render: function() {
     var html = {__html: marked(this.props.text)};
     return React.createElement("div", {ref: "post", 
-                className: "post", 
+                className: classnames("post", {folded: !this.props.authenticated}), 
                 hidden: this.props.hidden, 
                 onClick: this.props.onClick, 
                 dangerouslySetInnerHTML: html})
@@ -3095,7 +3096,7 @@ module.exports = React.createClass({displayName: "exports",
   }
 });
 
-},{"../bower_components/marked/lib/marked":2}],7:[function(require,module,exports){
+},{"../bower_components/marked/lib/marked":2,"classnames":15}],7:[function(require,module,exports){
 var React = (window.React);
 
 var months = ['January', 'Februaray', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -3323,6 +3324,7 @@ module.exports = React.createClass({displayName: "exports",
                     metadata: entry.metadata, 
                     postdata: entry.postdata, 
                     editable: !self.state.singleton && self.state.authenticated, 
+                    authenticated: self.state.authenticated, 
                     runProcessors: self.runProcessors, 
                     onSave: self.save, 
                     onDelete: self.delete});
@@ -3821,6 +3823,56 @@ module.exports = {
   }
 }
 },{}],15:[function(require,module,exports){
+/*!
+  Copyright (c) 2015 Jed Watson.
+  Licensed under the MIT License (MIT), see
+  http://jedwatson.github.io/classnames
+*/
+/* global define */
+
+(function () {
+	'use strict';
+
+	var hasOwn = {}.hasOwnProperty;
+
+	function classNames () {
+		var classes = '';
+
+		for (var i = 0; i < arguments.length; i++) {
+			var arg = arguments[i];
+			if (!arg) continue;
+
+			var argType = typeof arg;
+
+			if (argType === 'string' || argType === 'number') {
+				classes += ' ' + arg;
+			} else if (Array.isArray(arg)) {
+				classes += ' ' + classNames.apply(null, arg);
+			} else if (argType === 'object') {
+				for (var key in arg) {
+					if (hasOwn.call(arg, key) && arg[key]) {
+						classes += ' ' + key;
+					}
+				}
+			}
+		}
+
+		return classes.substr(1);
+	}
+
+	if (typeof module !== 'undefined' && module.exports) {
+		module.exports = classNames;
+	} else if (typeof define === 'function' && typeof define.amd === 'object' && define.amd) {
+		// register as 'classnames', consistent with npm package name
+		define('classnames', [], function () {
+			return classNames;
+		});
+	} else {
+		window.classNames = classNames;
+	}
+}());
+
+},{}],16:[function(require,module,exports){
 /**
  * A mixin for handling (effectively) onClickOutside for React components.
  * Note that we're not intercepting any events in this approach, and we're
