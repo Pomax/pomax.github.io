@@ -2981,6 +2981,7 @@ module.exports = React.createClass({displayName: "exports",
   componentDidMount: function() {
     var state = this.props.metadata;
     state.postdata = this.props.postdata;
+    console.log("binding ", state);
     this.setState(state, function() {
       var ccount = this.refs.markdown.getChildCount();
       if (this.state.folded && ccount < 8) {
@@ -3333,13 +3334,14 @@ module.exports = React.createClass({displayName: "exports",
   generateEntries: function(entries) {
     entries = entries || this.getSlice();
     var self = this;
+    var editable = (!self.state.singleton && self.state.authenticated);
     return entries.map(function(entry) {
       return React.createElement(Entry, {key: entry.metadata.created, 
                     ref: entry.metadata.id, 
                     issues: self.state.issues, 
                     metadata: entry.metadata, 
                     postdata: entry.postdata, 
-                    editable: !self.state.singleton && self.state.authenticated, 
+                    editable: editable, 
                     runProcessors: self.runProcessors, 
                     onSave: self.save, 
                     onDelete: self.delete});
