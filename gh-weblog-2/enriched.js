@@ -3416,7 +3416,7 @@ module.exports = {
         console.log("rebinding path as " + path + " for goddamn reals");
       }
       if (path) {
-        thiss.options.path = path;
+        this.options.path = path;
       }
     };
 
