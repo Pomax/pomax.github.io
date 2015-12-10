@@ -4,5 +4,12 @@
   "created": 1449777175633,
   "published": 1449777175633,
   "updated": 1449777194068,
-  "tags": []
+  "tags": [
+    "Fonts",
+    "OpenType",
+    "CMAP",
+    "GSUB",
+    "TTF",
+    "OTF"
+  ]
 }
