@@ -5,12 +5,12 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Thu, 10 Dec 2015 20:02:01 GMT</lastBuildDate>
-<pubDate>Thu, 10 Dec 2015 20:02:01 GMT</pubDate>
+<lastBuildDate>Thu, 10 Dec 2015 20:20:28 GMT</lastBuildDate>
+<pubDate>Thu, 10 Dec 2015 20:20:28 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> OpenType: let's learn how modern fonts actually work</title>
-<description>&lt;p&gt;In a previous post I talked about the distinction between "TTF" and "OTF" fonts, and the fact that they're actually both just OpenType fonts. I explained how the difference between TTF and OTF is only which outline language is used, with everything else being the same between the two types of Opentype font, so in this post I'd like to talk about some of the bits that all OpenType fonts have. There are actually quite a lot of things, so this will not be the last post on the subject, but let's just cover as much as we can and see what that leaves.&lt;/p&gt;
+<description>&lt;p&gt;In a previous post &lt;a href="/1449438115186"&gt;I talked about the distinction between "TTF" and "OTF" fonts&lt;/a&gt;, and the fact that they're actually both just OpenType fonts. I explained how the difference between TTF and OTF is only which outline language is used, with everything else being the same between the two types of Opentype font, so in this post I'd like to talk about some of the bits that all OpenType fonts have. There are actually quite a lot of things, so this will not be the last post on the subject, but let's just cover as much as we can and see what that leaves.&lt;/p&gt;
 &lt;p&gt;Let's start with something that might sound like it can't possibly be true:&lt;/p&gt;
 &lt;h2 id="fonts-don-t-contain-letters-"&gt;Fonts don't contain letters.&lt;/h2&gt;
 &lt;p&gt;I know this sounds a bit weird for a technology that is supposed to be used to draw letters, but it's important to get this out of the way first: fonts don't know anything about "letters". Instead, they know about character codes, and glyphs. Character codes are simply numbers that the computer sees when you type, when it reads a text file, etc. and glyphs are anything in the font "that can be drawn". A font is a collection of inherently meaningless pictures, linked to character codes to give them meaning.&lt;/p&gt;
