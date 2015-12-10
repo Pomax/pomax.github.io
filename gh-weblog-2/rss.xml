@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Thu, 10 Dec 2015 19:53:18 GMT</lastBuildDate>
-<pubDate>Thu, 10 Dec 2015 19:53:18 GMT</pubDate>
+<lastBuildDate>Thu, 10 Dec 2015 19:57:40 GMT</lastBuildDate>
+<pubDate>Thu, 10 Dec 2015 19:57:40 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> OpenType: let's learn how modern fonts actually work</title>
@@ -56,7 +56,12 @@
 &lt;p&gt;In a next post I'll cover some more typographical concepts like kerning and positioning, as well as some of the finer nuances between TrueType and Type2 outlines, which work together with the pure OpenType data about those things.&lt;/p&gt;
 &lt;p&gt;And if you have questions, or comments, do let me know by clicking the comment link below.&lt;/p&gt;
 </description>
-
+<category>Fonts</category>
+<category>OpenType</category>
+<category>CMAP</category>
+<category>GSUB</category>
+<category>TTF</category>
+<category>OTF</category>
 <link>http://pomax.github.io/#gh-weblog-1449777175633</link>
 <guid>http://pomax.github.io/#gh-weblog-1449777175633</guid>
 <pubDate>Thu, 10 Dec 2015 19:52:55 GMT</pubDate>
