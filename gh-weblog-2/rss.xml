@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Tue, 15 Dec 2015 19:18:53 GMT</lastBuildDate>
-<pubDate>Tue, 15 Dec 2015 19:18:53 GMT</pubDate>
+<lastBuildDate>Tue, 15 Dec 2015 19:23:37 GMT</lastBuildDate>
+<pubDate>Tue, 15 Dec 2015 19:23:37 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Developing Open Source Software</title>
@@ -78,7 +78,9 @@
 &lt;p&gt;There's a fair amount of finer detail and variation that fits into the "file it, fix it, follow up" process, but stick to that order and you're on the path of a sustainable development cycle.&lt;/p&gt;
 &lt;p&gt;Most of this is probably obvious to most people, but that just makes it all the more important to get it written down, because someone's going to be a bit bewildered and they'll need a blog post to get them on track =)&lt;/p&gt;
 </description>
-
+<category>Open source</category>
+<category>Development</category>
+<category>Process</category>
 <link>http://pomax.github.io/#gh-weblog-1450207129290</link>
 <guid>http://pomax.github.io/#gh-weblog-1450207129290</guid>
 <pubDate>Tue, 15 Dec 2015 19:18:49 GMT</pubDate>
