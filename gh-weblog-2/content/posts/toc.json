@@ -889,7 +889,22 @@
     "title": " OpenType: let's learn how modern fonts actually work",
     "created": 1449777175633,
     "published": 1449777175633,
-    "updated": 1449777194068,
+    "updated": 1449778827015,
+    "tags": [
+      "Fonts",
+      "OpenType",
+      "CMAP",
+      "GSUB",
+      "TTF",
+      "OTF"
+    ]
+  },
+  "2015-12-15-19-18-49": {
+    "id": "2015-12-15-19-18-49",
+    "title": " Developing Open Source Software",
+    "created": 1450207129290,
+    "published": 1450207129290,
+    "updated": 1450207131030,
     "tags": []
   }
 }
