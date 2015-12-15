@@ -5,9 +5,84 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Thu, 10 Dec 2015 20:20:35 GMT</lastBuildDate>
-<pubDate>Thu, 10 Dec 2015 20:20:35 GMT</pubDate>
+<lastBuildDate>Tue, 15 Dec 2015 19:18:53 GMT</lastBuildDate>
+<pubDate>Tue, 15 Dec 2015 19:18:53 GMT</pubDate>
 <ttl>1440</ttl>
+<item>
+<title> Developing Open Source Software</title>
+<description>&lt;p&gt;I want to take a little bit of time to explain how I work on Open Source, not because it's wildly different from how everyone else does it, but because it's probably the same as how the vast majority works on Open Source, which means very few people bother to explain the processes involved.&lt;/p&gt;
+&lt;p&gt;There are two different kinds of "working on open source", depending on whether the code is a collaboration or just a simple one-man (or woman) project, so let's look at both.&lt;/p&gt;
+&lt;h2 id="-i-m-making-a-thing-"&gt;&lt;em&gt;"I'm making a thing!"&lt;/em&gt;&lt;/h2&gt;
+&lt;p&gt;If you're making a thing, the basic rule is "anything goes": you're the only one you're inconveniencing by taking shortcuts, and often that's fine. However, if you're starting a project that you think might at some point gain contributors (say, you're making a thing that you hope becomes popular), there are a few things you can do to make sure that when your project does go from "one dev" to "a team", the transition is smooth:&lt;/p&gt;
+&lt;h3 id="file-issues-before-fixing-them"&gt;File issues before fixing them&lt;/h3&gt;
+&lt;p&gt;Not only is it a handy If you file the issues you know about as a kind of to-do list to walk through, but you might be surprised to find someone actually fixing an issue you fixed before you get to it, once your project gets even a little exposure.&lt;/p&gt;
+&lt;h3 id="work-in-branches-"&gt;Work in branches.&lt;/h3&gt;
+&lt;p&gt;There will be an initial "I just need to get this code written" period where you're pushing to master: awesome, go for it. However, once you reach what might turn into a 1.0 with a bit more code, start getting in the habit of treating your master branch as off limits, and working in branches that you merge into master instead. This makes it easier for contributors to do the same.&lt;/p&gt;
+&lt;h3 id="document-document-document-"&gt;Document, document, document.&lt;/h3&gt;
+&lt;p&gt;You're not actually working on your code alone: you're collaborating with your future self, and future self has no idea what you're thinking right now while you're writing your code: document your choices, explain complex bits of code and whatever you do, explain hacks and bodges! Clever as they might be today, 2 months from now they might be so clever you actually need to spend your own time on them to figure out why they even work the way they do. Help future-you out: write documentation.&lt;/p&gt;
+&lt;p&gt;And that doesn't need to be wikis or long readmes, it can just be code comments: as long as knowledge you need to understand changes you're making right now isn't lost, you're being awesome. &lt;/p&gt;
+&lt;h2 id="-we-re-making-a-thing-"&gt;&lt;em&gt;We're making a thing.&lt;/em&gt;&lt;/h2&gt;
+&lt;p&gt;While you're fairly free to do what you want to do on your own, for collaborative projects, there is really only one way to work in a way that's not going to break down. For anything that needs to be done, follow the three F's:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;File it&lt;/strong&gt;,&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Fix it&lt;/strong&gt;, and&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Follow up&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="1-file-it-"&gt;1) File it!&lt;/h3&gt;
+&lt;p&gt;If you're going to work on something, make sure it's a known issue. Code changes without an issue that explain why the changes were necessary in the first place are mystery changes, and mysteries in a collaborative effort are bad.&lt;/p&gt;
+&lt;p&gt;However, your changes might be critical, so: always, &lt;strong&gt;always&lt;/strong&gt; make sure there's a ticket, or issue, or bug report, associated with the changes you're making, so that your code changes can say "this fixes/addresses ticket/issue/bug so-and-so". Sometimes those tickets/issues/bug reports already exist and you can simply refer to them, but sometimes they don't: &lt;strong&gt;file it before submitting your code changes&lt;/strong&gt;, so that you can refer to that newly filed ticket.&lt;/p&gt;
+&lt;p&gt;It's okay to already have the code in place that addresses an issue you haven't filed yet, just make sure that by the time you submit your changes, there is one.&lt;/p&gt;
+&lt;p&gt;Collaboration relies on communication. If people change the code without tying it to the list of "these are issues we need to address", then there is no way to track changes in the codebase. Generating a changelog based on closed issues is often quite easy, but if there are no issues that got closed/resolved due to changes getting accepted into the code base, then you're asking people to work on code that potentially no one can explain (because the person who contributed it may have left already. If you can even track who submitted the change at all).&lt;/p&gt;
+&lt;p&gt;Also, &lt;strong&gt;file individual issues&lt;/strong&gt;. The best code bases are ones where each thing that needs to be done is filed separately, and fixed separately, because it's much easier to work on as a team (small tasks make for rapid progress), and it makes it easy to track complex tasks: if you need to implement a user profile system, and that requires a login system, a user database, and user facing UI, then if someone files "implement a user profile system", the very first thing that should happen is chopping that issue up into several smaller issues. It might sound anal, but you're working in a team, and many hands make light work: the smaller you can chop up an issue, the easier it becomes to resolve the bigger task.&lt;/p&gt;
+&lt;h3 id="2-fix-it-"&gt;2) Fix it...&lt;/h3&gt;
+&lt;p&gt;When working to fix issues, there are three things to keep in mind:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;commit early&lt;/strong&gt;,&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;commit often&lt;/strong&gt;, and&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;communicate with your team&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="commit-early"&gt;Commit early&lt;/h4&gt;
+&lt;p&gt;If you're working on code changes, push up your changes as soon as you have "something" going. &lt;strong&gt;Especially if it's not done yet&lt;/strong&gt;. Don't wait until "it's done", because you have idea when that will be: form a commit and push it up once you have the basic stubs in place, for instance, before you start working out the code in full.&lt;/p&gt;
+&lt;p&gt;This lets other people that work with you see what you're working on, and lets them catch things early that would cost a lot of time to fix later on. &lt;/p&gt;
+&lt;h4 id="commit-often"&gt;Commit often&lt;/h4&gt;
+&lt;p&gt;Some code changes are one liners or a simple function renaming, but many are not: don't wait until you're done to push up your changes. Any time you write some code and test it, and it passes, that's a moment to form a commit, push it up, and then keep going.&lt;/p&gt;
+&lt;p&gt;If a computer dies (and if you work in a team, that will happen surprisingly often) or someone unexpectedly becomes unavailable for a few days (again, happens more often than you might think), there is no loss of work &lt;strong&gt;for the team&lt;/strong&gt;. The team as a whole can pick up where you as a person left off in these circumstances, and if you don't commit often, they'll potentially have to reinvent changes you had already written.&lt;/p&gt;
+&lt;p&gt;It's also much easier to rebase your code if they're small incremental commits when the master code base changes. For instance, a dependency got updated, which caused some functions to use that dependency's new API calls; that is much easier to deal with if it just requires you to change the small commit that touched a file for which that was the case than if you have one massive commit.&lt;/p&gt;
+&lt;p&gt;Additionally, the more often you commit, the earlier possible bugs can be found; the earlier bugs are found, the less work it is to fix them, because not a lot of things will trigger them yet.&lt;/p&gt;
+&lt;h4 id="communicate-with-your-team"&gt;Communicate with your team&lt;/h4&gt;
+&lt;p&gt;If you're working on anything even moderately sized: start talking about your code with team members early. Don't ask them to review only all the way at the end if your changes involve new code or new approaches; run it by someone so that even if you're the only one that'll end up writing code, you're &lt;em&gt;not&lt;/em&gt; the only one who knows what decisions were made while the code was being written.&lt;/p&gt;
+&lt;h4 id="corrolary-know-when-to-split-your-work-"&gt;Corrolary: know when to split your work.&lt;/h4&gt;
+&lt;p&gt;Some issues reveal problems in other parts of the project, and you might be tempted to fix those as part of your changes. I know it's tempting, but &lt;strong&gt;don't&lt;/strong&gt;, because you're not actually helping the team that way. Instead, file it, fix it, and follow up.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Step away from the current code when you reach a good break point (and that could be immediately, if the thing you found is blocking you),&lt;/li&gt;
+&lt;li&gt;File the issue as a new issue,&lt;/li&gt;
+&lt;li&gt;If it's blocking you:&lt;ol&gt;
+&lt;li&gt;Fix it first,&lt;/li&gt;
+&lt;li&gt;Schedule follow up&lt;/li&gt;
+&lt;li&gt;Rebase your code on the fix, so you're unblocked&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;Now you can come back to the code you were already working on.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;You'll note that in step 3 the advice is to work on it immediately only if it's actually blocking you: this is important. You're working in a team, and someone else might have a free moment to work on the thing you just discovered, while you keep working on your own changes.&lt;/p&gt;
+&lt;h3 id="3-run-through-the-follow-up-"&gt;3) Run through the follow-up.&lt;/h3&gt;
+&lt;p&gt;You've worked on code changes, you committed early, and often, and your "patch" now consists of 12 commits and two observations about future work: it's time for follow-up.&lt;/p&gt;
+&lt;h4 id="clean-up-your-code"&gt;Clean up your code&lt;/h4&gt;
+&lt;p&gt;If your changes work using 12 commits, then your changes work, and it's time to squash those 12 commits into a single commit so it can be landed into the codebase without all the steps that got you there. Even if there is no requirement to squash your code before landing, changelog generation, revision control, and rollbacks are all much nicer if patches land as single commits.&lt;/p&gt;
+&lt;p&gt;Also, if there are any unnecessary comments or logs/prints in your code, now's the time to get rid of those, and of course, now is also the time to make sure that any missing documentation either gets added, or gets filed as "document XYZ", to be worked on immediately after landing your changes, rather than anything else, which brings us to...&lt;/p&gt;
+&lt;h4 id="file-anything-you-found-but-didn-t-fix-"&gt;File anything you found, but didn't fix.&lt;/h4&gt;
+&lt;p&gt;While you were working on your changes, you may have thought of things that might need addressing outside of the changes you made: &lt;strong&gt;file those&lt;/strong&gt;. It is important to capture those observations in a way that the entire team can see them.&lt;/p&gt;
+&lt;h4 id="talk-to-your-team"&gt;Talk to your team&lt;/h4&gt;
+&lt;p&gt;Finally, follow up with people, too. Let the people who need to know about your changes know about your changes - ask them to review, explain your work, make sure at least two people agree these changes are good to go (including yourself). That doesn't need to be in person, the issue tracker you use might facilitate this kind of follow up, but always collaborate on the landing, even if the code works. There might be last minute changes or decisions that you were not aware of that someone else might: good to discover that before the changes are merged in!&lt;/p&gt;
+&lt;h2 id="that-s-pretty-much-it"&gt;That's pretty much it&lt;/h2&gt;
+&lt;p&gt;There's a fair amount of finer detail and variation that fits into the "file it, fix it, follow up" process, but stick to that order and you're on the path of a sustainable development cycle.&lt;/p&gt;
+&lt;p&gt;Most of this is probably obvious to most people, but that just makes it all the more important to get it written down, because someone's going to be a bit bewildered and they'll need a blog post to get them on track =)&lt;/p&gt;
+</description>
+
+<link>http://pomax.github.io/#gh-weblog-1450207129290</link>
+<guid>http://pomax.github.io/#gh-weblog-1450207129290</guid>
+<pubDate>Tue, 15 Dec 2015 19:18:49 GMT</pubDate>
+</item>
 <item>
 <title> OpenType: let's learn how modern fonts actually work</title>
 <description>&lt;p&gt;In a previous post &lt;a href="/1449438115186"&gt;I talked about the distinction between "TTF" and "OTF" fonts&lt;/a&gt;, and the fact that they're actually both just OpenType fonts. I explained how the difference between TTF and OTF is only which outline language is used, with everything else being the same between the two types of Opentype font, so in this post I'd like to talk about some of the bits that all OpenType fonts have. There are actually quite a lot of things, so this will not be the last post on the subject, but let's just cover as much as we can and see what that leaves.&lt;/p&gt;
@@ -1346,28 +1421,5 @@ var Editor = React.createClass({
 <link>http://pomax.github.io/#gh-weblog-1430980643433</link>
 <guid>http://pomax.github.io/#gh-weblog-1430980643433</guid>
 <pubDate>Thu, 07 May 2015 06:37:23 GMT</pubDate>
-</item>
-<item>
-<title>Finally, a new watch.</title>
-<description>&lt;p&gt;I've had a Pulsar Titanium Chronograph watch (matte metal with gold accents) for the last... 15 years. Possibly longer. It's finally on its way out (only the main face still works, and of that, even the date is no longer correct. And the button to change it is broken), and so after two years of thinking "maybe I should buy a new watch", I actually did.&lt;/p&gt;
-&lt;p&gt;Although what I really got was a &lt;a href="http://www.amazon.ca/Seiko-SNA411-Flight-Alarm-Chronograph/dp/B00068TJM6"&gt;flight computer with a watch underneath it&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Now, if you've never heard of a flight computer you might think it's some kind of weird specialised digital computery type thingakajigger, but you would be quite wrong: &lt;a href="https://en.wikipedia.org/wiki/Flight_computer"&gt;flight computers&lt;/a&gt; are the most basic, analog of "these things don't break even if everything else does" slide rule style bits of cardboard or metal, that let you perform a million and one different kind of "computations", and are generally extremely useful if you don't have pen and paper and a calculator at the ready.&lt;/p&gt;
-&lt;p&gt;My flight computer just looks a little fancier than the one you'd be familiar with if you fly planes (or have ever seen a flight computer before):&lt;/p&gt;
-&lt;p&gt;&lt;img src="/gh-weblog-2/images/sna411.jpg" class="border"&gt;&lt;/p&gt;
-&lt;p&gt;You can see the flight computer part of it pretty much all over the face and dial:&lt;/p&gt;
-&lt;p&gt;&lt;img src="/gh-weblog-2/images/sna411-close.jpg" class="border"&gt;&lt;/p&gt;
-&lt;p&gt;Holy crap that's a lot of things! And half the fun is figuring out &lt;a href="https://www.youtube.com/watch?v=Y7ZlWKeA_c8"&gt;how to do the million computations&lt;/a&gt; this relatively simple (but sturdy) piece of metal will let me do.&lt;/p&gt;
-&lt;p&gt;But, why would I buy this watch at all? Why not just install some apps on my phone? Allow me to explain by showing you a picture of &lt;a href="https://en.wikipedia.org/wiki/Nokia_N900"&gt;my phone&lt;/a&gt;:&lt;/p&gt;
-&lt;p&gt;&lt;img src="/gh-weblog-2/images/phone.jpg" class="border"&gt;&lt;/p&gt;
-&lt;p&gt;My phone is for making phone calls, sending text messages, and waking me up in the morning.&lt;/p&gt;
-&lt;p&gt;It can't really do "apps" (or, it can, but no one makes apps for it because it's ancient), but on the upside has a battery life of a week or longer. The reason I don't have an iPhone or the like is because in my life, there is no point in owning one: I'm always around wifi, with a laptop, or a workstation, even when traveling. And if I need map navigation, cars come with GPS, and public transport kind of never takes accidental wrong turns. The modern phone basically has nothing to offer me. So instead of spending $600 on an iphone, I spent far less on this watch, and will spend the remainder on buying tasty ingredients for cooking up tasty food.&lt;/p&gt;
-&lt;p&gt;Also this watch is insane. Thank you for reading.&lt;/p&gt;
-</description>
-<category>Seiko</category>
-<category>Watch</category>
-<category>Flight Computer</category>
-<link>http://pomax.github.io/#gh-weblog-1430857088045</link>
-<guid>http://pomax.github.io/#gh-weblog-1430857088045</guid>
-<pubDate>Tue, 05 May 2015 20:18:08 GMT</pubDate>
 </item></channel>
 </rss>
