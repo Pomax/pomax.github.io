@@ -846,6 +846,45 @@
       "Love letter"
     ]
   },
+  "2015-08-06-20-02-06": {
+    "id": "2015-08-06-20-02-06",
+    "title": " Making traditional French bread: baguettes",
+    "created": 1438891326649,
+    "published": 1438891326649,
+    "updated": 1446335876357,
+    "tags": [
+      "Baking",
+      "French Bread",
+      "Baguette"
+    ]
+  },
+  "2015-09-19-22-02-09": {
+    "id": "2015-09-19-22-02-09",
+    "title": " Mozilla released a tool I am excited about.",
+    "created": 1442700129236,
+    "published": 1442700129236,
+    "updated": 1444540344672,
+    "tags": [
+      "Mozilla",
+      "Thimble",
+      "HTML",
+      "CSS",
+      "JS"
+    ]
+  },
+  "2015-09-21-00-46-09": {
+    "id": "2015-09-21-00-46-09",
+    "title": " \"Tell me what some of your strengths are...\"",
+    "created": 1442796369118,
+    "published": 1442796369118,
+    "updated": 1442796428278,
+    "tags": [
+      "Mozilla",
+      "Leadership",
+      "Strengths",
+      "Introspection"
+    ]
+  },
   "2015-12-05-17-15-50": {
     "id": "2015-12-05-17-15-50",
     "title": " Bezier curves are not invariant under conformal mapping",
@@ -905,6 +944,10 @@
     "created": 1450207129290,
     "published": 1450207129290,
     "updated": 1450207131030,
-    "tags": []
+    "tags": [
+      "Open source",
+      "Development",
+      "Process"
+    ]
   }
 }
