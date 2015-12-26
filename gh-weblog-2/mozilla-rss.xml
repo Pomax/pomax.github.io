@@ -5,9 +5,90 @@
 <title>Pomax.github.io</title>
 <description>My blog on github [Mozilla posts only]</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Tue, 15 Dec 2015 19:23:38 GMT</lastBuildDate>
-<pubDate>Tue, 15 Dec 2015 19:23:38 GMT</pubDate>
+<lastBuildDate>Tue, 15 Dec 2015 23:15:33 GMT</lastBuildDate>
+<pubDate>Tue, 15 Dec 2015 23:15:33 GMT</pubDate>
 <ttl>1440</ttl>
+<item>
+<title> Developing Open Source Software</title>
+<description>&lt;p&gt;I want to take a little bit of time to explain how I work on Open Source, both privately and as part of my job as a Software Engineer at the Mozilla Foundation. Not because it's wildly different from how everyone else does it, but because it's probably the same as how the vast majority works on Open Source, which means very few people bother to explain the processes involved.&lt;/p&gt;
+&lt;p&gt;There are two different kinds of "working on open source", depending on whether the code is a collaboration or just a simple one-man (or woman) project, so let's look at both.&lt;/p&gt;
+&lt;h2 id="-i-m-making-a-thing-"&gt;&lt;em&gt;"I'm making a thing!"&lt;/em&gt;&lt;/h2&gt;
+&lt;p&gt;If you're making a thing, the basic rule is "anything goes": you're the only one you're inconveniencing by taking shortcuts, and often that's fine. However, if you're starting a project that you think might at some point gain contributors (say, you're making a thing that you hope becomes popular), there are a few things you can do to make sure that when your project does go from "one dev" to "a team", the transition is smooth:&lt;/p&gt;
+&lt;h3 id="file-issues-before-fixing-them"&gt;File issues before fixing them&lt;/h3&gt;
+&lt;p&gt;Not only is it a handy If you file the issues you know about as a kind of to-do list to walk through, but you might be surprised to find someone actually fixing an issue you filed before you get to it, once your project gets even a little exposure.&lt;/p&gt;
+&lt;h3 id="work-in-branches-"&gt;Work in branches.&lt;/h3&gt;
+&lt;p&gt;There will be an initial "I just need to get this code written" period where you're pushing to master: awesome, go for it. However, once you reach what might turn into a 1.0 with a bit more code, start getting in the habit of treating your master branch as off limits, and working in branches that you merge into master instead. This makes it easier for contributors to do the same.&lt;/p&gt;
+&lt;h3 id="document-document-document-"&gt;Document, document, document.&lt;/h3&gt;
+&lt;p&gt;You're not actually working on your code alone: you're collaborating with your future self, and future self has no idea what you're thinking right now while you're writing your code: document your choices, explain complex bits of code and whatever you do, explain hacks and bodges! Clever as they might be today, 2 months from now they might be so clever you actually need to spend your own time on them to figure out why they even work the way they do. Help future-you out: write documentation.&lt;/p&gt;
+&lt;p&gt;And that doesn't need to be wikis or long readmes, it can just be code comments: as long as knowledge you need to understand changes you're making right now isn't lost, you're being awesome. &lt;/p&gt;
+&lt;h2 id="-we-re-making-a-thing-"&gt;&lt;em&gt;We're making a thing.&lt;/em&gt;&lt;/h2&gt;
+&lt;p&gt;While you're fairly free to do what you want to do on your own, for collaborative projects, there is really only one way to work in a way that's not going to break down. For anything that needs to be done, follow the three F's:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;File it&lt;/strong&gt;,&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Fix it&lt;/strong&gt;, and&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Follow up&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="1-file-it-"&gt;1) File it!&lt;/h3&gt;
+&lt;p&gt;If you're going to work on something, make sure it's a known issue. Code changes without an issue that explain why the changes were necessary in the first place are mystery changes, and mysteries in a collaborative effort are bad.&lt;/p&gt;
+&lt;p&gt;However, that doesn't mean the changes aren't necessary, so: always, &lt;strong&gt;always&lt;/strong&gt; make sure there's a ticket, or issue, or bug report, associated with the changes you're making, so that your code changes can say "this fixes/addresses ticket/issue/bug so-and-so". Sometimes those tickets/issues/bug reports already exist and you can simply refer to them, but sometimes they don't: &lt;strong&gt;file it before submitting your code changes&lt;/strong&gt;, so that you can refer to that newly filed ticket.&lt;/p&gt;
+&lt;p&gt;It's okay to already have the code in place that addresses an issue you haven't filed yet, just make sure that by the time you submit your changes, there is one.&lt;/p&gt;
+&lt;p&gt;Collaboration relies on communication. If people change the code without tying it to the list of "these are issues we need to address", then there is no way to track changes in the codebase. Generating a changelog based on closed issues is often quite easy, but if there are no issues that got closed/resolved due to changes getting accepted into the code base, then you're asking people to work on code that potentially no one can explain (because the person who contributed it may have left already. If you can even track who submitted the change at all).&lt;/p&gt;
+&lt;p&gt;Also, &lt;strong&gt;file individual issues&lt;/strong&gt;. The best code bases are ones where each thing that needs to be done is filed separately, and fixed separately, because it's much easier to work on as a team (small tasks make for rapid progress), and it makes it easy to track complex tasks: if you need to implement a user profile system, and that requires a login system, a user database, and user facing UI, then if someone files "implement a user profile system", the very first thing that should happen is chopping that issue up into several smaller issues. It might sound anal, but you're working in a team, and many hands make light work: the smaller you can chop up an issue, the easier it becomes to resolve the bigger task.&lt;/p&gt;
+&lt;h3 id="2-fix-it-"&gt;2) Fix it...&lt;/h3&gt;
+&lt;p&gt;Crazy as it may sound: never start fixing things by writing code. First ask: "Has someone else already written the code and can I just plug that in?". If they have: just use that. You're still probably going to need a little bit of code to do the "plugging it in" part, but little bits of code are easy to maintain, and it means you're not responsible for maintaining lots of code.&lt;/p&gt;
+&lt;p&gt;Conversely, if there is no code out there that already does what you need to do, ask yourself: "Can I write this as a standalone utility, and then plug &lt;em&gt;that&lt;/em&gt; in?". Because if you can, that's worth doing. If you need to solve a problem and there's no solution out there, you're probably solving a problem that other people are also having: it's worth making that solution available.&lt;/p&gt;
+&lt;p&gt;Of course, there will be plenty of issues that can only be addressed by writing real, project-relevant, code, and for those occasions there are three things to keep in mind:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;commit early&lt;/strong&gt;,&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;commit often&lt;/strong&gt;, and&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;communicate with your team&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="commit-early"&gt;Commit early&lt;/h4&gt;
+&lt;p&gt;If you're working on code changes, push up your changes as soon as you have "something" going. &lt;strong&gt;Especially if it's not done yet&lt;/strong&gt;. Don't wait until "it's done", because you have idea when that will be: form a commit and push it up once you have the basic stubs in place, for instance, before you start working out the code in full.&lt;/p&gt;
+&lt;p&gt;This lets other people that work with you see what you're working on, and lets them catch things early that would cost a lot of time to fix later on. &lt;/p&gt;
+&lt;h4 id="commit-often"&gt;Commit often&lt;/h4&gt;
+&lt;p&gt;Some code changes are one liners or a simple function renaming, but many are not: don't wait until you're done to push up your changes. Any time you write some code and test it, and it passes, that's a moment to form a commit, push it up, and then keep going.&lt;/p&gt;
+&lt;p&gt;If a computer dies (and if you work in a team, that will happen surprisingly often) or someone unexpectedly becomes unavailable for a few days (again, happens more often than you might think), there is no loss of work &lt;strong&gt;for the team&lt;/strong&gt;. The team as a whole can pick up where you as a person left off in these circumstances, and if you don't commit often, they'll potentially have to reinvent changes you had already written.&lt;/p&gt;
+&lt;p&gt;It's also much easier to rebase your code if they're small incremental commits when the master code base changes. For instance, a dependency got updated, which caused some functions to use that dependency's new API calls; that is much easier to deal with if it just requires you to change the small commit that touched a file for which that was the case than if you have one massive commit.&lt;/p&gt;
+&lt;p&gt;Additionally, the more often you commit, the earlier possible bugs can be found; the earlier bugs are found, the less work it is to fix them, because not a lot of things will trigger them yet.&lt;/p&gt;
+&lt;h4 id="communicate-with-your-team"&gt;Communicate with your team&lt;/h4&gt;
+&lt;p&gt;If you're working on anything even moderately sized: start talking about your code with team members early. Don't ask them to review only all the way at the end if your changes involve new code or new approaches; run it by someone so that even if you're the only one that'll end up writing code, you're &lt;em&gt;not&lt;/em&gt; the only one who knows what decisions were made while the code was being written.&lt;/p&gt;
+&lt;p&gt;Also, remember to ask questions in the open. You might end up with blocking questions that need an answer before you can continue your work, and while it's tempting to try to find someone to get it answered in real-time, &lt;strong&gt;file it first&lt;/strong&gt;, so that the entire team can see it. Then you can find someone to real-time answer it and capture the answer in the filed issue, so that the entire team can be aware of the question having come up, and the answer that was agreed on.&lt;/p&gt;
+&lt;h4 id="corrolary-know-when-to-split-your-work-"&gt;Corrolary: know when to split your work.&lt;/h4&gt;
+&lt;p&gt;Some issues reveal problems in other parts of the project, and you might be tempted to fix those as part of your changes. I know it's tempting, but &lt;strong&gt;don't&lt;/strong&gt;, because you're not actually helping the team that way. Instead: file it, fix it, and follow up.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Step away from the current code when you reach a good break point (and that could be immediately, if the thing you found is blocking you),&lt;/li&gt;
+&lt;li&gt;File the issue as a new issue,&lt;/li&gt;
+&lt;li&gt;If it's blocking you:&lt;ol&gt;
+&lt;li&gt;Fix it first,&lt;/li&gt;
+&lt;li&gt;Schedule follow up&lt;/li&gt;
+&lt;li&gt;Rebase your code on the fix, so you're unblocked&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;Now you can come back to the code you were already working on.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;You'll note that in step 3 the advice is to work on it immediately only if it's actually blocking you: this is important. You're working in a team, and someone else might have a free moment to work on the thing you just discovered, while you keep working on your own changes.&lt;/p&gt;
+&lt;h3 id="3-run-through-the-follow-up-"&gt;3) Run through the follow-up.&lt;/h3&gt;
+&lt;p&gt;You've worked on code changes, you committed early, and often, and your "patch" now consists of 12 commits and two observations about future work: it's time for follow-up.&lt;/p&gt;
+&lt;h4 id="clean-up-your-code"&gt;Clean up your code&lt;/h4&gt;
+&lt;p&gt;If your changes work using 12 commits, then your changes work, and it's time to squash those 12 commits into a single commit so it can be landed into the codebase without all the steps that got you there. Even if there is no requirement to squash your code before landing, changelog generation, revision control, and rollbacks are all much nicer if patches land as single commits.&lt;/p&gt;
+&lt;p&gt;Also, if there are any unnecessary comments or logs/prints in your code, now's the time to get rid of those, and of course, now is also the time to make sure that any missing documentation either gets added, or gets filed as "document XYZ", to be worked on immediately after landing your changes, rather than anything else, which brings us to...&lt;/p&gt;
+&lt;h4 id="file-anything-you-found-but-didn-t-fix-"&gt;File anything you found, but didn't fix.&lt;/h4&gt;
+&lt;p&gt;While you were working on your changes, you may have thought of things that might need addressing outside of the changes you made: &lt;strong&gt;file those&lt;/strong&gt;. It is important to capture those observations in a way that the entire team can see them.&lt;/p&gt;
+&lt;h4 id="talk-to-your-team"&gt;Talk to your team&lt;/h4&gt;
+&lt;p&gt;Finally, follow up with people, too. Let the people who need to know about your changes know about your changes - ask them to review, explain your work, make sure at least two people agree these changes are good to go (including yourself). That doesn't need to be in person, the issue tracker you use might facilitate this kind of follow up, but always collaborate on the landing, even if the code works. There might be last minute changes or decisions that you were not aware of that someone else might: good to discover that before the changes are merged in!&lt;/p&gt;
+&lt;h2 id="that-s-pretty-much-it"&gt;That's pretty much it&lt;/h2&gt;
+&lt;p&gt;There's a fair amount of finer detail and variation that fits into the "file it, fix it, follow up" process, but stick to that order and you're on the path of a sustainable development cycle.&lt;/p&gt;
+&lt;p&gt;Most of this is probably obvious to most people, but that just makes it all the more important to get it written down, because someone's going to be a bit bewildered and they'll need a blog post to get them on track =)&lt;/p&gt;
+</description>
+<category>Open source</category>
+<category>Development</category>
+<category>Process</category>
+<category>Mozilla</category>
+<link>http://pomax.github.io/#gh-weblog-1450207129290</link>
+<guid>http://pomax.github.io/#gh-weblog-1450207129290</guid>
+<pubDate>Tue, 15 Dec 2015 19:18:49 GMT</pubDate>
+</item>
 <item>
 <title> "Whose state is it, anyway?" — Further thoughts about React</title>
 <description>&lt;p&gt;A look at thoughts that have come from working with React at the &lt;a href="https://www.mozilla.org/foundation"&gt;Mozilla Foundation&lt;/a&gt;, where we use it extensively for our &lt;a href="https://github.com/mozilla/webmaker-android/"&gt;Webmaker Android app&lt;/a&gt;&lt;/p&gt;
