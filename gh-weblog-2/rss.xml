@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Fri, 01 Jan 2016 03:18:29 GMT</lastBuildDate>
-<pubDate>Fri, 01 Jan 2016 03:18:29 GMT</pubDate>
+<lastBuildDate>Fri, 01 Jan 2016 03:20:08 GMT</lastBuildDate>
+<pubDate>Fri, 01 Jan 2016 03:20:08 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> React with LaTeX, without needing client-side Mathjax</title>
@@ -171,7 +171,7 @@ function escapeBlockLaTeX(source) {
 var base64 = new Buffer(latex).toString("base64");
 var mathjaxed = execSync("node tex2svg.js --base64 " + base64);
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And then we just need to make sure that the MathJax script unpacks the passed data from &lt;a href="https://en.wikipedia.org/wiki/Base64"&gt;base 64 format&lt;/a&gt; to plain string format before converting, and we're good!&lt;/p&gt;
-&lt;p&gt;But not quite: this is not exactly a cheap thing to do. Firing up an instance of node and loading &lt;code&gt;mathjax-node&lt;/code&gt; takes time. Not enough to notice if you only do it once, but if you need to run this lots of times, a second each time adds up to having to wait minutes for this building to happen. Every time you want to run the dev server.&lt;/p&gt;
+&lt;p&gt;But not quite: executing an external process is not exactly a cheap thing to do, and firing up an instance of Node and loading &lt;code&gt;mathjax-node&lt;/code&gt; both take time. Not so much that you'd normally notice, but if you need to run this lots of times, one second each time you call &lt;code&gt;exec&lt;/code&gt; adds up to having to literally wait minutes for your build to finish. Every time you want to run the dev server.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;That is unacceptable.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;So, let's add in some caching: instead of having the MathJax script do the conversion for us, and then spit out the SVG code, we make it do the conversion but then write the SVG code to file, in the images dir.&lt;/p&gt;
 &lt;p&gt;And because we don't want the build process to do more work than necessary, we make the filenames predictable, based on the LaTeX that needs to be converted: we compute the &lt;a href="https://en.wikipedia.org/wiki/SHA-1"&gt;sha1 digest&lt;/a&gt; of the LaTeX that needs converting, and only if we don't see a file called &lt;code&gt;&amp;lt;hash&amp;gt;.svg&lt;/code&gt; in the images dir do we do our conversion:  &lt;/p&gt;
