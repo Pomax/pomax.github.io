@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Fri, 01 Jan 2016 03:21:03 GMT</lastBuildDate>
-<pubDate>Fri, 01 Jan 2016 03:21:03 GMT</pubDate>
+<lastBuildDate>Fri, 01 Jan 2016 03:40:20 GMT</lastBuildDate>
+<pubDate>Fri, 01 Jan 2016 03:40:20 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> React with LaTeX, without needing client-side Mathjax</title>
@@ -90,9 +90,7 @@ function hasLaTeX(input) {
 }
 
 /**
- * We look for MathJax/KaTeX style data, and make sure
- * it is escaped properly so that JSX conversion will
- * still work.
+ * We look for MathJax/KaTeX style data, and convert it to something JSX-safe 
  */
 function escapeBlockLaTeX(source) {
   // MAGIC HAPPENS HERE!
