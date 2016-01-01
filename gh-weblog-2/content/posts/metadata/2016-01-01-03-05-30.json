@@ -4,5 +4,10 @@
   "created": 1451617530567,
   "published": 1451617530567,
   "updated": 1451617535563,
-  "tags": []
+  "tags": [
+    "React",
+    "LaTeX",
+    "MathJax",
+    "Webpack"
+  ]
 }
