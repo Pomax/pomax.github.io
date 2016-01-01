@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Fri, 01 Jan 2016 03:17:56 GMT</lastBuildDate>
-<pubDate>Fri, 01 Jan 2016 03:17:56 GMT</pubDate>
+<lastBuildDate>Fri, 01 Jan 2016 03:18:29 GMT</lastBuildDate>
+<pubDate>Fri, 01 Jan 2016 03:18:29 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> React with LaTeX, without needing client-side Mathjax</title>
@@ -169,8 +169,8 @@ function escapeBlockLaTeX(source) {
 &lt;p&gt;But here's where things get tricky. Writing a command line utility that does the MathJax conversion requires a little work, because the command line is tricky, and LaTeX contains all kinds of characters that can do things in shell land. Slashes and ampersands abound, and those are kind of active symbols,  so we need to be a little smarter:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;// convert all this... smarter!
 var base64 = new Buffer(latex).toString("base64");
-var mathjaxed = execSync("node tex2svg.js --base54 " + base64);
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And then we just need to make sure that the mathjax script unpacks the passed data from &lt;a href="https://en.wikipedia.org/wiki/Base64"&gt;base 64 format&lt;/a&gt; to plain string format before converting, and we're good!&lt;/p&gt;
+var mathjaxed = execSync("node tex2svg.js --base64 " + base64);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And then we just need to make sure that the MathJax script unpacks the passed data from &lt;a href="https://en.wikipedia.org/wiki/Base64"&gt;base 64 format&lt;/a&gt; to plain string format before converting, and we're good!&lt;/p&gt;
 &lt;p&gt;But not quite: this is not exactly a cheap thing to do. Firing up an instance of node and loading &lt;code&gt;mathjax-node&lt;/code&gt; takes time. Not enough to notice if you only do it once, but if you need to run this lots of times, a second each time adds up to having to wait minutes for this building to happen. Every time you want to run the dev server.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;That is unacceptable.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;So, let's add in some caching: instead of having the MathJax script do the conversion for us, and then spit out the SVG code, we make it do the conversion but then write the SVG code to file, in the images dir.&lt;/p&gt;
