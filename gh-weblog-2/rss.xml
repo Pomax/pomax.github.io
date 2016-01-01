@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Fri, 01 Jan 2016 03:05:39 GMT</lastBuildDate>
-<pubDate>Fri, 01 Jan 2016 03:05:39 GMT</pubDate>
+<lastBuildDate>Fri, 01 Jan 2016 03:08:32 GMT</lastBuildDate>
+<pubDate>Fri, 01 Jan 2016 03:08:32 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> React with LaTeX, without needing client-side Mathjax</title>
@@ -208,7 +208,10 @@ function escapeBlockLaTeX(source) {
 &lt;p&gt;I can add sections one at a time, and every time I run the build step, only genuinely new LaTeX will need to get converted. LaTeX that got processed during a previous run already wrote files to disk, so the latex-loader just bypasses the conversion process entirely in for those LaTeX blocks, and so the build really only does exactly as much work as it needs to do to get the data transformed.&lt;/p&gt;
 &lt;p&gt;Needless to say, I am chuffed to bits about this, and if you have any questions about the process, feel free to reach out to me &lt;a href="https://twitter.com/TheRealPomax"&gt;on twitter&lt;/a&gt; or &lt;a href="https://github.com/Pomax/BezierInfo-2/issues"&gt;on github&lt;/a&gt;, and I'll be happy to talk about it more.&lt;/p&gt;
 </description>
-
+<category>React</category>
+<category>LaTeX</category>
+<category>MathJax</category>
+<category>Webpack</category>
 <link>http://pomax.github.io/#gh-weblog-1451617530567</link>
 <guid>http://pomax.github.io/#gh-weblog-1451617530567</guid>
 <pubDate>Fri, 01 Jan 2016 03:05:30 GMT</pubDate>
