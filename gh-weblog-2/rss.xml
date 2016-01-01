@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Fri, 01 Jan 2016 03:08:32 GMT</lastBuildDate>
-<pubDate>Fri, 01 Jan 2016 03:08:32 GMT</pubDate>
+<lastBuildDate>Fri, 01 Jan 2016 03:17:56 GMT</lastBuildDate>
+<pubDate>Fri, 01 Jan 2016 03:17:56 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> React with LaTeX, without needing client-side Mathjax</title>
@@ -148,7 +148,7 @@ function escapeBlockLaTeX(source) {
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;That doesn't look too strange, &lt;a href="http://stackoverflow.com/questions/748175/asynchronous-vs-synchronous-execution-what-does-it-really-mean"&gt;but the timing is crucially different&lt;/a&gt;: when the Webpack loader runs, its function is entered, data is transformed, and it exits again. However, when the MathJax typesetter runs, the function call happens and then &lt;em&gt;immediately exits again&lt;/em&gt;, and at some point in the future the result handling function will run, and there is no way to "wait" for it to finish, because that's not a thing JavaScript can do.&lt;/p&gt;
 &lt;p&gt;If only there was a way that we could turn the asynchronouse conversion process that MathJax requires, into a synchronous data transform as is required by Webpack...&lt;/p&gt;
 &lt;h2 id="execsync-ing-our-way-to-success"&gt;execSync'ing our way to success&lt;/h2&gt;
-&lt;p&gt;And in that wish we find the answer: make the conversion a CLI tool, and then &lt;code&gt;exec&lt;/code&gt; that tool synchronously, using &lt;a href="https://nodejs.org"&gt;Node.js&lt;/a&gt;'s built in &lt;a href="https://nodejs.org/api/child_process.html#child_process_child_process_execsync_command_options"&gt;execSync&lt;/a&gt;, because the following will work brilliantly:&lt;/p&gt;
+&lt;p&gt;And in that wish we find the answer: make the conversion a command line utility, and then &lt;code&gt;exec&lt;/code&gt; that utility synchronously, using &lt;a href="https://nodejs.org"&gt;Node.js&lt;/a&gt;'s built in &lt;a href="https://nodejs.org/api/child_process.html#child_process_child_process_execsync_command_options"&gt;execSync&lt;/a&gt;, because the following will work brilliantly:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;var execSync = require("child_process").execSync;
 
 function escapeBlockLaTeX(source) {
@@ -165,7 +165,8 @@ function escapeBlockLaTeX(source) {
   }
   ...
 }
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;But here's where things get tricky. Writing a &lt;a href="https://en.wikipedia.org/wiki/Command-line_interface"&gt;CLI&lt;/a&gt; tool that does the MathJax conversion needs a little work, because the command line is tricky, and LaTeX contains all kinds of characters that can do things in shell land. Slashes and ampersands abound, and those are kind of active symbols, so we need to be a little smarter:&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;We write a simple &lt;code&gt;tex2svg.js&lt;/code&gt; file that requires &lt;code&gt;mathjax-node&lt;/code&gt;, passes it the config options for conversion to SVG, read in the LaTeX as command line argument, and then spits out the conversion result on &lt;a href="https://en.wikipedia.org/wiki/Standard_streams"&gt;standard out&lt;/a&gt;, so that &lt;code&gt;execSync&lt;/code&gt; treats it as its function return value.&lt;/p&gt;
+&lt;p&gt;But here's where things get tricky. Writing a command line utility that does the MathJax conversion requires a little work, because the command line is tricky, and LaTeX contains all kinds of characters that can do things in shell land. Slashes and ampersands abound, and those are kind of active symbols,  so we need to be a little smarter:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;// convert all this... smarter!
 var base64 = new Buffer(latex).toString("base64");
 var mathjaxed = execSync("node tex2svg.js --base54 " + base64);
