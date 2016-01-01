@@ -5,13 +5,13 @@
 <title>Pomax.github.io</title>
 <description>My blog on github [Mozilla posts only]</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Tue, 15 Dec 2015 23:15:33 GMT</lastBuildDate>
-<pubDate>Tue, 15 Dec 2015 23:15:33 GMT</pubDate>
+<lastBuildDate>Fri, 01 Jan 2016 03:05:40 GMT</lastBuildDate>
+<pubDate>Fri, 01 Jan 2016 03:05:40 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Developing Open Source Software</title>
 <description>&lt;p&gt;I want to take a little bit of time to explain how I work on Open Source, both privately and as part of my job as a Software Engineer at the Mozilla Foundation. Not because it's wildly different from how everyone else does it, but because it's probably the same as how the vast majority works on Open Source, which means very few people bother to explain the processes involved.&lt;/p&gt;
-&lt;p&gt;There are two different kinds of "working on open source", depending on whether the code is a collaboration or just a simple one-man (or woman) project, so let's look at both.&lt;/p&gt;
+&lt;p&gt;There are two different kinds of "working on open source", depending on whether the code is a collaboration or just a simple one-person project, so let's look at both.&lt;/p&gt;
 &lt;h2 id="-i-m-making-a-thing-"&gt;&lt;em&gt;"I'm making a thing!"&lt;/em&gt;&lt;/h2&gt;
 &lt;p&gt;If you're making a thing, the basic rule is "anything goes": you're the only one you're inconveniencing by taking shortcuts, and often that's fine. However, if you're starting a project that you think might at some point gain contributors (say, you're making a thing that you hope becomes popular), there are a few things you can do to make sure that when your project does go from "one dev" to "a team", the transition is smooth:&lt;/p&gt;
 &lt;h3 id="file-issues-before-fixing-them"&gt;File issues before fixing them&lt;/h3&gt;
@@ -44,7 +44,7 @@
 &lt;li&gt;&lt;strong&gt;communicate with your team&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id="commit-early"&gt;Commit early&lt;/h4&gt;
-&lt;p&gt;If you're working on code changes, push up your changes as soon as you have "something" going. &lt;strong&gt;Especially if it's not done yet&lt;/strong&gt;. Don't wait until "it's done", because you have idea when that will be: form a commit and push it up once you have the basic stubs in place, for instance, before you start working out the code in full.&lt;/p&gt;
+&lt;p&gt;If you're working on code changes, push up your changes as soon as you have "something" going. &lt;strong&gt;Especially if it's not done yet&lt;/strong&gt;. Don't wait until "it's done", because you have no idea when that will be: form a commit and push it up once you have the basic stubs in place, for instance, before you start working out the code in full.&lt;/p&gt;
 &lt;p&gt;This lets other people that work with you see what you're working on, and lets them catch things early that would cost a lot of time to fix later on. &lt;/p&gt;
 &lt;h4 id="commit-often"&gt;Commit often&lt;/h4&gt;
 &lt;p&gt;Some code changes are one liners or a simple function renaming, but many are not: don't wait until you're done to push up your changes. Any time you write some code and test it, and it passes, that's a moment to form a commit, push it up, and then keep going.&lt;/p&gt;
@@ -76,7 +76,7 @@
 &lt;h4 id="file-anything-you-found-but-didn-t-fix-"&gt;File anything you found, but didn't fix.&lt;/h4&gt;
 &lt;p&gt;While you were working on your changes, you may have thought of things that might need addressing outside of the changes you made: &lt;strong&gt;file those&lt;/strong&gt;. It is important to capture those observations in a way that the entire team can see them.&lt;/p&gt;
 &lt;h4 id="talk-to-your-team"&gt;Talk to your team&lt;/h4&gt;
-&lt;p&gt;Finally, follow up with people, too. Let the people who need to know about your changes know about your changes - ask them to review, explain your work, make sure at least two people agree these changes are good to go (including yourself). That doesn't need to be in person, the issue tracker you use might facilitate this kind of follow up, but always collaborate on the landing, even if the code works. There might be last minute changes or decisions that you were not aware of that someone else might: good to discover that before the changes are merged in!&lt;/p&gt;
+&lt;p&gt;Finally, follow up with people, too. Let the people who need to know about your changes know about your changes - ask them to review you patch, explain your work to them where needed, if there is testing involved, make sure they understand what needs to be done, and generally make sure at least two people agree these changes are good to go (including yourself). That communication doesn't need to happen in person, the issue tracker you use might facilitate this kind of follow up, but always collaborate on the landing, even if the code works. There might be last minute changes or decisions that you were not aware of that someone else might: good to discover that before the changes are merged in!&lt;/p&gt;
 &lt;h2 id="that-s-pretty-much-it"&gt;That's pretty much it&lt;/h2&gt;
 &lt;p&gt;There's a fair amount of finer detail and variation that fits into the "file it, fix it, follow up" process, but stick to that order and you're on the path of a sustainable development cycle.&lt;/p&gt;
 &lt;p&gt;Most of this is probably obvious to most people, but that just makes it all the more important to get it written down, because someone's going to be a bit bewildered and they'll need a blog post to get them on track =)&lt;/p&gt;
@@ -90,860 +90,152 @@
 <pubDate>Tue, 15 Dec 2015 19:18:49 GMT</pubDate>
 </item>
 <item>
-<title> "Whose state is it, anyway?" — Further thoughts about React</title>
-<description>&lt;p&gt;A look at thoughts that have come from working with React at the &lt;a href="https://www.mozilla.org/foundation"&gt;Mozilla Foundation&lt;/a&gt;, where we use it extensively for our &lt;a href="https://github.com/mozilla/webmaker-android/"&gt;Webmaker Android app&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id="first-off-the-single-most-important-note-about-react-i-ever-wrote-"&gt;First off, the single most important note about React I ever wrote.&lt;/h2&gt;
-&lt;p&gt;Let me start this blog post with the most important thing about React, so that we understand why things happen the way they do:&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;If used correctly, your users will think they are manipulating a UI, when in fact they are manipulating React, which &lt;em&gt;may&lt;/em&gt; then update the UI&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Sounds simple, doesn't it? But it has a profound effect on how UI interactions work, and how you should be thinking about data flow in React applications. For instance, let's say we have a properly written React application that consists of a page with some text, and a slider for changing the text's opacity. I move the slider. What happens?&lt;/p&gt;
-&lt;p&gt;In traditional HTML, I move the slider, a change event is triggered, and if I had an eventListener hooked up for that, I could then do things based on that change.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;React doesn't work like that&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Another short and sweet sentence: React doesn't work with "changes to the UI" as you make them; React doesn't &lt;strong&gt;allow&lt;/strong&gt; changes to the UI without its consent. Instead, &lt;strong&gt;React intercepts changes to the UI so they don't happen&lt;/strong&gt;, then triggers the components that are tied to the UI the user thinks they're interacting with, so that those components can decide whether or not a UI update is necessary.&lt;/p&gt;
-&lt;p&gt;In a well written React application, this happens:&lt;/p&gt;
+<title> "Tell me what some of your strengths are..."</title>
+<description>&lt;p&gt;Last week I attended a work seminar on discovering your personal strengths and how to identify and curtail stress behaviour. Let me just give the summary first:&lt;/p&gt;
+&lt;p&gt;Yes, it was incredibly useful, and I'd urge you to do something similar if you haven't yet.&lt;/p&gt;
+&lt;h2 id="know-yourself"&gt;Know yourself&lt;/h2&gt;
+&lt;p&gt;The main point is to learn what you're good at, so that you can focus your efforts into further developing skills that fall in categories related to where you are at your strongest.&lt;/p&gt;
+&lt;p&gt;Yes, you might like doing a million different things, but if you really want to develop yourself, find out which few you're really going to be good at, and exploit that. Not necessarily give up on the others, just make sure you &lt;em&gt;focus&lt;/em&gt; on the ones that really come to you naturally.&lt;/p&gt;
+&lt;p&gt;At the same time, know how you react when you get driven into a corner. Some of us are naturals at personal development, most of us are not, and the great thing about attending a seminar like this is that you get exposed to some of the psychology behind a few major generic personalities. For instance, here's my list of "strengths", spread over two categories:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Strategic thinking:&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;I try to move the slider.&lt;/li&gt;
-&lt;li&gt;The event is &lt;em&gt;intercepted&lt;/em&gt; by React and killed off.&lt;/li&gt;
-&lt;li&gt;As far as the browser knows, &lt;em&gt;nothing has happened&lt;/em&gt; to that slider.&lt;/li&gt;
-&lt;li&gt;React then takes the information about my UI interaction, and sends it to the component that owns the slider I tried to manipulate.&lt;/li&gt;
-&lt;li&gt;If that component accepts my attempt at changing the UI, it will update its state such that it now renders in a way that makes it look identical to the traditional HTML case:&lt;/li&gt;
-&lt;li&gt;As far as I'm concerned, as a user, I just moved the slider. Except in reality I didn't, my UI interaction asked React to have that interaction processed and that processing caused a UI update.&lt;/li&gt;
+&lt;li&gt;Input: "you crave to know more, and like to collect information and archive it". &lt;/li&gt;
+&lt;li&gt;Learner: "you have a great desire to learn and continuously improve. In particular, learning, rather than the outcome, excites you".&lt;/li&gt;
+&lt;li&gt;Intellection: "you are characterized by your intellectual activity. you're introspective, and appreciate intellectual discussions". &lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;This is so different from traditional HTML that you're going to forget that. And every time you do, things will feel weird, and bugs might even be born. So, just to hopefully at least address that a tiny bit, once more:&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;If used correctly, your users will think they are manipulating a UI, when in fact they are manipulating React, which &lt;em&gt;may&lt;/em&gt; then update the UI&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Now then, try to remember this forever (I know, simple request, right?) and let's move on.&lt;/p&gt;
-&lt;h2 id="revisiting-the-core-concepts-of-modeling-your-stuff-with-react"&gt;Revisiting the core concepts of modeling "your stuff" with React&lt;/h2&gt;
-&lt;p&gt;If you've been working with React for a while it's easy to forget where "your mental construct of a thing" ends and where your UI components begin, and that makes it hard to reason about when to use React's state, when to use props, when to use instance variables, and when to offload things entirely to imported functionality objects. So, a quick refresher on the various bits that we're going to be looking at, and how to make use of them:&lt;/p&gt;
-&lt;h3 id="your-thing"&gt;Your thing&lt;/h3&gt;
-&lt;p&gt;This is an abstract idea, and generally breaks up into lots of tiny things that all need to "do something" to combine into a larger whole that actual humans like to think in. "A blog post", "A page", or "a markdown editor" all fall into this category. When thinking about "your thing", it's tempting to call the specific instantiation of everything that this thing needs "its state", but I'm going to have to be curt and tell you to not do that. At least, let's be specific: whenever we talk about the thing's state, let's call it "the full state". That way we won't get confused later. If it doesn't have "full" in the description, it's not your thing's abstract meta all encompassing state.&lt;/p&gt;
-&lt;h3 id="react-components"&gt;React components&lt;/h3&gt;
-&lt;p&gt;These are extremely concrete things, representing UI elements that your users will interact with. Components need not map one-to-one to those abstract ideas you have in your head. Think of components as things with three levels of data: properties, state, and "plain old javascript stuffs".&lt;/p&gt;
-&lt;h4 id="component-properties-this-props-"&gt;Component properties: "this.props"&lt;/h4&gt;
-&lt;p&gt;These are "constructor" properties, and are dictated by whoever creates an instance of the component. However, React is pretty clever and can deal with some situations in ways you may not expect coming at React from a traditional HTML programming paradigm. Let's say we have the following React XML - also known as JSX (This isn't HTML or even XML, it's just a more convenient way to write out programming intent, and maps directly to a React.createElement call. You can write React code without ever using JSX, and JSX is always first transformed back to plain JS before React runs it. Which is why you can get JavaScript errors "in your XML", which makes no sense if you still think that stuff you wrote really is XML):&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;Parent = React.createClass({
-  render() {
-    return (&amp;lt;div&amp;gt;
-      &amp;lt;...&amp;gt;
-      &amp;lt;Child content={ getCurrentChildContent() }/&amp;gt;
-      &amp;lt;...&amp;gt;
-    &amp;lt;/div&amp;gt;);
-  }
-});
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The child's position is always the same in this case, and when the Parent first renders, it will create this Child with some content. But this isn't what really happens. React actually adds a level of indirection between the code you wrote, and the stuff you see client-side (e.g. the browser, a native device, etc.): a VIRTUAL DOM has been created based on your JSX, and it is that VIRTUAL DOM that actually controls how things are changed client-side. Not your code. So the diffrence kicks in when we change the content that should be in that child and we rerender, to effect a new child:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Something happens to Parent that changes the output of &lt;code&gt;getCurrentChildContent&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Parent renders itself, which means the &lt;code&gt;&amp;lt;Child&amp;gt;&lt;/code&gt; has changed.&lt;/li&gt;
-&lt;li&gt;React updates the VIRTUAL element associated with the Parent, and one of the updates is for the VIRTUAL Child element, which has a new property value&lt;/li&gt;
-&lt;li&gt;Rather than destroying the old Child and building a new one with the new property, React simply updates the VIRTUAL element so that it is indistinguishable from what things would have been had we destroyed and created anew.&lt;/li&gt;
-&lt;li&gt;the VIRTUAL DOM, once marked as fully updated, then reflects itself onto client the so that users see an updated UI.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The idea is that React is supposed to do this so fast you can't tell. And the reason React is so popular is that it actually does. React is fast. &lt;em&gt;Really fast&lt;/em&gt;. &lt;/p&gt;
-&lt;p&gt;Where in traditional HTML you might remove(old) and then append(new), React will always, ALWAYS, first try to apply a "difference patch", so that it doesn't need to waste time on expensive construction and garbage collection. That makes React super fast, but also means you need to think of your components as "I am supplying a structure, and that structure will get updated" instead of "I am writing HTML elements". You're not.&lt;/p&gt;
-&lt;h4 id="component-state-this-state-"&gt;Component state: "this.state"&lt;/h4&gt;
-&lt;p&gt;This is the state of the &lt;strong&gt;React component&lt;/strong&gt;. A react component that represents a piece of interactive text, for instance, will have that text bound as its state, because that state can be changed &lt;em&gt;by the component itself&lt;/em&gt;. Components do not control what's in their props (beyond the limited 'use these default values for props that were not passed along during construction'), but they do control their state, and every update to the state triggers a &lt;code&gt;render()&lt;/code&gt; call.&lt;/p&gt;
-&lt;p&gt;This can have some interesting side effects, and requires some extra thinking: If you have a text element, and you type to change that text, that change needs to be reflected to the state before it will actually happen.&lt;/p&gt;
-&lt;p&gt;Remember that important sentence from the start of the post:&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;If used correctly, your users will think they are manipulating a UI, when in fact they are manipulating React, which &lt;em&gt;may&lt;/em&gt; then update the UI&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;And then let's look at what happens:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;the user types a letter in what they think is a text input field of some sort&lt;/li&gt;
-&lt;li&gt;the event gets sent to React, which kills it off immediately so the browser never deals with it, and then sends it on to the component belonging to the VIRTUAL element that backs the UI that the user interacted with&lt;/li&gt;
-&lt;li&gt;the component handles the event by extracting the data and updating its state so that its text reflects the new text&lt;/li&gt;
-&lt;li&gt;the component renders itself, which updates the VIRTUAL element that backs the UI that the user sees, replacing its old text (pre-user-input) with the next text (what-the-user-thinks-they-wrote). This change is then reflected to the UI.&lt;/li&gt;
-&lt;li&gt;the user sees the updated content, and all of this happened so fast that they never even notice that all this happens behind the scenes. As far as they know, they simply typed a letter.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;If we didn't use this state reflecting, instead this would happen:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;user types a letter&lt;/li&gt;
-&lt;li&gt;React kills off the event to the VIRTUAL element&lt;/li&gt;
-&lt;li&gt;there is no handler to accept the event, extract its value, and update the component state, so:&lt;/li&gt;
-&lt;li&gt;nothing happens.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The user keeps hitting the keyboard, but no text shows up, because nothing changes &lt;em&gt;in React&lt;/em&gt;, and so nothing changes in the UI. As such, state is extremely important to get right, and remembering how React works is of crucial importance.&lt;/p&gt;
-&lt;h4 id="semantically-refactored-state-mixins"&gt;Semantically refactored state: mixins&lt;/h4&gt;
-&lt;p&gt;In additional to properties and state, React has a "mixin" concept, which allows you to write utility code that can tack into/onto any React class you're working with. For instance, let's look at an input component:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var Thing = React.createClass({
-  getInitialState: function() {
-    return { input: this.props.input || "" };
-  },
-  render: function() {
-    return &amp;lt;input value={this.state.input} onChange={this.updateInput}/&amp;gt;
-  },
-  updateInput: function(evt) {
-    this.setState({ input: evt.target.value }, function() {
-      if (this.props.onUpdate) {
-        this.props.onUpdate(this.state.input);
-      }
-    });
-  }
-});
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Perfectly adequate, but if we have lots of components that all need to work with inputs, we can also do this:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var inputMixin = {
-  getInitialState: function() {
-    return {
-      input: this.props.input || ""
-    };
-  },
-  updateInput: function(evt) {
-    this.setState({ input: evt.target.value }, function() {
-      if (this.props.onUpdate) {
-        this.props.onUpdate(this.state.input);
-      }
-    });
-  }
-};
-
-var Thing = React.createClass({
-  mixins: [ inputMixin ],
-  render: function() {
-    return &amp;lt;input value={this.state.input} onChange={this.updateInput}/&amp;gt;
-  },
-});
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;We've delegated the notion of input state tracking and UI handling to a "plain JavaScript" object. But, one that hooks into React's lifecycle functions, so even though we define the state variable &lt;code&gt;input&lt;/code&gt; in the mixin, the component will end up owning it and &lt;code&gt;this.state.input&lt;/code&gt; anywhere in its code will resolve just fine.&lt;/p&gt;
-&lt;p&gt;Mixins allow you to, effectively, organise state and behaviour in a finer-grained way than just components allow. Multiple components that have nothing in common with respects to your abstract model can be very efficiently implemented by looking at which purely UI bits they share, and modeling those with single mixins. Less repetition, smaller components, better control. &lt;/p&gt;
-&lt;p&gt;Of course, it gets tricky if you refer to a state variable that a mixin introduces &lt;em&gt;outside&lt;/em&gt; of that mixin, so that's a pitfall: ideally, mixins capture "everything" so that your components don't need to know they can do certain things, "they just work". As such, I like to rewrite the previous code to the following, for instance:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var inputMixin = {
-  getInitialState: function() {
-    return {
-      input: this.props.input || ""
-    };
-  },
-  updateInput: function(evt) {
-    this.setState({ input: evt.target.value }, function() {
-      if (this.props.onUpdate) {
-        this.props.onUpdate(this.state.input);
-      }
-    });
-  },
-  // JSX generator function, so components using this mixin don't need to
-  // know anything about the mixin "internals".
-  generateInputJSX: function() {
-    return &amp;lt;input value={this.state.input} onChange={this.updateInput}/&amp;gt;
-  }
-};
-
-var Thing = React.createClass({
-  mixins: [ inputMixin ],
-  render: function() {
-    return (
-      &amp;lt;div&amp;gt;
-        ...
-        { this.generateInputJSX() }
-        ...
-      &amp;lt;/div&amp;gt;
-    );
-  },
-});
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Now the mixin controls all the things it needs to, and the component simply relies on the fact that if it's loaded a mixing &lt;code&gt;somethingsometingMixin&lt;/code&gt;, it can render whatever that mixin introduces in terms of JSX with a call to the &lt;code&gt;generateSomethingsomethingJSX&lt;/code&gt; function, which will do the right thing. If the state for this component needs to be saved, saving &lt;code&gt;this.state&lt;/code&gt; will include everything that was relevant to the component &lt;em&gt;and&lt;/em&gt; the mixin, and loading the state in from somewhere with a &lt;code&gt;setState(stateFromSomewhere())&lt;/code&gt; call will also do the right thing.&lt;/p&gt;
-&lt;p&gt;So now we can have two completely different components, such as a "Portfolio" component and a "User Signup" component, which have absolutely nothing to do with each other, except that they will both need the UI and functionality that the &lt;code&gt;inputMixin&lt;/code&gt; can provide.&lt;/p&gt;
-&lt;p&gt;(Note that while it is tempting to use Mixins for everything, there is a very simple criterium for whether or not to model something using mixins: does it rely on hooking into React class/lifecycle functions like getInitialState, componentDidUpdate, componentWillUnmount, etc.? If not, don't use a mixin. If you just want to put common functions in a mixin, don't. Just use a library import, that's what they're for)&lt;/p&gt;
-&lt;h4 id="instance-variables-and-externals"&gt;Instance variables and externals&lt;/h4&gt;
-&lt;p&gt;These things are handy for supporting the component, but as far as React is concerned they "don't matter", because updates to them do nothing for the UI unless there is extra code for manually triggering a state change. And you can't trigger a state change on an instance variable, state changes happen through &lt;code&gt;setState&lt;/code&gt; and property updates by parents.&lt;/p&gt;
-&lt;p&gt;That said, React components are just plain JavaScript, so there is nothing preventing you from using the same JS constructs that we use outside of React:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var library = require("libname");
-var Thing = React.createClass({
-  mixins: [
-    require("somemixin"),
-    require("someothermixin")
-  ],
-  getInitialState: function() {
-    this.elements = library.getStandardList();
-    return { elements: this.elements };
-  },
-  addElement: function(e) {
-    this.elements.push(e);
-    this.setState({ elements: this.elements });
-  },   
-  render: function() {
-    return this.state.elements.map(...);
-  }
-});
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Perfect: in fact, using instance variables sometimes drastically increases legibility and ease of development, such as in this example. Calling &lt;code&gt;addElement()&lt;/code&gt; several times in rapid succession, without &lt;code&gt;this.elements&lt;/code&gt;, has the potential to lose state updates, effectively doing this:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Relationship building:&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;code&gt;var l1 = this.state.elements;&lt;/code&gt; + &lt;code&gt;l1.push(e)&lt;/code&gt; + &lt;code&gt;setState({ elements: l1 });&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;var l2 = this.state.elements;&lt;/code&gt; + &lt;code&gt;l2.push(e)&lt;/code&gt; + &lt;code&gt;setState({ elements: l2 });&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;var l3 = this.state.elements;&lt;/code&gt; + &lt;code&gt;l3.push(e)&lt;/code&gt; + &lt;code&gt;setState({ elements: l3 });&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Relator: "you enjoy building close relationships, and find deep satisfaction in working hard with friends to achieve goals".&lt;/li&gt;
+&lt;li&gt;Connectedness: "you think all things are connected and don't believe in coincidence. almost every event has a reason".&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Now, if &lt;code&gt;l3&lt;/code&gt; is created before setState for &lt;code&gt;l2&lt;/code&gt; has finished, then &lt;code&gt;l3&lt;/code&gt; is going to be &lt;em&gt;identical&lt;/em&gt; to &lt;code&gt;l1&lt;/code&gt;, and after it's set, &lt;code&gt;l2&lt;/code&gt; could be drop over it, losing us data twice!&lt;/p&gt;
-&lt;p&gt;Instance variables to the rescue.&lt;/p&gt;
-&lt;h4 id="static-properties-on-the-component-class"&gt;Static properties on the component class&lt;/h4&gt;
-&lt;p&gt;Finally, components can also be defined with a set of static properties, meaning they exist "on the class", not on specific instances:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var Thing = React.createClass({
-  statics: [
-    mimetypes: require("mimetypes")
-  ],
-  render() {
-    return &amp;lt;div&amp;gt;I am a { this.props.type }!&amp;lt;/div&amp;gt;;
-  }
-});
-
-var OtherThing = React.createClass({
-  render: function() {
-    &amp;lt;Thing type={ Thing.mimetypes.font } /&amp;gt;
-  }
-});
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Of course like all good JS, statics can be any legal JS reference, not just primitives, so they can be objects or functions and things will work quite well. &lt;/p&gt;
-&lt;h2 id="back-to-react-hooking-up-components"&gt;Back to React: hooking up components&lt;/h2&gt;
-&lt;p&gt;The actual point of this blog post, in addition to the opener sentence, was to look at how components can be hooked up, by choosing how to a) model state ownership, b) model component interactions, and c) data propagation from one component to another.&lt;/p&gt;
-&lt;p&gt;This is going to be lengthy (but hopefully worth it) so let's just do this the itemized list way and work our way through. We have two lists:&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;State ownership:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;And here's the thing: based on their simple definitions, not all of these strengths make a lot of sense. Thankfully, there are individualised descriptions of what each of these strengths mean, and so things start to make a lot more sense, and rather than "fortune cookie" information, one can actually learn something meaningful.&lt;/p&gt;
+&lt;h2 id="meaningful-descriptors"&gt;Meaningful descriptors&lt;/h2&gt;
+&lt;p&gt;The seminar I attended used the &lt;a href="http://strengths.gallup.com/110440/About-StrengthsFinder-20.aspx"&gt;Clifton Strengthsfinder 2.0&lt;/a&gt; test, based on data by &lt;a href="https://en.wikipedia.org/wiki/Gallup_%28company%29"&gt;Gallup&lt;/a&gt; gathered over quite a few years from over 100,000 participants. I like science, and if this data is going to say something "about me", then that's at least a decent sample size.&lt;/p&gt;
+&lt;p&gt;No, of course the predictions won't be perfect, but it'll be good enough to act as starting point to acknowledge your own strengths and personality type, and exploit the strengths while working on minimizing the reactionary tendencies. So: who am I?&lt;/p&gt;
+&lt;h3 id="strategic-thinking-input"&gt;Strategic thinking: Input&lt;/h3&gt;
+&lt;p&gt;I like information. I like learning new things, and learning &lt;em&gt;about&lt;/em&gt; new things, but I don't particularly care about archiving, because I trust my brain to do that for me without having to bother with it. So what does "input" really mean? &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Chances are good that you can simplify the most complex, convoluted, or intricate procedure. People usually rely on you to offer clear and easy-to-comprehend explanations. Driven by your talents, you may notice that certain people turn to you for guidance. Maybe your willingness to share the knowledge you have gained over the years partially explains the fondness they have for you. Some individuals might have benefited from what you have read, observed, or experienced. It’s very likely that you frequently use academic-sounding words to talk about your ideas or areas of expertise. You intentionally spend time broadening your vocabulary by looking up words in the dictionary and committing their meanings to memory. By nature, you occasionally combine your fascination for reading with your ability to figure out what sets specific individuals apart from everyone else. You might discover the things that interest someone. Then you may read more about these topics. Perhaps you aim to collect insights that inspire the person to take advantage of his or her one-of-akind talents, knowledge, and/or skills. Because of your strengths, you might gather ideas and information from reading publications that keep you up to date on particular types of current events. What you choose to peruse — that is, examine studiously — may reflect some of your personal or professional interests.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;That makes a bit more sense than the generic summary. It also offers far more footholds when it comes to aspects of this strength that can be relied or built on.&lt;/p&gt;
+&lt;h3 id="strategic-thinking-learner"&gt;Strategic thinking: Learner&lt;/h3&gt;
+&lt;p&gt;I won't lie: I liked seeing this strength. I do very much enjoy learning new things, and seeing this as one of my strengths was basically one of those "yep, I knew it" moments. However, "I like to learn new things" is a pretty generic strength, so seeing the much bigger analysis was quite useful:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Instinctively, you endorse the importance of acquiring additional knowledge and gaining new skills. You regard education as an ongoing activity. It’s very likely that you occasionally collect bits and pieces of information. At the time, the value of this material may not be apparent. In specific cases, you have found it useful to turn to some specialists for help. Perhaps these individuals can provide you with enough direction so you can ask some questions, render a few decisions, or try to map courses of action without upsetting anyone in the process. You avoid angering certain people by consulting with them before doing anything. Driven by your talents, you may long to gather certain types of information about specific individuals. Perhaps your “need to know” is rarely satisfied. The more facts you gather, the easier it might be for you to understand someone’s strengths, limitations, interests, likes, dislikes, or goals. You might be inclined to study human beings one by one. To some degree, your ongoing observations of selected individuals provide you with interesting insights into human nature. By nature, you intentionally include uncommon, highly technical, or sophisticated words in your vocabulary. You realize that language is a form of knowledge that gives you an upper hand — that is, controlling power — in conversations, debates, or discussions. It quickly establishes you as an authority figure in listeners’ minds. First, you capture their attention. Then you take charge of events, projects, meetings, or problem solving. Chances are good that you may be a solo performer. You might be determined to broaden your knowledge or acquire new skills. Perhaps you are drawn to the process of education.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;And there you have it. Pretty much all of this rings true. And yes, on their own each of these phrases sound like a horoscope, but it's not the individual phrases that form the strength, it's the collection of all of them, applicable to this person.&lt;/p&gt;
+&lt;p&gt;I'm okay with this.&lt;/p&gt;
+&lt;h3 id="strategic-thinking-intellection"&gt;Strategic thinking: Intellection&lt;/h3&gt;
+&lt;p&gt;This strength feels a little weird, because it's hard to go "why yes, I am intellectual" and not come off smug. The main problem is that "intellectual" and "smart" are often treated as the same thing, and in this particular case, they're not. I could give lots of examples, but instead it just makes far more sense to let the snippets do the talking:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Chances are good that you sometimes wish you could switch off your active brain. Even so, you may enjoy your time alone as you ponder ideas. Perhaps you want to test whether they make sense. Because of your strengths, you may be selective about the types of books or publications you read. They might contain information or tips that you can share with individuals you are training. Perhaps imparting knowledge, talking about your experiences, or passing along your skills gives you a certain degree of satisfaction. By nature, you may find it easier to befriend certain types of people if they tell you what they want to accomplish. Knowing that much, you might read some books, journals, newspapers, correspondence, or Internet sites to broaden your knowledge about their interests. When you can share information that helps people move closer to their goals, perhaps you can begin to understand each other a little better. It’s very likely that you eagerly welcome opportunities to think out loud about ideas, theories, or philosophies. You derive pleasure from conversations that force you to ponder matters that exist only in the realm of thought, not in reality. Driven by your talents, you sometimes delight in having your very own tasks to perform. Perhaps you like to solo because it gives you quiet time to reflect on what you think or feel. Maybe you consider what you have done, are doing, or can do better.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id="relationship-building-relator"&gt;Relationship building: Relator&lt;/h3&gt;
+&lt;p&gt;This one confused me, because while I like deep relationships, I'm perfectly fine with shallow ones, too. The generic description didn't seem to match at all, but the detailed one certainly did:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;By nature, you are naturally open and honest about who you are, what you have done, what you can do, and what you cannot do. Your straightforward explanations and stories help listeners see you as you see yourself. You reveal your strengths and limitations. You are forthright and plainspoken. People generally seek your company and want to work with you. Many are impelled to move into action by your words and examples. It’s very likely that you periodically are sought out by people whom you have befriended. They may trust you when you have taken time to know them individually. This may partially explain why certain people come back again and again for ideas or suggestions. They might realize you try to tailor your words of wisdom to fit their unique situations, needs, strengths, limitations, goals, or personalities. Driven by your talents, you may be convinced that you are measuring up to your potential. Perhaps you know when you are doing your best work or earning the highest grades you possibly can. Chances are good that you occasionally tell yourself that you are an effective mentor or trainer. Perhaps individuals benefit from the investment you make in them. Because of your strengths, you might do your best training after you become well-acquainted with someone. Perhaps you want to discover each individual’s unique talents, work style, goals, motivations, or interests. Maybe these insights tell you what suggestions to make or what tips to offer during coaching sessions.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;In fact, this very blog post is essentially proof of how true this assessment is: I'm right now telling you about something that a lot of people would consider pretty personal, and that last bit pretty much underlines how I even started this post: learning about different personalities and strengths, and how to work with those in oneself and other people, is fascinating, as well as functionally useful.&lt;/p&gt;
+&lt;h3 id="relationship-building-connectedness"&gt;Relationship Building: Connectedness&lt;/h3&gt;
+&lt;p&gt;And this one was a genuine surprise, at least based on the generic descriptions. It sounds very much like a "faith in the oneness of all things", which really doesn't describe my take on matters at all. I believe in a quantum universe (at least, for now. Physics is still developing), and while I don't believe in "coincidence", I also don't analyse things from just one perspective, and so the notion of "a coincidence" doesn't even make sense to me. There are so many different perspectives on single events that are all simultaneously in effect that even if you'd pretend there was a coincidence in one of those, that same coincidence would vanish in others. This strength felt like nonsense. But then this more personalised description actually made it make sense:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;By nature, you may get to know people individually in your quest to gain wisdom. Discovering the qualities that distinguish someone from everyone else might be an essential aspect of your search for truth. Driven by your talents, you might be fascinated with certain ideas, policies, or philosophies that affect human beings around the world. Because of your strengths, you may be able to accept unpredictable events in your life on the basis of sheer faith. Perhaps you sense there is a force greater than you at work in the world. Occasionally you can live with not knowing the exact reason why something good or bad happened to you and not to someone else. Chances are good that you sometimes think like a detective. You might search for and find obvious and not-so-obvious clues. You might determine which ones link together. Now and then, you notice gaps in your investigation. Some of these cannot be explained using reason alone. You may feel comfortable accepting what is unknown and unknowable. Why? To some extent, you trust that everything, everyone, and every action is somehow intertwined. Instinctively, you may be determined to make the acquaintance of certain individuals you identify as seekers of truth. Perhaps you are attracted to people who ponder philosophical questions such as “What is the meaning of life?” or “What is beauty?” or “What constitutes wisdom?” or “Why do bad things happen to good people?” or “Why should ordinary people like me even ask these kinds of questions?”&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Reading this, it basically reads as a description of being a university student who's taking a masters in A.I. which happens to be exactly who I was, and whose intellectual inheritance I still live today.&lt;/p&gt;
+&lt;h2 id="weaknesses-the-reactionary-side-of-things"&gt;Weaknesses: the reactionary side of things&lt;/h2&gt;
+&lt;p&gt;For the purposes of the seminar, when people get put on the spot, and stressed to a breaking point, the behaviour they might display is broadly categorised in three possible ways:&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;centralized ownership&lt;/li&gt;
-&lt;li&gt;delegated ownership&lt;/li&gt;
-&lt;li&gt;fragmented ownership&lt;/li&gt;
-&lt;li&gt;black box ownership&lt;/li&gt;
+&lt;li&gt;Complying: giving away the control over the situation and taking it from there.&lt;/li&gt;
+&lt;li&gt;Protecting: walking away from the situation to protect oneself.&lt;/li&gt;
+&lt;li&gt;Controlling: going into "getting shit done" mode and steamrolling anyone who doesn't do so as well.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;strong&gt;Component interactions:&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Parent to Child&lt;/li&gt;
-&lt;li&gt;Parent to Descendant&lt;/li&gt;
-&lt;li&gt;Child to Parent&lt;/li&gt;
-&lt;li&gt;Child to Ancestor&lt;/li&gt;
-&lt;li&gt;Sibling to Sibling&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;strong&gt;Data propagation:&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;this.props chains&lt;/li&gt;
-&lt;li&gt;targeted events using publish/subscribe&lt;/li&gt;
-&lt;li&gt;blind events broadcasting&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;So I'm going to run through these, and then hopefully at the end tie things back together by looking at which of these things work best, and why I think that is the case (with which you are fully allowed to disagree and we should talk! Talking is super useful).&lt;/p&gt;
-&lt;h2 id="deciding-on-state-ownership"&gt;Deciding on State Ownership&lt;/h2&gt;
-&lt;h3 id="centralized-ownership"&gt;Centralized ownership&lt;/h3&gt;
-&lt;p&gt;The model that fits the traditional HTML programming model best is the centralized approach, where one thing "owns" all the data, and all changes go through it. In our editor app, we can model this as one master component, "Parent", with two child components, "Post" and "Editor", which take care of simply showing the post, and editing the post, respectively.&lt;/p&gt;
-&lt;p&gt;Out post will consist of:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var marked = require("marked");
-var Post = React.createClass({
-  render: function() {
-    var innerHTML = {
-      dangerouslySetInnerHTML: {
-        __html: marked(this.props.content);
-      }
-    };
-    return &amp;lt;div {...innerHTML}/&amp;gt;;
-  }
-});
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Our editor will consist of:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var tinyMCE = require("tinymce");
-var Editor = React.createClass({
-  render: function() {
-    var innerHTML = {
-      dangerouslySetInnerHTML: {
-        __html: tinymce({
-          content: this.props.content,
-          updateHandler: this.onUpdate
-        });
-      }
-    };
-    return &amp;lt;div {...innerHTML}/&amp;gt;;
-  },
-  onUpdate: function(evt) {
-    this.props.onUpdate(evt);
-  }
-});
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And our parent component will wrap these two as:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var Parent = React.createClass({
-  getInitialState: function() {
-    return {
-      content: "",
-      editing: false
-    };
-  },
-
-  render: function() {
-    return (&amp;lt;div className="post"&amp;gt;
-      &amp;lt;Post   hidden={this.state.editing}  content={this.state.content} onClick={this.switchToEditor}/&amp;gt;
-      &amp;lt;Editor hidden={!this.state.editing} content={this.state.content} onUpdate={this.onUpdate}/&amp;gt;
-    &amp;lt;/div&amp;gt;);
-  },
-
-  // triggered when we click the post
-  switchToEditor: function() {
-    this.setState({
-      editing: true
-    });
-  },
-
-  // Called by the editor component
-  onUpdate: function(evt) {
-    this.setState({
-      content: evt.updatedContent,
-      editing: false
-    });
-  }
-});
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;In this setup, the Parent is the lord and master, and any changes to the content must run through it. Saving and loading of the post to and from a data repository would, logically, happen in this Parent class. When a user clicks on the post, the "hidden" flag is toggled, which causes the Parent to render with the Editor loaded instead of the Post, and the user can modify the content to their heart's content. Upon completion, the Editor uses the API that the Parent passed down to ensure that its latest data gets reflected, and we return to the Post view.&lt;/p&gt;
-&lt;p&gt;The important question is "where do we put &lt;code&gt;save&lt;/code&gt; and &lt;code&gt;load&lt;/code&gt;", and in this case that choice is obvious: in Parent.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var staterecorder = {
-  componentWillMount: function() {
-    this.register(this, function loadState(state) {
-      this.setState(state);
-    });
-  },
-
-  register
-
-  componentWillUnmount: function() {
-    this.unregister(this);
-  },
-}
-
-var Parent = React.createClass({
-  mixins: [
-    require("staterecorder")
-  ]
-
-  getInitialState: function() {
-    ...
-  },
-
-  getDefaultProps: function() {
-    return { id: 1};
-  },
-
-  render: function() {
-    ...
-  },
-
-  ...
-});
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;But: why would the Parent be in control? While this design mirrors our "abstract idea", this is certainly not the only way we can model things. And look closely: why would that Post not be the authoritative source for the actual post? After all, that's what we called it. Let's have a look at how we could model the idea of "a Post" by acknowledging that our UI should simply "show the right thing", not necessary map 1-on-1 to our abstract idea.&lt;/p&gt;
-&lt;h3 id="delegated-state-management"&gt;Delegated state management&lt;/h3&gt;
-&lt;p&gt;In the delegated approach, each component controls what it controls. No more, no less, and this changes things a little. Let's look at our new component layout:&lt;/p&gt;
-&lt;p&gt;Out post is almost the same, except it now controls the content, and as such, this is now its state and it has an API function for updating the content if a user makes an edit (somehow) outside of the Post:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var marked = require("marked");
-var database = require("database");
-var Post = React.createClass({
-  getInitialState: function() {
-    content: ""
-  },
-
-  componentWillMount: function() {
-    database.getPostFor({id : this.props.id}, function(result) {
-      this.setState({ content: result });
-    };
-  },
-
-  render: function() {
-    var innerHTML = {
-      dangerouslySetInnerHTML: {
-        __html: marked(this.props.content);
-      }
-    };
-    return &amp;lt;div {...innerHTML}/&amp;gt;;
-  },
-
-  setContent: function(newContent) {
-    this.setState({
-      content: newContent
-    });
-  }
-});
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Our editor is still the same, and it will do pretty much what it did before:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var tinyMCE = require("tinymce");
-var Editor = React.createClass({
-  render: function() {
-    var innerHTML = {
-      dangerouslySetInnerHTML: {
-        __html: tinymce({
-          content: this.props.content,
-          updateHandler: this.onUpdate
-        });
-      }
-    };
-    return &amp;lt;div {...innerHTML}/&amp;gt;;
-  },
-  onUpdate: function(evt) {
-    this.props.onUpdate(evt);
-  }
-});
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And our parent, however, has rather changed. It no longer controls the content, it is simply a convenient construct that marries the authoritative component, with some id, to an editor when the user needs it:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var Parent = React.createClass({
-  getInitialState: function() {
-    return {
-      editing: false
-    };
-  },
-
-  render: function() {
-    return (&amp;lt;div className="post"&amp;gt;
-      &amp;lt;Post   hidden={this.state.editing}  id={...} onClick={this.switchToEditor}/&amp;gt;
-      &amp;lt;Editor hidden={!this.state.editing} onUpdate={this.onUpdate}/&amp;gt;
-    &amp;lt;/div&amp;gt;);
-  },
-
-  // triggered when we click the post
-  switchToEditor: function() {
-
-    ??????
-
-    this.setState({
-      editing: true
-    });
-  },
-
-  // Called by the editor component
-  onUpdate: function(evt) {
-    this.setState({
-      editing: false
-    }, function() {
-      this.refs.setContent(evt.newContent);
-    });
-  }
-});
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;You may have spotted the question marks: how do we now make sure that when we click the post, we get its content loaded into the editor? There is no convenient "this.props" binding that we can exploit, so how do we make sure we don't duplicate things all over the place? For instance, the following would work, but it would also be a little ridiculous:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var Parent = React.createClass({
-  getInitialState: function() {
-    return {
-      editing: false,
-      localContent: ""
-    };
-  },
-
-  render: function() {
-    return (&amp;lt;div className="post"&amp;gt;
-      &amp;lt;Post   ref="post" hidden={this.state.editing}  id={...} onClick={this.switchToEditor}/&amp;gt;
-      &amp;lt;Editor hidden={!this.state.editing} content={this.state.localContent} onUpdate={this.onUpdate}/&amp;gt;
-    &amp;lt;/div&amp;gt;);
-  },
-
-  bindContent: function(newContent) {
-    this.setSTate({
-      localContent: newContrent
-    });
-  },
-
-  // triggered when we click the post
-  switchToEditor: function() {
-    this.setState({
-      editing: true
-    });
-  },
-
-  // Called by the editor component
-  onUpdate: function(evt) {
-    this.setState({
-      editing: false
-    }, function() {
-      this.refs.post.setContent(evt.newContent);
-    });
-  }
-});
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;We've basically turned the Parent into a surrogate Post now, again with its own content state variables, even though the set out to eliminate that. This is not a path to success. We could try to circumvent this by linking the Post to the Editor directly in the function handlers:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var Parent = React.createClass({
-  getInitialState: function() {
-    return {
-      editing: false
-    };
-  },
-
-  render: function() {
-    return (&amp;lt;div className="post"&amp;gt;
-      &amp;lt;Post   ref="post" id={...} hidden={this.state.editing} onClick={this.switchToEditor}/&amp;gt;
-      &amp;lt;Editor ref="editor" hidden={!this.state.editing} onUpdate={this.onUpdate}/&amp;gt;
-    &amp;lt;/div&amp;gt;);
-  },
-
-  // triggered when we click the post
-  switchToEditor: function() {
-    this.refs.editor.setContent(this.refs.post.getContent(), function() {
-      this.setState({
-        editing: true
-      });
-    });
-  },
-
-  // Called by the editor component
-  onUpdate: function(evt) {
-    this.setState({
-      editing: false
-    }, function() {
-      this.refs.post.setContent(evt.newContent);
-    });
-  }
-});
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This might seem better, but we've certainly not made the code easier to read by putting in all those async interruptions...&lt;/p&gt;
-&lt;h3 id="fragmenting-state-across-the-ui"&gt;Fragmenting state across the UI&lt;/h3&gt;
-&lt;p&gt;What if we took the genuinely distributed approach? What if we don't have "a Parent", with the Post and Editor being, structurally, sibling elements? This would certainly rule out the notion of duplicated state, but also introduces the issue of "how do we get data from the editor into the post":&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var Post = React.createClass({
-  getInitialState: function() {
-    content: ""
-  },
-
-  componentWillMount: function() {
-    database.getPostFor({id : this.props.id}, function(result) {
-      this.setState({ content: result });
-    };
-
-    somewhere.listenFor("editor:update", this.setContent);
-  },
-
-  render: function() {
-    var innerHTML = {
-      dangerouslySetInnerHTML: {
-        __html: marked(this.props.content);
-      },
-      onClick: this.onClick
-    };
-    return &amp;lt;div {...innerHTML}/&amp;gt;;
-  },
-
-  onClick: function() {
-    // somehow get an editor, somewhere, to open...
-    somewhere.trigger("post:edit", { content: this.state.content });
-  },
-
-  setContent: function(newContent) {
-    this.setState({
-      content: newContent
-    });
-  }
-});
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The obvious thing to notice is that the post now needs to somehow be able to trigger "an editor", as well as listen for updates.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var Editor = React.createClass({
-  componentWillMount: function() {
-    somewhere.listenFor("post:edit", function(evt) {
-      this.contentString = evt.content;
-    });
-  },
-
-  render: function() {
-    var innerHTML = {
-      dangerouslySetInnerHTML: {
-        __html: tinymce({
-          content: this.contentString,
-          updateHandler: this.onUpdate
-        });
-      }
-    };
-    return &amp;lt;div {...innerHTML}/&amp;gt;;
-  },
-  onUpdate: function(evt) {
-    somewhere.trigger("editor:update", evt);
-  }
-});
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Again, this seems less than ideal. While the Post and Editor are now nice models, we're spending an aweful lot of time in magical-async-event-land, and as designers, programmers, and contributors, we basically have no idea what's going on without code diving.&lt;/p&gt;
-&lt;p&gt;Remember, you're not just writing code for you, you're also writing code for people you haven't met yet. We want to make sure we can onboard them without going "here are the design documents and flowcharts, if you see anything you don't understand, please reach out and good luck". We want to go "here's the code. It's pretty immediately obvious how everything works, just hit F3 in your code editor to follow the function calls".&lt;/p&gt;
-&lt;h3 id="delegating-all-state-to-an-external-black-box"&gt;Delegating all state to an external black box&lt;/h3&gt;
-&lt;p&gt;There is one last thing we can try: delegating all state synchronizing to some black box object that "knows how to state, yo". For instance, a database interfacing thing through which we perform lookups and save/load all state changes. Of all the options we have, this is the one that is absolutely the most distributed, but it also comes with some significant drawbacks.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var api = {
-  save: function(component, state) {
-    // update our data store, and once that succeeds, update the component
-    datastore.update(component, state).success(function() {
-      component.setState(state);
-    });
-  }
-};
-
-var Post = React.createClass({
-  ...
-  componentWillMount: function() {
-    api.load(this, function(state) {
-      this.setState(state);
-    });
-  },
-  setContent: function(newContent) {
-    api.save(this, {
-      content: newContent
-    });
-  }
-});
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This seems pretty handy! we don't update our UI until we know the datastore has the up to date state, so are application is now super portable, and multiple people can, in theory, all work on the same data. That's awesome, free collaboration!&lt;/p&gt;
-&lt;p&gt;The downside is that this is a UI blocking approach, meaning that if for some reason the data store fails, components won't get updated despite there being no &lt;em&gt;technical&lt;/em&gt; reason for that to happen, or worse, the data store can be very slow, leading to actions the user took earlier conflicting with their current actions because the updates happen while the user's already trying to make the UI do something else.&lt;/p&gt;
-&lt;p&gt;Of course, we can reverse the order of commits and UI updates, but that introduces an even harder problem: invalidating the UI if it turns out the changes cannot be committed. While the api approach has neat benefits, they rely on your infrastructure being reliable, and fast. If that cannot be guaranteed, then contacting a data store for committing states manually may be a better solution because it limits the store interactions to bootstrapping (i.e. loading previously modified components) and user-initiated synchronization (save buttons, etc).&lt;/p&gt;
-&lt;h2 id="dealing-with-component-relations"&gt;Dealing with Component Relations&lt;/h2&gt;
-&lt;h3 id="parent-to-child-construction-properties"&gt;Parent to Child: construction properties&lt;/h3&gt;
-&lt;p&gt;This is the classic example of using construction properties. Typically the parent should &lt;em&gt;never&lt;/em&gt; tell the Child to do things via API calls or the like, but simply set up need property values, so that the Child can do "whatever it needs to do based on those".&lt;/p&gt;
-&lt;h3 id="parent-to-descendant-a-modeling-error"&gt;Parent to Descendant: a modeling error&lt;/h3&gt;
-&lt;p&gt;In React, this relationship is essentially void. Parents should only be concerned about what their children look like, and nothing else. If there are things hanging under those children, those things should be irrelevant to the Parent. If they're not, this is a sign that the choice of which components map to which abstract concepts was not thought out well enough (yet), and needs redoing.&lt;/p&gt;
-&lt;h3 id="child-to-parent-this-props"&gt;Child to Parent: this.props&lt;/h3&gt;
-&lt;p&gt;Children can trigger behaviour in their Parents as long as the Parent supplies the API to do so via construction properties. If a Parent has an API for "doing something based on a Child doing something", that API can be passed into along during Child construction in the same way that primitive properties are passed in. React's JSX is just 'JavaScript, with easier to read syntax' so the following:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;render: function() {
-  return &amp;lt;Child content={this.state.content} onUpdate={this.handleChildUpdate}/&amp;gt;;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;is equivalent to:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;render: function() {
-  return React.createElement("Child", {
-    content: this.state.content,
-    onUpdate: this.handleChildUpdate
-  });
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And the child can call &lt;code&gt;this.props.onUpdate&lt;/code&gt; locally whenever it needs the Parent to "do whatever it needs to do".&lt;/p&gt;
-&lt;h3 id="child-to-ancestor-a-modeling-error"&gt;Child to Ancestor: a modeling error&lt;/h3&gt;
-&lt;p&gt;Just like how Parents should not rely on descendants, only direct children, Children should never care about their Ancestors, only their Parents. If the Child needs to talk to its ancestor, this is a sign that the choice of which components map to which abstract concepts was, again, not thought out well enough (yet), and needs redoing.&lt;/p&gt;
-&lt;h3 id="sibling-to-sibling-"&gt;Sibling to Sibling:&lt;/h3&gt;
-&lt;p&gt;As "intuitive" as it might seem for siblings to talk to each other (after all, we do this in traditional HTML setting all the time), in React the notion of "siblings" is irrelevant. If a child relies on a sibling to do its own job, this is yet another sign that the choice of which components map to which abstract concepts was not thought out well enough (yet), and needs redoing.&lt;/p&gt;
-&lt;h2 id="deciding-on-how-to-propagate-data"&gt;Deciding on how to propagate data&lt;/h2&gt;
-&lt;h3 id="chains-of-this-props-fname-function-calls"&gt;Chains of this.props.fname() function calls&lt;/h3&gt;
-&lt;p&gt;The most obvious way to effect communication is via construction properties (on the Parent side) and &lt;code&gt;this.props&lt;/code&gt; (on the Child side). For simple Parent-Child relationships this is pretty much obvious, after all it's what makes React as a technology, but what if we have several levels of components? Let's look at a page with menu system:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;Page → menu → submenu → option
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;When the user clicks on the option, the page should do something. This &lt;em&gt;feels&lt;/em&gt; like the option, or perhaps the submenu, should be able to tell the Page that something happened, but this isn't entirely true: the &lt;em&gt;semantics&lt;/em&gt; of the user interaction changes at each level, and having a chain of this.props calls might feel "verbose", but accurately describes what should happen, and follows React methodology. So let's look at those things:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var Options = React.createClass({
-  render: function() {
-    return &amp;lt;li onClick={this.props.optionPicked}&amp;gt;{ this.props.label }&amp;lt;/li&amp;gt;;
-  }
-});
-
-var Submenu = React.createClass({
-  render: function() {
-    var options = this.props.options.map(function(option) {
-      return &amp;lt;Option key={option.label}
-                     label={option.label}
-                     optionPicked={function() { this.select(option.label); }} /&amp;gt;  
-    });
-    return &amp;lt;ul className={ ["menu", this.menuName].join(" ") }&amp;gt;{ options }&amp;lt;/ul&amp;gt;;
-  },
-  select: function(label) {
-    this.props.
-  }
-});
-
-var Menu = React.createClass({
-  render: function() {
-    var submenus = this.props.menus.map(function(menu) {
-      return &amp;lt;Submenu key={menu.name}
-                      menuName={menu.name}
-                      options={menu.options}
-                      onOptionChosen={function(option) { this.select(menu.name, option); }}/&amp;gt;
-    });
-  },
-  select: function(menu, option) {
-    this.props.onSelect(menu, option);
-  }
-});
-
-var Page = React.createClass({
-  render: function() {
-    return (&amp;lt;div&amp;gt;
-      &amp;lt;Header&amp;gt;
-        &amp;lt;Menu menus={require("menusystem")} onSelect={this.navigate}/&amp;gt;
-      &amp;lt;/Header&amp;gt;
-      { this.formSections() }
-      &amp;lt;Footer ... /&amp;gt;
-    &amp;lt;/diV&amp;gt;);
-  },
-  navigate: function(category, topic) {
-    // load in the appropriate section for the category/topic pair given.
-  }
-});
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;At each stage, the meaning of what started with "a click" changes. Yes, ultimately this leads to some content being swapped in in the Page component, but that behaviour only matters inside the Page component. Inside the menu component, the important part is learning what the user picked as submenu and option, and communicating that up. Similarly, in the Submenu the important part is known which option the user picked. Contrast this to the menu, where it is also important to know which submenu that "pick" happened in. Those are similar, but different, behaviours. Finally in the Option, the only thing we care about is "hey parent: the user clicked us. Do something with that information".&lt;/p&gt;
-&lt;p&gt;"But this is arduous, why would I need to have a full chain when I know that Menu and Submenu don't care?" Well, for starters, they probably do care, because they'll probably want to style themselves when the user picks an option, such that it's obvious what they picked. It's pretty unusual to see a straight up, pass-along chain of this.props calls, usually a little more happens at each stage.&lt;/p&gt;
-&lt;p&gt;But what if you genuinely need to do something where the "chain" doesn't matter? For instance, you need to have any component be able to throw "an error" at an error log or notifying component that lives "somewhere" in the app and you don't know (nor care) where? Then we need one of the following two solutions. &lt;/p&gt;
-&lt;h3 id="targeted-events-using-the-publish-subscribe-model"&gt;Targeted events using the Publish/Subscribe model&lt;/h3&gt;
-&lt;p&gt;The publish/subscribe model for event handling is the system where you have a mechanism to fire off events "at an event monitor", who will then deliver (copies of) that event to anyone who registered as a listener. In Java, this is the "EventListener" interface, in JavaScript's it's basically the &lt;code&gt;document.addEventListener&lt;/code&gt; + &lt;code&gt;document.dispatch(new CustomEvent)&lt;/code&gt; approach. Things are pretty straight forward, although we need to make sure to &lt;strong&gt;never, ever&lt;/strong&gt; use plain strings for our event names, because hot damn is that asking for bugs once someone starts to refactor the code:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var EventNames = require("eventnames");
-
-var SomeThingSomewhere = React.createClass({
-  mixins: [
-    pubsub: require(...)
-  ],
-  componentWillMount: function() {
-    if (retrieval of something crucial failed) {
-      this.pubsub.generate(EventNames.ERROR, {
-        msg: "something went terribly wrong",
-        code: 13
-      }); 
-    }
-  },
-  render: function() {
-    ...
-  },
-  ...
-});
-
-var ErrorNotifier = React.createClass({
-  mixins: [
-    pubsub: require(...)
-  ],
-  getInitialState: function() {
-    return { errors: [] };
-  },
-  componentWillMount: function() {
-    pubsub.register(EventNames.ERROR, this.showError);
-  },
-  render() {
-    ...
-  },
-  showError: function(err) {
-    this.setState({
-      errors: this.state.errors.slice().concat([err])
-    });
-  }
-});
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;We can send off error messages into "the void" using the publish/subscribe event manager, and have the ErrorNotifier trigger each time an error event comes flying by. The reason we can do this is crucial: when a component has "data that someone might be able to use, but is meaningless to myself" then sending that data off over an event manager is an excellent plan. If, however, the data does have meaning to the component itself, like in the menu system above, then the pub/sub approach is tempting, but arguably taking shortcuts without good justification.&lt;/p&gt;
-&lt;p&gt;Of course we can take the publish/subscribe model one step further, by removing the need to subscribe...&lt;/p&gt;
-&lt;h3 id="events-on-steroids-the-broadcasting-approach"&gt;Events on steroids: the broadcasting approach&lt;/h3&gt;
-&lt;p&gt;In the walkie-talkie method of event management, events are sent into the manager, but &lt;em&gt;everybody gets a copy&lt;/em&gt;, no ifs, no buts, the events are simply thrown at you and if you can't do anything with them, then you ignore them, a bit like a bus or taxi dispatcher, when everyone's listening in on the same radio frequency, which is why in the &lt;a href=""&gt;Flux&lt;/a&gt; pattern this kind of event manager is called the &lt;a href="https://facebook.github.io/react/blog/2014/07/30/flux-actions-and-the-dispatcher.html"&gt;Dispatcher&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;A Dispatcher pattern simplifies life by not needing to explicitly subscribe for specific events, you just see all the events fly by and if you know that you need to do something based on one or more of them, you just "do your job". The downside of course is that there will generally be more events that you don't care about than events that you do, so the Dispatcher pattern is great for applications with lots of independent "data generators" and "consumers", but not so great if you have a well modelled application, where you (as designer) can point at various components and say what they should reasonably care about in terms of blind events.&lt;/p&gt;
-&lt;h2 id="you-promised-to-circle-back-so-what-should-i-go-with-"&gt;You promised to circle back, so: what should I go with?&lt;/h2&gt;
-&lt;p&gt;Perhaps not surprisingly, I can't really tell you, at least not with authority. I have my own preferences, but need trumps preference, so choose wisely.&lt;/p&gt;
-&lt;p&gt;If you're working with React, then depending on where you are in your development cycle, as well as learning curve, many of the topics covered are things you're going to run into, and it's going to make life weird, and you'll need to make decisions on how to proceed based on what you need.&lt;/p&gt;
-&lt;p&gt;As far as I'm concerned, my preference is to "stick with React" as much as you can: a well modeled centralized component that maintains state, with &lt;code&gt;this.props&lt;/code&gt; chaining to propagate and process updates, letting &lt;code&gt;render()&lt;/code&gt; take care of keeping the UI in sync with what the user thinks they're doing, dipping sparingly into the publish/subscribe event model when you have to (such as a passive reflector component, like an error notifier that has no "parent" or "child" relationships, it's just a bin to throw data into).&lt;/p&gt;
-&lt;p&gt;I also prefer to solve problems before they become problems by modeling things in a way that takes advantage of everything it has to offer, which means I'm not the biggest fan of the Dispatcher model, because it feels like when that becomes necessary, an irreparable breakdown of your model has occurred.&lt;/p&gt;
-&lt;p&gt;I also don't think you should be writing your components in a way that blocks them from doing the very thing you use React for: having a lightning fast, easy to maintain user interface. While I do think you should be saving and syncing your state, I have strong opinions on "update first, then sync" because the user should never feel like they're waiting. The challenge then is error handling after the fact, but that's something you generally want to analyse and solve on a case-by-case basis.&lt;/p&gt;
-&lt;p&gt;I think you should use state to reflect the &lt;em&gt;component&lt;/em&gt; state, no more, no less, and wherever possible, make that overlap with the "full state" that fits your abstract notion of the thing you're modeling; the more you can props-delegate, and the less you need to rely on blind events, the better off your code base is going to be. Not just for you, but also for other developers and, hopefully, contributors.&lt;/p&gt;
-&lt;h2 id="and-before-closing-an-example-implementing-editable-elements-"&gt;And before closing, an example: implementing editable elements.&lt;/h2&gt;
-&lt;p&gt;Let's look at something that is typical of the "how do we do this right?" problem: editable forms. And I mean generic forms, so in this case, it's a form that lets you control various aspects of an HTML element.&lt;/p&gt;
-&lt;p&gt;This sounds simple, and in traditional HTML, sort of &lt;em&gt;is&lt;/em&gt; simple: set up a form with fields you can change, tie their events to "your thing"s settings, and then update your thing based on user interaction with the form. In React things have to necessarily happen a little differently, but to the user it should &lt;em&gt;feel&lt;/em&gt; the same. Change form → update element.&lt;/p&gt;
-&lt;p&gt;Let's start with something simple: the element. I know, React already has pre-made components for HTML elements, but we want a freely transformable and stylable one. In abstract, we want something like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;element:
-  attributeset:
-  - src
-  - alt
-  - title  
-  transform:
-  - translation
-  - rotation
-  - scale
-  - origin
-  styling:
-  - opacity
-  - border
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Which, at a first stab, could be the following React component:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var utils = require("handyHelperUtilities");
-
-var Element = React.createClass({
-  getInitialState: function() {
-    return utils.getDefaultElementDefinition(this.props);
-  }, 
-  render: function() {
-    var CSS = utils.convertToCSS(this.state);
-    return (&amp;lt;div style={CSS}&amp;gt;
-      &amp;lt;img src={this.state.src} alt={this.state.alt} title={this.state.title}/&amp;gt;
-    &amp;lt;/div&amp;gt;);
-  }
-});
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;But, does that make sense? Should this component ever be able to change its internal state? Yes, the abstract model as expressed as, for instance, a database record would certainly treat "changed data" as the same record with new values but the same id, but &lt;em&gt;functionally&lt;/em&gt;, the component is just "expressing a bunch of values via the medium of a UI component", so there isn't actually any reason for these values to be "state", as such. Let's try this again, but this time making the Image a "dumb" element, that simply renders what it is given: &lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var utils = require("handyHelperUtilities");
-
-var Element = React.createClass({
-  getInitialProps: function() {
-    return utils.getDefaultElementDefinition(this.props);
-  },
-  render: function() {
-    var CSS = utils.convertToCSS(this.props);
-    return (&amp;lt;div style={CSS}&amp;gt;
-      &amp;lt;img src={this.props.src} alt={this.props.alt} title={this.props.title}/&amp;gt;
-    &amp;lt;/div&amp;gt;);
-  }
-});
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Virtually identical, but this is a drastically different thing: instead of suggesting that the values it expresses is controlled by itself, this is simply a UI component that draws "something" based on the data we pass it when we use it. But we know these values can change, so we need something that &lt;em&gt;does&lt;/em&gt; get to manipulate values. We could call that an Editor, but we're also going to use it to show the element without any editorial options, so let's make sure we use a name that describes what we have:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var EditableElement = React.createClass({
-  getInitialState: function() {
-    return ...?
-  },
-  componentWillMount: function() {
-    ...?
-  },
-   render: function() {
-    var flatProperties = utils.flatten(this.state);
-    return &amp;lt;Element {...flatProperties}/&amp;gt;;
-  }
-});
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Let's build that out: we want to be able to edit this editable element, so let's also write an editor:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var utils = require(...) = {
-  ...
-  generateEditorComponents: function (properties, updateCallback) {
-    return properties.map(name =&amp;gt; {
-      utils.getEditorComponent(name, properties[name], updateCallback);
-    });
-  },
-  getEditorComponent: function(name, value, updateCallback) {
-    var Controller = utils.getReactComponent(name);
-    return &amp;lt;Controller value={value} onUpdate={updateCallback} /&amp;gt;;
-  },
-  ...
-};
-
-var Editor = React.createClass({
-  render: function() {
-    return (&amp;lt;div&amp;gt;
-      {utils.generateEditorComponents(this.props, this.onUpdate)}
-    &amp;lt;/div&amp;gt;);
-  },
-  onUpdate: function(propertyLookup, newValue) {
-    ...?
-  }
-});
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Now: how do we get these components linked up? &lt;/p&gt;
-&lt;h2 id="editableelement-editor-image-"&gt;EditableElement → (Editor, Image)&lt;/h2&gt;
-&lt;p&gt;The simplest solution is to rely on props to just "do the right thing", with updates triggering state changes, which trigger a &lt;code&gt;render()&lt;/code&gt; which will consequently just do the right thing some more:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var EditableElement = React.createClass({
-  ...
-  render: function() {
-    var flatProperties = utils.flatten(this.state);
-    flatProperties.onUpdate = this.onUpdate;
-    return (&amp;lt;div&amp;gt;
-      { this.state.editing ? &amp;lt;Editor {...flatProperties}/&amp;gt; : &amp;lt;Element {...flatProperties}/&amp;gt; }
-    &amp;lt;/div&amp;gt;);
-  },
-  onUpdate: function(propName, newValue) {
-    var curState = this.state;
-    var updatedState = utils.update(curState, propName, newValue);
-    this.setState(updatedState);
-  }
-});
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;In fact, with this layout, we can even make sure the Editor has a preview of the element we're editing:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var Editor = React.createClass({
-  render: function() {
-    return (&amp;lt;div&amp;gt;
-      &amp;lt;div className="preview"&amp;gt;
-        &amp;lt;Element {...this.props}/&amp;gt;
-      &amp;lt;/div&amp;gt;
-      &amp;lt;div className="controls"&amp;gt;
-        {utils.generateEditorComponents(this.props, this.onUpdate)}
-      &amp;lt;/div&amp;gt;
-    &amp;lt;/div&amp;gt;);
-  },
-  onUpdate: function(propertyLookup, newValue) {
-    this.props.onUpdate(propertyLookup, newValue);
-  }
-});
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Excellent! The thing to notice here is that the EditableElement holds all the strings: it decides whether to show a plain element, or the editor-wrapped version, and it tells the editor that any changes it makes, it should communicate back, directly, via the &lt;code&gt;onUpdate&lt;/code&gt; function call. If an update is sent over, the EditableElement updates its state to reflect this change, and the render chain ensures that everything "downstream" updates accordingly.&lt;/p&gt;
-&lt;h3 id="doesn-t-that-mean-we-re-updating-too-much-"&gt;Doesn't that mean we're updating too much?&lt;/h3&gt;
-&lt;p&gt;Let's say the Editor has a slider for controlling opacity, and we drag it from &lt;code&gt;1.0&lt;/code&gt; to &lt;code&gt;0.5&lt;/code&gt;. The Editor calls &lt;code&gt;this.props.onUpdate("opacity", 0.5)&lt;/code&gt;, which makes the EditableElement call &lt;code&gt;setState({opacity: 0.5})&lt;/code&gt;, which calls &lt;code&gt;render()&lt;/code&gt;, which sees an update in state, which means React propages the new values to the Editor, which sees an update in its properties and so calls its own &lt;code&gt;render()&lt;/code&gt;, which then redraws the UI to match the exact same thing as what we just turned it into. Aren't we wasting time and processing on this? We're just getting the Editor's slider value up into the Element, we don't need a full redraw, do we?&lt;/p&gt;
-&lt;p&gt;Time to repeat that sentence one more time:&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;If used correctly, your users will think they are manipulating a UI, when in fact they are manipulating React, which &lt;em&gt;may&lt;/em&gt; then update the UI&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;In redux, this means we &lt;em&gt;did not&lt;/em&gt; first change that slider to &lt;code&gt;0.5&lt;/code&gt;, and so we definitely need that redraw, because &lt;em&gt;nothing has changed yet&lt;/em&gt;! You're initiating a change-event that React gets, after which updates may happen, but the slider hasn't updated yet. React takes your requested change, kills it off as far as the browser is concerned, and then forwards the "suggestion" in your event to whatever handles value changes. If those changes get rejected, nothing happens. For example, if our element is set to ignore opacity changes, then despite us trying to drag the opacity slider, that slider will not budge, no matter how much we tug on it.&lt;/p&gt;
-&lt;h3 id="extended-editorial-control"&gt;Extended editorial control&lt;/h3&gt;
-&lt;p&gt;We can extend the editor so that it becomes more and more detailed, while sticking with this pattern. For instance, say that in addition to the simple editing, we also want some expert editing: there's some "basic" controls with sliders, and some "expert" controls with input fields:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var SimpleControls = React.createClass({
-  render: function() {
-    return utils.generateSimpleEditorComponents(this.props, this.onUpdate);
-  }
-});
-
-var ExpertControls = React.createClass({
-  render: function() {
-    return utils.generateExpertEditorComponents(this.props, this.onUpdate);
-  }
-});
-
-var Editor = React.createClass({
-  render: function() {
-    return (&amp;lt;div&amp;gt;
-      &amp;lt;div className="preview"&amp;gt;
-        &amp;lt;Element {...this.props}/&amp;gt;
-      &amp;lt;/div&amp;gt;
-      &amp;lt;div className="controls"&amp;gt;
-        &amp;lt;SimpleControls properties={this.props} onUpdate={this.onUpdate}/&amp;gt;
-        &amp;lt;ExpertControls properties={this.props} onUpdate={this.onUpdate}/&amp;gt;
-      &amp;lt;/div&amp;gt;
-    &amp;lt;/div&amp;gt;);
-  },
-  onUpdate: function(propertyLookup, newValue) {
-    this.props.onUpdate(propertyLookup, newValue);
-  }
-});
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Done. The &lt;code&gt;Editor&lt;/code&gt; is still responsible for moving data up to the &lt;code&gt;EditableElement&lt;/code&gt;, and the simple vs. expert controls simply tap into the exact same properties. If the parent is rendered with updates, they will "instantly" propagate down.&lt;/p&gt;
-&lt;h1 id="and-that-s-it-"&gt;And that's it...&lt;/h1&gt;
-&lt;p&gt;If you made it all the way to the bottom, I've taken up a lot of your time, so first off: thanks for reading! But more importantly, I hope there was some new information in this post that helps you understand React a little better. And if there's anything in this post that you disagree with, or feel is weirdly explained, or &lt;em&gt;know&lt;/em&gt; is outright wrong: let me know! I'm not done learning either!&lt;/p&gt;
+&lt;p&gt;Those are just words with short descriptors, and people often enough display more than one type of behaviour, depending on the situation. However, I know myself reasonably well in this respect, and I'm virtually always protecting:&lt;/p&gt;
+&lt;p&gt;I will turn off any emotional attachment, and deal with problems in what is best described as "the vulcan way". I've certainly been abrasively critical in the past often enough for it to rub people the wrong way, and I've been trying to get better at &lt;em&gt;not&lt;/em&gt; being abrasive, but a seminar like this is a great supplement to introspection: it puts what you sort of already thought into a wider perspective, and most importantly gives you insight into how the way you behave under stress will affect others who are also operating under stress.&lt;/p&gt;
+&lt;p&gt;If I'm stressed, and the person I'm dealing with is stressed as well (and for whatever reason. Not strictly work), then if they're of a complying nature, we're going to have problems. Because they'll want a resolution, and I'll be offering criticism without solutions. That won't get us anywhere, except "more stuck". Similarly, if they're controlling, they'll be coming up with what solution works, and I'll just shoot it right back down. And that's just the "practical" result, emotionally there's a lot of potential for resentment both ways, and things can get very nasty. &lt;/p&gt;
+&lt;h2 id="-so-tell-us-some-of-your-strengths-"&gt;"So tell us some of your strengths..."&lt;/h2&gt;
+&lt;p&gt;You know that question you get at job interviews, where they want to know what your strengths and weaknesses are? This is what they're talking about. This is why I'd recommend everyone to take a seminar like this even if you're between jobs, or even if you've yet to start on your first one. There's "knowing what you're good at", and there's "knowing the strengths that you can build on and exploit", and they're two different things. The first most people develop naturally, by virtue of just doing what they do. The second, everyone can use some help with.&lt;/p&gt;
+&lt;p&gt;It also lets you know what you're not. That sounds a little weird, because there's an infinite world of infinite possibilities out there, but there're broadly speaking four categories of personalities and strengths that you want as part of an effective team, and a team made entirely of "learners" isn't going to be very useful. Fun, probably, but not something that makes business sense.&lt;/p&gt;
+&lt;p&gt;I fall in the strategic thinking and relationship building categories. That means that if I'm put on a team, my contribution plays off of having other people with different skills: people with execution skills to keep us on track and meet deadlines, and people with influence skills to get the most out of all the team members as well as facilitate negotiations within the team. Also, having a good spread of different "reactionary" behaviours helps to make sure no one "agrees to be stuck in a rut". Obviously no one likes being stuck, but if we're all the same kind of reactionaries, things go real bad, real fast. Much faster than if there's a good spread.  &lt;/p&gt;
+&lt;h2 id="the-take-home-message"&gt;The take-home message&lt;/h2&gt;
+&lt;p&gt;For me, the take-home message from this seminar was that it's really useful to do a thing like this at least once, even if you don't have a job right now, or you think you know yourself: if you've never done a personal strengths test before then chances are good you think you know what you're good at, and you might know what makes your temper-self so problematic, but there is great value in seeing things affirmed, or even being shown that there are parts of you that you never thought about, but ring very close to home: knowing yourself is not just something that helps you, it also helps others work, or just be, with you.&lt;/p&gt;
+&lt;p&gt;I've been paired up with a "buddy", and we'll be holding each other accountable for the action plan we've drawn up on how to work on our weaknesses while also trying to focus on what we think are our most exploitable strengths. That probably sounds pretty lame, but at the same time, it's two people being committed to helping each other better themselves in a "no judging" relationship.  &lt;/p&gt;
+&lt;p&gt;That's a pretty sweet outcome for a seminar called "Leadership Discovery".&lt;/p&gt;
 </description>
 <category>Mozilla</category>
-<category>React</category>
-<category>JavaScript</category>
-<category>Development</category>
-<link>http://pomax.github.io/#gh-weblog-1433888478288</link>
-<guid>http://pomax.github.io/#gh-weblog-1433888478288</guid>
-<pubDate>Tue, 09 Jun 2015 22:21:18 GMT</pubDate>
+<category>Leadership</category>
+<category>Strengths</category>
+<category>Introspection</category>
+<link>http://pomax.github.io/#gh-weblog-1442796369118</link>
+<guid>http://pomax.github.io/#gh-weblog-1442796369118</guid>
+<pubDate>Mon, 21 Sep 2015 00:46:09 GMT</pubDate>
+</item>
+<item>
+<title> Mozilla released a tool I am excited about.</title>
+<description>&lt;p&gt;&lt;strong&gt;tl,dr&lt;/strong&gt;: you should have a look at &lt;a href="https://thimble.mozilla.org"&gt;https://thimble.mozilla.org&lt;/a&gt;, and if you think "this is just a fancy jsbin", challenge yourself to first read &lt;a href="http://blog.humphd.org/thimble-and-bramble"&gt;http://blog.humphd.org/thimble-and-bramble&lt;/a&gt;, which explains in detail how this is nothing like the other "single tool sites" we had on the web until pretty much this month.&lt;/p&gt;
+&lt;p&gt;With that said, Thimble has a larger story here for me, personally, and I'd like to tell you that story so that you might understand why I am genuinely excited about this tool.&lt;/p&gt;
+&lt;h2 id="once-upon-a-time-i-was-a-java-developer-"&gt;Once upon a time, I was a Java developer.&lt;/h2&gt;
+&lt;p&gt;In a round-about way, my first "being a programmer" identity started in University. As a kid I'd written things in &lt;a href="https://en.wikipedia.org/wiki/BASIC"&gt;Basic&lt;/a&gt;  and &lt;a href="https://en.wikipedia.org/wiki/Turbo_Pascal"&gt;Turbo Pascal&lt;/a&gt;, but it wasn't until University that I was taught how to write structured programs that were more than utilities or silly time wasters.&lt;/p&gt;
+&lt;p&gt;My first "real programming" kicked in about three years into &lt;a href="http://gss.uva.nl/future-msc-students/information-sciences/content26/artificial-intelligence.html"&gt;my AI education&lt;/a&gt;, when we were taking a 10 credit course that involved working on real world AI applications, I worked on a java code base for running distributed sensors backed by software agents that collaborated on performing Bayesian reasoning about signal sources. It was interesting, and after the course was done, landed me my first student job continuing my work on it. I ended up designing the code architecture, which ended up landing me my first permanent job, and ultimately gave me a subject I could do a master's thesis on (yes, that's the order things happened in).&lt;/p&gt;
+&lt;p&gt;Of course I was still programming my own things in my spare time, as well as maintaining some websites (most notably &lt;a href="http://nihongoresources.com"&gt;nihongoresources.com&lt;/a&gt;) and when a friend mentioned doing some log visualisations using a language called &lt;a href="http://processing.org"&gt;"Processing"&lt;/a&gt; (which is the worst name for a programming language that wants to be searchable on the internet btw), I figured I'd have a look at what this mystery language was. &lt;/p&gt;
+&lt;p&gt;As it turned out, I really liked Processing: it was &lt;em&gt;like&lt;/em&gt; Java, but with more freedom: a simpler modeling concept, "global unless you enclose it" functions, immediate execution of code in an imperfect editor (the "PDE") that was good enough to write quick, super sweet visual things. What's more there was even a JavaScript port available, for running your pde files online. Not as Java Applets, but just "as content". &lt;/p&gt;
+&lt;p&gt;I ended up using Processing enough that I started running into annoying inconsistencies, or even bugs, in the &lt;a href="http://processingjs.org"&gt;Processing.js&lt;/a&gt; port, and being familiar with &lt;a href="https://en.wikipedia.org/wiki/Internet_Relay_Chat"&gt;IRC&lt;/a&gt; I jumped into the #processing.js channel on irc.mozilla.org and started complaining whenever things didn't work. In some places, that gets you kicked out of a channel, but in this one, a user called "&lt;a href="http://blog.humphd.org"&gt;humph&lt;/a&gt;" flipped my complaints around and threw them back at me as suggestions on how bugs could be filed, discussed, and fixed, instead. Without knowing it, I was getting a lesson in how to be a member of a community, and it worked.&lt;/p&gt;
+&lt;p&gt;My life in today's definition of open source really started there: I started filing bugs, I knew JavaScript well enough to write code for web pages, but the kind of JS needed to write Processing.js was different, so I started learning more about JS as I tried to figure out problems in Processing.js, and at some point decided I knew enough that I could patch problems when I ran into them, with a community of devs that were kind enough to help me through the process of getting those patches submitted and landed into the main codebase. I ended up, I think it's fair to say, a major contributor to Processing.js, I moved from the Netherlands to Canada and went from Java developer to freelance web dev with a love of JS, and that's where this story turns into my involvement with Mozilla.&lt;/p&gt;
+&lt;h2 id="-i-want-to-put-a-team-together-"&gt;"I want to put a team together."&lt;/h2&gt;
+&lt;p&gt;I can't talk about humph, or really, Dave Humphrey, without a certain amount of adoration (and that is a well-considered word).&lt;/p&gt;
+&lt;p&gt;If you haven't heard of Dave, he's a Professor of Open Source with ties to Mozilla, teaching at &lt;a href="http://cdot.senecacollege.ca"&gt;CDOT&lt;/a&gt;, at &lt;a href="http://www.senecacollege.ca"&gt;Seneca College&lt;/a&gt; in Toronto, and if you use Firefox, there's a good chance you've enjoyed his work. Dave, to me, is in the category of people who look at something and go "what, 2 years from now, is a thing I want to be taking for granted as available and usable, that isn't there right now". And then, unlike many people, doesn't just blog about it, but sits down and figures out how to make it happen. The part that earns him my adoration is that one of his approaches is to inspire others to do the work, because he has the singular ability to explain his ideas in ways that hold up, and make you excited about the prospect of them becoming reality. &lt;/p&gt;
+&lt;p&gt;And he was thinking of "a thing" that would require getting some people together to make it happen. Needless to say, he had my attention.&lt;/p&gt;
+&lt;p&gt;Dave had been linking me to &lt;a href="http://marksurman.commons.ca/blog"&gt;blog posts&lt;/a&gt; about making the web about "making" instead of "consuming" by a guy called "Mark Surman" every now and then, and while I'd never heard of the man, his posts made a lot of sense. It wasn't until Dave explain his idea to me that things clicked: &lt;a href="https://en.wikipedia.org/wiki/Mark_Surman"&gt;Mark Surman&lt;/a&gt; was the director of the &lt;a href="https://en.wikipedia.org/wiki/Mozilla_Foundation"&gt;Mozilla Foundation&lt;/a&gt;, and the idea that Dave had was a project to foster "making on the web" through a Mozilla Foundation initiative that you might have heard of.&lt;/p&gt;
+&lt;p&gt;"&lt;a href="https://webmaker.org"&gt;Webmaker&lt;/a&gt;"&lt;/p&gt;
+&lt;h2 id="in-2012-i-joined-a-tiny-mozilla-foundation-"&gt;In 2012, I joined a tiny Mozilla Foundation.&lt;/h2&gt;
+&lt;p&gt;I applied to the Mozilla Foundation as a software engineer when it was pretty small. Certainly not "5 people and a goat" levels of small, but when I joined, &lt;a href="http://creativecommons.org/staff/ryan"&gt;Ryan Merkley&lt;/a&gt; was still with the foundation with the explicit goal of growing it to self-sustaining size, and while I had initially expected to work on "Popcorn Maker", an online video mashup/remixing tool spearheaded by the fascinating &lt;a href="http://www.etherworks.ca"&gt;Brett Gaylor&lt;/a&gt; (from &lt;a href="http://donottrack.us"&gt;Do Not Track&lt;/a&gt; fame), I instead ended up working on a project that was about letting people write HTML in a friendly way, to allow them to learn HTML while also making things they wanted to make on the web.&lt;/p&gt;
+&lt;p&gt;For quite a few months there was no name, and initially the "webmaker" name applied only to this particular tool, but as we folded more tools into the offering (popcorn maker and the "x-ray goggles", most notably), the overarching program became "Webmaker", and the tool that I was involved with became "Thimble". It was an interesting thing to work on: I learned a ton about patterns and antipatterns in the JavaScript world, and despite the tool being a single page editor, people responded positively. Thimble empowered people on the web in a way that they hadn't been until then, and that made it really important.&lt;/p&gt;
+&lt;p&gt;But, as a developer, I wouldn't use it myself.&lt;/p&gt;
+&lt;p&gt;In the same way that I won't do my job using &lt;a href="http://jsbin.com"&gt;jsbin&lt;/a&gt; or &lt;a href="http://jsfiddle.net"&gt;jsfiddle&lt;/a&gt; or &lt;a href="http://codepen.io"&gt;codepen&lt;/a&gt; as &lt;em&gt;tools&lt;/em&gt;, Thimble was too simple to address the needs of "everyone". It was great for sitting down to &lt;em&gt;with someone&lt;/em&gt;, and running them through a "zero to hero!" process where they walked away from the experience with the ability to create simple HTML pages for their own, personal content, and a way to put that content on the web (outside of social media postings), but there was no reason to ever use it if you already knew HTML and CSS and JS, and certainly not if you were a developer.&lt;/p&gt;
+&lt;h2 id="thimble-got-upgraded-quite-a-bit-"&gt;Thimble got upgraded quite a bit...&lt;/h2&gt;
+&lt;p&gt;After a year of Thimble, as well as several other tools being part of the Webmaker offering, we made a decision to give a new technology called &lt;a href="http://nodejs.org"&gt;Node.js&lt;/a&gt; a shot at the Foundation. As a JavaScript server side technology, it offered the benefits of "the same language everywhere", rather than the "JS in the browser, Python on the server" that we'd been using until then, and we quickly learned how to use Node.js and &lt;a href="http://expressjs.com"&gt;Express&lt;/a&gt; (in no small part thanks to colleague and friend jbuck, who did a phenomenal job at giving an hour and a half lecture on how to go from an empty file to a fully functional Express server, following best practices), and in the process rewrote parts of our tools to take advantage of the fact that everything could be done in JavaScript.&lt;/p&gt;
+&lt;p&gt;We were able to add features and fix bugs much quicker than before, and we ended up releasing updates almost as fast as we could land bugs. But the Thimble tool stayed relatively samey: yes, there was progressively better support for error reporting in HTML and CSS, and we figured out how to safely allow script execution, so that people could write "real" web pages, but they were still just single pages.&lt;/p&gt;
+&lt;p&gt;With the help of &lt;a href="http://thomaspark.co"&gt;Tom Park&lt;/a&gt; from &lt;a href="http://drexel.edu"&gt;Drexel University&lt;/a&gt; we came up with a way to present not just an editor but also a tutorial system, so that using Thimble for educational purposes would be easier, but ultimately it was still just single pages. &lt;/p&gt;
+&lt;h2 id="this-was-not-a-tool-that-would-work-for-everyone-"&gt;This was not a tool that would work for everyone.&lt;/h2&gt;
+&lt;p&gt;The problem with Thimble, and I'm making it sound like one but for the purpose of Thimble it mostly wasn't, was that it was aimed at an audience that I wasn't part of. In my professional life, I could do everything Thimble did, better, in tools I already had at my disposal on my computers. A desktop code editor and a browser gave me more power than the single flat file concept Thimble operated on, and so I would still use Thimble to teach people, but that was it.&lt;/p&gt;
+&lt;p&gt;There were always ideas. "Wouldn't it be great if Thimble was like a real editor, but friendly when it needed to be, while being progressively less 'teaching tool' and more a real development tool as you level up your skills". It &lt;em&gt;would&lt;/em&gt; be great. But we couldn't make that tool. Having the tool work for educational setting was more important than spending time on making it better for a group of people who already had tools at their disposal.&lt;/p&gt;
+&lt;p&gt;That makes sense, and that makes what makes the end of this story even more remarkable.&lt;/p&gt;
+&lt;h2 id="atom-brackets-and-thimble-oh-my-"&gt;Atom, Brackets, and Thimble; Oh my!&lt;/h2&gt;
+&lt;p&gt;Sever-side JavaScript did more than just skyrocket Node.js's popularity: it also allowed for some "chromeless" browser experiments ("chrome" not just being the name of Google's browser, but in the browser world also being the name for every part of the the browser's interface that isn't "the part that shows you the webpages". The term was in already widely used when Google appropriated it) which ended up spawning "pure JS" code editors. Code editors called &lt;a href="https://atom.io"&gt;Atom&lt;/a&gt; and &lt;a href="http://brackets.io"&gt;Brackets&lt;/a&gt; hit the scene, being experiments on using a chromeless browser as a UI framework, and using pure JS as the editor engine. Presented as normal desktop applications, but "powered by the web", there was a lot of love for these new flavours of code editors.&lt;/p&gt;
+&lt;p&gt;But: if they ran in a headless browser, there wasn't any real reason why they shouldn't be able to, at least in principal, run in real browsers, online.&lt;/p&gt;
+&lt;p&gt;And that's where Dave showed his genius: he took Adobe's "Brackets" editor, and at &lt;a href="http://2013.mozillafestival.org"&gt;MozFest 2013&lt;/a&gt; showed off that it might be possible to put it in the browser, and use it as the code editing part of Thimble, rather than relying on &lt;a href="https://codemirror.net"&gt;codemirror&lt;/a&gt;, so that people would have all the power of a true code editor at their disposal. There was a confluence of technologies that he knew of that could take "making things on the web" to a whole new level, and listening to him describe it, it was the kind of thing I wanted to use.&lt;/p&gt;
+&lt;p&gt;Imagine opening a code editor with file management, running a localhost server for proper &lt;code&gt;http://&lt;/code&gt; protocol testing, and a browser with live reloading so you could see the results instantly. As a dev, that sounds a lot like how I do my work already.&lt;/p&gt;
+&lt;p&gt;Now imagine not doing those things separately because the browser just does &lt;em&gt;all those things&lt;/em&gt;. A true file system, a true code editor, a true zero-conf HTTP server, true live reloading, all of it, just working. No questions asked. Start it up, and it all just... works.&lt;/p&gt;
+&lt;p&gt;To me, that's the future. And that's what Dave was suggesting was possible. If we could put in the time to make it work.&lt;/p&gt;
+&lt;h2 id="sometimes-tough-choices-aren-t-fun"&gt;Sometimes, tough choices aren't fun&lt;/h2&gt;
+&lt;p&gt;Unfortunately, we didn't have the man hours to make that happen. I really, really loved the idea, but we didn't have the time or the people to stop working on Webmaker, and the Thimble we already had, and instead work on this new thing. This made me sad: it felt like we were focusing on the wrong things by sticking with the Thimble we had. Imagine growing up in a country rife with corruption, and discovering "Norway" is a real thing: while Thimble was still the same tool it had been before, I had seen a glimpse of what it &lt;em&gt;could&lt;/em&gt; be, and how much better that was, and simply knowing that the technology allowed for this amazing thing, devalued the Thimble we worked on for me, instead.&lt;/p&gt;
+&lt;p&gt;Fortunately, the Mozilla Foundation is about fostering a "maker attitude" on the web, and promoting digital literacy, not "maintaining a set of tools in perpetuity" and even though Thimble was a tool that helped people express themselves creatively on the web, while learning about how the web works, we were constantly looking at what else we could do, or what we could do instead, to instill those core ideas in people, but not necessarily with the same tools all the time. We came up with Appmaker, which allowed people to make web apps, using web technologies - it was fun, it ended up not working as well as we'd hoped, and so we tried something else. We took the lessons we learned and made a page builder that used templates to allow people to make simple pages that also worked as apps on platforms that supported WebApps (like Android and Firefox OS).&lt;/p&gt;
+&lt;p&gt;We looked at the world, and saw a significant part of the world experiencing massive friction between "what the web can do", and "how it was experienced": over a billion people are slowly coming online all over the world right now (even in places like Europe or the US), and the only "internet" they get is through preinstalled apps on their phone; they use Facebook, Twitter, Instagram, but not a browser, that supposedly ubiquitous gateway to the world wide web. The browser is supposed to open up the whole wide world to you, whereas branded apps like Facebook's client are like the CompuServe and AOL of days gone by; you get content presented in one way. Their way.&lt;/p&gt;
+&lt;p&gt;This is not a good thing, and so we changed what the app we made could do, transforming it into an &lt;a href="https://beta.webmaker.org"&gt;Android app&lt;/a&gt; (available in the &lt;a href="https://play.google.com/store/apps/details?id=org.mozilla.webmaker"&gt;Play Store&lt;/a&gt; for free) that lets you build simple multi-view websites with text, images, and navigation buttons, to cater to the needs of the people we talked to in the various countries in the world where internet connectivity is starting to boom. It's not done, but the response from people for whom the app makes sense because they've been getting, effectively, locked-in devices has been great.&lt;/p&gt;
+&lt;p&gt;At the same time, we deprecated the tools we had been using for the last few years, &lt;a href="https://blog.webmaker.org/whats-next-for-webmaker-tools"&gt;moving some to new homes and retiring others&lt;/a&gt;. And that's where this story comes full circle:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;We killed off Thimble. And replaced it with Thimble.&lt;/strong&gt; &lt;/p&gt;
+&lt;h2 id="letting-others-do-the-work-you-can-t"&gt;Letting others do the work you can't&lt;/h2&gt;
+&lt;p&gt;I'm going to borrow a page out of Dave's book, and profess my enthusiasm for the "let others do the work when you can't do it" doctrine, even though it's a bit of a boomerang: while we were doing all this at the Mozilla Foundation, various people were working on the various technologies that could be glued together as the kind of vision-of-the-future Thimble that Dave had talked about in 2013.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/modeswitch"&gt;Alan Kligman&lt;/a&gt; developed a &lt;a href="https://github.com/filerjs/filer"&gt;POSIX filesystem&lt;/a&gt; that ran on top of &lt;a href="https://en.wikipedia.org/wiki/Indexed_Database_API"&gt;IndexDB&lt;/a&gt;, Dave had been working on getting Brackets itself to &lt;a href="https://github.com/humphd/brackets/tree/bramble"&gt;work in the browser&lt;/a&gt;, the web itself had landed, or had in draft, several new technologies that made data management and communication between processes, documents, and service workers easier, and eventually everything was available for Dave to put together a team of students and see if they could combine everything into the kind of Thimble I had been hoping for since Dave showed me Brackets.&lt;/p&gt;
+&lt;p&gt;On Monday, August 31&lt;sup&gt;st&lt;/sup&gt; 2015, that thing officially &lt;a href="http://thimble.mozilla.org"&gt;became real&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="the-new-thimble-is-a-dream-tool-and-i-love-it"&gt;The new Thimble is a dream tool, and I love it&lt;/h2&gt;
+&lt;p&gt;Here's a true thing: the day the new Thimble got announced, I stopped using jsbin, jsfiddle, codepen, and all those other "make a quick html/css/js thing online" tools. Overnight, they had become obsolete. Anything I used them for could be done better in the new Thimble, and where jsbin or codepen let me be creative in a "single thing", the new Thimble lets me be creative without a ceiling. It's simplified the tools necessary to have a live server running with a full file system at my fingertips to "just open thimble.mozilla.org", and I can make things as simple or as complicated as I want.&lt;/p&gt;
+&lt;p&gt;It's a true code editor that I can use to make as many files, in as many directories, as I need to properly organize and work on my code. There is undo/redo, but I don't ever have to hit save: my changes are synced by the extremely clever file system that Thimble runs on top of. It has an invisible zero-conf webserver running &lt;em&gt;in the browser&lt;/em&gt; that shows me the result of what I'm writing right next to the content I'm working on. I no longer need a live-server or a &lt;code&gt;python -m SimpleHTTPServer&lt;/code&gt; anymore, it's all &lt;em&gt;just there&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;And here's a thing I didn't even think I would say as a developer: thanks to the new Thimble just... working, I don't even &lt;em&gt;need git&lt;/em&gt; anymore.&lt;/p&gt;
+&lt;p&gt;No, I don't get revision control (though really, "I don't get revision control &lt;strong&gt;yet&lt;/strong&gt;", because remember that the current &lt;a href="https://thimble.mozilla.org"&gt;https://thimble.mozilla.org&lt;/a&gt; is really just a Minimum Viable Product launch: we've only just begun to see what it can do, and now is that time to start dreaming about fancy features), but I can write my code, publish it to the web for free, and have people be able to see the code I used because they can click a button to fire up thimble with my project loaded up as a forked copy for themselves.&lt;/p&gt;
+&lt;p&gt;If I just want to write some Proof of Concept code, or demonstrator code for an article I'm writing, or example code for something I'm explaining to someone online that might be useful later on, I don't need to set up a git repo, with a &lt;code&gt;gh-pages&lt;/code&gt; branch. I can just work in Thimble, hit "publish" (which will update what is online if I'm republishing the same project, with changes) and move my attention elsewhere in the knowledge that my stuff's been updated online for everyone to play with, and my code's safe and sound on a Mozilla server somewhere. And any time I want to dive "deeper", I can just tell Thimble to export my entire filesystem as a .zip file, and then do whatever I feel I need to do.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The new Thimble is taking away the need for tools I thought were essential in my life.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;I honestly think that's the most impactful statement I can make here. Thimble is solving problems I didn't know I had, and that makes me super happy, and excited about the future.&lt;/p&gt;
+&lt;h2 id="so-in-conclusion-"&gt;So, in conclusion:&lt;/h2&gt;
+&lt;p&gt;Go try out the new &lt;a href="https://thimble.mozilla.org"&gt;https://thimble.mozilla.org&lt;/a&gt;, and &lt;a href="https://github.com/mozilla/thimble.webmaker.org/issues"&gt;let the team know what you think of it&lt;/a&gt;, and what you can imagine as, in the future, being obvious things you already use it for, that it can't do today.&lt;/p&gt;
+&lt;p&gt;Thanks for reading, and I need to be off to write code for my next blog post on writing fonts as source code. I already have Thimble open in another tab with demonstrator code doing amazing things.&lt;/p&gt;
+</description>
+<category>Mozilla</category>
+<category>Thimble</category>
+<category>HTML</category>
+<category>CSS</category>
+<category>JS</category>
+<link>http://pomax.github.io/#gh-weblog-1442700129236</link>
+<guid>http://pomax.github.io/#gh-weblog-1442700129236</guid>
+<pubDate>Sat, 19 Sep 2015 22:02:09 GMT</pubDate>
 </item></channel>
 </rss>
