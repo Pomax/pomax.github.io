@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Fri, 01 Jan 2016 03:40:20 GMT</lastBuildDate>
-<pubDate>Fri, 01 Jan 2016 03:40:20 GMT</pubDate>
+<lastBuildDate>Tue, 05 Jan 2016 22:30:25 GMT</lastBuildDate>
+<pubDate>Tue, 05 Jan 2016 22:30:25 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> React with LaTeX, without needing client-side Mathjax</title>
@@ -204,7 +204,7 @@ function escapeBlockLaTeX(source) {
 &lt;p&gt;Using this latex-loader in conjunction with a file writing conversion utility script, we now have a &lt;em&gt;synchronous&lt;/em&gt; MathJax conversion going on, despite MathJax itself being an inherently asynchronous processor, and we completely bypass any strangeness that might normally pop up if you tried to mix LaTeX code and JSX syntax, with the benefit of files that can be cached, so that the browser doesn't need to redownload them everytime the article gets loaded in a browser.&lt;/p&gt;
 &lt;p&gt;Responsiveness increase: x1 million. Goal reached.&lt;/p&gt;
 &lt;p&gt;Instead of every individual user needing to wait for MathJax to do typesetting, the only person waiting for MathJax now is me, and only for "new" LaTeX blocks during the build step. &lt;em&gt;As it should be&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;I can add sections one at a time, and every time I run the build step, only genuinely new LaTeX will need to get converted. LaTeX that got processed during a previous run already wrote files to disk, so the latex-loader just bypasses the conversion process entirely in for those LaTeX blocks, and so the build really only does exactly as much work as it needs to do to get the data transformed.&lt;/p&gt;
+&lt;p&gt;I can add sections one at a time, and every time I run the build step, only genuinely new LaTeX will need to get converted. LaTeX that got processed during a previous run already wrote files to disk, so the latex-loader just bypasses the conversion process entirely for those LaTeX blocks, and so the build really only does exactly as much work as it needs to do to get the data transformed.&lt;/p&gt;
 &lt;p&gt;Needless to say, I am chuffed to bits about this, and if you have any questions about the process, feel free to reach out to me &lt;a href="https://twitter.com/TheRealPomax"&gt;on twitter&lt;/a&gt; or &lt;a href="https://github.com/Pomax/BezierInfo-2/issues"&gt;on github&lt;/a&gt;, and I'll be happy to talk about it more.&lt;/p&gt;
 </description>
 <category>React</category>
