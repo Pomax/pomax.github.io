@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Tue, 19 Jan 2016 19:59:51 GMT</lastBuildDate>
-<pubDate>Tue, 19 Jan 2016 19:59:51 GMT</pubDate>
+<lastBuildDate>Tue, 19 Jan 2016 20:01:00 GMT</lastBuildDate>
+<pubDate>Tue, 19 Jan 2016 20:01:00 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> "git init" your way to peace of mind.</title>
@@ -27,13 +27,13 @@
 &lt;p&gt;Every time you make changes to your files, even if you're not done but you made some headway on them and feel like now would be a good time to take a snapshot: take a snapshot!&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;code&gt;$&amp;gt; git add -A&lt;/code&gt; (tell git to look at &lt;em&gt;all&lt;/em&gt; the changes that were made since the last snapshot)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;$&amp;gt;git commit -m "give your snapshot a name and/or description here"&lt;/code&gt; (include the quotes)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;$&amp;gt; git commit -m "give your snapshot a name and/or description here"&lt;/code&gt; (include the quotes)&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Done. No syncing with the internet, no complicated workflow stuff, just &lt;code&gt;git add&lt;/code&gt; to add all the changes, and then &lt;code&gt;git commit&lt;/code&gt; to commit the snapshot to the version history.&lt;/p&gt;
 &lt;h2 id="okay-i-ve-done-that-and-then-a-few-minutes-later-i-ruined-all-my-files-what-now-"&gt;Okay, I've done that! And then a few minutes later I ruined all my files! What now!?!?!&lt;/h2&gt;
 &lt;p&gt;Say you accidentally deleted the files you needed from your project dir, and then to make things worse you also saved empty files on top of that because your text editor spazzed out! Oh no! If you didn't have &lt;code&gt;git&lt;/code&gt; managing your version control, you'd be completely screwed!&lt;/p&gt;
 &lt;p&gt;But you have git managing your snapshot history, and as long as you still have its &lt;code&gt;.git&lt;/code&gt; dir, what you just did is effectively insignificant: just tell git to restore your last snapshot:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;$&amp;gt;git reset --hard&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;$&amp;gt; git reset --hard&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;And done. All your files are back, in the state they were in during the last snapshot. Sure, you may have lost a few minutes of work, but between that and "I lost everything", I'm pretty sure we'd both pick the few minutes of work lost option.&lt;/p&gt;
 &lt;h2 id="it-worked-but-then-i-messed-up-again-and-this-time-i-also-deleted-my-git-directory-"&gt;It worked! But then I messed up &lt;em&gt;again&lt;/em&gt; and this time I also deleted my &lt;code&gt;.git&lt;/code&gt; directory!!&lt;/h2&gt;
 &lt;p&gt;That's the only way to make sure &lt;code&gt;git&lt;/code&gt; can't help you anymore. If your workflow is such that you &lt;em&gt;can&lt;/em&gt; delete entire directories, then really you need to get yourself some remote syncing/backup solution. That's kind of out of scope for this short post on "version control your stuff already, you are smart enough to understand the need for it", but you could look at things like &lt;a href="https://www.dropbox.com/"&gt;Dropbox&lt;/a&gt; and/or &lt;a href="https://www.backblaze.com"&gt;backblaze&lt;/a&gt;. If your work is that important, why are you not paying the $5/mo to properly protect &lt;em&gt;all the data on your computer&lt;/em&gt;?&lt;/p&gt;
