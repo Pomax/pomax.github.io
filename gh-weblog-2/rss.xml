@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Tue, 19 Jan 2016 19:54:11 GMT</lastBuildDate>
-<pubDate>Tue, 19 Jan 2016 19:54:11 GMT</pubDate>
+<lastBuildDate>Tue, 19 Jan 2016 19:54:24 GMT</lastBuildDate>
+<pubDate>Tue, 19 Jan 2016 19:54:24 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> "git init" your way to peace of mind.</title>
@@ -44,7 +44,8 @@
 &lt;p&gt;Go use version control. You &lt;em&gt;litearlly&lt;/em&gt; have no excuse not to. And if you have any questions or comments, you can either leave those over on github (see the link below this post) or just tweet at me &lt;a href="http://twitter.com/TheRealPomax"&gt;@TheRealPomax&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Version control your files, because you shouldn't be able to be your own enemy.&lt;/p&gt;
 </description>
-
+<category>Git</category>
+<category>Version Control</category>
 <link>http://pomax.github.io/#gh-weblog-1453231679399</link>
 <guid>http://pomax.github.io/#gh-weblog-1453231679399</guid>
 <pubDate>Tue, 19 Jan 2016 19:27:59 GMT</pubDate>
