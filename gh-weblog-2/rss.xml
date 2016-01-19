@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Tue, 19 Jan 2016 20:07:45 GMT</lastBuildDate>
-<pubDate>Tue, 19 Jan 2016 20:07:45 GMT</pubDate>
+<lastBuildDate>Tue, 19 Jan 2016 20:09:06 GMT</lastBuildDate>
+<pubDate>Tue, 19 Jan 2016 20:09:06 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> "git init" your way to peace of mind.</title>
@@ -50,7 +50,7 @@
 &lt;li&gt;&lt;code&gt;$&amp;gt;git checkout dbcaf87689facb6bcb6f9eb786fs9&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Boom, git changes everything to match what they were at the time I took that snapshot. I can copy the bits I need onto my desktop, then make sure to put me back on where I just was&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;$&amp;gt;git reset master&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;$&amp;gt; git reset master&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;This changes all my files to where I just was again, and I can go on with my life. So handy!&lt;/p&gt;
 &lt;h1 id="that-s-it-we-re-done-"&gt;That's it, we're done.&lt;/h1&gt;
 &lt;p&gt;Go use version control. You &lt;em&gt;litearlly&lt;/em&gt; have no excuse not to. And if you have any questions or comments, you can either leave those over on github (see the link below this post) or just tweet at me &lt;a href="http://twitter.com/TheRealPomax"&gt;@TheRealPomax&lt;/a&gt;.&lt;/p&gt;
