@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Tue, 19 Jan 2016 20:01:00 GMT</lastBuildDate>
-<pubDate>Tue, 19 Jan 2016 20:01:00 GMT</pubDate>
+<lastBuildDate>Tue, 19 Jan 2016 20:07:45 GMT</lastBuildDate>
+<pubDate>Tue, 19 Jan 2016 20:07:45 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> "git init" your way to peace of mind.</title>
@@ -40,6 +40,18 @@
 &lt;p&gt;Also, if you have any kind of user account control, make sure to set the &lt;code&gt;.git&lt;/code&gt; directory (but not its content) to read-only, so that even if you accidentally try to delete it, your OS will go "hey you can't actually delete this dir, okay? you're going to have to unlock it before I can do that for you". Depending on your OS the way you do this differs, but again instead of telling you to look up how to do that, I'm just going to tell you.&lt;/p&gt;
 &lt;p&gt;On Linux, Unix, and OSX, you can use the terminal to issue &lt;code&gt;$&amp;gt;chmod 0444 .git&lt;/code&gt; in your project's directory, which sets the permissions for the ".git" dir (but not its content) to read-only. Unless you're deleting things with &lt;code&gt;rm&lt;/code&gt;, that dir will be relatively safe now.&lt;/p&gt;
 &lt;p&gt;On windows, use any filemanager and right click the dir's folder, and then make sure to check the "read-only" box. On windows deleting the .git dir is usually less of a problem because the dir's marked as "hidden". You'll see it if you're a power user who unhides system and hidden dirs/files, but in normal use you won't see it, and thus won't accidentally delete it.&lt;/p&gt;
+&lt;h2 id="i-didn-t-actually-mess-anything-up-but-i-d-like-to-look-at-an-old-snapshot-"&gt;I didn't actually mess anything up, but I'd like to look at an old snapshot...&lt;/h2&gt;
+&lt;p&gt;Yeah that's a thing you can do. You can scroll through your snapshot history by using &lt;code&gt;$&amp;gt; git log&lt;/code&gt;, which will tell show your the name/descriptions for each snapshot (which is why you want to at least use sensible naming/descriptions. A single dot is fast to write, but useless if you ever need to go through your history), tied to a git "commit hash", which is a long hexadecimal string that uniquely identifies that snapshot for the git application. Say I need last week's version of a novel I'm writing, because I rewrote half a chapter but I remember there was a paragraph that had super sweet phrasing and I want it back:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;$&amp;gt; git add -A&lt;/code&gt; because I don't want to lose any work&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;$&amp;gt; git commit -m "midday work, somedate-2016"&lt;/code&gt; so that git has a snapshot for where I am right now.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;$&amp;gt; git log&lt;/code&gt;, to see my history&lt;/li&gt;
+&lt;li&gt;Notice that "end of day, Monday, week 2, 2016" has commit "dbcaf87689facb6bcb6f9eb786fs9".&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;$&amp;gt;git checkout dbcaf87689facb6bcb6f9eb786fs9&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Boom, git changes everything to match what they were at the time I took that snapshot. I can copy the bits I need onto my desktop, then make sure to put me back on where I just was&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;$&amp;gt;git reset master&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;This changes all my files to where I just was again, and I can go on with my life. So handy!&lt;/p&gt;
 &lt;h1 id="that-s-it-we-re-done-"&gt;That's it, we're done.&lt;/h1&gt;
 &lt;p&gt;Go use version control. You &lt;em&gt;litearlly&lt;/em&gt; have no excuse not to. And if you have any questions or comments, you can either leave those over on github (see the link below this post) or just tweet at me &lt;a href="http://twitter.com/TheRealPomax"&gt;@TheRealPomax&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Version control your files, because you shouldn't be able to be your own enemy.&lt;/p&gt;
