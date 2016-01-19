@@ -956,7 +956,23 @@
     "title": " React with LaTeX, without needing client-side Mathjax",
     "created": 1451617530567,
     "published": 1451617530567,
-    "updated": 1451617535563,
-    "tags": []
+    "updated": 1452033020806,
+    "tags": [
+      "React",
+      "LaTeX",
+      "MathJax",
+      "Webpack"
+    ]
+  },
+  "2016-01-19-19-27-59": {
+    "id": "2016-01-19-19-27-59",
+    "title": " \"git init\" your way to peace of mind.",
+    "created": 1453231679399,
+    "published": 1453231679399,
+    "updated": 1453234715405,
+    "tags": [
+      "Git",
+      "Version Control"
+    ]
   }
 }
