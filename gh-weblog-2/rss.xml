@@ -5,14 +5,14 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Tue, 19 Jan 2016 19:54:24 GMT</lastBuildDate>
-<pubDate>Tue, 19 Jan 2016 19:54:24 GMT</pubDate>
+<lastBuildDate>Tue, 19 Jan 2016 19:59:34 GMT</lastBuildDate>
+<pubDate>Tue, 19 Jan 2016 19:59:34 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> "git init" your way to peace of mind.</title>
 <description>&lt;p&gt;This is going to be a short post, but it's one that can make the difference between you being happy, and crying with your head in your hands because you absolutely ruined a file and hit save.  I'm basically going to tell you to use version control for stuff that matters, but rather than letting you figure out how to do that, I'm simply going to straight up tell you.&lt;/p&gt;
 &lt;h2 id="what-do-i-need-version-control-for-i-don-t-program"&gt;What do I need version control for, I don't program&lt;/h2&gt;
-&lt;p&gt;Who cares about programming? Do you write text on your computer? Maybe Word docs? A personal web page? Blog entries as .txt files you'll copy-paste into wordpress later? It really doesn't care, the real question is "do you have folders/directories with data in them that you change every now and then, and that you might mess up because you can accidentally hit save and overwrite them, or accidentally hit delete and lose them forever?".&lt;/p&gt;
+&lt;p&gt;Who cares about programming? Do you write text on your computer? Maybe Word docs? A personal web page? Blog entries as .txt files you'll copy-paste into wordpress later? It really doesn't matter: the real question is "do you have folders/directories with data in them that you change every now and then, and that you might mess up because you can accidentally hit save and overwrite them, or accidentally hit delete and lose them forever?".&lt;/p&gt;
 &lt;p&gt;Because the answer is pretty much guaranteed "yes", and you could try to be diligent about never hitting save or delete, but you're human, and you're going to mess up. Maybe not today, maybe not next, week, but chances are pretty much 100% at some point, you'll mess up.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;so use git&lt;/em&gt;&lt;/p&gt;
 &lt;h2 id="what-do-i-need-git-for-i-don-t-want-to-put-my-stuff-online"&gt;What do I need "git" for, I don't want to put my stuff online&lt;/h2&gt;
