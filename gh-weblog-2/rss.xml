@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Tue, 19 Jan 2016 20:11:36 GMT</lastBuildDate>
-<pubDate>Tue, 19 Jan 2016 20:11:36 GMT</pubDate>
+<lastBuildDate>Tue, 19 Jan 2016 20:16:41 GMT</lastBuildDate>
+<pubDate>Tue, 19 Jan 2016 20:16:41 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> "git init" your way to peace of mind.</title>
@@ -54,6 +54,8 @@
 &lt;p&gt;This changes all my files to where I just was again, and I can go on with my life. So handy!&lt;/p&gt;
 &lt;h2 id="what-else-can-i-do-"&gt;What else can I do?&lt;/h2&gt;
 &lt;p&gt;Quite a lot, but all of that's covered by &lt;a href="https://git-scm.com/book/en/v2"&gt;the git book&lt;/a&gt;, and a lot of it is mostly irrelevant unless you also want to do remote syncing of your data. Still, good read if you really care about your data.&lt;/p&gt;
+&lt;h2 id="what-if-the-command-line-is-too-unfamiliar-to-me-"&gt;What if the command line is too unfamiliar to me?&lt;/h2&gt;
+&lt;p&gt;You can use the &lt;code&gt;git-gui&lt;/code&gt; command. This will ask you (if you "just run it") whether to create a new repository, or manage an existing one, so you can do &lt;/p&gt;
 &lt;h1 id="that-s-it-we-re-done-"&gt;That's it, we're done.&lt;/h1&gt;
 &lt;p&gt;Go use version control. You &lt;em&gt;litearlly&lt;/em&gt; have no excuse not to. And if you have any questions or comments, you can either leave those over on github (see the link below this post) or just tweet at me &lt;a href="http://twitter.com/TheRealPomax"&gt;@TheRealPomax&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Version control your files, because you shouldn't be able to be your own enemy.&lt;/p&gt;
