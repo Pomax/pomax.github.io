@@ -5,9 +5,50 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Tue, 05 Jan 2016 22:30:25 GMT</lastBuildDate>
-<pubDate>Tue, 05 Jan 2016 22:30:25 GMT</pubDate>
+<lastBuildDate>Tue, 19 Jan 2016 19:54:11 GMT</lastBuildDate>
+<pubDate>Tue, 19 Jan 2016 19:54:11 GMT</pubDate>
 <ttl>1440</ttl>
+<item>
+<title> "git init" your way to peace of mind.</title>
+<description>&lt;p&gt;This is going to be a short post, but it's one that can make the difference between you being happy, and crying with your head in your hands because you absolutely ruined a file and hit save.  I'm basically going to tell you to use version control for stuff that matters, but rather than letting you figure out how to do that, I'm simply going to straight up tell you.&lt;/p&gt;
+&lt;h2 id="what-do-i-need-version-control-for-i-don-t-program"&gt;What do I need version control for, I don't program&lt;/h2&gt;
+&lt;p&gt;Who cares about programming? Do you write text on your computer? Maybe Word docs? A personal web page? Blog entries as .txt files you'll copy-paste into wordpress later? It really doesn't care, the real question is "do you have folders/directories with data in them that you change every now and then, and that you might mess up because you can accidentally hit save and overwrite them, or accidentally hit delete and lose them forever?".&lt;/p&gt;
+&lt;p&gt;Because the answer is pretty much guaranteed "yes", and you could try to be diligent about never hitting save or delete, but you're human, and you're going to mess up. Maybe not today, maybe not next, week, but chances are pretty much 100% at some point, you'll mess up.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;so use git&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="what-do-i-need-git-for-i-don-t-want-to-put-my-stuff-online"&gt;What do I need "git" for, I don't want to put my stuff online&lt;/h2&gt;
+&lt;p&gt;Yeah, common misconception. "git" has nothing to do with "putting stuff online", but has everything to do with "being version control software". In order to be successful version control software, you need to be able to do remote syncing because the vast majority of version controlled data is collaborative data, but it's 100% not necessary for the version control part, so here's what you do:&lt;/p&gt;
+&lt;h2 id="safeguard-your-data-from-you-"&gt;Safeguard your data from &lt;em&gt;you&lt;/em&gt;&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;install &lt;a href="https://git-scm.com/downloads"&gt;git&lt;/a&gt;. It's a few clicks, just do it.&lt;/li&gt;
+&lt;li&gt;For any dir/folder that holds a project you do work on, run "git init". If you are familiar with the command line, it's literally just &lt;code&gt;$&amp;gt; cd your/project/dir&lt;/code&gt; followed by &lt;code&gt;$&amp;gt; git init&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Awesome, you now have version control running for that dir/folder.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="okay-what-s-next-"&gt;Okay, what's next?&lt;/h2&gt;
+&lt;p&gt;Every time you make changes to your files, even if you're not done but you made some headway on them and feel like now would be a good time to take a snapshot: take a snapshot!&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;$&amp;gt; git add -A&lt;/code&gt; (tell git to look at &lt;em&gt;all&lt;/em&gt; the changes that were made since the last snapshot)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;$&amp;gt;git commit -m "give your snapshot a name and/or description here"&lt;/code&gt; (include the quotes)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Done. No syncing with the internet, no complicated workflow stuff, just &lt;code&gt;git add&lt;/code&gt; to add all the changes, and then &lt;code&gt;git commit&lt;/code&gt; to commit the snapshot to the version history.&lt;/p&gt;
+&lt;h2 id="okay-i-ve-done-that-and-then-a-few-minutes-later-i-ruined-all-my-files-what-now-"&gt;Okay, I've done that! And then a few minutes later I ruined all my files! What now!?!?!&lt;/h2&gt;
+&lt;p&gt;Say you accidentally deleted the files you needed from your project dir, and then to make things worse you also saved empty files on top of that because your text editor spazzed out! Oh no! If you didn't have &lt;code&gt;git&lt;/code&gt; managing your version control, you'd be completely screwed!&lt;/p&gt;
+&lt;p&gt;But you have git managing your snapshot history, and as long as you still have its &lt;code&gt;.git&lt;/code&gt; dir, what you just did is effectively insignificant: just tell git to restore your last snapshot:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;$&amp;gt;git reset --hard&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;And done. All your files are back, in the state they were in during the last snapshot. Sure, you may have lost a few minutes of work, but between that and "I lost everything", I'm pretty sure we'd both pick the few minutes of work lost option.&lt;/p&gt;
+&lt;h2 id="it-worked-but-then-i-messed-up-again-and-this-time-i-also-deleted-my-git-directory-"&gt;It worked! But then I messed up &lt;em&gt;again&lt;/em&gt; and this time I also deleted my &lt;code&gt;.git&lt;/code&gt; directory!!&lt;/h2&gt;
+&lt;p&gt;That's the only way to make sure &lt;code&gt;git&lt;/code&gt; can't help you anymore. If your workflow is such that you &lt;em&gt;can&lt;/em&gt; delete entire directories, then really you need to get yourself some remote syncing/backup solution. That's kind of out of scope for this short post on "version control your stuff already, you are smart enough to understand the need for it", but you could look at things like &lt;a href="https://www.dropbox.com/"&gt;Dropbox&lt;/a&gt; and/or &lt;a href="https://www.backblaze.com"&gt;backblaze&lt;/a&gt;. If your work is that important, why are you not paying the $5/mo to properly protect &lt;em&gt;all the data on your computer&lt;/em&gt;?&lt;/p&gt;
+&lt;p&gt;Also, if you have any kind of user account control, make sure to set the &lt;code&gt;.git&lt;/code&gt; directory (but not its content) to read-only, so that even if you accidentally try to delete it, your OS will go "hey you can't actually delete this dir, okay? you're going to have to unlock it before I can do that for you". Depending on your OS the way you do this differs, but again instead of telling you to look up how to do that, I'm just going to tell you.&lt;/p&gt;
+&lt;p&gt;On Linux, Unix, and OSX, you can use the terminal to issue &lt;code&gt;$&amp;gt;chmod 0444 .git&lt;/code&gt; in your project's directory, which sets the permissions for the ".git" dir (but not its content) to read-only. Unless you're deleting things with &lt;code&gt;rm&lt;/code&gt;, that dir will be relatively safe now.&lt;/p&gt;
+&lt;p&gt;On windows, use any filemanager and right click the dir's folder, and then make sure to check the "read-only" box. On windows deleting the .git dir is usually less of a problem because the dir's marked as "hidden". You'll see it if you're a power user who unhides system and hidden dirs/files, but in normal use you won't see it, and thus won't accidentally delete it.&lt;/p&gt;
+&lt;h1 id="that-s-it-we-re-done-"&gt;That's it, we're done.&lt;/h1&gt;
+&lt;p&gt;Go use version control. You &lt;em&gt;litearlly&lt;/em&gt; have no excuse not to. And if you have any questions or comments, you can either leave those over on github (see the link below this post) or just tweet at me &lt;a href="http://twitter.com/TheRealPomax"&gt;@TheRealPomax&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Version control your files, because you shouldn't be able to be your own enemy.&lt;/p&gt;
+</description>
+
+<link>http://pomax.github.io/#gh-weblog-1453231679399</link>
+<guid>http://pomax.github.io/#gh-weblog-1453231679399</guid>
+<pubDate>Tue, 19 Jan 2016 19:27:59 GMT</pubDate>
+</item>
 <item>
 <title> React with LaTeX, without needing client-side Mathjax</title>
 <description>&lt;p&gt;It's no secret that I like working with &lt;a href="https://facebook.github.io/react"&gt;React&lt;/a&gt;, and that I like &lt;a href="https://en.wikipedia.org/wiki/LaTeX"&gt;LaTeX&lt;/a&gt; for my maths, and that I like &lt;a href="https://mathjax.org"&gt;MathJax&lt;/a&gt; for my LaTeX on the web. What I don't like, though, is having to wait 20 seconds for a long article with lots of maths to load client-side, constantly changing the page dimensions as it does so. Especially if you're loading it mid-page and then MathJax kicks in and all the content keeps being pushed down. And again. And again, etc. etc.&lt;/p&gt;
@@ -777,61 +818,5 @@ function escapeBlockLaTeX(source) {
 <link>http://pomax.github.io/#gh-weblog-1438891326649</link>
 <guid>http://pomax.github.io/#gh-weblog-1438891326649</guid>
 <pubDate>Thu, 06 Aug 2015 20:02:06 GMT</pubDate>
-</item>
-<item>
-<title> A Love letter to Flickr</title>
-<description>&lt;h2 id="-dear-flickr"&gt;“Dear Flickr&lt;/h2&gt;
-&lt;p&gt;“&lt;a href="https://www.flickr.com/Pomax"&gt;We go back a few years, don't we&lt;/a&gt;. We started hanging out in 2006, and officially hooked up in May of 2007, and have been together since. I've not always spent as much time with you as I would have liked, but the relationship was steady, and when I took photographs, you showed them to the world, in the hopes that others would enjoy them as much as we did.&lt;/p&gt;
-&lt;p&gt;“Over the years, you started to take the helm more and more, deciding what we could show our visitors, taking way the short descriptions I worked so hard on to make sure visitors understood what they were looking at, turning my gallery into a "wallpaper" because some of your friends saw other people do that and it looked cool, adding ways to display my photographs for me that I didn't appreciate, and most recently, claiming that people prefer to view my works as if they were looking through my portfolio as a "camera roll".&lt;/p&gt;
-&lt;p&gt;“I think you need to come back to me and sit down for a bit, so we can talk about this. You've started running this Photography exhibit on your own, without so much as even asking me, or letting me say "no, this is not how I want people to experience our shared efforts, they are bad", just steamrolling ahead like you know what's best for us.&lt;/p&gt;
-&lt;h2 id="-you-used-to-be-about-showing-the-world-photographs"&gt;“You used to be about showing the world photographs&lt;/h2&gt;
-&lt;p&gt;“Remember when you loved photography? You were enthusiastic about tons of people having photos they wanted to show the world, with as much detail as possible, curated the way they thought the photos worked best, with a default exhibit space that allowed people to browse the walls, walk up to photos that looked interesting, and read the descriptions, even letting them walk over to the more detailed floor guide for each work to get all the additional information that we, the curators, thought would be pertinent.&lt;/p&gt;
-&lt;p&gt;“Those were happy times. You ran the art gallery, I had the art, and people could come in and immediately enjoy what we, together, had to offer.&lt;/p&gt;
-&lt;p&gt;“But then you shut down the art gallery, and started a hip, new, place. One I did not understand.&lt;/p&gt;
-&lt;h2 id="-i-just-wanted-the-world-to-enjoy-my-work"&gt;“I just wanted the world to enjoy my work&lt;/h2&gt;
-&lt;p&gt;“Your hip new place took the works I had made, and instead of hanging them on the wall, easy to walk past, with titles and descriptions that people could read and feel good about, you decided to just tile a single wall with every photo I ever took. I don't know how you did it, but the wall ran on forever. Every photograph we ever exhibited was on it, but none of them said what they were of, or gave any details about why it was taken, or worth looking at.&lt;/p&gt;
-&lt;p&gt;“I confess, I didn't understand why you did it. I hated it. What use is a wall that is so long that people can't even get to the end? Is there even an end? I never got to it - much like everyone else, after walking for 5 minutes I was so overstimulated with just contextless, meaningless "pictures" that I left my own exhibit and went across town to galleries like &lt;a href="http://imgur.com"&gt;Imgur&lt;/a&gt;, and if I felt particularly depressed, &lt;a href="http://fukung.net"&gt;Fukung&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;“You made me unhappy.&lt;/p&gt;
-&lt;h2 id="-you-did-realise-you-were-hurting-our-relationship-i-think-"&gt;“You did realise you were hurting our relationship, I think...&lt;/h2&gt;
-&lt;p&gt;“I stuck with you, but I wasn't happy. You were doing things that I saw didn't just hurt me, but were hurting everyone around us. All our friends who you represented felt the same. Some of them initially liked the hip new look, but many of them just didn't understand it. How did this help people enjoy our work?&lt;/p&gt;
-&lt;p&gt;“So you backed off a little. You spaced out the artworks a bit, so people wouldn't experience sensory overload so much, but you still left off the descriptions, saying people would reach for the exhibit guide if they wanted more information.&lt;/p&gt;
-&lt;p&gt;“But that's not how exhibits work, and user visits for individual works plummeted.&lt;/p&gt;
-&lt;p&gt;“I think you noticed that, too. I had hoped you would do the sensible thing, but I think you took it the wrong way and started doing things that felt, to me, like desperation. Instead of focussing on better exhibit organisation, and playbooks for how to set up specific kinds of exhibits, you decided to move our gallery to the conference center you just bought, and open it up to everyone, for free, with unlimited gallery space for all.&lt;/p&gt;
-&lt;p&gt;“When I asked you how you were paying for all of this, you smiled and said "we're getting sponsored by some big name companies, and we'll be hanging their product posters in between photographs". I can't believe you said that, it's like I was talking to someone who didn't care about photography anymore, or even exhibiting good collections of art works. &lt;/p&gt;
-&lt;p&gt;“This was someone who had lost interest and was finding pleasures in figuring out new and creative ways to make numbers go up.&lt;/p&gt;
-&lt;p&gt;“You even tried to cancel our exhibition contract, saying that because you now allowed everyone, of course that included me.&lt;/p&gt;
-&lt;p&gt;“That hurt.&lt;/p&gt;
-&lt;h2 id="-and-you-became-a-bit-anti-social-too-"&gt;“And you became a bit anti-social, too.&lt;/h2&gt;
-&lt;p&gt;“Remember how we could see what friends were exhibiting in your other galleries? You changed that so that it wasn't even possible to see what a single friend was doing. Where we used to be able to see that seven friends had updated their exhibition space, now we needed to scroll through a long, unorganized list of updates. It became impossible to keep tabs on what other people were doing in the photograph space we once ran together. &lt;/p&gt;
-&lt;p&gt;“What's the point of recommending following "people I might know", for instance, (I think you liked Twitter, you clearly just repeated what they were doing, but they had a reason for it, and you, I think, didn't) if I then cannot see what these people have been doing? It was confusing.&lt;/p&gt;
-&lt;p&gt;“You were confusing me, Flickr.&lt;/p&gt;
-&lt;h2 id="-it-s-true-i-tried-going-it-alone-for-a-bit"&gt;“It's true: I tried going it alone for a bit&lt;/h2&gt;
-&lt;p&gt;“You were driving me away, to the point where I was looking for ways to get my artwork back from you, in a way that would let me exhibit it the way we used to do. Letting people walk around the space, and lean over to read a description here and there, grabbing the exhibit guide when they really wanted, and letting them get as close to the works as they wanted. Remember that blank wall we used to have where people could take individual photographs and hang them up, on their own? I wanted to add that back in, too.&lt;/p&gt;
-&lt;p&gt;“I couldn't find any art galleries that would do what you used to do. So I rented a space, and &lt;a href="http://flickr.nihongoresources.com/Pomax"&gt;started my own&lt;/a&gt;. I wrote a playbook on how to &lt;a href="https://github.com/Pomax/flickrmirror"&gt;set up a gallery in our old style&lt;/a&gt;, and for a while I was happy. I could tell people to just visit my gallery while you did you own thing at your corporate conference center and I could ignore you.&lt;/p&gt;
-&lt;p&gt;“I even came up with some ideas that worked for me, like a film strip while navigating, and I sent you text messages telling you what I'd done and that I didn't like what you were doing right now, but felt it would benefit everyone if you copied those ideas. I think you acted on some of those texts, although of course not on all of them.&lt;/p&gt;
-&lt;p&gt;“Ultimately, of course, I couldn't drive enough people to my own little art gallery. They all knew about your conference center, and while I had a small clique of friends who knew where my exhibits "really" ran, it was too much effort to keep up with multiple exhibitions across town.&lt;/p&gt;
-&lt;h2 id="-it-feels-like-you-re-coming-back-though"&gt;“It feels like you're coming back, though&lt;/h2&gt;
-&lt;p&gt;“I've not been the nicest to you, I know. We drifted apart, but it feels like you realised that. Or, at least, understand that what you've been doing has perhaps been more about "just making numbers go up" than about "getting the world to love the exhibits you run", and you've started to change your ways a little.&lt;/p&gt;
-&lt;p&gt;“I very recently posted a short notice in a local paper about how I would love it if you brought back personal contracts, so that we could track exhibit numbers together, and the next day you announced that was coming back. I was overjoyed!&lt;/p&gt;
-&lt;p&gt;“There's a ways to go yet, but it feels like we're at a point in this relationship where I can either walk away, or I can confess all these frustrations I've had over the last seven years, and hope that some of them make sense to you, even if they make you angry because I'm pointing them out. I think you deserve to be angry at me, as long as we can work together to channel that anger, and bring back the joy of exhibiting photographs to the world.&lt;/p&gt;
-&lt;p&gt;“There's some odd things I don't understand, that maybe you can explain, or maybe you can look at and go "yeah, these things don't make much sense, I was just trying out things to see whether any of it would stick". The Camera Roll, for instance, serves no purpose that I can tell. Maybe you have a plan for it, but it feels like something you should take back out until you know what that is.&lt;/p&gt;
-&lt;p&gt;“You're still just showing photographs on the walls, instead of putting up the little description plaques next to them. &lt;/p&gt;
-&lt;p&gt;“It's still very hard for people to see the full size photographs, too. Instead of letting people walk up close to each work, you did something clever with lenses, and instead when people try to walk closer, you keep them where they are and just zoom in on the reduced work. I... don't think that's a nice thing to do to people.&lt;/p&gt;
-&lt;p&gt;“Sure, you added "lots of interactions" for people, but you haven't labeled any of them. They're just hieroglyphs that people need to guess at, and there are so many of them that it feels like you're, at least at this point in your life, preferring option overload over just letting people experience the works at their own pace.&lt;/p&gt;
-&lt;p&gt;“But you're also improved some things, and that's the part that I think matters most.&lt;/p&gt;
-&lt;h2 id="-let-s-talk-"&gt;“Let's talk?&lt;/h2&gt;
-&lt;p&gt;“I'm writing you this letter because I don't know how to talk to you right now. I tried calling a few times, but it goes to an answering machine that tells me to come to the conference center and leave my issues with the info desk. That's not fair, I think. Of course, you need an info desk for regular questions, or reports of where your exhibits got damaged, or a door got stuck, stuff like that, but the info desk is not a place where you and I can talk about the fundamental changes that I think are hurting not just you and I, but also this town we live in. It used to be full of art galleries, and you've slowly turned it into a wallpaper farm.&lt;/p&gt;
-&lt;p&gt;“That wasn't nice, and I'm sorry for having said that, but that's where we are. Can we talk?&lt;/p&gt;
-&lt;h2 id="-i-still-love-you-but-it-s-hard"&gt;“I still love you, but it's hard&lt;/h2&gt;
-&lt;p&gt;“I don't know what to do, hopefully you still want to be friends, and we can talk this through, but I have no powerful punchline to end this letter with. We both want, I think, to show the world great art, but the way you've been doing it the last few years and allowed other towns to do it better, and rather than learning from that, you've just been adding more and more things that drive more and more people away. I want to help you fix that. I want to bring back spontaneous, discoverable, enjoyable exhibits to our town. Without destroying everything you built up.&lt;/p&gt;
-&lt;h2 id="-with-more-love-than-my-friends-tell-me-you-deserve-"&gt;“With more love than my friends tell me you deserve,&lt;/h2&gt;
-&lt;p&gt;— Pomax”&lt;/p&gt;
-</description>
-<category>Flickr</category>
-<category>Photography</category>
-<category>Love letter</category>
-<link>http://pomax.github.io/#gh-weblog-1438539341719</link>
-<guid>http://pomax.github.io/#gh-weblog-1438539341719</guid>
-<pubDate>Sun, 02 Aug 2015 18:15:41 GMT</pubDate>
 </item></channel>
 </rss>
