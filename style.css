@@ -86,6 +86,27 @@ a:hover {
   color: rgb(80,140,200);
 }
 
+#projects {
+  background: white;
+  font: Verdana;
+}
+
+#projects ul {
+  list-style: outside none none;
+  margin: 0px;
+  padding: 0;
+  padding-left: 1em;
+  margin-bottom: 10px;
+}
+
+#projects ul li {
+  display: inline-block;
+}
+
+#projects ul li + li:before {
+  content: " - ";
+}
+
 #gh-weblog button.authenticate {
   font-size: 1rem;
 }

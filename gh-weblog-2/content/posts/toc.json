@@ -980,7 +980,23 @@
     "title": " A blog post about kitchen knives",
     "created": 1454267122337,
     "published": 1454267122337,
-    "updated": 1454267124523,
-    "tags": []
+    "updated": 1454272634446,
+    "tags": [
+      "Kitchen",
+      "Knives",
+      "Knife"
+    ]
+  },
+  "2016-02-11-18-23-40": {
+    "id": "2016-02-11-18-23-40",
+    "title": "You probably need Chocolate Bread Pudding in your life.",
+    "created": 1455215020166,
+    "published": 1455215020166,
+    "updated": 1455215147840,
+    "tags": [
+      "Cooking",
+      "Baking",
+      "Chocolate"
+    ]
   }
 }
