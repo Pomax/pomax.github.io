@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Wed, 24 Feb 2016 17:41:34 GMT</lastBuildDate>
-<pubDate>Wed, 24 Feb 2016 17:41:34 GMT</pubDate>
+<lastBuildDate>Wed, 24 Feb 2016 18:09:18 GMT</lastBuildDate>
+<pubDate>Wed, 24 Feb 2016 18:09:18 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title>Github changes to icon SVG from fonts, for no clear reason</title>
@@ -19,7 +19,8 @@
 &lt;p&gt;So far so good. Except that's not a reason to switch, that's merely stating the facts. Fonts for icons are hacks. Do they get the job done? Certainly. This does not count towards the "reasons to switch" yet.&lt;/p&gt;
 &lt;h2 id="page-rendering-improvements"&gt;Page rendering improvements&lt;/h2&gt;
 &lt;p&gt;There was an assumption that SVG would improve page performance. However, as they note later, &lt;a href="https://cloud.githubusercontent.com/assets/54012/13176951/eedb1330-d6e3-11e5-8dfb-99932ff7ee25.png"&gt;there's no clear evidence of that&lt;/a&gt;. To be clear: this is completely the right thing to do: you have two possible options, you test both, and then use metrics to determine which one is better. But if there is no real difference then it cannot count as reason to switch. It is in fact a reason to tell others "if this is why you're thinking of switching, it doesn't matter, here's our findings: ..."&lt;/p&gt;
-&lt;p&gt;So we have no reasons to switch yet.&lt;/p&gt;
+&lt;p&gt;I've &lt;a href="http://stackoverflow.com/a/30821089/740553"&gt;talked about this on Stackoverflow&lt;/a&gt; before, and none of that has changed so far.&lt;/p&gt;
+&lt;p&gt;So far, we have no justifiable reason to switch yet (other than just "let's do this").&lt;/p&gt;
 &lt;h2 id="accessibility"&gt;Accessibility&lt;/h2&gt;
 &lt;p&gt;This one's interesting. "some people use their own fonts, so our fonts don't render" may be a problem. Github has &lt;em&gt;a lot&lt;/em&gt; of users, but "people using their own fonts" typically also means those people do so by choice. If overriding the icon font is adverse, they presumably have the power to each fix that, but chose not to. That's not Github's responsibility to fix, but it can certainly be something Github can fix "as one party" instead of every user who's affected fixing it "as a million parties". It's not an argument to switch from fonts to SVG in general, but it's an argument for why Github, as a trusted and liked millions-of-users-daily service, to lend a helping hand.&lt;/p&gt;
 &lt;p&gt;The second argument concerns screen readers, but glosses over the nature of an icon in a UI. Icons are non-semantic, they're decoration around the actual thing. The hypothetical ability to add readable &lt;code&gt;alt&lt;/code&gt; texts because the icons are now true images does not apply: if your icon needs an alt-text read out to the user in order for them to understand your UI, that icon is not an icon, it's a genuine semantic element and you should not be using an icon to hide what it is. In fact, you confuse &lt;em&gt;everyone&lt;/em&gt; with that kind of icon use, not just people who need, or are better served by using, screen readers.&lt;/p&gt;
