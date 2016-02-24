@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Wed, 24 Feb 2016 17:21:41 GMT</lastBuildDate>
-<pubDate>Wed, 24 Feb 2016 17:21:41 GMT</pubDate>
+<lastBuildDate>Wed, 24 Feb 2016 17:22:28 GMT</lastBuildDate>
+<pubDate>Wed, 24 Feb 2016 17:22:28 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title>Github changes to icon SVG from fonts, for no clear reason</title>
@@ -17,7 +17,7 @@
 &lt;p&gt;The first section is 100% true. Github notes that "Icon fonts have always been a hack", and they have. Unicode these days comes with dingbats/windings, symbol sets, and emoji, but none of those things are true icons. Icon fonts will typically either inappropriately use "real letter" code points for icons ("you use class &lt;code&gt;.left-arrow&lt;/code&gt; but it renders because it asks the letter &lt;code&gt;a&lt;/code&gt; from the font, which happens to be an icon) or they use PUA (the Private Use Area of fonts) and some kind of substitution ruleset for finding icons in that area (because you can't really type PUA letters on your keyboard).&lt;/p&gt;
 &lt;p&gt;So far so good. Except that's not a reason to switch, that's merely stating the facts. Fonts for icons are hacks. Do they get the job done? Certainly. This does not count towards the "reasons to switch" yet.&lt;/p&gt;
 &lt;h2 id="page-rendering-improvements"&gt;Page rendering improvements&lt;/h2&gt;
-&lt;p&gt;There was an assumption that SVG would improve page performance. However, as they note later, &lt;a href="https://cloud.githubusercontent.com/assets/54012/13176951/eedb1330-d6e3-11e5-8dfb-99932ff7ee25.png"&gt;there's no clear evidence of that&lt;/a&gt;. This is in fact the right thing to do: test which one is better. But if there is no real difference then it cannot count as reason to switch. It is in fact a reason to tell others "if this is why you're thinking of switching, it doesn't matter, here's our findings: ..."&lt;/p&gt;
+&lt;p&gt;There was an assumption that SVG would improve page performance. However, as they note later, &lt;a href="https://cloud.githubusercontent.com/assets/54012/13176951/eedb1330-d6e3-11e5-8dfb-99932ff7ee25.png"&gt;there's no clear evidence of that&lt;/a&gt;. To be clear: this is completely the right thing to do: you have two possible options, you test both, and then use metrics to determine which one is better. But if there is no real difference then it cannot count as reason to switch. It is in fact a reason to tell others "if this is why you're thinking of switching, it doesn't matter, here's our findings: ..."&lt;/p&gt;
 &lt;p&gt;So we have no reasons to switch yet.&lt;/p&gt;
 &lt;h2 id="accessibility"&gt;Accessibility&lt;/h2&gt;
 &lt;p&gt;This one's interesting. "some people use their own fonts, so our fonts don't render" may be a problem. Github has &lt;em&gt;a lot&lt;/em&gt; of users, but "people using their own fonts" typically also means those people do so by choice. If overriding the icon font is adverse, they presumably have the power to each fix that, but chose not to. That's not Github's responsibility to fix, but it can certainly be something Github can fix "as one party" instead of every user who's affected fixing it "as a million parties". It's not an argument for "anyone" to switch from fonts to SVG, but it's an argument for Github, as a millions-of-users-daily service, to switch.&lt;/p&gt;
