@@ -5,12 +5,33 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Wed, 24 Feb 2016 16:50:18 GMT</lastBuildDate>
-<pubDate>Wed, 24 Feb 2016 16:50:18 GMT</pubDate>
+<lastBuildDate>Wed, 24 Feb 2016 17:17:49 GMT</lastBuildDate>
+<pubDate>Wed, 24 Feb 2016 17:17:49 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title>Github changes to icon SVG from fonts, for no clear reason</title>
 <description>&lt;p&gt;In a &lt;a href="https://github.com/blog/2112-delivering-octicons-with-svg"&gt;recent post on their blog&lt;/a&gt;, &lt;a href="github.com"&gt;github&lt;/a&gt; announced that  they've moved away from icon fonts in favour of SVG. In itself perfectly fine, use whatever works best, and if fonts aren't working for you, switch; but their explanation of what was wrong makes several kinds of no sense.&lt;/p&gt;
+&lt;p&gt;This is going to be a bit of a rant, feel free to ignore it, but here goes.&lt;/p&gt;
+&lt;p&gt;The images shown on the blog post to show a "badly blurred font icon" vs "a nicely crisp image icon" are both blurry. Neither is particularly better than the other at the scale shown, so there is no case there to determine which is better. They're both bad.&lt;/p&gt;
+&lt;h2 id="icon-font-rendering-issues"&gt;Icon font rendering issues&lt;/h2&gt;
+&lt;p&gt;The first section is 100% true. Github notes that "Icon fonts have always been a hack", and they have. Unicode these days comes with dingbats/windings, symbol sets, and emoji, but none of those things are true icons. Icon fonts will typically either inappropriately use "real letter" code points for icons ("you use class &lt;code&gt;.left-arrow&lt;/code&gt; but it renders because it asks the letter &lt;code&gt;a&lt;/code&gt; from the font, which happens to be an icon) or they use PUA (the Private Use Area of fonts) and some kind of substitution ruleset for finding icons in that area (because you can't really type PUA letters on your keyboard).&lt;/p&gt;
+&lt;p&gt;So far so good. Except that's not a reason to switch, that's merely stating the facts. Fonts for icons are hacks. Do they get the job done? Certainly. This does not count towards the "reasons to switch" yet.&lt;/p&gt;
+&lt;h2 id="page-rendering-improvements"&gt;Page rendering improvements&lt;/h2&gt;
+&lt;p&gt;There was an assumption that SVG would improve page performance. However, as they note later, it didn't. This is in fact the right thing to do: test which one is better. But if there is no real difference then it cannot count as reason to switch. It is in fact a reason to tell others "if this is why you're thinking of switching, it doesn't matter, here's our findings: ..."&lt;/p&gt;
+&lt;p&gt;So we have no reasons to switch yet.&lt;/p&gt;
+&lt;h2 id="accessibility"&gt;Accessibility&lt;/h2&gt;
+&lt;p&gt;This one's interesting. "some people use their own fonts, so our fonts don't render" may be a problem. Github has &lt;em&gt;a lot&lt;/em&gt; of users, but "people using their own fonts" typically also means those people do so by choice. If overriding the icon font is adverse, they presumably have the power to each fix that, but chose not to. That's not Github's responsibility to fix, but it can certainly be something Github can fix "as one party" instead of every user who's affected fixing it "as a million parties". It's not an argument for "anyone" to switch from fonts to SVG, but it's an argument for Github, as a millions-of-users-daily service, to switch.&lt;/p&gt;
+&lt;p&gt;The second argument is about screen readers, but the nature of icons is that they are non-semantic. The hypothetical ability to add readable alt texts does not apply here: if your icon needs an alt-text read in order for your UI to make sense, that icon is not an icon, it's a genuine semantic element and you should not be using an icon to hide what it is. You confuse &lt;em&gt;everyone&lt;/em&gt; with that kind of icon use, not just people who need screen readers.&lt;/p&gt;
+&lt;h2 id="properly-sized-glyphs"&gt;Properly sized glyphs&lt;/h2&gt;
+&lt;p&gt;This one's a bit odd, because it both makes sense and absolutely not. I'm paraphrasing, but this section has a rational along the lines of "vector fonts render horribly at small point sizes" (which is &lt;a href="http://rastertragedy.com"&gt;absolutely true&lt;/a&gt; "as opposed to SVG, which renders pixel-perfect" (which is absolutely false). It's like saying "my bike is horrible at going highway speeds, and that's why we're no longer using the highway" instead of going "and that's why we changed to a car". If you want pixel-perfect icons, use pixel fonts.&lt;/p&gt;
+&lt;p&gt;"But modern fonts are vector fonts!" No, they are not. Modern fonts, in fact, can do vectors, as well as true pixel bitmaps specifically to deal with the issue of "it renders all kinds of bad at low point sizes". In fact, any icon font that doesn't have EBDT (embedded bitmap data) for low point sizes that its vector shapes cannot be cleanly scaled to is a bad icon font. Use a better one.&lt;/p&gt;
+&lt;p&gt;Now, if there are no better ones out there: that would be a great reason to switch to SVG. I like Github and I assume they looked and couldn't find one. But as phrased, this section didn't actually gave a good rationale so much as highlighted that someone didn't understand how modern fonts work and made assumptions about what the problem was. To someone intimately familiar with the inner workings of fonts, this section instead reads as a symptom description, not a problem description, and fixing the symptom does not solve the underlying problem. Any vector graphic will render terribly at certain low point sizes: you've traded the symptom in technology X for the same symptom exposed at different times in technology Y.&lt;/p&gt;
+&lt;h2 id="ease-of-authoring"&gt;Ease of authoring&lt;/h2&gt;
+&lt;p&gt;No two ways about it: if you want to control your icons, SVG is a hell of a lot easier than fonts. Go with SVG! It's the right choice! &lt;/p&gt;
+&lt;h2 id="we-can-animate-them"&gt;We can animate them&lt;/h2&gt;
+&lt;p&gt;Get out. If you're arguing accessibility as part of your rationale, don't even go here.&lt;/p&gt;
+&lt;h1 id="should-github-switch-"&gt;Should Github switch?&lt;/h1&gt;
+&lt;p&gt;Of course they should, it's their site. If they feel better with an SVG solution compared to fonts, then that's all the rationale they need. But then it would be nice if their blog post acknowledged that the only objective justification, performance, turns out to not actually factor into making any difference whatsoever, and that they're doing this mostly because it's easier to work with from a continuous update perspective. I'm sure we'd understand that, too.&lt;/p&gt;
 </description>
 
 <link>http://pomax.github.io/#gh-weblog-1456332505750</link>
