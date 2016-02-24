@@ -5,13 +5,14 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Wed, 24 Feb 2016 18:09:18 GMT</lastBuildDate>
-<pubDate>Wed, 24 Feb 2016 18:09:18 GMT</pubDate>
+<lastBuildDate>Wed, 24 Feb 2016 18:16:23 GMT</lastBuildDate>
+<pubDate>Wed, 24 Feb 2016 18:16:23 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title>Github changes to icon SVG from fonts, for no clear reason</title>
 <description>&lt;p&gt;In a &lt;a href="https://github.com/blog/2112-delivering-octicons-with-svg"&gt;recent post on their blog&lt;/a&gt;, &lt;a href="github.com"&gt;github&lt;/a&gt; announced that  they've moved away from icon fonts in favour of SVG. In itself perfectly fine, use whatever works best, and if fonts aren't working for you, switch; but their explanation of what was wrong makes several kinds of no sense.&lt;/p&gt;
 &lt;p&gt;This is going to be a bit of a rant, it's going to conclude with "should they switch? absolutely! yay github" but the rest of the text is about how their blog post doesn't feel like it actually contains any proper rationale for the move. You can stop reading if you only wanted to know my concluding thoughts. As far as I'm concerned, they did the right thing, for the wrong reasons.&lt;/p&gt;
+&lt;p&gt;Also, I've &lt;a href="http://stackoverflow.com/a/30821089/740553"&gt;talked about this on Stackoverflow&lt;/a&gt; before, so if you ever ran into that post, the following analysis should not come as anything even close to a surprise to you.&lt;/p&gt;
 &lt;h2 id="showing-the-problem"&gt;Showing the problem&lt;/h2&gt;
 &lt;p&gt;The post starts with images that show a "badly blurred font icon" vs "a nicely crisp image icon", except what it really shows are two equally blurry, terrible images. Neither is particularly better than the other at the scale shown; they're differently blurry, but they're both terrible, and using this as a highlight of the problem shows that (unsurprisingly) a vector approach to icons is a weird solution to a problem predominantly caused by small-scale rendering of graphics designed using large scale units. They're both bad, so the rest of the post better be good at explaining why you want the lesser of two "evils" instead of finding a third "good".&lt;/p&gt;
 &lt;h2 id="icon-font-rendering-issues"&gt;Icon font rendering issues&lt;/h2&gt;
@@ -19,7 +20,6 @@
 &lt;p&gt;So far so good. Except that's not a reason to switch, that's merely stating the facts. Fonts for icons are hacks. Do they get the job done? Certainly. This does not count towards the "reasons to switch" yet.&lt;/p&gt;
 &lt;h2 id="page-rendering-improvements"&gt;Page rendering improvements&lt;/h2&gt;
 &lt;p&gt;There was an assumption that SVG would improve page performance. However, as they note later, &lt;a href="https://cloud.githubusercontent.com/assets/54012/13176951/eedb1330-d6e3-11e5-8dfb-99932ff7ee25.png"&gt;there's no clear evidence of that&lt;/a&gt;. To be clear: this is completely the right thing to do: you have two possible options, you test both, and then use metrics to determine which one is better. But if there is no real difference then it cannot count as reason to switch. It is in fact a reason to tell others "if this is why you're thinking of switching, it doesn't matter, here's our findings: ..."&lt;/p&gt;
-&lt;p&gt;I've &lt;a href="http://stackoverflow.com/a/30821089/740553"&gt;talked about this on Stackoverflow&lt;/a&gt; before, and none of that has changed so far.&lt;/p&gt;
 &lt;p&gt;So far, we have no justifiable reason to switch yet (other than just "let's do this").&lt;/p&gt;
 &lt;h2 id="accessibility"&gt;Accessibility&lt;/h2&gt;
 &lt;p&gt;This one's interesting. "some people use their own fonts, so our fonts don't render" may be a problem. Github has &lt;em&gt;a lot&lt;/em&gt; of users, but "people using their own fonts" typically also means those people do so by choice. If overriding the icon font is adverse, they presumably have the power to each fix that, but chose not to. That's not Github's responsibility to fix, but it can certainly be something Github can fix "as one party" instead of every user who's affected fixing it "as a million parties". It's not an argument to switch from fonts to SVG in general, but it's an argument for why Github, as a trusted and liked millions-of-users-daily service, to lend a helping hand.&lt;/p&gt;
