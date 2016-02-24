@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Wed, 24 Feb 2016 17:34:54 GMT</lastBuildDate>
-<pubDate>Wed, 24 Feb 2016 17:34:54 GMT</pubDate>
+<lastBuildDate>Wed, 24 Feb 2016 17:36:42 GMT</lastBuildDate>
+<pubDate>Wed, 24 Feb 2016 17:36:42 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title>Github changes to icon SVG from fonts, for no clear reason</title>
@@ -31,7 +31,8 @@
 &lt;h2 id="we-can-animate-them"&gt;We can animate them&lt;/h2&gt;
 &lt;p&gt;Get out. If you're arguing accessibility as part of your rationale, don't even go here.&lt;/p&gt;
 &lt;h1 id="should-github-switch-"&gt;Should Github switch?&lt;/h1&gt;
-&lt;p&gt;Of course they should, it's their site. If they feel better with an SVG solution compared to fonts, then that's all the rationale they need. But then it would be nice if their blog post acknowledged that the only objective justification, performance, turns out to not actually factor into making any difference whatsoever, and that they're doing this mostly because it's easier to work with from a continuous update perspective. I'm sure we'd understand that, too.&lt;/p&gt;
+&lt;p&gt;Of course they should, it's their site. If they feel better with an SVG solution compared to fonts, then that's all the rationale they need. But then it would be nice if their blog post acknowledged that the only objective justification that was described, performance, turned out to not be significantly impacted by the switch, and that they've gone through with the switch mostly because it's easier to work with from a continuous update perspective, and also quite likely because if you've done all that work already to test deploying SVG instead of fonts, why not flip the switch.&lt;/p&gt;
+&lt;p&gt;I'm sure we'd understand that, too.&lt;/p&gt;
 </description>
 <category>Github</category>
 <category>Fonts</category>
