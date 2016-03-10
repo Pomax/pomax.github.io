@@ -5,13 +5,15 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Thu, 10 Mar 2016 23:16:58 GMT</lastBuildDate>
-<pubDate>Thu, 10 Mar 2016 23:16:58 GMT</pubDate>
+<lastBuildDate>Thu, 10 Mar 2016 23:25:23 GMT</lastBuildDate>
+<pubDate>Thu, 10 Mar 2016 23:25:23 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title>I wrote a  script for Photoshop to export paths as SVG files</title>
-<description>&lt;p&gt;Ever drawn some paths in Photoshop, and wanted to export those paths for use in other, probably not-Adobe, products? Because that's kind of ... impossible.&lt;/p&gt;
-&lt;p&gt;Or, it was, now it isn't, because I needed this functionality and happened to know that Photoshop has a Javascript API. Well... sort of. It has an API for a truly &lt;em&gt;ancient&lt;/em&gt; version of Javascript (an almost 20 year old flavour, in fact), so there were some things that needing some shimming. Basic things like &lt;code&gt;Array.forEach&lt;/code&gt; didn't exist 20 years ago so after writing shims for &lt;code&gt;forEach&lt;/code&gt;, &lt;code&gt;map&lt;/code&gt; and &lt;code&gt;Object.keys&lt;/code&gt;, I was able to write a script that lets you simply call &lt;em&gt;file&lt;/em&gt; → &lt;em&gt;scripts&lt;/em&gt; → &lt;em&gt;browse&lt;/em&gt; and then run it, which immediately generates the SVG code for all your paths as a single SVG document and copies the code for it into your clipboard.&lt;/p&gt;
+<description>&lt;p&gt;Ever drawn some paths in Photoshop, and wanted to export those paths for use in something that &lt;strong&gt;isn't&lt;/strong&gt; Adobe Illustrator? Because that's kind of ... impossible. Photoshop lets you export your working paths specifically for Illustrator, using the &lt;code&gt;.ia&lt;/code&gt; format, but if you want to load it in something else? And heaven forbid, some Open Source package that doesn't even support proprietary formats? You have a problem.&lt;/p&gt;
+&lt;p&gt;Or, "had", because now you can export your paths to SVG instead. I needed this functionality for some glyph tracing I'm doing (tracing in Photoshop, but ultimately the glyph needs to end up in FontForge) and as it so happens I know that Photoshop has a Javascript API. So how hard could it be to create an "export to SVG" option?&lt;/p&gt;
+&lt;p&gt;Well... sort of hard. While PS supports JS, the API it has uses a &lt;em&gt;truly ancient&lt;/em&gt; version of Javascript (an almost 20 year old flavour, in fact), so there were some things that we pretty much rely on these days that simply didn't exist back then. Basic things like &lt;code&gt;Array.forEach&lt;/code&gt; aren't supported, so after writing shims for &lt;code&gt;forEach&lt;/code&gt;, &lt;code&gt;map&lt;/code&gt; and &lt;code&gt;Object.keys&lt;/code&gt;, I was able to write a script that lets you simply call &lt;em&gt;file&lt;/em&gt; → &lt;em&gt;scripts&lt;/em&gt; → &lt;em&gt;browse&lt;/em&gt; and then run it, which immediately generates the SVG code for all your paths as a single SVG document and copies the code for it into your clipboard.&lt;/p&gt;
+&lt;p&gt;Internally, Photoshop stores paths as multiple paths per document, multiple subpaths per path, and each subpath consists of an array of points. Each point is either &lt;/p&gt;
 &lt;p&gt;Done, as the say. Head on over to &lt;a href="https://github.com/Pomax/photoshop-paths-to-SVG"&gt;https://github.com/Pomax/photoshop-paths-to-SVG&lt;/a&gt; to grab the script and let me know if you find it useful or have ideas on how to improve it.&lt;/p&gt;
 </description>
 <category>Photoshop</category>
