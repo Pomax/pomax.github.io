@@ -5,9 +5,20 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Sun, 28 Feb 2016 18:16:05 GMT</lastBuildDate>
-<pubDate>Sun, 28 Feb 2016 18:16:05 GMT</pubDate>
+<lastBuildDate>Thu, 10 Mar 2016 23:16:41 GMT</lastBuildDate>
+<pubDate>Thu, 10 Mar 2016 23:16:41 GMT</pubDate>
 <ttl>1440</ttl>
+<item>
+<title>I wrote a  script for Photoshop to export paths as SVG files</title>
+<description>&lt;p&gt;Ever drawn some paths in Photoshop, and wanted to export those paths for use in other, probably not-Adobe, products? Because that's kind of ... impossible.&lt;/p&gt;
+&lt;p&gt;Or, it was, now it isn't, because I needed this functionality and happened to know that Photoshop has a Javascript API. Well... sort of. It has an API for a truly &lt;em&gt;ancient&lt;/em&gt; version of Javascript (an almost 20 year old flavour, in fact), so there were some things that needing some shimming. Basic things like &lt;code&gt;Array.forEach&lt;/code&gt; didn't exist 20 years ago so after writing shims for &lt;code&gt;forEach&lt;/code&gt;, &lt;code&gt;map&lt;/code&gt; and &lt;code&gt;Object.keys&lt;/code&gt;, I was able to write a script that lets you simply call &lt;em&gt;file&lt;/em&gt; → &lt;em&gt;scripts&lt;/em&gt; → &lt;em&gt;browse&lt;/em&gt; and then run it, which immediately generates the SVG code for all your paths as a single SVG document and copies the code for it into your clipboard.&lt;/p&gt;
+&lt;p&gt;Done, as the say. Head on over to &lt;a href="https://github.com/Pomax/photoshop-paths-to-SVG"&gt;https://github.com/Pomax/photoshop-paths-to-SVG&lt;/a&gt; to grab the script and let me know if you find it useful or have ideas on how to improve it.&lt;/p&gt;
+</description>
+
+<link>http://pomax.github.io/#gh-weblog-1457651549619</link>
+<guid>http://pomax.github.io/#gh-weblog-1457651549619</guid>
+<pubDate>Thu, 10 Mar 2016 23:12:29 GMT</pubDate>
+</item>
 <item>
 <title>Github changes to icon SVG from fonts, for no clear reason</title>
 <description>&lt;p&gt;In a &lt;a href="https://github.com/blog/2112-delivering-octicons-with-svg"&gt;recent post on their blog&lt;/a&gt;, &lt;a href="github.com"&gt;github&lt;/a&gt; announced that  they've moved away from icon fonts in favour of SVG. In itself perfectly fine, use whatever works best, and if fonts aren't working for you, switch; but their explanation of what was wrong makes several kinds of no sense.&lt;/p&gt;
@@ -572,36 +583,5 @@ function escapeBlockLaTeX(source) {
 <link>http://pomax.github.io/#gh-weblog-1449383023410</link>
 <guid>http://pomax.github.io/#gh-weblog-1449383023410</guid>
 <pubDate>Sun, 06 Dec 2015 06:23:43 GMT</pubDate>
-</item>
-<item>
-<title> Bezier curves are not invariant under conformal mapping</title>
-<description>&lt;p&gt;That's not a post title that'll sound very appealing to many people, but it's a question without an easy-to-google answer that I get asked more often than makes sense to keep answering on a case by case basis. So let me turn it into a URL on the internet instead.&lt;/p&gt;
-&lt;p&gt;Invariance is defined as "any operation you can apply to the control points that define a Bezier curve, and then forming the curve, will yield the same curve as if you broke up the curve as a  sequence of individual points, and applied that operation to each of those, separately".&lt;/p&gt;
-&lt;p&gt;Bezier curves are invariant under &lt;a href="https://en.wikipedia.org/wiki/Affine_transformation"&gt;affine linear transforms&lt;/a&gt;, which are those transforms that preserve parallel lines, but not necessarily distance between points or angles between lines. Basic affine linear transforms &lt;a href="https://en.wikipedia.org/wiki/Linear_map#Examples_of_linear_transformation_matrices"&gt;are&lt;/a&gt; rotation, reflection, translation, shearing, scaling, and projection.&lt;/p&gt;
-&lt;p&gt;However, this is not the only class of transforms (obviously), and another transform that people tend to be interested in are &lt;a href="https://en.wikipedia.org/wiki/Conformal_map"&gt;conformal mappings&lt;/a&gt;, which preserve the (local) angle between lines, and this is a problem for Bezier curves.&lt;/p&gt;
-&lt;p&gt;The simplest conformal mapping I can think of is the &lt;a href="https://en.wikipedia.org/wiki/Uniform_tilings_in_hyperbolic_plane"&gt;hyperbolic tiling&lt;/a&gt;, which maps the Euclidean ("rectangular") plane onto a circle plane instead, with a neat property:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;the center of the Euclidean plane is the center of the circle.&lt;/li&gt;
-&lt;li&gt;draw a line from the center, outward to infinity; this is a straight line in both the Euclidean plane and on the circle, but:&lt;/li&gt;
-&lt;li&gt;a point along that line at distance D from the center of the Euclidean plane will lie at some distance D'&amp;lt;D from the "center" of the circle, and,&lt;/li&gt;
-&lt;li&gt;any point along that line at twice the distance, E = 2D, on the Euclidean plane will lie on distance E' &amp;lt; 2D' - that is, outward travel at constant speed in the Euclidean plane, covering infinite distance, turns into monotone decreasing travel in terms of speed and distance, covering finite distance: you will never cross the "edge" of the circle, you just keep going slower and slower as you get closer and closer.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;There are an infinite number of functions that achieve this kind of mapping, but all of them preserve local angles: If two straight lines crossed each other at 37 degrees on the Euclidean plane, then the lines themselves will no longer be straight, but at the exact point of their intersection, the angle between them will still be 37 degrees.&lt;/p&gt;
-&lt;p&gt;Now, if you conformally map  the points that define a Bezier curve, and then draw a new curve with those mapped points, you are not guaranteed to get the same curve as if you'd treated the curve a sequence of points that together draw the curve, and then conformally mapped all of those instead. And we can prove this with a single example:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;A mapping that turns straight lines into circular arcs is a conformal mapping, preserving local angles of intersection.&lt;/li&gt;
-&lt;li&gt;Bezier curves can perfectly represent straight lines.&lt;/li&gt;
-&lt;li&gt;Bezier curves cannot perfectly represent circular arcs.&lt;/li&gt;
-&lt;li&gt;This mapping will turn geometry that can be represented by Bezier curves into geometry that cannot be represented by Bezier curves&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://en.wikipedia.org/wiki/Q.E.D."&gt;QED&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Another way to think about this is that Bezier curves are formed using (iterated) linear interpolation, which relies on straight lines staying linear. If we deform them to some non-linear form, then we cannot use linear interpolation and still find the same resulting points.&lt;/p&gt;
-&lt;p&gt;So there you have it. Are Bezier curves invariant under conformal mapping? No, they are not.&lt;/p&gt;
-</description>
-<category>Maths</category>
-<category>Bezier Curves</category>
-<link>http://pomax.github.io/#gh-weblog-1449335750620</link>
-<guid>http://pomax.github.io/#gh-weblog-1449335750620</guid>
-<pubDate>Sat, 05 Dec 2015 17:15:50 GMT</pubDate>
 </item></channel>
 </rss>
