@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Thu, 10 Mar 2016 23:16:41 GMT</lastBuildDate>
-<pubDate>Thu, 10 Mar 2016 23:16:41 GMT</pubDate>
+<lastBuildDate>Thu, 10 Mar 2016 23:16:58 GMT</lastBuildDate>
+<pubDate>Thu, 10 Mar 2016 23:16:58 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title>I wrote a  script for Photoshop to export paths as SVG files</title>
@@ -14,7 +14,10 @@
 &lt;p&gt;Or, it was, now it isn't, because I needed this functionality and happened to know that Photoshop has a Javascript API. Well... sort of. It has an API for a truly &lt;em&gt;ancient&lt;/em&gt; version of Javascript (an almost 20 year old flavour, in fact), so there were some things that needing some shimming. Basic things like &lt;code&gt;Array.forEach&lt;/code&gt; didn't exist 20 years ago so after writing shims for &lt;code&gt;forEach&lt;/code&gt;, &lt;code&gt;map&lt;/code&gt; and &lt;code&gt;Object.keys&lt;/code&gt;, I was able to write a script that lets you simply call &lt;em&gt;file&lt;/em&gt; → &lt;em&gt;scripts&lt;/em&gt; → &lt;em&gt;browse&lt;/em&gt; and then run it, which immediately generates the SVG code for all your paths as a single SVG document and copies the code for it into your clipboard.&lt;/p&gt;
 &lt;p&gt;Done, as the say. Head on over to &lt;a href="https://github.com/Pomax/photoshop-paths-to-SVG"&gt;https://github.com/Pomax/photoshop-paths-to-SVG&lt;/a&gt; to grab the script and let me know if you find it useful or have ideas on how to improve it.&lt;/p&gt;
 </description>
-
+<category>Photoshop</category>
+<category>Javascript</category>
+<category>SVG</category>
+<category>Paths</category>
 <link>http://pomax.github.io/#gh-weblog-1457651549619</link>
 <guid>http://pomax.github.io/#gh-weblog-1457651549619</guid>
 <pubDate>Thu, 10 Mar 2016 23:12:29 GMT</pubDate>
