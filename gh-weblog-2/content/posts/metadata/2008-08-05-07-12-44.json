@@ -1,9 +1,9 @@
 {
   "id": "2008-08-05-07-12-44",
   "title": "Welcome to my homepage",
-  "created": 1221833564,
-  "published": 1221833564,
-  "updated": 1221833564,
+  "created": 1221833564000,
+  "published": 1221833564000,
+  "updated": 1221833564000,
   "tags": [],
   "author": "Pomax"
 }
