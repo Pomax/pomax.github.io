@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Tue, 03 May 2016 18:46:52 GMT</lastBuildDate>
-<pubDate>Tue, 03 May 2016 18:46:52 GMT</pubDate>
+<lastBuildDate>Tue, 03 May 2016 18:47:12 GMT</lastBuildDate>
+<pubDate>Tue, 03 May 2016 18:47:12 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> HTTPS, Mixed Content, and the real web... oh my!</title>
@@ -49,7 +49,12 @@
 &lt;p&gt;So we want you to be able to remix your favourite sites, even if they're HTTP, and have a learning/teaching opportunity there around security. Yes, things will look bad when you try to load an HTTP site on HTTPS, but there's a reason for that, and it's important to talk about it.&lt;/p&gt;
 &lt;p&gt;And it's equally important to talk about it without making you lose an hour or more of working on your awesome remix.&lt;/p&gt;
 </description>
-
+<category>Mozilla</category>
+<category>X-Ray Goggles</category>
+<category>http</category>
+<category>https</category>
+<category>browsers</category>
+<category>internet</category>
 <link>http://pomax.github.io/#gh-weblog-1462301193409</link>
 <guid>http://pomax.github.io/#gh-weblog-1462301193409</guid>
 <pubDate>Tue, 03 May 2016 18:46:33 GMT</pubDate>
