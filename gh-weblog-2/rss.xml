@@ -5,9 +5,21 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Tue, 03 May 2016 20:01:22 GMT</lastBuildDate>
-<pubDate>Tue, 03 May 2016 20:01:22 GMT</pubDate>
+<lastBuildDate>Mon, 23 May 2016 18:26:44 GMT</lastBuildDate>
+<pubDate>Mon, 23 May 2016 18:26:44 GMT</pubDate>
 <ttl>1440</ttl>
+<item>
+<title>I started a Youtube channel.</title>
+<description>&lt;p&gt;I like &lt;a href="https://imgur.com"&gt;imgur.com&lt;/a&gt;, it's a great way to both fill moments of downtime with some interesting pictures posts, as well as waste too much time trying to find the next picture post, but one of the things that gets posted with reasonable frequency is food pictures, and they're always these high speed, "it's so easy just do this!" recipe gifs. &lt;/p&gt;
+&lt;p&gt;While I won't contest that there are easy recipes, provided you do your prep first, cooking -and baking- takes time, and I wanted to create something that shows off &lt;em&gt;that&lt;/em&gt; aspect of kitchen work.  So, I started a Youtube channel over on &lt;a href="https://www.youtube.com/channel/UC_vhEBO8O9ABn1f32KuUtjw"&gt;https://www.youtube.com/channel/UC_vhEBO8O9ABn1f32KuUtjw&lt;/a&gt;, starting with a video series on &lt;a href="https://www.youtube.com/playlist?list=PL5_wrS2aqN9YFaSCWbpo-OEvbytigJWMY"&gt;making baguette&lt;/a&gt;, start to finish. Baguette is not "easy", and it's not "fast"; any recipe that claims it is is either lying or selling you something (thanks "&lt;a href="http://www.imdb.com/title/tt0093779"&gt;The Princess Bride&lt;/a&gt;"!) but it is entirely doable, provided you follow all the steps, and all the steps take time. So I took mine and made 15 videos that document the process in real time, except for the "in the oven" videos, which are sped up because seeing what the dough does actually teaches you something.&lt;/p&gt;
+&lt;p&gt;And since it would be a shame to just do one kitchen video series and then sell the cameras I used again, I'll be trying to post some new series every now and then. For now, that means there's a video series for &lt;a href="https://www.youtube.com/playlist?list=PL5_wrS2aqN9aPVEKij5gDLf91UoapIrWH"&gt;Romano Pizza&lt;/a&gt; and a video series for &lt;a href="https://www.youtube.com/playlist?list=PL5_wrS2aqN9Z7RYLc9-npfsMRH0hXUQut"&gt;Chicken Shepherd's Pie&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;It's fun to do, obviously it's food that gets eaten after it gets made, and if you're tired of "an hour of work in 30 seconds" like I am, hit me up, I'm sure you have ideas I am interested in.&lt;/p&gt;
+</description>
+
+<link>http://pomax.github.io/#gh-weblog-1464027515789</link>
+<guid>http://pomax.github.io/#gh-weblog-1464027515789</guid>
+<pubDate>Mon, 23 May 2016 18:18:35 GMT</pubDate>
+</item>
 <item>
 <title> HTTPS, Mixed Content, and the real web... oh my!</title>
 <description>&lt;p&gt;We recently fixed something around Mozilla's X-Ray Goggles. A long running problem that caused people headaches and the feeling of lost work, while at the same time doing nothing "wrong", from a technical perspective. This is going to be a story about how modern browsers work, how people use the web, and how those two things... don't always align.&lt;/p&gt;
@@ -596,37 +608,5 @@ function escapeBlockLaTeX(source) {
 <link>http://pomax.github.io/#gh-weblog-1449777175633</link>
 <guid>http://pomax.github.io/#gh-weblog-1449777175633</guid>
 <pubDate>Thu, 10 Dec 2015 19:52:55 GMT</pubDate>
-</item>
-<item>
-<title> OpenType: what's the difference between TTF and OTF??</title>
-<description>&lt;p&gt;This is going to be a multiparter, because I've been trying to write this as a single long read and it's just not working. So as the first part in part of an OpenType series: ttf and otf... what's the difference?&lt;/p&gt;
-&lt;h2 id="first-it-s-all-opentype"&gt;First, it's all OpenType&lt;/h2&gt;
-&lt;p&gt;One thing that most people don't know is that both TTF and OTF font are &lt;a href="https://www.microsoft.com/typography/otspec/"&gt;OpenType fonts&lt;/a&gt;. OpenType is a binary format, with an open specification (i.e. it's free to implement codecs for, and you can sign up for the opentype mailing list and influence future versions), that contains outline data (for drawing letters), tons of metadata used for things ranging from typesetting to hardware memory management, and language-specific typesetting rules like contextual substitutions and positioning. &lt;/p&gt;
-&lt;p&gt;When people talk about "TTF" or "OTF" what they really mean is "files that end in &lt;code&gt;.ttf&lt;/code&gt; and &lt;code&gt;.otf&lt;/code&gt;", and those are two kinds of OpenType font: fonts ending in &lt;code&gt;.ttf&lt;/code&gt; are generally OpenType fonts that use the glyf/loca data blocks, with &lt;a href="https://www.microsoft.com/en-us/Typography/SpecificationsOverview.aspx"&gt;"TrueType"&lt;/a&gt; outlines, whereas fonts ending in &lt;code&gt;.otf&lt;/code&gt; are OpenType fonts that use a &lt;a href="https://partners.adobe.com/public/developer/en/font/5176.CFF.pdf"&gt;CFF data block&lt;/a&gt;, with &lt;a href="https://partners.adobe.com/public/developer/en/font/5177.Type2.pdf"&gt;"Type2"&lt;/a&gt; outlines. So the difference is in the outline language used. Everything else is the same, and there's a &lt;em&gt;lot&lt;/em&gt; of "everything else" in an OpenType font.&lt;/p&gt;
-&lt;p&gt;We're not going to look at all the fine differences between the two in this post, but let's look at the ones that are easy to talk about and already make a big difference:&lt;/p&gt;
-&lt;h3 id="truetype-tiny-simple-and-hardcoded-hinting"&gt;TrueType - tiny, simple, and hardcoded hinting&lt;/h3&gt;
-&lt;p&gt;TrueType outlines are incredibly straight forward: you get lines and &lt;a href="http://pomax.github.io/bezierinfo/#introduction"&gt;quadratic curves&lt;/a&gt;, and that's pretty much it. It's really easy to define shapes in, but the curves are "too" simple so you need quite a few of them. If you have decent design tool, that's mostly irrelevant, and the only thing you'll notice is that an OpenType font that uses TrueType outlines tends to be bigger than an OpenType font with Type2 outlines for the same shapes.&lt;/p&gt;
-&lt;p&gt;The other way in which TrueType differs is in how &lt;a href="https://www.typotheque.com/articles/hinting"&gt;"hinting"&lt;/a&gt; works. Hinting is a mechanism to tell font engines "if you need to scale this outline down to fit in the font size we need, and that leads to weird sub pixel positioning, here's how you should resolve that:..." When using TrueType, the hinting is explicit: all the information is stored in the TrueType data, so a font engine can be "dumb" about hinting and simply do what the font tells it to. That makes TrueType, again, a little bigger compared to Type2, but taken together with the simplicity of the language means it's really easy for people to write parsers that do the right thing. Not a lot of instructions, and the hinting is in-font.&lt;/p&gt;
-&lt;p&gt;(Although even then, hinting can go &lt;a href="http://www.rastertragedy.com/"&gt;terribly wrong&lt;/a&gt;, because it's an incredibly hard subject)&lt;/p&gt;
-&lt;h3 id="type2-rich-complicated-and-only-hinted-"&gt;Type2 - rich, complicated, and "only" hinted.&lt;/h3&gt;
-&lt;p&gt;On the other hand, the Type2 language is super rich, with lots of nuanced outline operations possible (including some 'if humans can tell this is gently curve, curve it, otherwise make this a flat line" instructions!), as well as supporting a small programming language that lets you do some amazing things... if the font engine that's rendering the font supports them. Because most of them don't: Type2 supports lines and cubic curves, and these are generally supported by font engines, but they also support more esoteric operations that a lot of font engines simply don't bother to support. That is unfortunate, and hopefully that will change as time goes on, but right now that's how it is.&lt;/p&gt;
-&lt;p&gt;To make matters worse, the hinting in a Type2 outline is really "just hints". Type2 outlines can mark certain edges and points as needing to line up in some way, but it is up to the font engine to make sure that "lining up" happens sensibly, and (again because this is not a trivial task) a lot of font engines just ... don't bother.&lt;/p&gt;
-&lt;p&gt;This leads people who are used to working with software that comes with a simple, or incomplete, font engine to claim that TTF is better than OTF because they look better, even though they don't: it's just the font engine not being good enough to deal with the space-optimised Type2 outline language, rather than the simplistic but "everything up front" TrueType outline language.&lt;/p&gt;
-&lt;h2 id="-which-should-i-use-"&gt;"Which should I use?"&lt;/h2&gt;
-&lt;p&gt;The real question tends to be which format you should use. If you're  a typeface designer, or a font engineer, I don't have to tell you which is to use, you already know the answer based on what you need to make, but if you're a font &lt;strong&gt;user&lt;/strong&gt;, which should you use? &lt;/p&gt;
-&lt;p&gt;It depends entirely on what's available, and which engine you're going to use. If the font (or, font family) you want to use is only available in &lt;code&gt;.otf&lt;/code&gt; form, and you're going to use it in an excellent font engine like Adobe's own engine, then clearly: pick &lt;code&gt;.otf&lt;/code&gt;. If, on the other hand, you want a font that works best on the web, then it's really a toss-up between &lt;code&gt;.ttf&lt;/code&gt; and &lt;code&gt;.otf&lt;/code&gt; and the only real answer is "try them both, and see which one looks best". It might even be that at low point sizes the &lt;code&gt;.ttf&lt;/code&gt; looks best, but at higher point sizes, the &lt;code&gt;.otf&lt;/code&gt; looks better. If they're small fonts (i.e. the size of a JPEG image, which most fonts comfortably fall under) then why not just use both?&lt;/p&gt;
-&lt;h2 id="more-to-come"&gt;More to come&lt;/h2&gt;
-&lt;p&gt;In order to just get these posts out I'm going to keep some of them short, and this is one of the shorter ones, but rest assured that there's a lot to say about OpenType fonts, including how little most people know about them. And that's not an indictment, unless it's people espousing the virtue of one over the other without even realising they're both just OpenType fonts, only differing in the outline language, which is a large part of, but most certainly not the definitive aspect of, modern fonts.&lt;/p&gt;
-&lt;p&gt;Next time I'll try to go into that statement a bit more: modern OpenType fonts are pretty dang complex pieces of software, and you could take the outline shapes for granted and still have a lot of amazingly detailed and rich data left to work with.&lt;/p&gt;
-</description>
-<category>Fonts</category>
-<category>OpenType</category>
-<category>TrueType</category>
-<category>Type2</category>
-<category>TTF</category>
-<category>OTF</category>
-<link>http://pomax.github.io/#gh-weblog-1449438115186</link>
-<guid>http://pomax.github.io/#gh-weblog-1449438115186</guid>
-<pubDate>Sun, 06 Dec 2015 21:41:55 GMT</pubDate>
 </item></channel>
 </rss>
