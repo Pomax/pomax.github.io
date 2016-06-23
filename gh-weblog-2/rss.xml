@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Thu, 23 Jun 2016 18:12:55 GMT</lastBuildDate>
-<pubDate>Thu, 23 Jun 2016 18:12:55 GMT</pubDate>
+<lastBuildDate>Thu, 23 Jun 2016 18:13:47 GMT</lastBuildDate>
+<pubDate>Thu, 23 Jun 2016 18:13:47 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title>Mobile photography is a joke</title>
@@ -27,7 +27,7 @@
 &lt;p&gt;Color calibration is hard. &lt;/p&gt;
 &lt;p&gt;This is why you'll see photographers carry around calibration targets: cards printed with specific colours on them that they'll periodically take pictures of during shoots so that during post processing they can ensure that for every shot under specific lighting conditions, there is a way to determine what the correction should look like. While display calibration is fairly static, scene calibration is a constant necessity.&lt;/p&gt;
 &lt;p&gt;Unfortunately, even though there are a number of commonly used scene calibration targets, neither Android nor IOS have ways to tell the phone itself to take a calibration with "calibration target X" so that the camera data that gets sent to a camera app is correct, which means that scene calibration on a mobile device is still the same as in traditional photography:  take a picture of a calibration target every now and then, and then "fix things in post".&lt;/p&gt;
-&lt;p&gt;Except on a mobile device, there &lt;strong&gt;is&lt;/strong&gt; no post. There are no apps that perform batch corrects, there are no apps that can abstract a correction profile off of an &lt;a href="https://en.wikipedia.org/wiki/IT8"&gt;IT8&lt;/a&gt; or &lt;a href="http://xritephoto.com/colorchecker-passport-photo"&gt;ColorChecker&lt;/a&gt; target, there are no apps that can load or embed &lt;a href="https://en.wikipedia.org/wiki/ICC_profile"&gt;ICC profiles&lt;/a&gt; into images. There is nothing, and so the only way to do half-decent photography with a $1000 device that is both camera and computer, is to have a &lt;strong&gt;second&lt;/strong&gt; computer with a desktop operating system and real photo processing software.&lt;/p&gt;
+&lt;p&gt;Except if you just have a mobile device, there &lt;strong&gt;is&lt;/strong&gt; no reasonable post processing. There are no apps that perform batch corrects, there are no apps that can abstract a correction profile off of an &lt;a href="https://en.wikipedia.org/wiki/IT8"&gt;IT8&lt;/a&gt; or &lt;a href="http://xritephoto.com/colorchecker-passport-photo"&gt;ColorChecker&lt;/a&gt; target, there are no apps that can load or embed &lt;a href="https://en.wikipedia.org/wiki/ICC_profile"&gt;ICC profiles&lt;/a&gt; into images. There is nothing, and so the only way to do half-decent photography with a $1000 device that is both camera and computer, is to have a &lt;strong&gt;second&lt;/strong&gt; computer with a desktop operating system and real photo processing software.&lt;/p&gt;
 &lt;h2 id="why-are-you-complaining-just-use-a-real-camera-then"&gt;Why are you complaining, just use a real camera then&lt;/h2&gt;
 &lt;p&gt;Fair enough. I have several real cameras, but that's exactly why I'm going to invoke one of my favourite quotes in recent years in a moment: my phone costs $700; that's an insane amount of money if all it could do was call and text, and so it can do a lot more. It has a high performance CPU and GPU, it has a high quality screen, and two (not just one) high resolution, high quality fixed aperture cameras. And you're asking why I should expect to be able to do a thing that literally 100% of users of this kind of device do dozens of times a day, with a quality that reflects the price and quality of the hardware I'm using, instead of "in the gimpiest broken way possible"? I'll tell you why, and here's that quote:&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;"Because this is bullshit, and we can fix this."&lt;/strong&gt;&lt;/p&gt;
