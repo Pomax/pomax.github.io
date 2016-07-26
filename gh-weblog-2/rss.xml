@@ -5,9 +5,25 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Mon, 11 Jul 2016 22:33:15 GMT</lastBuildDate>
-<pubDate>Mon, 11 Jul 2016 22:33:15 GMT</pubDate>
+<lastBuildDate>Tue, 26 Jul 2016 00:58:55 GMT</lastBuildDate>
+<pubDate>Tue, 26 Jul 2016 00:58:55 GMT</pubDate>
 <ttl>1440</ttl>
+<item>
+<title>So... I ruined my hands (but they're getting better)</title>
+<description>&lt;p&gt;About two weeks ago, I was fixing my favourite ramen bowl using traditional Japanese pottery repair techniques, which involves working with "urushi", a natural laquer obtained from the &lt;a href="https://en.wikipedia.org/wiki/Chinese_laquer_tree"&gt;Chinese Laquer Tree&lt;/a&gt;. This might not mean anything to you, until I explain to you that there is a compound known to science called "urushiol" that is found in poison ivy, poison oak, poison sumac, cashew trees, and other such nasty plants, and that is causes massive reactions in a large portion of humans.&lt;/p&gt;
+&lt;p&gt;Urushi is what that compound is named after, and while I wore gloves while working on my ramen bowl, I took them off before cleaning up. And so I ended up with &lt;a href="https://en.wikipedia.org/wiki/Urushiol-induced_contact_dermatitis"&gt;urushiol-induced contact dermatitis&lt;/a&gt;. The nasty thing about it is that it doesn't kick in immediately. As an antigen reaction, the first time this happens it takes one to two weeks before your body reacts to it, but like any good antigen reaction, the second time it only takes a few days. However, a "a few days" is not "immediately" and so you don't realise you screwed up until three days later, when it's too late: this is happening, better make your peace with it.&lt;/p&gt;
+&lt;p&gt;And making your peace with it is hard: the affected skin will start to rash and blister, and those blisters will just get bigger and bigger, spawning blisters INSIDE of them, and joining up to form huge finger-spanning blisters with smaller blisters inside of them. If that sounds horrible, good news: it's even worse because it also itches like &lt;em&gt;mad&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;There are some ways to mitigate it, and none of them are drugs or creams: the most effective way to deal with the itching is to soak the affected region (if possible) in super hot water. As hot as you can stand, and then just a fraction hotter. It desensitizes the tissue and alleviates the itching for at least a few hours. And after a week, the blisters start to recede again once the body finally figures out that none of its defenses are actually doing anything (no kidding, if only we could tell it that earlier), and then the rest of your body starts to catch up: any part of your body that undergoes repeated skin stress (bits that chafe up against clothing, a scrape you got from walking into a door handle, and so on) develops a rash, too. No blisters, but you'll enjoy swelling and rashing and massive itchiness a second time over.&lt;/p&gt;
+&lt;p&gt;Now, that sounds horrible, and it kind of is, but the most annoying part is that once you realise what's happening, it's a) too late and b) you're going to lose the functionality of whatever got the blister part of the deal. In my case, my left hand blistered up so badly that I couldn't use it, and my right was pretty close too. I ended up buying curator's gloves just so that moving my fingers ever so slightly wouldn't make blisters rub up against blisters, causing itching and pain.&lt;/p&gt;
+&lt;p&gt;Does that sound gross? Good: &lt;strong&gt;wear gloves when working with urushi, and wear clothes if you're in a poison ivy/poison oak region&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Seriously, it'll take you down, and if you live in North America, your doctor's just going to prescribe antibiotics and a topic cream, neither of which will do anything. You have to ride it out, and you have to not scratch, and you will be driven close to mad, while not being able to do your job.&lt;/p&gt;
+&lt;p&gt;Don't be like me.&lt;/p&gt;
+</description>
+
+<link>http://pomax.github.io/#gh-weblog-1469494036040</link>
+<guid>http://pomax.github.io/#gh-weblog-1469494036040</guid>
+<pubDate>Tue, 26 Jul 2016 00:47:16 GMT</pubDate>
+</item>
 <item>
 <title> Live commentary is soul-destroying</title>
 <description>&lt;p&gt;I started a Youtube channel called &lt;a href="https://www.youtube.com/channel/UC_vhEBO8O9ABn1f32KuUtjw"&gt;Baking McCookery&lt;/a&gt; a while ago for recording things I make in the kitchen, and for a while these were overhead and stove videos with text overlays, and that worked rather well, but they were silent, and that doesn't work all that well.&lt;/p&gt;
@@ -312,212 +328,5 @@
 <link>http://pomax.github.io/#gh-weblog-1453231679399</link>
 <guid>http://pomax.github.io/#gh-weblog-1453231679399</guid>
 <pubDate>Tue, 19 Jan 2016 19:27:59 GMT</pubDate>
-</item>
-<item>
-<title> React with LaTeX, without needing client-side Mathjax</title>
-<description>&lt;p&gt;It's no secret that I like working with &lt;a href="https://facebook.github.io/react"&gt;React&lt;/a&gt;, and that I like &lt;a href="https://en.wikipedia.org/wiki/LaTeX"&gt;LaTeX&lt;/a&gt; for my maths, and that I like &lt;a href="https://mathjax.org"&gt;MathJax&lt;/a&gt; for my LaTeX on the web. What I don't like, though, is having to wait 20 seconds for a long article with lots of maths to load client-side, constantly changing the page dimensions as it does so. Especially if you're loading it mid-page and then MathJax kicks in and all the content keeps being pushed down. And again. And again, etc. etc.&lt;/p&gt;
-&lt;p&gt;It's annoying for the user, and as the guy who runs a &lt;a href="http://pomax.github.io/bezierinfo"&gt;big article on Bézier curves&lt;/a&gt;, with lots of maths, it's annoying to know I'm responsible for a bad experience. So, I'm rewriting that article so that it's easier to maintain, and loads a million times faster. One of the things that involves is taking MathJax out of the client-side experience, which means during LaTeX conversion server-side. Or really, "offline", because it should be a "generate once, then cache and use" instead of "having the server generate it all the time".&lt;/p&gt;
-&lt;h2 id="react-and-webpack-and-babel-"&gt;React and Webpack (and Babel)&lt;/h2&gt;
-&lt;p&gt;First off, a React codebase needs bundling, and generally also some &lt;a href="https://facebook.github.io/react/docs/jsx-in-depth.html"&gt;JSX&lt;/a&gt; transforming and &lt;a href="https://babeljs.io/docs/learn-es2015"&gt;ES2015+&lt;/a&gt; conversion, so the basis for my rewrite was a fairly simple dir layout with a fairly simple &lt;a href="https://webpack.github.io"&gt;Webpack&lt;/a&gt; config:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;./
- |-&amp;lt;components&amp;gt;
- |-&amp;lt;images&amp;gt;
- |-&amp;lt;lib&amp;gt; 
- |-&amp;lt;stylesheets&amp;gt;
- | package.json
- | webpack.config.js
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;With the Webpack config doing the following:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var webpack = require('webpack');
-
-// Hot Reload server when we're in dev mode, otherwise build it the normal way.
-var entry = ['./components/App.jsx'];
-if(!process.argv.indexOf("--prod")) { entry.push('webpack/hot/dev-server'); }
-
-module.exports = {
-  entry:  entry,
-  output: {
-    path: __dirname,
-    filename: 'article.js'
-  },
-  module: {
-    loaders: [
-      { test: /\.(png|gif)$/, loader: "file?name=images/packed/[hash].[ext]" },
-      { test: /\.less$/, loader: "style!css!less" },
-      { test: /.jsx?$/, include: /components/, loaders: ['babel-loader']
-      }
-    ]
-  },
-};
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This is a pretty standard setup, with webpack's &lt;a href="https://webpack.github.io/docs/hot-module-replacement-with-webpack.html"&gt;"hot reloading" server&lt;/a&gt; for dev work, and no server for production builds. Running Webpack for production will yield a file &lt;code&gt;article.js&lt;/code&gt; in the root, based on starting at the &lt;code&gt;component/App.jsx&lt;/code&gt; file, and then just bundling in every little requirement that has until we run out of things that need to be bundled in.&lt;/p&gt;
-&lt;p&gt;You can see I'm using &lt;a href="http://babeljs.io"&gt;Babel&lt;/a&gt; for interpreting any js/jsx files (it takes care of JSX transforming and ES2015 syntax), as well as &lt;a href="http://lesscss.org"&gt;less&lt;/a&gt; for my CSS. There's also a dumb &lt;a href="https://www.npmjs.com/package/file-loader"&gt;"file-loader"&lt;/a&gt; which simply copies images into their own dir. Not always necessary, but useful when running the webpack dev server.&lt;/p&gt;
-&lt;p&gt;The way I trigger either dev or prod runs is via &lt;a href="http://www.slideshare.net/k88hudson/advanced-frontend-automation-with-npm-scripts"&gt;npm scripts&lt;/a&gt;, with the &lt;code&gt;package.json&lt;/code&gt; using the following script block:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;  ...
-  "scripts": {
-    "build": "webpack --prod",
-    "start": "webpack-dev-server --progress --colors --hot --inline",
-  },
-  ...
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Two commands, a short &lt;code&gt;$&amp;gt; npm start&lt;/code&gt; for dev work, since that gets run all the time, and a special &lt;code&gt;$&amp;gt; npm run build&lt;/code&gt; for when the production bundle needs to be built. So far so good!&lt;/p&gt;
-&lt;h2 id="adding-latex-to-react-components"&gt;Adding LaTeX to React components&lt;/h2&gt;
-&lt;p&gt;One thing I hate when doing rewrites is "changing everything" to suit the technology. The article as it exists relies on LaTeX that takes the following form:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;p&amp;gt;\[
-  f(x) = \sum^n_{k=0} \frac{n(n-k)}{k! + x} 
-\]&amp;lt;/p&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;That's a pretty standard format if you use MathJax, or &lt;a href="https://github.com/Khan/KaTeX"&gt;KaTeX&lt;/a&gt;, and since I use a &lt;em&gt;lot&lt;/em&gt; of LaTeX, that format had to stay. And that's a bit of a problem, because LaTeX uses a lot of curly brackets. And React's JSX syntax treats curly brackets as templating delimiters.&lt;/p&gt;
-&lt;p&gt;Something like this, for instance:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;p&amp;gt;\[
-  \frac{percentage}{100}
-\]&amp;lt;/p&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;will cause the JSX transform step to go "uh, I don't know a variable &lt;code&gt;percentage&lt;/code&gt;, I can't convert this for you". Even though we don't want it converted. Too bad for us! However, there is a way out, and it's called a Webpack loader.&lt;/p&gt;
-&lt;h2 id="webpack-and-mathjax-node"&gt;Webpack and mathjax-node&lt;/h2&gt;
-&lt;p&gt;You may have noticed the part where I mentioned Webpack uses babel for JSX and ES2015 transforms. That means it rewrites the source code several times before handing it off for bundling, and so if we can convert those LaTeX blocks before anything else tries to interpret it, things should work pretty well!&lt;/p&gt;
-&lt;p&gt;So, let us write a latex-loader for Webpack. In fact, I've already done the work there, so, let's look at that. First off, Webpack &lt;strong&gt;is weird&lt;/strong&gt; when it comes to loader order, and uses a &lt;a href="https://en.wikipedia.org/wiki/Stack_%28abstract_data_type%29"&gt;LIFO&lt;/a&gt; ordering. The last loader gets to run first. So:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;loaders: [
-  ...
-  {
-    test: /.jsx?$/,
-    include: /components/,
-    loaders: [
-      'babel-loader',
-      __dirname + '/lib/latex-loader'
-    ]
-  }
-]
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;With a corresponding &lt;code&gt;latex-loader.js&lt;/code&gt; in the &lt;code&gt;./lib&lt;/code&gt; dir:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var op = "\\[";
-var ed = "\\]";
-
-/**
- * Is there going to be anything to convert here?
- */
-function hasLaTeX(input) {
-  return input.indexOf(op) !== -1 &amp;amp;&amp;amp; input.indexOf(ed) !== -1;
-}
-
-/**
- * We look for MathJax/KaTeX style data, and convert it to something JSX-safe 
- */
-function escapeBlockLaTeX(source) {
-  // MAGIC HAPPENS HERE!
-  return doTheMagic(source);
-}
-
-module.exports = function(source) {
-  this.cacheable();
-  if (!hasLaTeX(source)) return source;
-  return escapeBlockLaTeX(source);
-};
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;That's the main gist of it, anyway. The loader's basically a single synchronous function that gets passed entire files as source string, and then expects a possible different string as replacement output.&lt;/p&gt;
-&lt;p&gt;So, the approach is obvious: accept the source only if it has LaTeX that needs transforming (otherwise just hand the original source back as a thing we don't need to change), and then if we're still running, find all the LaTeX blocks, transform them to "something safe", and then return that modified source. Ideally, transform them using MathJax.&lt;/p&gt;
-&lt;p&gt;As it turns out, MathJax has a server-side library available called &lt;a href="https://www.npmjs.com/package/mathjax-node"&gt;mathjax-node&lt;/a&gt;, which can be used to generate browser-agnostic SVG or MathML source, so that's perfect! It means we can do the following:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var mathjax = require("mathjax-node");
-
-function escapeBlockLaTeX(source) {
-  var from = 0, curr, term, newsource = "", latex;
-  for(curr = source.indexOf(op, from);
-      curr !== -1;
-      from = term + ed.length, curr = source.indexOf(op, from))
-  {
-    // split out a block of LaTeX:
-    newsource += source.substring(from, curr);
-    term = source.indexOf(ed, from);
-    if(term === -1) {
-      // We only have ourselves to blame if we get here
-      throw new Error("improperly closed LaTeX encountered!");
-    }
-    latex = source.substring(curr, term + ed.length);
-
-    // convert this LaTeX code to SVG, which React can deal with just fine:
-    var mathjaxed = mathjax.typeset(latex);
-
-    // slot the SVG code in place of the LaTeX code
-    newsource += mathjaxed;
-  }
-  return newsource + source.substring(from);
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Except... we can't.&lt;/p&gt;
-&lt;h2 id="webpack-mathjax-and-the-problem-of-sync-vs-async"&gt;Webpack, MathJax, and the problem of sync vs. async&lt;/h2&gt;
-&lt;p&gt;You see, Webpack is a fully synchronous technology. A loader gets a file, transforms it, then passes it back to webpack, which hands it to the next loader, which transforms it, and so on. This is a fully synchronous process, and loaders simply get data, and "immediately" (give or take the time needed to modify that data) give something back.&lt;/p&gt;
-&lt;p&gt;MathJax can't do that. It relies on quite a few asynchronous things (like font loads), and so where webpack has a function API much like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;module.exports = function webpackloader(input) {
-  return formOutput(input);
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;MathJax has a function API like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;mathjax.typeset(input, function(result) {
-  if(!result.errors) {
-    doSomethingWith(result.svg);
-  }
-});
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;That doesn't look too strange, &lt;a href="http://stackoverflow.com/questions/748175/asynchronous-vs-synchronous-execution-what-does-it-really-mean"&gt;but the timing is crucially different&lt;/a&gt;: when the Webpack loader runs, its function is entered, data is transformed, and it exits again. However, when the MathJax typesetter runs, the function call happens and then &lt;em&gt;immediately exits again&lt;/em&gt;, and at some point in the future the result handling function will run, and there is no way to "wait" for it to finish, because that's not a thing JavaScript can do.&lt;/p&gt;
-&lt;p&gt;If only there was a way that we could turn the asynchronouse conversion process that MathJax requires, into a synchronous data transform as is required by Webpack...&lt;/p&gt;
-&lt;h2 id="execsync-ing-our-way-to-success"&gt;execSync'ing our way to success&lt;/h2&gt;
-&lt;p&gt;And in that wish we find the answer: make the conversion a command line utility, and then &lt;code&gt;exec&lt;/code&gt; that utility synchronously, using &lt;a href="https://nodejs.org"&gt;Node.js&lt;/a&gt;'s built in &lt;a href="https://nodejs.org/api/child_process.html#child_process_child_process_execsync_command_options"&gt;execSync&lt;/a&gt;, because the following will work brilliantly:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var execSync = require("child_process").execSync;
-
-function escapeBlockLaTeX(source) {
-  ...
-  for(...) {
-    // split out a block of LaTeX:
-    latex = ...
-
-    // convert all this!
-    var mathjaxed = execSync("node tex2svg.js --latex " + latex);
-
-    // slot the rewritten code back in
-    newsource += mathjaxed;
-  }
-  ...
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;We write a simple &lt;code&gt;tex2svg.js&lt;/code&gt; file that requires &lt;code&gt;mathjax-node&lt;/code&gt;, passes it the config options for conversion to SVG, read in the LaTeX as command line argument, and then spits out the conversion result on &lt;a href="https://en.wikipedia.org/wiki/Standard_streams"&gt;standard out&lt;/a&gt;, so that &lt;code&gt;execSync&lt;/code&gt; treats it as its function return value.&lt;/p&gt;
-&lt;p&gt;But here's where things get tricky. Writing a command line utility that does the MathJax conversion requires a little work, because the command line is tricky, and LaTeX contains all kinds of characters that can do things in shell land. Slashes and ampersands abound, and those are kind of active symbols,  so we need to be a little smarter:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;// convert all this... smarter!
-var base64 = new Buffer(latex).toString("base64");
-var mathjaxed = execSync("node tex2svg.js --base64 " + base64);
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And then we just need to make sure that the MathJax script unpacks the passed data from &lt;a href="https://en.wikipedia.org/wiki/Base64"&gt;base 64 format&lt;/a&gt; to plain string format before converting, and we're good!&lt;/p&gt;
-&lt;p&gt;But not quite: this is not exactly a cheap thing to do. Firing up an instance of node and loading &lt;code&gt;mathjax-node&lt;/code&gt; takes time. Not enough to notice if you only do it once, but if you need to run this lots of times, a second each time adds up to having to wait minutes for this building to happen. Every time you want to run the dev server.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;That is unacceptable.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;So, let's add in some caching: instead of having the MathJax script do the conversion for us, and then spit out the SVG code, we make it do the conversion but then write the SVG code to file, in the images dir.&lt;/p&gt;
-&lt;p&gt;And because we don't want the build process to do more work than necessary, we make the filenames predictable, based on the LaTeX that needs to be converted: we compute the &lt;a href="https://en.wikipedia.org/wiki/SHA-1"&gt;sha1 digest&lt;/a&gt; of the LaTeX that needs converting, and only if we don't see a file called &lt;code&gt;&amp;lt;hash&amp;gt;.svg&lt;/code&gt; in the images dir do we do our conversion:  &lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var sha1 = require("sha1");
-
-function escapeBlockLaTeX(source) {
-  ...
-  for(...) {
-    latex = ...;
-
-    // Get the digest for the latex - any subsequent checks for the same block
-    // of LaTeX will yield the exact same digest, which is handy!
-    var hash = sha1.hash(latex);
-
-    // Whether the SVG for this LaTeX already exists or not, we already know
-    // the filename it's going to have, so we can prebuild the JSX we need:  
-    var imgHTML = '&amp;lt;img src="' + hash + '.svg" className="LaTeX SVG"/&amp;gt;';
-
-    // Then: do we need to generate this image first? If so, execSync,
-    // otherwise we do absolutely nothing because we're already done!  
-    if (!imageExists(hash)) {
-      var base64 = new Buffer(latex).toString("base64");
-      execSync("node tex2svg.js --hash " + hash +" --base64 " + base64);
-    }
-
-    newsource += imgHTML;
-  }
-  return newsource;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And that, as they say, is that!&lt;/p&gt;
-&lt;h2 id="boom-"&gt;Boom.&lt;/h2&gt;
-&lt;p&gt;Using this latex-loader in conjunction with a file writing conversion utility script, we now have a &lt;em&gt;synchronous&lt;/em&gt; MathJax conversion going on, despite MathJax itself being an inherently asynchronous processor, and we completely bypass any strangeness that might normally pop up if you tried to mix LaTeX code and JSX syntax, with the benefit of files that can be cached, so that the browser doesn't need to redownload them everytime the article gets loaded in a browser.&lt;/p&gt;
-&lt;p&gt;Responsiveness increase: x1 million. Goal reached.&lt;/p&gt;
-&lt;p&gt;Instead of every individual user needing to wait for MathJax to do typesetting, the only person waiting for MathJax now is me, and only for "new" LaTeX blocks during the build step. &lt;em&gt;As it should be&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;I can add sections one at a time, and every time I run the build step, only genuinely new LaTeX will need to get converted. LaTeX that got processed during a previous run already wrote files to disk, so the latex-loader just bypasses the conversion process entirely for those LaTeX blocks, and so the build really only does exactly as much work as it needs to do to get the data transformed.&lt;/p&gt;
-&lt;p&gt;Needless to say, I am chuffed to bits about this, and if you have any questions about the process, feel free to reach out to me &lt;a href="https://twitter.com/TheRealPomax"&gt;on twitter&lt;/a&gt; or &lt;a href="https://github.com/Pomax/BezierInfo-2/issues"&gt;on github&lt;/a&gt;, and I'll be happy to talk about it more.&lt;/p&gt;
-</description>
-<category>React</category>
-<category>LaTeX</category>
-<category>MathJax</category>
-<category>Webpack</category>
-<link>http://pomax.github.io/#gh-weblog-1451617530567</link>
-<guid>http://pomax.github.io/#gh-weblog-1451617530567</guid>
-<pubDate>Fri, 01 Jan 2016 03:05:30 GMT</pubDate>
 </item></channel>
 </rss>
