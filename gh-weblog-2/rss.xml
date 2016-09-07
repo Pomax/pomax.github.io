@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Wed, 07 Sep 2016 19:10:55 GMT</lastBuildDate>
-<pubDate>Wed, 07 Sep 2016 19:10:55 GMT</pubDate>
+<lastBuildDate>Wed, 07 Sep 2016 19:14:25 GMT</lastBuildDate>
+<pubDate>Wed, 07 Sep 2016 19:14:25 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> If you use use document.write, you suck at JavaScript</title>
@@ -73,7 +73,8 @@
 &lt;h2 id="3-document-write-is-synchronous"&gt;3.  &lt;code&gt;document.write&lt;/code&gt; is synchronous&lt;/h2&gt;
 &lt;p&gt;Because we can't defer &lt;code&gt;document.write&lt;/code&gt; to after the document is done loading, all the &lt;code&gt;document.write&lt;/code&gt; code &lt;em&gt;has&lt;/em&gt; to run as part of the initial page load, and so anything it puts in your document increases time-to-load. If you are blessed enough to live in a part of the world where you've never noticed page load speed, good for you! But a &lt;em&gt;lot&lt;/em&gt; of people are still on slow connections, and any page blocking before the browser can show an initial view (which it only does once it reaches the &lt;code&gt;&amp;lt;/body&amp;gt;&lt;/code&gt; tag) is extremely obvious.&lt;/p&gt;
 &lt;h2 id="okay-fine-but-say-i-know-all-these-things-why-do-i-suck-at-javascript-if-i-use-it-i-know-what-i-m-doing-"&gt;Okay, fine, but say I know all these things, why do I suck at JavaScript if I use it? I know what I'm doing!&lt;/h2&gt;
-&lt;p&gt;I'm going to  argue that you don't. Modern JS has many constructions that are non-destructive, secure, and non-blocking. Why not use those instead? And that's a rhetorical question, really: you &lt;em&gt;should&lt;/em&gt; be using the modern JS equivalents, not a low-level document bytecode writer. It doesn't really matter what you want to do, because I know what you don't want to do: you don't want to "write byte data into the document", you want to do something else, so: use the appropriate APIs to do that thing, don't resort to &lt;code&gt;document.write&lt;/code&gt; as some kind of magical hammer: you're abusing &lt;code&gt;document.write&lt;/code&gt; to do something it's not designed to do, in a way that is horrendously broken and bug-prone.&lt;/p&gt;
+&lt;p&gt;I'm going to  argue that you don't. Not necessarily through any fault of your own, but you don't.&lt;/p&gt;
+&lt;p&gt;Modern JS has many constructions that are non-destructive, secure, and non-blocking. Why not use those instead? And that's a rhetorical question, really: you &lt;em&gt;should&lt;/em&gt; be using the modern JS equivalents, not a low-level document bytecode writer. It doesn't really matter what you want to do, because I know what you don't want to do: you don't want to "write byte data into the document", you want to do something else, so: use the appropriate APIs to do that thing, don't resort to &lt;code&gt;document.write&lt;/code&gt; as some kind of magical hammer: you're abusing &lt;code&gt;document.write&lt;/code&gt; to do something it's not designed to do, in a way that is horrendously broken and bug-prone.&lt;/p&gt;
 &lt;p&gt;So what do you use instead?&lt;/p&gt;
 &lt;h3 id="adding-content-to-the-document"&gt;Adding content to the document&lt;/h3&gt;
 &lt;p&gt;The proper way to add content to your document, using modern, non-destructive code, is by using the DOM manipulation API. In vanilla JS, things like this:&lt;/p&gt;
