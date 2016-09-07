@@ -826,7 +826,7 @@
     "title": " We are really terrible at digital colours, and digital photography.",
     "created": 1436836360570,
     "published": 1436836360570,
-    "updated": 1437434826062,
+    "updated": 1470097785857,
     "tags": [
       "Digital photography",
       "RGB",
@@ -1030,7 +1030,7 @@
     "title": " HTTPS, Mixed Content, and the real web... oh my!",
     "created": 1462301193409,
     "published": 1462301193409,
-    "updated": 1462301209267,
+    "updated": 1462305677679,
     "tags": [
       "Mozilla",
       "X-Ray Goggles",
@@ -1038,6 +1038,66 @@
       "https",
       "browsers",
       "internet"
+    ]
+  },
+  "2016-05-23-18-18-35": {
+    "id": "2016-05-23-18-18-35",
+    "title": "I started a Youtube channel.",
+    "created": 1464027515789,
+    "published": 1464027515789,
+    "updated": 1464028001155,
+    "tags": []
+  },
+  "2016-06-23-17-02-44": {
+    "id": "2016-06-23-17-02-44",
+    "title": "Mobile photography is a joke",
+    "created": 1466701364674,
+    "published": 1466701364674,
+    "updated": 1466717539342,
+    "tags": [
+      "Mobile",
+      "Photography",
+      "Android",
+      "IOS",
+      "Color",
+      "Calibration"
+    ]
+  },
+  "2016-07-11-16-55-51": {
+    "id": "2016-07-11-16-55-51",
+    "title": " Live commentary is soul-destroying",
+    "created": 1468256151147,
+    "published": 1468256151147,
+    "updated": 1468276392670,
+    "tags": [
+      "Youtube",
+      "Videography",
+      "Quality of Life"
+    ]
+  },
+  "2016-07-26-00-47-16": {
+    "id": "2016-07-26-00-47-16",
+    "title": "So... I ruined my hands (but they're getting better)",
+    "created": 1469494036040,
+    "published": 1469494036040,
+    "updated": 1471204681497,
+    "tags": [
+      "Urushi",
+      "Poison Ivy",
+      "Poison Oak",
+      "Safety"
+    ]
+  },
+  "2016-09-07-17-50-09": {
+    "id": "2016-09-07-17-50-09",
+    "title": " If you use use document.write, you suck at JavaScript",
+    "created": 1473270609919,
+    "published": 1473270609919,
+    "updated": 1473276055421,
+    "tags": [
+      "JavaScript",
+      "Web dev",
+      "document.write"
     ]
   }
 }
