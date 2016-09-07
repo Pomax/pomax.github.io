@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Wed, 07 Sep 2016 18:48:03 GMT</lastBuildDate>
-<pubDate>Wed, 07 Sep 2016 18:48:03 GMT</pubDate>
+<lastBuildDate>Wed, 07 Sep 2016 18:48:25 GMT</lastBuildDate>
+<pubDate>Wed, 07 Sep 2016 18:48:25 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> If you use use document.write, you suck at JavaScript</title>
@@ -59,10 +59,12 @@
   &amp;lt;/body&amp;gt;
 &amp;lt;/html&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;and let's put a &lt;code&gt;document.write&lt;/code&gt; in that "perfectly safe" js file!&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;// awesome,  this injected code will run as if it's part of the page this is run on,
-// not our http://third.party.domain context, so it will have access to everything
-// security related that we shouldn't ever have access to!
-document.write("&amp;lt;script&amp;gt; do.anything(); &amp;lt;/script&amp;gt;");
+&lt;pre&gt;&lt;code&gt;document.write("&amp;lt;script&amp;gt; do.anything(); &amp;lt;/script&amp;gt;");
+/*
+  awesome,  this injected code will run as if it's part of the page this is run on,
+  not our http://third.party.domain context, so it will have access to everything
+  security related that we shouldn't ever have access to!
+*/
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Good times!&lt;/p&gt;
 &lt;h2 id="3-document-write-is-synchronous"&gt;3.  &lt;code&gt;document.write&lt;/code&gt; is synchronous&lt;/h2&gt;
 &lt;p&gt;Because we can't defer &lt;code&gt;document.write&lt;/code&gt; to after the document is done loading, all the &lt;code&gt;document.write&lt;/code&gt; code &lt;em&gt;has&lt;/em&gt; to run as part of the initial page load, and so anything it puts in your document increases time-to-load. If you are blessed enough to live in a part of the world where you've never noticed page load speed, good for you! But a &lt;em&gt;lot&lt;/em&gt; of people are still on slow connections, and any page blocking before the browser can show an initial view (which it only does once it reaches the &lt;code&gt;&amp;lt;/body&amp;gt;&lt;/code&gt; tag) is extremely obvious.&lt;/p&gt;
