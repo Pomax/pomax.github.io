@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Wed, 07 Sep 2016 18:49:30 GMT</lastBuildDate>
-<pubDate>Wed, 07 Sep 2016 18:49:30 GMT</pubDate>
+<lastBuildDate>Wed, 07 Sep 2016 18:50:39 GMT</lastBuildDate>
+<pubDate>Wed, 07 Sep 2016 18:50:39 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> If you use use document.write, you suck at JavaScript</title>
@@ -44,7 +44,8 @@
     &amp;lt;/script&amp;gt;
   &amp;lt;/body&amp;gt;
 &amp;lt;/html&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Where did that &lt;code&gt;&amp;lt;h1&amp;gt;&lt;/code&gt; go?&lt;/em&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Run this code. Seriously, hit up &lt;a href="https://jsbin.com"&gt;jsbin&lt;/a&gt; and paste that into the HTML section, then run it. See what happens.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Huh, where did that &lt;code&gt;&amp;lt;h1&amp;gt;&lt;/code&gt; go?&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Actually, the correct question is "where did &lt;strong&gt;everything&lt;/strong&gt; go?" because your entire document got wiped. After all, &lt;code&gt;document.write&lt;/code&gt; needs an open pipe, and there is no open pipe once all content has loaded. And so it makes one.&lt;/p&gt;
 &lt;p&gt;A new one.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;An empty one&lt;/em&gt;&lt;/p&gt;
