@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Wed, 07 Sep 2016 19:08:18 GMT</lastBuildDate>
-<pubDate>Wed, 07 Sep 2016 19:08:18 GMT</pubDate>
+<lastBuildDate>Wed, 07 Sep 2016 19:10:40 GMT</lastBuildDate>
+<pubDate>Wed, 07 Sep 2016 19:10:40 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> If you use use document.write, you suck at JavaScript</title>
@@ -114,7 +114,9 @@
 &lt;p&gt;Seriously: &lt;em&gt;&lt;code&gt;document.write&lt;/code&gt; has to go.&lt;/em&gt;&lt;/p&gt;
 &lt;h1 id="do-you-really-suck-at-javascript-probably-not-"&gt;Do you &lt;em&gt;really&lt;/em&gt; suck at JavaScript? Probably not.&lt;/h1&gt;
 &lt;p&gt;So back to the original proposition. Do you suck at JavaScript? Well, sort of. You're using a function you shouldn't ever have been taught to use. That happens. We all started at a position of "knowing nothing about JavaScript", so not knowing how bad &lt;code&gt;document.write&lt;/code&gt; is, is kind of a given. However, now you know, and now you need to go and find all those places where you use it.&lt;/p&gt;
-&lt;p&gt;So only to all of you who don't stop using &lt;code&gt;document.write&lt;/code&gt;: you absolutely suck at JavaScript, and the world is worse off because of you. Shape up, and help everyone learn better JS by writing better JS. You have the skills and the power, exercise them.&lt;/p&gt;
+&lt;p&gt;So do you suck at JavaScript? That depends on what you do next: if you who don't stop using &lt;code&gt;document.write&lt;/code&gt; now, and you don't go an correct your past mistakes, then yes; you absolutely suck at JavaScript, and the world is worse off because of you.&lt;/p&gt;
+&lt;p&gt;Shape up, and help everyone learn better JS by writing better JS. You have the skills and the power, exercise them.&lt;/p&gt;
+&lt;p&gt;And to all of you already avoiding &lt;code&gt;document.write&lt;/code&gt; like the low-level legacy function that it is: good on you, keep up the good work. Maybe convince a friend to do the same, together we can fix the web.&lt;/p&gt;
 </description>
 
 <link>http://pomax.github.io/#gh-weblog-1473270609919</link>
