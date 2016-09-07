@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Wed, 07 Sep 2016 19:20:47 GMT</lastBuildDate>
-<pubDate>Wed, 07 Sep 2016 19:20:47 GMT</pubDate>
+<lastBuildDate>Wed, 07 Sep 2016 19:20:57 GMT</lastBuildDate>
+<pubDate>Wed, 07 Sep 2016 19:20:57 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> If you use use document.write, you suck at JavaScript</title>
@@ -111,7 +111,7 @@
 &lt;p&gt;You open your browser's dev tools view, and you use &lt;code&gt;console.log(...)&lt;/code&gt; to write data to the dev tools console. In fact, unlike &lt;code&gt;document.write&lt;/code&gt; which can only write strings (obviously), &lt;code&gt;console.log&lt;/code&gt; can write everything you throw at it, and can write as many things as you need written in a single command. Strings, arrays, full objects, it makes all those things accessible in the console in an explorable way, and in a single call: &lt;code&gt;console.log("test", [1,2,3], {x:0,y:undefined})&lt;/code&gt; just works.&lt;/p&gt;
 &lt;p&gt;In fact, because being explicit about your intent in code is important for your code to make sense not just to others but even to your future self, the console API even has things like &lt;code&gt;console.warn()&lt;/code&gt; and &lt;code&gt;console.error()&lt;/code&gt;, so you can be specific about what your debug is for (just "see the data" vs "strong signal that something's wrong"). And if you want to get &lt;em&gt;really&lt;/em&gt; fancy there's things like &lt;code&gt;console.table()&lt;/code&gt; for pretty-printing specific data in tabulated form. &lt;/p&gt;
 &lt;p&gt;The console is amazing and you should be using it. Not &lt;code&gt;document.write&lt;/code&gt;.&lt;/p&gt;
-&lt;h3 id="i-use-it-for-"&gt;I use it for--&lt;/h3&gt;
+&lt;h3 id="but-what-if-i-use-it-for-"&gt;But what if I use it for--&lt;/h3&gt;
 &lt;p&gt;I kind of stopped caring: whatever you're doing, there is a modern JS way to do that without using &lt;strong&gt;a bare-bones byte injection function hooked into the normally inaccessible document byte map&lt;/strong&gt;. &lt;/p&gt;
 &lt;h3 id="no-really-i-m-using-it-for-injecting-a-filesystem-loader-into-an-iframe-that-kicks-in-before-the-document-even-exists-replacing-it-with-a-posix-filesystem-enabled-mini-server-that-"&gt;No really, I'm using it for injecting a filesystem loader into an iframe that kicks in before the document even exists, replacing it with a POSIX filesystem-enabled mini server that--&lt;/h3&gt;
 &lt;p&gt;That sounds awesome, I did the same thing! Also, that's an amazeballs super-ninja insane-o-hack, so I hope you're not counting on that working forever, because &lt;code&gt;document.write&lt;/code&gt; has to go. No matter how neat the thing is we can achieve by abusing the hell out of it. Our exploits of it are not enough to justify keeping it around.&lt;/p&gt;
