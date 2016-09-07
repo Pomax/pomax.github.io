@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Wed, 07 Sep 2016 19:10:40 GMT</lastBuildDate>
-<pubDate>Wed, 07 Sep 2016 19:10:40 GMT</pubDate>
+<lastBuildDate>Wed, 07 Sep 2016 19:10:55 GMT</lastBuildDate>
+<pubDate>Wed, 07 Sep 2016 19:10:55 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> If you use use document.write, you suck at JavaScript</title>
@@ -118,7 +118,9 @@
 &lt;p&gt;Shape up, and help everyone learn better JS by writing better JS. You have the skills and the power, exercise them.&lt;/p&gt;
 &lt;p&gt;And to all of you already avoiding &lt;code&gt;document.write&lt;/code&gt; like the low-level legacy function that it is: good on you, keep up the good work. Maybe convince a friend to do the same, together we can fix the web.&lt;/p&gt;
 </description>
-
+<category>JavaScript</category>
+<category>Web dev</category>
+<category>document.write</category>
 <link>http://pomax.github.io/#gh-weblog-1473270609919</link>
 <guid>http://pomax.github.io/#gh-weblog-1473270609919</guid>
 <pubDate>Wed, 07 Sep 2016 17:50:09 GMT</pubDate>
