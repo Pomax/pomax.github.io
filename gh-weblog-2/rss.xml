@@ -5,9 +5,70 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Sun, 14 Aug 2016 19:58:05 GMT</lastBuildDate>
-<pubDate>Sun, 14 Aug 2016 19:58:05 GMT</pubDate>
+<lastBuildDate>Wed, 07 Sep 2016 18:21:16 GMT</lastBuildDate>
+<pubDate>Wed, 07 Sep 2016 18:21:16 GMT</pubDate>
 <ttl>1440</ttl>
+<item>
+<title> If you use use document.write, you suck at JavaScript</title>
+<description>&lt;p&gt;Wow, that's an incendiary post title isn't it. Just because you use &lt;code&gt;document.write&lt;/code&gt; doesn't say anything about your JavaScript skills, I mean it's just another function in the official ECMAScript spec, it's just an older one. Why the vitriol?&lt;/p&gt;
+&lt;h2 id="let-s-start-at-the-start"&gt;Let's start at the start&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;document.write&lt;/code&gt; function comes to us from the dark ages of the early JavaScript enabled web, and is really nothing like the JS you are likely to be familiar with.  It might be called &lt;code&gt;document.write&lt;/code&gt; and invoked as if it's part of the document API, its true behaviour is much lower level: it is a proxy function in to the bytesteam pipe that defines what's even &lt;strong&gt;in&lt;/strong&gt; in &lt;code&gt;document&lt;/code&gt;. The &lt;code&gt;write&lt;/code&gt; function doesn't let you "write some data into the document", it &lt;strong&gt;is&lt;/strong&gt; the document, and that comes with some hilarious side effects.&lt;/p&gt;
+&lt;h2 id="1-write-needs-an-open-pipe"&gt;1: &lt;code&gt;write&lt;/code&gt; needs an open pipe&lt;/h2&gt;
+&lt;p&gt;Say you have a web page, and that webpage has the following code:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;html&amp;gt;
+  &amp;lt;head&amp;gt;&amp;lt;title&amp;gt;whatever&amp;lt;/title&amp;gt;&amp;lt;/head&amp;gt;
+  &amp;lt;body&amp;gt;
+    &amp;lt;script&amp;gt; document.write("&amp;lt;p&amp;gt;oh look a paragraph&amp;lt;/p&amp;gt;"); &amp;lt;/script&amp;gt;
+  &amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;then you might expect this to write a paragraph at the time the script triggers. And you'd be right, but here is &lt;em&gt;why&lt;/em&gt; you're right: the document pipe is still open, and the script element gets evaluated &lt;em&gt;while&lt;/em&gt; the document is getting parsed. Want to see something hilarious:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;html&amp;gt;
+  &amp;lt;head&amp;gt;&amp;lt;title&amp;gt;whatever&amp;lt;/title&amp;gt;&amp;lt;/head&amp;gt;
+  &amp;lt;body&amp;gt;
+    &amp;lt;script&amp;gt;
+      document.addEventListener("DOMContentLoaded", function() {
+        document.write("&amp;lt;p&amp;gt;oh look a paragraph&amp;lt;/p&amp;gt;");
+      });
+    &amp;lt;/script&amp;gt;
+  &amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Want to guess what that does? Writes a paragraph into the document once it's finished loading? &lt;strong&gt;no, not really&lt;/strong&gt;. Sure, if you put this in jsbin or the like that's what it looks like it does, but let's try this:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;html&amp;gt;
+  &amp;lt;head&amp;gt;&amp;lt;title&amp;gt;whatever&amp;lt;/title&amp;gt;&amp;lt;/head&amp;gt;
+  &amp;lt;body&amp;gt;
+    &amp;lt;h1&amp;gt;Second test:&amp;lt;/h1&amp;gt;
+    &amp;lt;script&amp;gt;
+      document.addEventListener("DOMContentLoaded", function() {
+        document.write("&amp;lt;p&amp;gt;oh look a paragraph&amp;lt;/p&amp;gt;");
+      });
+    &amp;lt;/script&amp;gt;
+  &amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Where did that &lt;code&gt;&amp;lt;h1&amp;gt;&lt;/code&gt; go?&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Actually, the correct question is "where did &lt;strong&gt;everything&lt;/strong&gt; go?" because your entire document got wiped. After all, &lt;code&gt;document.write&lt;/code&gt; needs an open pipe, and there is no open pipe once all content has loaded. And so it makes one.&lt;/p&gt;
+&lt;p&gt;A new one.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;An empty one&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;document&lt;/code&gt; is now an empty, open data pipe&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;So congratulations, you just wiped the page! And this is not a "quirk", this is literally what it's supposed to do, it's intended and explicit behaviour. If this was code you wrote on your own page, then lucky you, easy to fix (don't use &lt;code&gt;document.write&lt;/code&gt;) but if this was a 3rd party library, good luck finding out which one is  responsible. And then replacing it with a modern library instead.&lt;/p&gt;
+&lt;h2 id="2-document-write-is-insanely-insecure-"&gt;2.  &lt;code&gt;document.write&lt;/code&gt; is insanely insecure.&lt;/h2&gt;
+&lt;p&gt;If you know why &lt;code&gt;eval()&lt;/code&gt; is bad, you should already see where this is going, but &lt;code&gt;document.write&lt;/code&gt; is the most low-level version of eval you can come up with: it's &lt;em&gt;literally&lt;/em&gt; the function for injecting data into a page, so let's do that:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;html&amp;gt;
+  &amp;lt;head&amp;gt;&amp;lt;title&amp;gt;whatever&amp;lt;/title&amp;gt;&amp;lt;/head&amp;gt;
+  &amp;lt;body&amp;gt;
+    &amp;lt;script src="https://third.party.domain/perfectly-safe.js"&amp;gt;&amp;lt;/script&amp;gt;
+  &amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;and let's put a &lt;code&gt;document.write&lt;/code&gt; in that "perfectly safe" js file!&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;document.write("&amp;lt;script&amp;gt; do.anything(); /* this runs as if it's part of your page now, not scoped to third.party.domain */ &amp;lt;/script&amp;gt;");
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Good times!&lt;/p&gt;
+&lt;h2 id="3-document-write-is-synchronous"&gt;3.  &lt;code&gt;document.write&lt;/code&gt; is synchronous&lt;/h2&gt;
+&lt;p&gt;Because we can't defer &lt;code&gt;document.write&lt;/code&gt; to after the document is done loading, all the &lt;code&gt;document.write&lt;/code&gt; code &lt;em&gt;has&lt;/em&gt; to run as part of the initial page load, and so anything it puts in your document increases time-to-load. If you are blessed enough to live in a part of the world where you've never noticed page load speed is&lt;/p&gt;
+</description>
+
+<link>http://pomax.github.io/#gh-weblog-1473270609919</link>
+<guid>http://pomax.github.io/#gh-weblog-1473270609919</guid>
+<pubDate>Wed, 07 Sep 2016 17:50:09 GMT</pubDate>
+</item>
 <item>
 <title>So... I ruined my hands (but they're getting better)</title>
 <description>&lt;p&gt;About two weeks ago, I was fixing my favourite ramen bowl using traditional Japanese pottery repair techniques, which involves working with "urushi", a natural laquer obtained from the &lt;a href="https://en.wikipedia.org/wiki/Chinese_laquer_tree"&gt;Chinese Laquer Tree&lt;/a&gt;. This might not mean anything to you, until I explain to you that there is a compound known to science called "urushiol" that is found in poison ivy, poison oak, poison sumac, cashew trees, and other such nasty plants, and that is causes massive reactions in a large portion of humans.&lt;/p&gt;
@@ -273,63 +334,5 @@
 <link>http://pomax.github.io/#gh-weblog-1454267122337</link>
 <guid>http://pomax.github.io/#gh-weblog-1454267122337</guid>
 <pubDate>Sun, 31 Jan 2016 19:05:22 GMT</pubDate>
-</item>
-<item>
-<title> "git init" your way to peace of mind.</title>
-<description>&lt;p&gt;This is going to be a short post, but it's one that can make the difference between you being happy, and crying with your head in your hands because you absolutely ruined a file and hit save.  I'm basically going to tell you to use version control for stuff that matters, but rather than letting you figure out how to do that, I'm simply going to straight up tell you.&lt;/p&gt;
-&lt;h2 id="what-do-i-need-version-control-for-i-don-t-program"&gt;What do I need version control for, I don't program&lt;/h2&gt;
-&lt;p&gt;Who cares about programming? Do you write text on your computer? Maybe Word docs? A personal web page? Blog entries as .txt files you'll copy-paste into wordpress later? It really doesn't matter: the real question is "do you have folders/directories with data in them that you change every now and then, and that you might mess up because you can accidentally hit save and overwrite them, or accidentally hit delete and lose them forever?".&lt;/p&gt;
-&lt;p&gt;Because the answer is pretty much guaranteed "yes", and you could try to be diligent about never hitting save or delete, but you're human, and you're going to mess up. Maybe not today, maybe not next week, but chances are pretty much 100% at some point, you'll mess up.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;so use git&lt;/em&gt;&lt;/p&gt;
-&lt;h2 id="what-do-i-need-git-for-i-don-t-want-to-put-my-stuff-online"&gt;What do I need "git" for, I don't want to put my stuff online&lt;/h2&gt;
-&lt;p&gt;Yeah, common misconception. "git" has nothing to do with "putting stuff online", but has everything to do with "being version control software". In order to be successful version control software, you need to be able to do remote syncing because the vast majority of version controlled data is collaborative data, but it's 100% not necessary for the version control part, so here's what you do:&lt;/p&gt;
-&lt;h2 id="safeguard-your-data-from-you-"&gt;Safeguard your data from &lt;em&gt;you&lt;/em&gt;&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;install &lt;a href="https://git-scm.com/downloads"&gt;git&lt;/a&gt;. It's a few clicks, just do it.&lt;/li&gt;
-&lt;li&gt;For any dir/folder that holds a project you do work on, run "git init". If you are familiar with the command line, it's literally just &lt;code&gt;$&amp;gt; cd your/project/dir&lt;/code&gt; followed by &lt;code&gt;$&amp;gt; git init&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Awesome, you now have version control running for that dir/folder.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id="okay-what-s-next-"&gt;Okay, what's next?&lt;/h2&gt;
-&lt;p&gt;Every time you make changes to your files, even if you're not done but you made some headway on them and feel like now would be a good time to take a snapshot: take a snapshot!&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;$&amp;gt; git add -A&lt;/code&gt; (tell git to look at &lt;em&gt;all&lt;/em&gt; the changes that were made since the last snapshot)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;$&amp;gt; git commit -m "give your snapshot a name and/or description here"&lt;/code&gt; (include the quotes)&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Done. No syncing with the internet, no complicated workflow stuff, just &lt;code&gt;git add&lt;/code&gt; to add all the changes, and then &lt;code&gt;git commit&lt;/code&gt; to commit the snapshot to the version history.&lt;/p&gt;
-&lt;h2 id="okay-i-ve-done-that-and-then-a-few-minutes-later-i-ruined-all-my-files-what-now-"&gt;Okay, I've done that! And then a few minutes later I ruined all my files! What now!?!?!&lt;/h2&gt;
-&lt;p&gt;Say you accidentally deleted the files you needed from your project dir, and then to make things worse you also saved empty files on top of that because your text editor spazzed out! Oh no! If you didn't have &lt;code&gt;git&lt;/code&gt; managing your version control, you'd be completely screwed!&lt;/p&gt;
-&lt;p&gt;But you have git managing your snapshot history, and as long as you still have its &lt;code&gt;.git&lt;/code&gt; dir, what you just did is effectively insignificant: just tell git to restore your last snapshot:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;$&amp;gt; git reset --hard&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;And done. All your files are back, in the state they were in during the last snapshot. Sure, you may have lost a few minutes of work, but between that and "I lost everything", I'm pretty sure we'd both pick the few minutes of work lost option.&lt;/p&gt;
-&lt;h2 id="it-worked-but-then-i-messed-up-again-and-this-time-i-also-deleted-my-git-directory-"&gt;It worked! But then I messed up &lt;em&gt;again&lt;/em&gt; and this time I also deleted my &lt;code&gt;.git&lt;/code&gt; directory!!&lt;/h2&gt;
-&lt;p&gt;That's the only way to make sure &lt;code&gt;git&lt;/code&gt; can't help you anymore. If your workflow is such that you &lt;em&gt;can&lt;/em&gt; delete entire directories, then really you need to get yourself some remote syncing/backup solution. That's kind of out of scope for this short post on "version control your stuff already, you are smart enough to understand the need for it", but you could look at things like &lt;a href="https://www.dropbox.com/"&gt;Dropbox&lt;/a&gt; and/or &lt;a href="https://www.backblaze.com"&gt;backblaze&lt;/a&gt;. If your work is that important, why are you not paying the $5/mo to properly protect &lt;em&gt;all the data on your computer&lt;/em&gt;?&lt;/p&gt;
-&lt;p&gt;Also, if you have any kind of user account control, make sure to set the &lt;code&gt;.git&lt;/code&gt; directory (but not its content) to read-only, so that even if you accidentally try to delete it, your OS will go "hey you can't actually delete this dir, okay? you're going to have to unlock it before I can do that for you". Depending on your OS the way you do this differs, but again instead of telling you to look up how to do that, I'm just going to tell you.&lt;/p&gt;
-&lt;p&gt;On Linux, Unix, and OSX, you can use the terminal to issue &lt;code&gt;$&amp;gt;chmod 0444 .git&lt;/code&gt; in your project's directory, which sets the permissions for the ".git" dir (but not its content) to read-only. Unless you're deleting things with &lt;code&gt;rm&lt;/code&gt;, that dir will be relatively safe now.&lt;/p&gt;
-&lt;p&gt;On windows, use any filemanager and right click the dir's folder, and then make sure to check the "read-only" box. On windows deleting the .git dir is usually less of a problem because the dir's marked as "hidden". You'll see it if you're a power user who unhides system and hidden dirs/files, but in normal use you won't see it, and thus won't accidentally delete it.&lt;/p&gt;
-&lt;h2 id="i-didn-t-actually-mess-anything-up-but-i-d-like-to-look-at-an-old-snapshot-"&gt;I didn't actually mess anything up, but I'd like to look at an old snapshot...&lt;/h2&gt;
-&lt;p&gt;Yeah that's a thing you can do. You can scroll through your snapshot history by using &lt;code&gt;$&amp;gt; git log&lt;/code&gt;, which will tell show your the name/descriptions for each snapshot (which is why you want to at least use sensible naming/descriptions. A single dot is fast to write, but useless if you ever need to go through your history), tied to a git "commit hash", which is a long hexadecimal string that uniquely identifies that snapshot for the git application. Say I need last week's version of a novel I'm writing, because I rewrote half a chapter but I remember there was a paragraph that had super sweet phrasing and I want it back:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;$&amp;gt; git add -A&lt;/code&gt; because I don't want to lose any work&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;$&amp;gt; git commit -m "midday work, somedate-2016"&lt;/code&gt; so that git has a snapshot for where I am right now.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;$&amp;gt; git log&lt;/code&gt;, to see my history&lt;/li&gt;
-&lt;li&gt;Notice that "end of day, Monday, week 2, 2016" has commit "dbcaf87689facb6bcb6f9eb786fs9".&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;$&amp;gt;git checkout dbcaf87689facb6bcb6f9eb786fs9&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Boom, git changes everything to match what they were at the time I took that snapshot. I can copy the bits I need onto my desktop, then make sure to put me back on where I just was&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;$&amp;gt; git reset master&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;This changes all my files to where I just was again, and I can go on with my life. So handy!&lt;/p&gt;
-&lt;h2 id="what-else-can-i-do-"&gt;What else can I do?&lt;/h2&gt;
-&lt;p&gt;Quite a lot, but all of that's covered by &lt;a href="https://git-scm.com/book/en/v2"&gt;the git book&lt;/a&gt;, and a lot of it is mostly irrelevant unless you also want to do remote syncing of your data. Still, good read if you really care about your data.&lt;/p&gt;
-&lt;h2 id="what-if-the-command-line-is-too-unfamiliar-to-me-"&gt;What if the command line is too unfamiliar to me?&lt;/h2&gt;
-&lt;p&gt;You can use the &lt;code&gt;git-gui&lt;/code&gt; command. This will ask you (if you "just run it") whether to create a new repository, or manage an existing one. I'm not going to explain how to use that, because  I never use it, but it can do all the things this post talked about.&lt;/p&gt;
-&lt;h1 id="that-s-it-we-re-done-"&gt;That's it, we're done.&lt;/h1&gt;
-&lt;p&gt;Go use version control. You &lt;em&gt;litearlly&lt;/em&gt; have no excuse not to. And if you have any questions or comments, you can either leave those over on github (see the link below this post) or just tweet at me &lt;a href="http://twitter.com/TheRealPomax"&gt;@TheRealPomax&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Version control your files, because you shouldn't be able to be your own enemy.&lt;/p&gt;
-</description>
-<category>Git</category>
-<category>Version Control</category>
-<link>http://pomax.github.io/#gh-weblog-1453231679399</link>
-<guid>http://pomax.github.io/#gh-weblog-1453231679399</guid>
-<pubDate>Tue, 19 Jan 2016 19:27:59 GMT</pubDate>
 </item></channel>
 </rss>
