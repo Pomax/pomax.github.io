@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Wed, 07 Sep 2016 19:17:22 GMT</lastBuildDate>
-<pubDate>Wed, 07 Sep 2016 19:17:22 GMT</pubDate>
+<lastBuildDate>Wed, 07 Sep 2016 19:18:26 GMT</lastBuildDate>
+<pubDate>Wed, 07 Sep 2016 19:18:26 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> If you use use document.write, you suck at JavaScript</title>
@@ -106,7 +106,7 @@
   &amp;lt;/body&amp;gt;
 &amp;lt;/html&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Done.  And it runs asynchronous, too, so your page isn't blocked from loading.&lt;/p&gt;
-&lt;h3 id="i-use-document-write-to-see-debug-information-"&gt;I use &lt;code&gt;document.write&lt;/code&gt; to see debug information!&lt;/h3&gt;
+&lt;h3 id="but-i-only-use-document-write-to-see-debug-information-"&gt;But I only use &lt;code&gt;document.write&lt;/code&gt; to see debug information!&lt;/h3&gt;
 &lt;p&gt;Okay... wait, what? Why are you doing that? It's 2016, but even if this was 2010: use the &lt;code&gt;console&lt;/code&gt; API, because that's what it for.&lt;/p&gt;
 &lt;p&gt;You open your browser's dev tools view, and you use &lt;code&gt;console.log(...)&lt;/code&gt; to write data to the dev tools console. In fact, unlike &lt;code&gt;document.write&lt;/code&gt; which can only write strings (obviously), &lt;code&gt;console.log&lt;/code&gt; can write &lt;em&gt;everything&lt;/em&gt;. Strings, arrays, full objects, it makes all those things accessible in the console in an explorable way. In fact, it even has &lt;code&gt;console.warn()&lt;/code&gt; and &lt;code&gt;console.error()&lt;/code&gt;, so you can be specific about what your debug is for (just "see the data" vs "strong signal that something's wrong").&lt;/p&gt;
 &lt;h3 id="i-use-it-for-"&gt;I use it for-&lt;/h3&gt;
