@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Wed, 07 Sep 2016 19:02:50 GMT</lastBuildDate>
-<pubDate>Wed, 07 Sep 2016 19:02:50 GMT</pubDate>
+<lastBuildDate>Wed, 07 Sep 2016 19:05:02 GMT</lastBuildDate>
+<pubDate>Wed, 07 Sep 2016 19:05:02 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> If you use use document.write, you suck at JavaScript</title>
@@ -21,7 +21,9 @@
     &amp;lt;script&amp;gt; document.write("&amp;lt;p&amp;gt;oh look a paragraph&amp;lt;/p&amp;gt;"); &amp;lt;/script&amp;gt;
   &amp;lt;/body&amp;gt;
 &amp;lt;/html&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;then you might expect this to write a paragraph at the time the script triggers. And you'd be right, but here is &lt;em&gt;why&lt;/em&gt; you're right: the document pipe is still open, and the script element gets evaluated &lt;em&gt;while&lt;/em&gt; the document is getting parsed. Want to see something hilarious:&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The browser loads this code by creating a &lt;code&gt;document&lt;/code&gt;, opening it for writing, piping that data into it (which gets parsed into a DOM as it sees bytes flying by) and then closes it to signal the completion of building &lt;a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model"&gt;the DOM&lt;/a&gt; for your page.&lt;/p&gt;
+&lt;p&gt;Given that, you might expect this code to write a paragraph into your document at the time that the &lt;code&gt;document.write&lt;/code&gt; script triggers. And you'd be right, but here is &lt;em&gt;why&lt;/em&gt; you're right: as the document pipe is still open, and the script element gets evaluated &lt;em&gt;while&lt;/em&gt; the document is getting parsed, the document parser simply sees "more bytes" flying by to parse into the DOM.&lt;/p&gt;
+&lt;p&gt;Want to see something hilarious?&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;&amp;lt;html&amp;gt;
   &amp;lt;head&amp;gt;&amp;lt;title&amp;gt;whatever&amp;lt;/title&amp;gt;&amp;lt;/head&amp;gt;
   &amp;lt;body&amp;gt;
