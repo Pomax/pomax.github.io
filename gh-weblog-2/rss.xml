@@ -5,14 +5,14 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Wed, 07 Sep 2016 18:48:25 GMT</lastBuildDate>
-<pubDate>Wed, 07 Sep 2016 18:48:25 GMT</pubDate>
+<lastBuildDate>Wed, 07 Sep 2016 18:49:30 GMT</lastBuildDate>
+<pubDate>Wed, 07 Sep 2016 18:49:30 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> If you use use document.write, you suck at JavaScript</title>
 <description>&lt;p&gt;Wow, that's an incendiary post title isn't it. Just because you use &lt;code&gt;document.write&lt;/code&gt; doesn't say anything about your JavaScript skills, I mean it's just another function in the official ECMAScript spec, it's just an older one. Why the vitriol?&lt;/p&gt;
 &lt;h2 id="let-s-start-at-the-start"&gt;Let's start at the start&lt;/h2&gt;
-&lt;p&gt;The &lt;code&gt;document.write&lt;/code&gt; function comes to us from the dark ages of the early JavaScript enabled web, and is really nothing like the JS you are likely to be familiar with.  It might be called &lt;code&gt;document.write&lt;/code&gt; and invoked as if it's part of the document API, its true behaviour is much lower level: it is a proxy function in to the bytesteam pipe that defines what's even &lt;strong&gt;in&lt;/strong&gt; in &lt;code&gt;document&lt;/code&gt;. The &lt;code&gt;write&lt;/code&gt; function doesn't let you "write some data into the document", it &lt;strong&gt;is&lt;/strong&gt; the document, and that comes with some hilarious side effects.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;document.write&lt;/code&gt; function comes to us from the dark ages of the early JavaScript enabled web, and is really nothing like the JS you are likely to be familiar with.  It might be called &lt;code&gt;document.write&lt;/code&gt; and invoked as if it's part of the document API, &lt;a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/write"&gt;its true behaviour is much lower level&lt;/a&gt;: it is a proxy function in to the bytesteam pipe that defines what's even &lt;strong&gt;in&lt;/strong&gt; in &lt;code&gt;document&lt;/code&gt;. The &lt;code&gt;write&lt;/code&gt; function doesn't let you "write some data into the document", it &lt;strong&gt;is&lt;/strong&gt; the document, and that comes with some hilarious side effects.&lt;/p&gt;
 &lt;h2 id="1-write-needs-an-open-pipe"&gt;1: &lt;code&gt;write&lt;/code&gt; needs an open pipe&lt;/h2&gt;
 &lt;p&gt;Say you have a web page, and that webpage has the following code:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;&amp;lt;html&amp;gt;
