@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Wed, 07 Sep 2016 18:21:16 GMT</lastBuildDate>
-<pubDate>Wed, 07 Sep 2016 18:21:16 GMT</pubDate>
+<lastBuildDate>Wed, 07 Sep 2016 18:47:02 GMT</lastBuildDate>
+<pubDate>Wed, 07 Sep 2016 18:47:02 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> If you use use document.write, you suck at JavaScript</title>
@@ -62,7 +62,46 @@
 &lt;pre&gt;&lt;code&gt;document.write("&amp;lt;script&amp;gt; do.anything(); /* this runs as if it's part of your page now, not scoped to third.party.domain */ &amp;lt;/script&amp;gt;");
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Good times!&lt;/p&gt;
 &lt;h2 id="3-document-write-is-synchronous"&gt;3.  &lt;code&gt;document.write&lt;/code&gt; is synchronous&lt;/h2&gt;
-&lt;p&gt;Because we can't defer &lt;code&gt;document.write&lt;/code&gt; to after the document is done loading, all the &lt;code&gt;document.write&lt;/code&gt; code &lt;em&gt;has&lt;/em&gt; to run as part of the initial page load, and so anything it puts in your document increases time-to-load. If you are blessed enough to live in a part of the world where you've never noticed page load speed is&lt;/p&gt;
+&lt;p&gt;Because we can't defer &lt;code&gt;document.write&lt;/code&gt; to after the document is done loading, all the &lt;code&gt;document.write&lt;/code&gt; code &lt;em&gt;has&lt;/em&gt; to run as part of the initial page load, and so anything it puts in your document increases time-to-load. If you are blessed enough to live in a part of the world where you've never noticed page load speed, good for you! But a &lt;em&gt;lot&lt;/em&gt; of people are still on slow connections, and any page blocking before the browser can show an initial view (which it only does once it reaches the &lt;code&gt;&amp;lt;/body&amp;gt;&lt;/code&gt; tag) is extremely obvious.&lt;/p&gt;
+&lt;h2 id="okay-fine-but-say-i-know-all-these-things-why-do-i-suck-at-javascript-if-i-use-it-i-know-what-i-m-doing-"&gt;Okay, fine, but say I know all these things, why do I suck at JavaScript if I use it? I know what I'm doing!&lt;/h2&gt;
+&lt;p&gt;I'm going to  argue that you don't. Modern JS has many constructions that are non-destructive, secure, and non-blocking. Why not use those instead?&lt;/p&gt;
+&lt;h3 id="adding-content-to-the-document"&gt;adding content to the document&lt;/h3&gt;
+&lt;p&gt;The proper way to add content to your document, using modern, non-destructive code, is by using the DOM manipulation API. In vanilla JS, things like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;html&amp;gt;
+  &amp;lt;head&amp;gt;&amp;lt;title&amp;gt;whatever&amp;lt;/title&amp;gt;&amp;lt;/head&amp;gt;
+  &amp;lt;body&amp;gt;
+    &amp;lt;h1&amp;gt;Second test:&amp;lt;/h1&amp;gt;
+    &amp;lt;script&amp;gt;
+      document.addEventListener("DOMContentLoaded", function() {
+        var body = document.body.
+        var p = document.createElement("p");
+        p.textContent = "wow, a new paragraph!";
+        body.appendChild(p);
+      });
+    &amp;lt;/script&amp;gt;
+  &amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Is that cumbersome? Sure is, so if you have to manipulate the DOM, use something like jQuery or Zepto or the like instead, because they give you far easier APIs, while making sure to fall through to proper DOM manipulation instead of &lt;code&gt;document.write&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;html&amp;gt;
+  &amp;lt;head&amp;gt;&amp;lt;title&amp;gt;whatever&amp;lt;/title&amp;gt;&amp;lt;/head&amp;gt;
+  &amp;lt;body&amp;gt;
+    &amp;lt;h1&amp;gt;Second test:&amp;lt;/h1&amp;gt;
+    &amp;lt;script&amp;gt;
+      $(function() {
+        $(document.body).append($("&amp;lt;p&amp;gt;Wow, a new paragraph!&amp;lt;/p&amp;gt;");
+      });
+    &amp;lt;/script&amp;gt;
+  &amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Done.  And it runs asynchronous, too, so your page isn't blocked from loading.&lt;/p&gt;
+&lt;h3 id="i-use-document-write-to-see-debug-information-"&gt;I use &lt;code&gt;document.write&lt;/code&gt; to see debug information!&lt;/h3&gt;
+&lt;p&gt;Okay... wait, what? Why are you doing that? It's 2016, but even if this was 2010: use the &lt;code&gt;console&lt;/code&gt; API, because that's what it for.&lt;/p&gt;
+&lt;p&gt;You open your browser's dev tools view, and you use &lt;code&gt;console.log(...)&lt;/code&gt; to write data to the dev tools console. In fact, unlike &lt;code&gt;document.write&lt;/code&gt; which can only write strings (obviously), &lt;code&gt;console.log&lt;/code&gt; can write &lt;em&gt;everything&lt;/em&gt;. Strings, arrays, full objects, it makes all those things accessible in the console in an explorable way. In fact, it even has &lt;code&gt;console.warn()&lt;/code&gt; and &lt;code&gt;console.error()&lt;/code&gt;, so you can be specific about what your debug is for (just "see the data" vs "strong signal that something's wrong").&lt;/p&gt;
+&lt;h3 id="i-use-it-for-"&gt;I use it for-&lt;/h3&gt;
+&lt;p&gt;I kind of stopped caring: whatever you're doing, there is a modern JS way to do that without using &lt;strong&gt;a bare-bones byte injection function hooked into the normally inaccessible document byte map&lt;/strong&gt;. &lt;/p&gt;
+&lt;h1 id="do-you-really-suck-at-javascript-probably-not-"&gt;Do you &lt;em&gt;really&lt;/em&gt; suck at JavaScript? Probably not.&lt;/h1&gt;
+&lt;p&gt;So back to the original proposition. Do you suck at JavaScript? Well, sort of. You're using a function you shouldn't ever have been taught to use. That happens. We all started at a position of "knowing nothing about JavaScript", so not knowing how bad &lt;code&gt;document.write&lt;/code&gt; is, is kind of a given. However, now you know, and now you need to go and find all those places where you use it.&lt;/p&gt;
+&lt;p&gt;So only to all of you who don't stop using &lt;code&gt;document.write&lt;/code&gt;: you absolutely suck at JavaScript, and the world is worse off because of you. Shape up, and help everyone learn better JS by writing better JS. You have the skills and the power, exercise them.&lt;/p&gt;
 </description>
 
 <link>http://pomax.github.io/#gh-weblog-1473270609919</link>
