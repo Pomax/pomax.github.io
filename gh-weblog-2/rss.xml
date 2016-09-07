@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Wed, 07 Sep 2016 18:50:39 GMT</lastBuildDate>
-<pubDate>Wed, 07 Sep 2016 18:50:39 GMT</pubDate>
+<lastBuildDate>Wed, 07 Sep 2016 18:52:16 GMT</lastBuildDate>
+<pubDate>Wed, 07 Sep 2016 18:52:16 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> If you use use document.write, you suck at JavaScript</title>
@@ -52,7 +52,7 @@
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;document&lt;/code&gt; is now an empty, open data pipe&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;So congratulations, you just wiped the page! And this is not a "quirk", this is literally what it's supposed to do, it's intended and explicit behaviour. If this was code you wrote on your own page, then lucky you, easy to fix (don't use &lt;code&gt;document.write&lt;/code&gt;) but if this was a 3rd party library, good luck finding out which one is  responsible. And then replacing it with a modern library instead.&lt;/p&gt;
 &lt;h2 id="2-document-write-is-insanely-insecure-"&gt;2.  &lt;code&gt;document.write&lt;/code&gt; is insanely insecure.&lt;/h2&gt;
-&lt;p&gt;If you know why &lt;code&gt;eval()&lt;/code&gt; is bad, you should already see where this is going, but &lt;code&gt;document.write&lt;/code&gt; is the most low-level version of eval you can come up with: it's &lt;em&gt;literally&lt;/em&gt; the function for injecting data into a page, so let's do that:&lt;/p&gt;
+&lt;p&gt;You probably know that &lt;code&gt;eval()&lt;/code&gt; is really bad because it can evaluate arbitrary JS code, with the same execution rights as the page it's run on. So... you should see this one coming, but &lt;code&gt;document.write&lt;/code&gt; lets you do exactly the same thing. In fact, it's the most low-level version of eval you can come up with: it's &lt;em&gt;literally&lt;/em&gt; the function for injecting data into a page, so let's do that...&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;&amp;lt;html&amp;gt;
   &amp;lt;head&amp;gt;&amp;lt;title&amp;gt;whatever&amp;lt;/title&amp;gt;&amp;lt;/head&amp;gt;
   &amp;lt;body&amp;gt;
