@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Wed, 07 Sep 2016 19:05:02 GMT</lastBuildDate>
-<pubDate>Wed, 07 Sep 2016 19:05:02 GMT</pubDate>
+<lastBuildDate>Wed, 07 Sep 2016 19:08:18 GMT</lastBuildDate>
+<pubDate>Wed, 07 Sep 2016 19:08:18 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> If you use use document.write, you suck at JavaScript</title>
@@ -34,7 +34,7 @@
     &amp;lt;/script&amp;gt;
   &amp;lt;/body&amp;gt;
 &amp;lt;/html&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Want to guess what that does? Writes a paragraph into the document once it's finished loading? &lt;strong&gt;no, not really&lt;/strong&gt;. Sure, if you put this in jsbin or the like that's what it looks like it does, but let's try this:&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Guess what that does. If you thought "it writes a paragraph into the document once it's finished loading" then: no, not really.  While it might look that way if you put this in jsbin or the like that's what it looks like it does, but let's try this:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;&amp;lt;html&amp;gt;
   &amp;lt;head&amp;gt;&amp;lt;title&amp;gt;whatever&amp;lt;/title&amp;gt;&amp;lt;/head&amp;gt;
   &amp;lt;body&amp;gt;
@@ -52,7 +52,8 @@
 &lt;p&gt;A new one.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;An empty one&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;document&lt;/code&gt; is now an empty, open data pipe&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;So congratulations, you just wiped the page! And this is not a "quirk", this is literally what it's supposed to do, it's intended and explicit behaviour. If this was code you wrote on your own page, then lucky you, easy to fix (don't use &lt;code&gt;document.write&lt;/code&gt;) but if this was a 3rd party library, good luck finding out which one is  responsible. And then replacing it with a modern library instead.&lt;/p&gt;
+&lt;p&gt;What happened? The document got opened, the source code bytes went flying past the parser, it saw the end of the document, the document got closed for writing, and then when it sends the signal "DOM finished building!", our &lt;code&gt;document.write&lt;/code&gt; code kicks in, and the document is reopened as a new, empty, byte stream, and we pump in only the bytes &lt;code&gt;&amp;lt;p&amp;gt;oh look a paragraph&amp;lt;/p&amp;gt;&lt;/code&gt;. The browser knows how to auto-inject missing tags so it'll automatically build the higher level &lt;code&gt;html&lt;/code&gt;, &lt;code&gt;head&lt;/code&gt; and &lt;code&gt;body&lt;/code&gt; nodes in the DOM, but the &lt;em&gt;only&lt;/em&gt; data in our document as far as the browser knows is now &lt;code&gt;&amp;lt;p&amp;gt;oh look a paragraph&amp;lt;/p&amp;gt;&lt;/code&gt;, and &lt;strong&gt;nothing else&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;So congratulations, you actually just wiped the page! And this is not a "quirk", this is literally what it's supposed to do, it's intended and explicit behaviour. If this was code you wrote on your own page, then lucky you, easy to fix (don't use &lt;code&gt;document.write&lt;/code&gt;) but if this was a 3rd party library, good luck finding out which one is  responsible. And then replacing it with a modern library instead.&lt;/p&gt;
 &lt;h2 id="2-document-write-is-insanely-insecure-"&gt;2.  &lt;code&gt;document.write&lt;/code&gt; is insanely insecure.&lt;/h2&gt;
 &lt;p&gt;You probably know that &lt;code&gt;eval()&lt;/code&gt; is really bad because it can evaluate arbitrary JS code, with the same execution rights as the page it's run on. So... you should see this one coming, but &lt;code&gt;document.write&lt;/code&gt; lets you do exactly the same thing. In fact, it's the most low-level version of eval you can come up with: it's &lt;em&gt;literally&lt;/em&gt; the function for injecting data into a page, so let's do that...&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;&amp;lt;html&amp;gt;
