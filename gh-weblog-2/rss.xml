@@ -5,9 +5,244 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Fri, 02 Dec 2016 17:52:53 GMT</lastBuildDate>
-<pubDate>Fri, 02 Dec 2016 17:52:53 GMT</pubDate>
+<lastBuildDate>Fri, 10 Mar 2017 01:09:28 GMT</lastBuildDate>
+<pubDate>Fri, 10 Mar 2017 01:09:28 GMT</pubDate>
 <ttl>1440</ttl>
+<item>
+<title> Localization is hard.</title>
+<description>&lt;p&gt;I know, that seems like an obvious statement, but I want to dig a little deeper because just because you have a "web thing" that people might want to see translated or even fully localized, that doesn't mean that they can, or even if they can, that it's easy for them to do so.&lt;/p&gt;
+&lt;p&gt;As such, this is a story of a project that was blessed with two independent users wanting to translate content to Chinese and Japanese, and a code base that was &lt;em&gt;absolutely not ready for that&lt;/em&gt;. As of this blog post, it most definitely is, and that's been a few weeks worth of journey.&lt;/p&gt;
+&lt;p&gt;Let me take you through the travel log.&lt;/p&gt;
+&lt;h2 id="once-upon-a-time-there-was-a-primer-on-b-zier-curves-https-pomax-github-io-bezierinfo-"&gt;Once upon a time there was a &lt;a href="https://pomax.github.io/bezierinfo"&gt;Primer on Bézier curves&lt;/a&gt;.&lt;/h2&gt;
+&lt;p&gt;Or rather, there was a &lt;a href="http://processingjs.org"&gt;Processing.js&lt;/a&gt; based exploration of the basics of Bézier curves because I was working on font generation and wanted to understand the intricacies of Bézier curves for the purposes of drawing curve outlines. There weren't any really good resources on the topic, and because the best way to learn something is to teach it, I figured I'd write my own explanation, put it online, and learn how they worked that way.&lt;/p&gt;
+&lt;p&gt;As I learned more and more I kept updating that one short page until it had became a rather long page, and once it started to show up fairly high in Google results for "bezier curves" (typos included because who has the time to write "é" when you're not on a French keyboard) I started taking "making sure it was sort of usable" more seriously.&lt;/p&gt;
+&lt;p&gt;Jumping from 2011 to 2017, the page underwent a fair number of changes, and I thought I had a pretty good setup until a few weeks ago:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The Primer itself is a &lt;a href="https://facebook.github.io/react"&gt;React&lt;/a&gt;-managed single page... err... page. It's just a page, not an app.&lt;/li&gt;
+&lt;li&gt;Each section is a &lt;a href="https://github.com/Pomax/BezierInfo-2/tree/4c3be7105161d69774e622432654a5dbc62bae96/components/sections"&gt;separate JSX file&lt;/a&gt; wrapping both the JS functionality and the web content, with the &lt;code&gt;render()&lt;/code&gt; function simply housing a big block of almost-HTML code with virtually no templating, so it reads like normal webpages (for the most part).&lt;/li&gt;
+&lt;li&gt;the article as a whole loads all the sections, &lt;a href="https://github.com/Pomax/BezierInfo-2/blob/4c3be7105161d69774e622432654a5dbc62bae96/components/Navigation.jsx"&gt;mines them for title data, uses that to build a ToC&lt;/a&gt;, and then just renders the entire article.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;It also has clever code for dealing with "I just want to write about maths, not program about maths", so sections can contain code that isn't legal JSX in the slightest, but that's okay: babel loaders do some preprocessing and when the code actually gets to the "convert react to plain JS" step, everything is perfectly fine:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;bundling uses &lt;a href="https://webpack.github.io"&gt;Webpack&lt;/a&gt;, with &lt;a href="http://babeljs.io/"&gt;babel&lt;/a&gt; for converting JSX and ES6+ code to plain old ES5&lt;/li&gt;
+&lt;li&gt;a number of custom webpack loaders are used to turn "my code" into "actually spec-compliant JSX" (insofar as there is a spec, of course):&lt;ul&gt;
+&lt;li&gt;a &lt;a href="https://github.com/Pomax/BezierInfo-2/blob/4c3be7105161d69774e622432654a5dbc62bae96/lib/p-loader.js"&gt;&lt;code&gt;p-loader&lt;/code&gt;&lt;/a&gt; which replaces &lt;code&gt;{&lt;/code&gt; and &lt;code&gt;}&lt;/code&gt; inside paragraphs with JSX-safified versions instead, because to JSX those are templating instructions.   &lt;/li&gt;
+&lt;li&gt;a &lt;a href="https://github.com/Pomax/BezierInfo-2/blob/4c3be7105161d69774e622432654a5dbc62bae96/lib/pre-loader.js"&gt;&lt;code&gt;pre-loader&lt;/code&gt;&lt;/a&gt; which replaces "html sensitive" characters in &lt;code&gt;&amp;lt;pre&amp;gt;&lt;/code&gt; blocks with safe equivalents, so that I can write &lt;code&gt;i &amp;lt; 0&lt;/code&gt; rather than having to bother with remembering to use &lt;code&gt;i &amp;amp;lt; 0&lt;/code&gt;. Which is good: having to remember HTML entities is dumb.&lt;/li&gt;
+&lt;li&gt;a &lt;a href="https://github.com/Pomax/BezierInfo-2/blob/4c3be7105161d69774e622432654a5dbc62bae96/lib/latex-loader.js"&gt;&lt;code&gt;latex-loader&lt;/code&gt;&lt;/a&gt; which does some "genuinely cool shit™"&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;There is a &lt;code&gt;&amp;lt;SectionHeader&amp;gt;&lt;/code&gt; component that ensure that each section ends up providing its own fragment identifier for easy &lt;code&gt;index.html#somesection&lt;/code&gt; navigation and bookmarking.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Particularly the LaTeX loader is a thing I really like: &lt;a href="http://pomax.github.io/1451617530567/react-with-latex-without-needing-client-side-mathjax"&gt;I wrote about this before&lt;/a&gt;, but for the longest time the on-page LaTeX would simply be parsed client-side using &lt;a href="https://mathjax.org"&gt;MathJax&lt;/a&gt; but that made the article load really slowly because I use a lot of maths. Like... &lt;strong&gt;a lot&lt;/strong&gt;. People had to basically wait for 150+ blocks of LaTeX to be typeset by their browser, slowing down the page load, making the page unresponsive, and basically just being super annoying. Worth it for what you got in return, but still annoying.&lt;/p&gt;
+&lt;p&gt;So, eventually, I wrote the latex-loader whose specialized role was to ingest a JSX file, extract all LaTeX code blocks, convert them &lt;em&gt;offline during the build&lt;/em&gt; by running them through MathJax (using &lt;a href="https://www.npmjs.com/package/mathjax-node"&gt;mathjax-node&lt;/a&gt;), saving the resulting SVG to file, and then generating a &lt;em&gt;new&lt;/em&gt; JSX file in which each LaTeX block got replaced with &lt;code&gt;&amp;lt;img src="latexfile.svg" width="..." height="..."/&amp;gt;&lt;/code&gt; to effect two things: first, excellent load experience for users because their browser wasn't locking up anymore, and second, the page content wouldn't move around anymore because while client-side MathJax means there was no way to tell how much vertical space a conversion result would take up, having actual SVG files means you can just quickly check what their size is going to be and bind an image &lt;code&gt;width&lt;/code&gt; and &lt;code&gt;height&lt;/code&gt; value so that the DOM already knows how much space it needs even before an image is loaded.&lt;/p&gt;
+&lt;p&gt;All in all, it was &lt;em&gt;pretty&lt;/em&gt; sweet!&lt;/p&gt;
+&lt;h2 id="and-then-contributors-show-up-"&gt;And then contributors show up.&lt;/h2&gt;
+&lt;p&gt;I've been working on the Primer pretty much on my own since 2011, with some help from people in terms of advice or suggestions, but never in the sense that they took the code, changes something radically, and then filed a PR and discussed the changes to get them landed.&lt;/p&gt;
+&lt;p&gt;In February of 2017, that changed. In the span of a week two people contacted me because they wanted to translate the article to their own language. Specifically: Chinese and Japanese. And this is where, if you're an English content creator, things get interesting because that's not just translation: that's localization. While of course translation is involved, things like "how maths statement are organized" also changes, and probably some other things you hadn't even thought of.&lt;/p&gt;
+&lt;p&gt;Naturally, I really wanted to take these folks up on their offer: getting the Primer translated so that the content is more meaningful for Chinese and Japanese audiences is huge! But my code base was written by one person, for one person, for one language, without any affordances to the possibility of eventual translation. so I did the only thing I could think of:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;I told them I was super interested in having them help out, but would need a little time to make sure they could work on the code&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;This is where you lose contributors, by the way, but it's still the correct way to deal with people showing up wanting to help doing a thing you had never spent any time thinking of at all: when the world shows up at your doorstep asking to help you, you make it some tea, express your deepest gratitude and then while they're hopwfully distracted by the cookies you work your ass off to make sure it doesn't go "well I should go again". You make it want to stay.&lt;/p&gt;
+&lt;h2 id="code-base-changes-let-s-talk-about-failures-"&gt;Code base changes: let's talk about failures.&lt;/h2&gt;
+&lt;p&gt;I've worked with localized code bases before and there are some nice solutions out there for websites and apps. I figured I'd see if &lt;a href="https://www.transifex.com"&gt;Transifex&lt;/a&gt; and &lt;a href="https://pontoon.mozilla.org"&gt;Mozilla's Pontoon&lt;/a&gt; could be used, because that's what I've used in the past, but this is where traditional localization solutions break down.&lt;/p&gt;
+&lt;p&gt;Transifex is a translation service that lets you define your project in terms of key-value mappings, where you use the keys in your own content, and translators can create translations of the associated values to whatever language you want to have supported. You then download your latest translations from transifex and apply the key/value mappings to your content to achieve a translated web page, app, UI, etc. Now, while this works quite really well for web apps, and really well for general UI,  things get tricky for content like articles. In articles, where the content is structured in paragraphs and the ordering matters for the tone of the text, asking localizers to translate paragraphs or even single sentences fully detached from what comes before or after is almost guaranteed to give weird translations.&lt;/p&gt;
+&lt;p&gt;To alleviate that problem, Mozilla's Pontoon project offers a sort of "on-page translation" localization system, where you load the website and pontoon UI at the same time, and translators can "double click and translate" text on the page. While that sounds really nice, it turns out that setting it up for "not mozilla sites" is a little bit tricky: you need to run your own copy of pontoon, and a lot of the code assumes it's running on Mozilla infrastructure. However, once you do get that it work, you still have the problem that transifex has: your localizers might have an easier time, but as an author you're still stuck being unable to write text yourself without then having to convert it to an unreadable "mess" of &lt;code&gt;getText('section1-paragraph1')&lt;/code&gt; in your code, so you have no idea what you wrote. You can try to get abstract keys from values (say, by hashing) but then changing even one letter in a paragraph invalidates every translation, which is typically &lt;em&gt;not&lt;/em&gt; what you want. A little desync is fine for webcontent. Corrections that trickle through are infinitely preferable to "keeping either all sites on the old content, or breaking all translations for a hopefully short while as translators catch up with changes".&lt;/p&gt;
+&lt;p&gt;So what do you do?&lt;/p&gt;
+&lt;p&gt;The problems with the methodology of these translation/localization systems outweight the benefits they brought to my project, as they either didn't work for me as author, or didn't work for the nature of the content, so the traditional solutions for adding localization to a site were out. Not because they're unsuitable as localization solutions, but because for this project, they introduced more problems than they solved.&lt;/p&gt;
+&lt;h2 id="code-base-changes-that-work-markdown-"&gt;Code base changes that work: Markdown.&lt;/h2&gt;
+&lt;p&gt;And so after about a week of trying to make localization "easy" with string based localization services, instead I figured I'd roll my own solution because I was keeping people waiting for a week at this point and they had every reason to just go "well this Pomax guy's clearly not interested in getting help, time to look for something else to help out on". &lt;/p&gt;
+&lt;p&gt;This is, by the way, your single biggest challenge in Open Source: if you thought it was hard to find contributors, it's ten times harder to make sure &lt;strong&gt;you&lt;/strong&gt; respond in a timely fashion and make sure there is something for them to get started on. Don't have anything? Take a paid-time-off or vacation day and &lt;em&gt;make sure there are things for them to start on&lt;/em&gt;. Or lose your contributor. If you leave a contributor hanging for more than a day, your project isn't really worth helping out on.&lt;/p&gt;
+&lt;p&gt;So I had to make this work, and the solution to the problem was one that basically comes to us from the traditional translation world: detach the content from the code, and translate the content as full length pieces. This is programming, we can make "integrating disparate pieces of code and content" work in at least seventeen different ways, so it's entirely possible to offer authors and translators alike a base case where "here is the section as natural, flowing text, with embedded LaTeX where necessary and code blocks to illustrate how to program stuff. Just translate that". And so that's what I set out to achieve.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;I decided on a content format: sections would be an &lt;code&gt;index.js&lt;/code&gt; for the JSX code, and a &lt;code&gt;content.en-GB.md&lt;/code&gt; for my own English content.&lt;/li&gt;
+&lt;li&gt;content would be pulled back into the JSX by... wait...&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;How do you pull markdown content into a JSX file? Unlike &lt;code&gt;js&lt;/code&gt; or &lt;code&gt;jsx&lt;/code&gt; or &lt;code&gt;json&lt;/code&gt;, markdown content can't just be imported in JavaScript or even in Node.js... It's a problem, but really solving this problem before getting back to my contributors would prevent translations from happening, and so &lt;em&gt;I stepped away from the problem and told them I had something they could work with now&lt;/em&gt;. I had a solution &lt;em&gt;for them&lt;/em&gt;, and that came first.&lt;/p&gt;
+&lt;p&gt;Yes, it's nice to solve these things as they pop up, but the most important part is still to make sure contributors can start doing what they wanted to do to help, and once I figured out how to at least split up the JSX into "JSX for the skeleton" and "Markdown for the content", I had a solution that unblocked my contributors so that &lt;em&gt;they&lt;/em&gt; could now at least get started translating and making progress, even if the system for rebuilding the content wasn't done yet and I wouldn't be able to immediately deploy whatever PR they were going to throw my way.&lt;/p&gt;
+&lt;p&gt;Their needs came first.&lt;/p&gt;
+&lt;p&gt;Once I figured out how to at least split up the content as JSX and Markdown, I sat down and split up the preface and first three sections for the primer, creating a few &lt;code&gt;content.en-GB.md&lt;/code&gt; that set the tone for what the markdown would look like, and then I told the hopefully-still-willing-to-be-contributors that if they were still interested in helping out they could now start on these files. All they had to do was copy it to &lt;code&gt;content.zh-CN.md&lt;/code&gt; or &lt;code&gt;content.ja-JP.md&lt;/code&gt; and then modify that as best they knew how to.&lt;/p&gt;
+&lt;p&gt;And while they were doing that, I'd have some time to implement getting the Markdown loaded back into the JSX files to generate a site that, for visitors, was identical to the monolithic English one.    &lt;/p&gt;
+&lt;p&gt;The take-away here is mostly that perfect solutions aren't necessary: if you're balancing priorities &lt;strong&gt;unblock your contributors before you unblock yourself&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="reintegrating-sections-based-on-jsx-and-markdown"&gt;Reintegrating sections based on JSX and Markdown&lt;/h2&gt;
+&lt;p&gt;While the contributors were working on their translations, I got back to work integrating Markdown into the JSX, and after a bit of thinking the solution to how to achieve that integration was remarkably simple: &lt;em&gt;you don't&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;I know, that sounds a bit silly, but it's not silly as you might initially think; I solved this problem using the classic problem solving approach of "if X is hard,find out which Y is easy, and find out how you turn X into Y". This is a general life skill when it comes to problem solving and I honestly don't practice it enough, but I practiced it here:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Pulling markdown into JSX is hard,&lt;/li&gt;
+&lt;li&gt;pulling JSX into JSX is trivial,&lt;/li&gt;
+&lt;li&gt;I should convert markdown strings into JSX strings.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I'm pretty good at programming, and both markdown and JSX are, at their code, just string data in a file. As converting string data into other string data is a pretty easy thing if you know how to program, I wrote a script called &lt;code&gt;make-locales.js&lt;/code&gt; which runs through the &lt;code&gt;./components/sections&lt;/code&gt; directories looking for &lt;code&gt;content.*.md&lt;/code&gt; files, filters the list of locales it finds that way, turning it into a list of unique locales, and then for each locale in that list does something like:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;for (locale in locales) {
+  giantMarkdownCollection = getAllContentFilesBelongingTo(locale)
+  sectionAndContentMap = convertMarkdown(giantMarkdownCollection)
+  convertedToJS = JSON.stringify(sectionAndContentMap)
+  filesystem.write(`./locales/${locale}/content.js`, convertedToJS);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Running this script builds a &lt;code&gt;content.js&lt;/code&gt; file that takes a form that matches the one necessary for any Node script (which JSX files are in my code base) to trivially import with a single &lt;code&gt;require('content')&lt;/code&gt; statement. By further making sure the data inside &lt;code&gt;content.js&lt;/code&gt; is keyed in the same way as the original code base organised sections, I basically had a markdown-to-JSX conversion that the original code base didn't even notice was different. Everything basically worked the same as far as it was concerned.&lt;/p&gt;
+&lt;h3 id="further-challenges-i-m-not-using-true-markdown"&gt;Further challenges: I'm not using &lt;em&gt;true&lt;/em&gt; markdown&lt;/h3&gt;
+&lt;p&gt;Of course, while the &lt;code&gt;get all content&lt;/code&gt; and &lt;code&gt;stringify&lt;/code&gt; operations are pretty easy, the crucial function to get right was that &lt;code&gt;convertMarkdown&lt;/code&gt; function, to turn the markdown syntax into JSX syntax instead. Thankfully, JSX syntax is basically JavaScript with embedded "HTML that follows XML rules", and converting markdown to HTML is super easy: just pick any of twenty or so libraries to do so, and you're essentially done.&lt;/p&gt;
+&lt;p&gt;I picked the &lt;code&gt;marked&lt;/code&gt; library to do things for me, but there was one real challenge that needed to be tackled: the content I write is a mix of "mostly normal text", "some LaTeX, sometimes", "some divs with specific classes to mark bits as notes, how-to-code, and figures, sometimes" and some JSX for each interactive graphic... also sometimes. And being a pure markdown converter, except for the "normal text" parts &lt;code&gt;marked&lt;/code&gt; kind of didn't like any of that, so how would one make &lt;code&gt;marked&lt;/code&gt; convert things properly? &lt;/p&gt;
+&lt;p&gt;Same problem solution process: &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Converting mixed Markdown content is hard,&lt;/li&gt;
+&lt;li&gt;converting just plain markdown is trivial,&lt;/li&gt;
+&lt;li&gt;only convert plain markdown and leave the other bits alone.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The crucial observation was that in the build system I already had, things like "LaTeX", "divs with classes for notes and howtos" and "JSX" already worked. So really the only thing that &lt;em&gt;needed&lt;/em&gt; additional work was turning the markdown string sections into html string sections. &lt;/p&gt;
+&lt;p&gt;Easy-peasy: I know how to write tokenizers, lexers and grammar parsers in general so I wrote a simple chained chunker that takes a markdown file, and then runs a super simple "chop it up, if I know how to chop it up" action.&lt;/p&gt;
+&lt;p&gt;Start with:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;data = a full markdown file,
+chunks = empty list to fill with data chunks,
+chunkers = a list of latex, div, JSX, and BadMarkDown chunkers.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;define a function to act as recursion point:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function performChunking(data, chunks, chunker, moreChunkers) {
+  if no chunker:
+    if data isn't empty:
+      chunks.push({ convert: true, data: data })
+    return;
+
+  // otherwise, if there is a chunker:
+  chunker(data, chunks, moreChunkers);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;and then finally, you just start blindly running through the data:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function chunkLatex(data, chunks, chunkMore) {
+  // run through the data looking for LaTeX blocks
+  while there is data left to examine:
+    if there is no latex left:
+      performChunking(data.substring(p), chunks, next, otherChunkers);
+      exit the chunkLatex function
+
+    if there is, get the start of the latex block.
+    Then, parse the non-LaTeX data prior to it using the rest of the chunkers:
+        performChunking(data.substring(...), chunks, next=chunkMore[0], chunkMore=chunkMore[1,...])
+
+    And then capture the LaTeX block itself as a "don't convert" block
+    chunks.push({ convert: false, type: "latex", start:..., end:..., data:...});
+  }
+}
+
+function chunkDiv(data, chunks, chunkMore) {
+  Same as above, except for &amp;lt;div&amp;gt; and &amp;lt;/div&amp;gt; delimiters
+}
+
+function chunkJSX(data, chunks, chunkMore) {
+  Same as above, except for &amp;lt;Graphic..../&amp;gt; lines
+}
+
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And so forth. This system ensures that a block that has no latex gets further analysed by the "div" code. Any divs are extracted, any non-div code is handed on to the JSX code, and so on and so on until there is no function left to examine with. At that point, we know it's just plain markdown and we record it as a "convert? yes!" data block.&lt;/p&gt;
+&lt;p&gt;At the end of this process (which actually runs &lt;em&gt;really&lt;/em&gt; quickly), we end up with an object that looks like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;chunked = [
+  {
+    start: 0,
+    end: 312,
+    type: "text"
+    convert: true,
+    data: "# section title\nThis is regular markdown..."
+  },
+  {
+    start: 313
+    end: 417,
+    type: "LaTeX",
+    convert: false,
+    data: "\\[\nB(t) = (1-t)^3 + 3 \cdot (1-t)^2t + ... " 
+  },
+  ...
+]
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And so we simply run through this through a quick &lt;code&gt;map&lt;/code&gt; function where any data that is marked as "convert? no!" is left alone, any data that is marked as "convert? yes!" is converted by &lt;code&gt;marked&lt;/code&gt; from markdown to HTML data. Then we simply join all the blocks back up, and we actually have the kind of JSX that the original monolithic English article was already using. &lt;/p&gt;
+&lt;p&gt;Winner!&lt;/p&gt;
+&lt;h3 id="one-last-thing-javascript-bindings-still-needs-to-work-"&gt;One last thing: JavaScript bindings still needs to work.&lt;/h3&gt;
+&lt;p&gt;While the above procedure works &lt;em&gt;really&lt;/em&gt; well, it left one problem: sections have interactive graphics, which are tied to individual React components. While components were single JSX files that was not a problem, but by pulling the content out I needed a way to make sure that JSX code like &lt;code&gt;&amp;lt;Graphics setup={this.setup} draw={this.draw}/&amp;gt;&lt;/code&gt; still had a correct understanding of which JavaScript object was supposed to be used when it made calls for &lt;code&gt;this.something()&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The solution to this is actually the simplest, borderline trivial,  a bit silly, but super effective: as each mapped chunk is strictly speaking already valid JSX I just took the string data and wrapped it in more string data that just turned it into a function call, wrapping it in &lt;code&gt;function(handler) { return &amp;lt;section&amp;gt;&lt;/code&gt; at the start and &lt;code&gt;&amp;lt;/section&amp;gt;; }&lt;/code&gt; at the end, and making sure the JSX chunker replaced any &lt;code&gt;this&lt;/code&gt; with the word &lt;code&gt;handler&lt;/code&gt; instead. The result: code like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;content = [
+  "whatis": function(handler) {
+    return &amp;lt;section&amp;gt;
+     ...
+     &amp;lt;Graphics setup={handler.setup} draw={handler.draw} /&amp;gt;
+     ...
+    &amp;lt;/section&amp;gt;;
+  }
+  ...
+];
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And there you have it. Rather than importing this and then using it directly, a component can now import this and then call the function, passing itself in as the "handler":&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var React = require("react");
+
+var Locale = require("../../../lib/locale");
+var locale = new Locale(__dirname);
+
+return React.createClass({
+  getDefaultProps() {
+    return {
+      title: locale.getTitle()
+    };
+  },
+  setup() {
+    ...
+  }
+  draw() {
+    ...
+  }
+  render() {
+    return locale.getContent(this);
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Sorted: suddenly we have a code base that is super easy to localize. Just change the &lt;code&gt;content.{local}.md&lt;/code&gt; file, and the &lt;code&gt;make-locales.js&lt;/code&gt; script will take care of the rest. In fact, with an &lt;code&gt;npm&lt;/code&gt; task that watches for changes in &lt;code&gt;.md&lt;/code&gt; files so that &lt;code&gt;make-locales.js&lt;/code&gt; gets retriggered, and a webpack task for &lt;code&gt;js&lt;/code&gt; files in general, live development didn't even need any changing: it just works.&lt;/p&gt;
+&lt;h2 id="so-what-about-that-latex-is-maths-notation-universal-"&gt;So what about that LaTeX? Is maths notation universal?&lt;/h2&gt;
+&lt;h3 id="spoilers-not-if-there-s-english-in-it"&gt;spoilers: not if there's English in it&lt;/h3&gt;
+&lt;p&gt;Here's the thing about localisation: you need to update &lt;em&gt;all&lt;/em&gt; the content to work for a specific locale. Translating all the English text to something like Chinese is great and all but if the graphics still have English in them, things get weird. And while at this point the contributors were being quite productive and translating sections at a time, some of the LaTeX blocks still had English in them. &lt;/p&gt;
+&lt;p&gt;Wouldn't it be nice if in a Japanese-localized Primer, this:&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://pomax.github.io/BézierInfo-2/images/latex/8090904d6448ed0c8e6151aecf62f361d51ead96.svg" alt="English LaTeX"&gt;&lt;/p&gt;
+&lt;p&gt;looked like this instead?&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://pomax.github.io/BézierInfo-2/images/latex/98885bce8eeabb5a9bdddd12cd6cb4382115ad5c.svg" alt="Japanese LaTeX"&gt;   &lt;/p&gt;
+&lt;p&gt;Of course the answer is "yes, that would be lovely, actually" and so I had a look at whether CJK fonts could be used in LaTeX setting. I have a &lt;a href="https://pomax.github.com/NRGrammar"&gt;background in Japanese&lt;/a&gt; and so I've written LaTeX with Japanese in it before, and my naive thought was to just put Japanese in the LaTeX, teach MathJax to use a Unicode font with Japanese support, and that would be that. Unfortunately, it turns out MathJax is not as flexible as "real" LaTeX engines, and it can't really deal with non-English text. So that basically meant I had to give up MathJax, and instead try to go for something else.&lt;/p&gt;
+&lt;p&gt;And as it so happens, there is a perfect candidate for this job that I never used in the build system because it really is just "a desktop tool" but as MathJax was already getting invoked through an &lt;code&gt;exec&lt;/code&gt; call, now seemed a good time to see if it would be a feasible solution to the problem of localized LaTeX: XeLaTeX, that is to say LaTeX code written for the &lt;a href="https://en.wikipedia.org/wiki/XeTeX"&gt;XeTeX&lt;/a&gt; engine, which is basically a modern, utf-8 aware, system and OpenType font aware TeX engine. If TeX is the system that lets you do "beautiful typesetting for English", XeTeX is the completely from-the-ground-up rewrite of TeX that lets you do "beautiful typesetting in any language, with any font".&lt;/p&gt;
+&lt;h3 id="back-to-real-latex-parsing-"&gt;Back to real LaTeX parsing.&lt;/h3&gt;
+&lt;p&gt;Switching the build stop over from calling MathJax to calling XeLaTeX was essentially trivial thanks to &lt;code&gt;npm&lt;/code&gt; scripts and Node.js's &lt;code&gt;execSync&lt;/code&gt;, so the only "hard" thing I had to do was write a script that managed the chain of calls necessary to generate an SVG file, as XeLaTeX generates PDF files. Thankfully, there are all kinds of handy tools that become available when you use TeX Live (on OSX or Unix/Linux) or MiKTeX (on Windows), so the chain of utilities that I settled on looked like:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;XeLaTeX to generate a PDF file on a huge page,&lt;/li&gt;
+&lt;li&gt;&lt;a href=""&gt;pdfcrop&lt;/a&gt; to isolate just the content in the resultant PDF,&lt;/li&gt;
+&lt;li&gt;&lt;a href=""&gt;pdf2svg&lt;/a&gt; to convert that cropped PDF into an SVG file, and&lt;/li&gt;
+&lt;li&gt;&lt;a href=""&gt;svgo&lt;/a&gt; to optimize the SVG that pdf2svg generated. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;and the way XeLaTeX got its latex was the same as before. Rather than calling:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;"latex": "node run lib/mathjax --latex ... --hash ..."
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;I wrote a &lt;code&gt;tex-to-svg&lt;/code&gt; script invoked as:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;"latex": "node run lib/tex-to-svg --latex ... --hash ..."
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And made it ingest LaTeX code as a base64-encoded string from the command line, along with the precomputed hash that I needed for the final SVG filename. The script takes the base64-encoded LaTeX, unpacks it into a pure LaTeX string, and then adds additional LaTeX instructions to make sure the result is a valid &lt;code&gt;.tex&lt;/code&gt; file that XeLaTeX can work with. This file is written to disk (synchronously) after which XeLaTeX is invoked with that file as input parameter. We run through the chain of utilities, and the final result is a tiny, self-contained &lt;code&gt;.svg&lt;/code&gt; file.&lt;/p&gt;
+&lt;p&gt;Once we have that file, &lt;code&gt;text-to-svg&lt;/code&gt; is done, &lt;code&gt;npm&lt;/code&gt; script execution returns to the latex-loader that has been patiently waiting for the whole LaTeX-to-SVG process to finish, and it then consults the &lt;code&gt;.svg&lt;/code&gt; file on disk to get the SVG image width and height. Those matter, because we need to know the exact dimensions that the SVG file will take up on the page, so that we can write an &lt;code&gt;&amp;lt;img src="..." width="..." height="..."/&amp;gt;&lt;/code&gt; tag into our JSX to ensure that the page preallocates the correct amount of space for the image. If we didn't, the page would constantly be reflowing as images got loaded in, and as we're dealing with 150+ images, that would be a horrible experience. &lt;/p&gt;
+&lt;h3 id="a-final-optimization-"&gt;A final optimization:&lt;/h3&gt;
+&lt;p&gt;Of course if we had to run this every single time we ran &lt;code&gt;npm run dev&lt;/code&gt; or &lt;code&gt;npm start&lt;/code&gt;, this process would be impossibly slow. As such, there is a shortcut in the &lt;code&gt;latex-loader&lt;/code&gt; code that for any block of LaTeX checks whether there already exists an &lt;code&gt;.svg&lt;/code&gt; file with the correct hashcode as filename. If there is, the loader bypasses the tex-to-svg steps entirely, and instead immediately grabs the &lt;code&gt;.svg&lt;/code&gt; file for extracting the width/height information, and then returns the necessary &lt;code&gt;&amp;lt;img.../&amp;gt;&lt;/code&gt; code.&lt;/p&gt;
+&lt;h2 id="so-how-do-we-switch-languages-"&gt;So how do we switch languages?&lt;/h2&gt;
+&lt;p&gt;The page is hosted on github through the gh-pages functionality, and so some of the traditional ways to switch locales are not actually as appealing. Putting the locale in the URL, for instance, is not quite as easy when you'd literally have to make a dir by that name and put a file in there.&lt;/p&gt;
+&lt;p&gt;So initially I figured I'd just use a URL query argument: &lt;code&gt;index.html?locale=en-GB&lt;/code&gt; would make a bit of script in the index file load the appropriate app bundle, and this would be sufficient for effecting different locales. That works really well, but one of the nice things about the Primer is that if you want an offline copy, you can literally just say "file -&amp;gt; save" and just save the page to your desktop. Done, you can now run it from file:// in the browser and it just works, and using query argument parsing to selectively load &lt;code&gt;article.{locale}.js&lt;/code&gt; would remove that ability.&lt;/p&gt;
+&lt;p&gt;So directories it is: it's not clean from a dir structure perspective, but ultimate it's not the repo dir structure that &lt;em&gt;readers&lt;/em&gt; care about. If their needs are not met, then it doesn't matter how clean the dir structure is.&lt;/p&gt;
+&lt;p&gt;Of course, you also need to be able to &lt;em&gt;switch&lt;/em&gt; locales on the site, so I wrote a small component that offers users a compellingly simple choice:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Read this in your own language: | &lt;strong&gt;English&lt;/strong&gt; | &lt;strong&gt;日本語&lt;/strong&gt; | &lt;strong&gt;中文&lt;/strong&gt; |
+&lt;em&gt;Don't see your language listed? &lt;a href="https://github.com/Pomax/BézierInfo-2/wiki/localize"&gt;Help translate this content!&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;A simple list of languages that people can read if it's theirs, and a call-out to anyone who &lt;em&gt;wants&lt;/em&gt; localized content but can't find it: this is an Open Source project, come help out!&lt;/p&gt;
+&lt;h2 id="finally-document-everything"&gt;Finally: document everything&lt;/h2&gt;
+&lt;p&gt;So now the code base can be localized! Hurray!&lt;/p&gt;
+&lt;p&gt;Last question: can people read up on how to do that without needing to ask questions, and just &lt;em&gt;do it&lt;/em&gt;? If not, you're not done. Yes, it's great to have everything in place but unless you also write the documentation that explains how to do what people want to do, they're going to need help, and you probably won't have time to spend on helping them, so: write the docs that take you out of the equation.&lt;/p&gt;
+&lt;p&gt;I ended up documenting &lt;a href="https://github.com/Pomax/BézierInfo-2/wiki/localize"&gt;the steps necessary to do localization&lt;/a&gt; on the github repo wiki, with links to the docs from the README.md, so that anyone visiting the repo --linked prominently on the Primer itself-- will immediately be able to find out what is involved and how they can make that work for them.&lt;/p&gt;
+&lt;h2 id="so-what-s-left-"&gt;So what's left?&lt;/h2&gt;
+&lt;p&gt;There is still one area of localization left to be tackled, and it's a big one with lots of question marks: localizing the actual interactive graphics. The problem with these is that text in these graphics are literally that: text in the browser.&lt;/p&gt;
+&lt;p&gt;Unfortunately, text in the browser needs a reliable font for it to typeset even moderately predictably, and this poses two problems:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;we don't know the dimensions of localized strings, and&lt;/li&gt;
+&lt;li&gt;we would need web fonts to ensure the right font gets used.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The first of these is typically understood as a problem: where something might require four words in one language, it might require twenty in another, or maybe just one. If the text is to be used in a graphics setting, then those differing lengths pose all kinds of alignment problems.&lt;/p&gt;
+&lt;p&gt;The second is less often remembered, but for CJK languages is a &lt;em&gt;huge&lt;/em&gt; problem: English fonts aren't very big compared to the modern website payload. 30kb for a nice looking font isn't even remarked upon anymore these days. But what about a 5+MB font just to support a few Japanese sentences use in graphics? or a 10+MB font to get Chinese text to show properly? And those are entirely reasonable font sizes for CJK languages: the smallest Japanese font I own is 4MB, and the smallest Chinese font I own is 12MB. The nice-looking fonts used for the LaTeX code are 7.7MB for Japanese and 5.1MB for Chinese. We clearly can't use those on the web.&lt;/p&gt;
+&lt;p&gt;Or maybe we can: we could analyse all the content to see exactly which letters are &lt;em&gt;actually&lt;/em&gt; used, and then create subset fonts so that we have small fonts again, tailored for each localization. Which in turns means being able to analyse graphics for the text they use and then per locale recording exactly which glyphs should be available. It's a bit of work, but entirely doable given some time, leaving us just with the first problem.&lt;/p&gt;
+&lt;p&gt;I don't have a solution here, yet, but maybe that's the point of this post...&lt;/p&gt;
+&lt;h2 id="localization-is-hard"&gt;localization is hard&lt;/h2&gt;
+</description>
+
+<link>http://pomax.github.io/#gh-weblog-1489108158510</link>
+<guid>http://pomax.github.io/#gh-weblog-1489108158510</guid>
+<pubDate>Fri, 10 Mar 2017 01:09:18 GMT</pubDate>
+</item>
 <item>
 <title>I built a spice rack to fit our 72 mason jars of spices and herbs</title>
 <description>&lt;p&gt;And it didn't even take all that long to do! It also took a bit to properly document so rather than repeat information on the internet, I will link to where I photo-documented the fabrication process and you can give that a read-through in case you ever want to do this yourself.&lt;/p&gt;
@@ -333,17 +568,5 @@
 <link>http://pomax.github.io/#gh-weblog-1456332505750</link>
 <guid>http://pomax.github.io/#gh-weblog-1456332505750</guid>
 <pubDate>Wed, 24 Feb 2016 16:48:25 GMT</pubDate>
-</item>
-<item>
-<title>You probably need Chocolate Bread Pudding in your life.</title>
-<description>&lt;p&gt;I made an &lt;a href="http://imgur.com/gallery/ObTlB"&gt;imgur image album&lt;/a&gt; as an illustrated guide to making chocolate bread pudding - or at least, the kind I make these days (less death-by-chocolate, more tasty-not-too-sweet brownie alternative). If there's requests I'll turn that into a post on this blog, but the imgur link should be pretty stable so for now I'll leave it at that.&lt;/p&gt;
-&lt;p&gt;&lt;img src="http://i.imgur.com/GDjqsU0.jpg" alt=""&gt;&lt;/p&gt;
-</description>
-<category>Cooking</category>
-<category>Baking</category>
-<category>Chocolate</category>
-<link>http://pomax.github.io/#gh-weblog-1455215020166</link>
-<guid>http://pomax.github.io/#gh-weblog-1455215020166</guid>
-<pubDate>Thu, 11 Feb 2016 18:23:40 GMT</pubDate>
 </item></channel>
 </rss>
