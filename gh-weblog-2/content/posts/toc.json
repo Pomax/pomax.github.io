@@ -1017,7 +1017,7 @@
     "title": "I wrote a  script for Photoshop to export paths as SVG files",
     "created": 1457651549619,
     "published": 1457651549619,
-    "updated": 1457652768884,
+    "updated": 1473276338647,
     "tags": [
       "Photoshop",
       "Javascript",
@@ -1093,11 +1093,37 @@
     "title": " If you use use document.write, you suck at JavaScript",
     "created": 1473270609919,
     "published": 1473270609919,
-    "updated": 1473276055421,
+    "updated": 1474952036165,
     "tags": [
       "JavaScript",
       "Web dev",
       "document.write"
+    ]
+  },
+  "2016-12-02-17-48-22": {
+    "id": "2016-12-02-17-48-22",
+    "title": "I built a spice rack to fit our 72 mason jars of spices and herbs",
+    "created": 1480700902037,
+    "published": 1480700902037,
+    "updated": 1480701130812,
+    "tags": [
+      "DIY",
+      "Spice Rack",
+      "Assembly",
+      "Carpentry"
+    ]
+  },
+  "2017-03-10-01-09-18": {
+    "id": "2017-03-10-01-09-18",
+    "title": " Localization is hard.",
+    "created": 1489108158510,
+    "published": 1489108158510,
+    "updated": 1489108160329,
+    "tags": [
+      "Localization",
+      "Bezier",
+      "Primer",
+      "Contributors"
     ]
   }
 }
