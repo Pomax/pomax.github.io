@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Fri, 10 Mar 2017 01:09:28 GMT</lastBuildDate>
-<pubDate>Fri, 10 Mar 2017 01:09:28 GMT</pubDate>
+<lastBuildDate>Fri, 10 Mar 2017 01:09:52 GMT</lastBuildDate>
+<pubDate>Fri, 10 Mar 2017 01:09:52 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Localization is hard.</title>
@@ -238,7 +238,10 @@ return React.createClass({
 &lt;p&gt;I don't have a solution here, yet, but maybe that's the point of this post...&lt;/p&gt;
 &lt;h2 id="localization-is-hard"&gt;localization is hard&lt;/h2&gt;
 </description>
-
+<category>Localization</category>
+<category>Bezier</category>
+<category>Primer</category>
+<category>Contributors</category>
 <link>http://pomax.github.io/#gh-weblog-1489108158510</link>
 <guid>http://pomax.github.io/#gh-weblog-1489108158510</guid>
 <pubDate>Fri, 10 Mar 2017 01:09:18 GMT</pubDate>
