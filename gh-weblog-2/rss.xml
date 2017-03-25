@@ -5,9 +5,28 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Fri, 10 Mar 2017 01:09:52 GMT</lastBuildDate>
-<pubDate>Fri, 10 Mar 2017 01:09:52 GMT</pubDate>
+<lastBuildDate>Sat, 25 Mar 2017 22:37:04 GMT</lastBuildDate>
+<pubDate>Sat, 25 Mar 2017 22:37:04 GMT</pubDate>
 <ttl>1440</ttl>
+<item>
+<title>A beer riddle</title>
+<description>&lt;p&gt;Cold beer I promise, if but in name; pour me one for the difference to remain. Lakes of beer I pass in strain - what am I?&lt;/p&gt;
+&lt;p&gt;&lt;span style="background: black; color: black"&gt;
+My name spells cold yet warm I work, my job to offer beer a fork: swim along or cloud the flow. It is my job to tell it: "no". What am I?
+&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="background: black; color: black"&gt;
+Once in water, I now swim here, holding that which muddles beer. Separate it from what is dear, thrown away once beer is clear. What am I?
+&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;And the answer:&lt;/p&gt;
+&lt;p&gt;&lt;span style="background: black; color: black"&gt;
+From fish we get a jellied web, that filters the last bits of drab, from finished beers sent off for casking: "isinglass" the name of asking.
+&lt;/span&gt;&lt;/p&gt;
+</description>
+
+<link>http://pomax.github.io/#gh-weblog-1490481349209</link>
+<guid>http://pomax.github.io/#gh-weblog-1490481349209</guid>
+<pubDate>Sat, 25 Mar 2017 22:35:49 GMT</pubDate>
+</item>
 <item>
 <title> Localization is hard.</title>
 <description>&lt;p&gt;I know, that seems like an obvious statement, but I want to dig a little deeper because just because you have a "web thing" that people might want to see translated or even fully localized, that doesn't mean that they can, or even if they can, that it's easy for them to do so.&lt;/p&gt;
@@ -190,9 +209,9 @@ return React.createClass({
 &lt;h3 id="spoilers-not-if-there-s-english-in-it"&gt;spoilers: not if there's English in it&lt;/h3&gt;
 &lt;p&gt;Here's the thing about localisation: you need to update &lt;em&gt;all&lt;/em&gt; the content to work for a specific locale. Translating all the English text to something like Chinese is great and all but if the graphics still have English in them, things get weird. And while at this point the contributors were being quite productive and translating sections at a time, some of the LaTeX blocks still had English in them. &lt;/p&gt;
 &lt;p&gt;Wouldn't it be nice if in a Japanese-localized Primer, this:&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://pomax.github.io/BézierInfo-2/images/latex/8090904d6448ed0c8e6151aecf62f361d51ead96.svg" alt="English LaTeX"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://pomax.github.io/bezierinfo/images/latex/8090904d6448ed0c8e6151aecf62f361d51ead96.svg" alt="English LaTeX"&gt;&lt;/p&gt;
 &lt;p&gt;looked like this instead?&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://pomax.github.io/BézierInfo-2/images/latex/98885bce8eeabb5a9bdddd12cd6cb4382115ad5c.svg" alt="Japanese LaTeX"&gt;   &lt;/p&gt;
+&lt;p&gt;&lt;img src="https://pomax.github.io/bezierinfo/images/latex/98885bce8eeabb5a9bdddd12cd6cb4382115ad5c.svg" alt="Japanese LaTeX"&gt;   &lt;/p&gt;
 &lt;p&gt;Of course the answer is "yes, that would be lovely, actually" and so I had a look at whether CJK fonts could be used in LaTeX setting. I have a &lt;a href="https://pomax.github.com/NRGrammar"&gt;background in Japanese&lt;/a&gt; and so I've written LaTeX with Japanese in it before, and my naive thought was to just put Japanese in the LaTeX, teach MathJax to use a Unicode font with Japanese support, and that would be that. Unfortunately, it turns out MathJax is not as flexible as "real" LaTeX engines, and it can't really deal with non-English text. So that basically meant I had to give up MathJax, and instead try to go for something else.&lt;/p&gt;
 &lt;p&gt;And as it so happens, there is a perfect candidate for this job that I never used in the build system because it really is just "a desktop tool" but as MathJax was already getting invoked through an &lt;code&gt;exec&lt;/code&gt; call, now seemed a good time to see if it would be a feasible solution to the problem of localized LaTeX: XeLaTeX, that is to say LaTeX code written for the &lt;a href="https://en.wikipedia.org/wiki/XeTeX"&gt;XeTeX&lt;/a&gt; engine, which is basically a modern, utf-8 aware, system and OpenType font aware TeX engine. If TeX is the system that lets you do "beautiful typesetting for English", XeTeX is the completely from-the-ground-up rewrite of TeX that lets you do "beautiful typesetting in any language, with any font".&lt;/p&gt;
 &lt;h3 id="back-to-real-latex-parsing-"&gt;Back to real LaTeX parsing.&lt;/h3&gt;
@@ -224,7 +243,7 @@ return React.createClass({
 &lt;h2 id="finally-document-everything"&gt;Finally: document everything&lt;/h2&gt;
 &lt;p&gt;So now the code base can be localized! Hurray!&lt;/p&gt;
 &lt;p&gt;Last question: can people read up on how to do that without needing to ask questions, and just &lt;em&gt;do it&lt;/em&gt;? If not, you're not done. Yes, it's great to have everything in place but unless you also write the documentation that explains how to do what people want to do, they're going to need help, and you probably won't have time to spend on helping them, so: write the docs that take you out of the equation.&lt;/p&gt;
-&lt;p&gt;I ended up documenting &lt;a href="https://github.com/Pomax/BézierInfo-2/wiki/localize"&gt;the steps necessary to do localization&lt;/a&gt; on the github repo wiki, with links to the docs from the README.md, so that anyone visiting the repo --linked prominently on the Primer itself-- will immediately be able to find out what is involved and how they can make that work for them.&lt;/p&gt;
+&lt;p&gt;I ended up documenting &lt;a href="https://github.com/Pomax/BezierInfo-2/wiki/localize"&gt;the steps necessary to do localization&lt;/a&gt; on the github repo wiki, with links to the docs from the README.md, so that anyone visiting the repo --linked prominently on the Primer itself-- will immediately be able to find out what is involved and how they can make that work for them.&lt;/p&gt;
 &lt;h2 id="so-what-s-left-"&gt;So what's left?&lt;/h2&gt;
 &lt;p&gt;There is still one area of localization left to be tackled, and it's a big one with lots of question marks: localizing the actual interactive graphics. The problem with these is that text in these graphics are literally that: text in the browser.&lt;/p&gt;
 &lt;p&gt;Unfortunately, text in the browser needs a reliable font for it to typeset even moderately predictably, and this poses two problems:&lt;/p&gt;
@@ -235,7 +254,8 @@ return React.createClass({
 &lt;p&gt;The first of these is typically understood as a problem: where something might require four words in one language, it might require twenty in another, or maybe just one. If the text is to be used in a graphics setting, then those differing lengths pose all kinds of alignment problems.&lt;/p&gt;
 &lt;p&gt;The second is less often remembered, but for CJK languages is a &lt;em&gt;huge&lt;/em&gt; problem: English fonts aren't very big compared to the modern website payload. 30kb for a nice looking font isn't even remarked upon anymore these days. But what about a 5+MB font just to support a few Japanese sentences use in graphics? or a 10+MB font to get Chinese text to show properly? And those are entirely reasonable font sizes for CJK languages: the smallest Japanese font I own is 4MB, and the smallest Chinese font I own is 12MB. The nice-looking fonts used for the LaTeX code are 7.7MB for Japanese and 5.1MB for Chinese. We clearly can't use those on the web.&lt;/p&gt;
 &lt;p&gt;Or maybe we can: we could analyse all the content to see exactly which letters are &lt;em&gt;actually&lt;/em&gt; used, and then create subset fonts so that we have small fonts again, tailored for each localization. Which in turns means being able to analyse graphics for the text they use and then per locale recording exactly which glyphs should be available. It's a bit of work, but entirely doable given some time, leaving us just with the first problem.&lt;/p&gt;
-&lt;p&gt;I don't have a solution here, yet, but maybe that's the point of this post...&lt;/p&gt;
+&lt;p&gt;There's also some smaller stuff, like "how do you number sections properly?" using locale-specific CSS, "how do I make sure people understand that I am English and so won't be able to respond to non-English comments in the comments section?", and even the crazier things like "which social media links do you offer to Japanese or Chinese users? How do you localize that?"&lt;/p&gt;
+&lt;p&gt;I don't have a solutions here, yet, but maybe that's the point of this post...&lt;/p&gt;
 &lt;h2 id="localization-is-hard"&gt;localization is hard&lt;/h2&gt;
 </description>
 <category>Localization</category>
@@ -534,42 +554,5 @@ return React.createClass({
 <link>http://pomax.github.io/#gh-weblog-1457651549619</link>
 <guid>http://pomax.github.io/#gh-weblog-1457651549619</guid>
 <pubDate>Thu, 10 Mar 2016 23:12:29 GMT</pubDate>
-</item>
-<item>
-<title>Github changes to icon SVG from fonts, for no clear reason</title>
-<description>&lt;p&gt;In a &lt;a href="https://github.com/blog/2112-delivering-octicons-with-svg"&gt;recent post on their blog&lt;/a&gt;, &lt;a href="github.com"&gt;github&lt;/a&gt; announced that  they've moved away from icon fonts in favour of SVG. In itself perfectly fine, use whatever works best, and if fonts aren't working for you, switch; but their explanation of what was wrong makes several kinds of no sense.&lt;/p&gt;
-&lt;p&gt;This is going to be a bit of a rant, it's going to conclude with "should they switch? absolutely! yay github" but the rest of the text is about how their blog post doesn't feel like it actually contains any proper rationale for the move. You can stop reading if you only wanted to know my concluding thoughts. As far as I'm concerned, they did the right thing, for the wrong reasons.&lt;/p&gt;
-&lt;p&gt;Also, I've &lt;a href="http://stackoverflow.com/a/30821089/740553"&gt;talked about this on Stackoverflow&lt;/a&gt; before, so if you ever ran into that post, the following analysis should not come as anything even close to a surprise to you.&lt;/p&gt;
-&lt;h2 id="showing-the-problem"&gt;Showing the problem&lt;/h2&gt;
-&lt;p&gt;The post starts with images that show a "badly blurred font icon" vs "a nicely crisp image icon", except what it really shows are two equally blurry, terrible images. Neither is particularly better than the other at the scale shown; they're differently blurry, but they're both terrible, and using this as a highlight of the problem shows that (unsurprisingly) a vector approach to icons is a weird solution to a problem predominantly &lt;a href="http://rastertragedy.com"&gt;caused by small-scale rendering of graphics designed using large scale units&lt;/a&gt;. They're both bad, so the rest of the post better be good at explaining why you want the lesser of two "evils" instead of finding a third "good".&lt;/p&gt;
-&lt;h2 id="icon-font-rendering-issues"&gt;Icon font rendering issues&lt;/h2&gt;
-&lt;p&gt;The first section is 100% true. Github notes that "Icon fonts have always been a hack", and they have. Unicode these days comes with dingbats/windings, symbol sets, and emoji, but none of those things are true icons. Icon fonts will typically either inappropriately use "real letter" code points for icons ("you use class &lt;code&gt;.left-arrow&lt;/code&gt; but it renders because it asks the letter &lt;code&gt;a&lt;/code&gt; from the font, which happens to be an icon) or they use PUA (the Private Use Area of fonts) and some kind of substitution ruleset for finding icons in that area (because you can't really type PUA letters on your keyboard).&lt;/p&gt;
-&lt;p&gt;So far so good. Except that's not a reason to switch, that's merely stating the facts. Fonts for icons are hacks. Do they get the job done? Certainly. This does not count towards the "reasons to switch" yet.&lt;/p&gt;
-&lt;h2 id="page-rendering-improvements"&gt;Page rendering improvements&lt;/h2&gt;
-&lt;p&gt;There was an assumption that SVG would improve page performance. However, as they note later, &lt;a href="https://cloud.githubusercontent.com/assets/54012/13176951/eedb1330-d6e3-11e5-8dfb-99932ff7ee25.png"&gt;there's no clear evidence of that&lt;/a&gt;. To be clear: this is completely the right thing to do: you have two possible options, you test both, and then use metrics to determine which one is better. But if there is no real difference then it cannot count as reason to switch. It is in fact a reason to tell others "if this is why you're thinking of switching, it doesn't matter, here's our findings: ..."&lt;/p&gt;
-&lt;p&gt;So far, we have no justifiable reason to switch yet (other than just "let's do this").&lt;/p&gt;
-&lt;h2 id="accessibility"&gt;Accessibility&lt;/h2&gt;
-&lt;p&gt;This one's interesting. "some people use their own fonts, so our fonts don't render" may be a problem. Github has &lt;em&gt;a lot&lt;/em&gt; of users, but "people using their own fonts" typically also means those people do so by choice. If overriding the icon font is adverse, they presumably have the power to each fix that, but chose not to. That's not Github's responsibility to fix, but it can certainly be something Github can fix "as one party" instead of every user who's affected fixing it "as a million parties". It's not an argument to switch from fonts to SVG in general, but it's an argument for Github, as a trusted and liked millions-of-users-daily service, to lend a helping hand.&lt;/p&gt;
-&lt;p&gt;The second argument concerns screen readers, but glosses over the nature of an icon in a UI. Icons are non-semantic, they're decoration around the actual thing. The hypothetical ability to add readable &lt;code&gt;alt&lt;/code&gt; texts because the icons are now true images does not apply: if your icon needs an alt-text read out to the user in order for them to understand your UI, that icon is not an icon, it's a genuine semantic element and you should not be using an icon to hide what it is. In fact, you confuse &lt;em&gt;everyone&lt;/em&gt; with that kind of icon use, not just people who need, or are better served by using, screen readers.&lt;/p&gt;
-&lt;h2 id="properly-sized-glyphs"&gt;Properly sized glyphs&lt;/h2&gt;
-&lt;p&gt;This one's a bit odd, because it both makes sense and absolutely not. I'm paraphrasing, but this section has a rational along the lines of "vector fonts render horribly at small point sizes", which is &lt;a href="http://rastertragedy.com"&gt;absolutely true&lt;/a&gt;, "as opposed to SVG, which renders pixel-perfect", which is absolutely false.  Both are vector graphics, and both suffer from the exact same problem scaled down. However, fonts can come with instructions on how to correct outlines, and SVG cannot. Unfortunately the choice between &lt;code&gt;ttf&lt;/code&gt; and &lt;code&gt;otf&lt;/code&gt; matters &lt;em&gt;a lot&lt;/em&gt; here: &lt;code&gt;ttf&lt;/code&gt; uses true instructions, and &lt;code&gt;otf&lt;/code&gt; uses hints. If you try to use an &lt;code&gt;otf&lt;/code&gt; icon font with a render engine that doesn't have a good "what should I do with these hints" implementation, your icons will look terrible. Turns out that's the state of technology right now. So that's an argument to use &lt;code&gt;ttf&lt;/code&gt; rather than &lt;code&gt;otf&lt;/code&gt;, rather than exchanging one vector format for another.&lt;/p&gt;
-&lt;p&gt;The blog post does talk about SVG not getting subpixel-hinted, which "fixes" things, but if that's the case you've found a bug in the text render pipeline: file that so it can be fixed. In fact as &lt;a href="https://twitter.com/Keyamoon/status/703530343169560576"&gt;Keyamoon points out&lt;/a&gt;, this is not the case in Firefox, and &lt;em&gt;wasn't&lt;/em&gt; the case in previous versions of Chrome. As arguably the most important playing in Open Source Software at the moment, I would expect Github to help get this fixed instead of walking away from a problem like that.&lt;/p&gt;
-&lt;p&gt;But why go from one vector format to another? Vector graphics are always worse than bitmaps if you want pixel-perfect icons, so: why not  keep using fonts, with bitmaps for the "it scales poorly" cases? I know what you're thinking: "but modern fonts are vector fonts!" Not really, no. Modern fonts can do &lt;em&gt;a lot&lt;/em&gt; of things, and one of those things is that they can contain pixel-perfect bitmaps to be used when a sequence of glyphs needs to be shaped at &lt;em&gt;specific&lt;/em&gt; point sizes, for pixel-perfect rendering (using the EBDT, Embedded Bitmap Data Table). If your icon font of choice doesn't come with those, then that's an argument for improving things on the font side, so that everyone who uses that font gets a better deal out of it.&lt;/p&gt;
-&lt;p&gt;Of course, in the mean time you might consider changing over to SVG because you want to solve the problem "now", and I like Github and assume they looked and couldn't find one. But as phrased, this section didn't actually give a good rationale for switching to SVG so much as highlighted a misunderstanding on how modern fonts work and showing that assumptions were made about what the problem was, leading to an action that doesn't &lt;em&gt;solve&lt;/em&gt; the problem: to someone familiar with the inner workings of fonts, this section reads as a symptom description, not a problem description, and fixing the symptom does not solve the underlying problem. &lt;em&gt;Any vector graphic&lt;/em&gt; will render terribly at low point sizes, trading one for another just &lt;a href="https://en.wikipedia.org/wiki/Buck_passing"&gt;passes the buck&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id="ease-of-authoring"&gt;Ease of authoring&lt;/h2&gt;
-&lt;p&gt;No two ways about it: if you want to control your icons, SVG is a hell of a lot easier than fonts. Go with SVG! It's the right choice! &lt;/p&gt;
-&lt;h2 id="we-can-animate-them"&gt;We can animate them&lt;/h2&gt;
-&lt;p&gt;Get out. If you're arguing accessibility as part of your rationale, don't even go here.&lt;/p&gt;
-&lt;h1 id="should-github-switch-"&gt;Should Github switch?&lt;/h1&gt;
-&lt;p&gt;Of course they should, it's their site. If they feel better with an SVG solution compared to fonts, then that's all the rationale they need. But then it would be nice if their blog post acknowledged that the only objective justification that was described, performance, turned out to not be significantly impacted by the switch, and that they've gone through with the switch mostly because it's easier to work with from a continuous update perspective, and also quite likely because if you've done all that work already to test deploying SVG instead of fonts, why not flip the switch.&lt;/p&gt;
-&lt;p&gt;I'm sure we'd understand that, too.&lt;/p&gt;
-</description>
-<category>Github</category>
-<category>Fonts</category>
-<category>SVG</category>
-<category>Icons</category>
-<link>http://pomax.github.io/#gh-weblog-1456332505750</link>
-<guid>http://pomax.github.io/#gh-weblog-1456332505750</guid>
-<pubDate>Wed, 24 Feb 2016 16:48:25 GMT</pubDate>
 </item></channel>
 </rss>
