@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Fri, 01 Dec 2017 23:15:49 GMT</lastBuildDate>
-<pubDate>Fri, 01 Dec 2017 23:15:49 GMT</pubDate>
+<lastBuildDate>Fri, 01 Dec 2017 23:16:13 GMT</lastBuildDate>
+<pubDate>Fri, 01 Dec 2017 23:16:13 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title>Creating VST/AU/etc audio plugins in 2017</title>
@@ -34,7 +34,11 @@
 &lt;h2 id="you-re-good-to-go-"&gt;You're good to go!&lt;/h2&gt;
 &lt;p&gt;Alright, now we can get back to that awesome tutorial and make some audio plugins. Select &lt;code&gt;MyFirstPlugin-app&lt;/code&gt;, hit F5 to start a compile, and "things should just work(tm)".&lt;/p&gt;
 </description>
-
+<category>Audio</category>
+<category>VST</category>
+<category>Programming</category>
+<category>VC++</category>
+<category>2017</category>
 <link>http://pomax.github.io/#gh-weblog-1512169175433</link>
 <guid>http://pomax.github.io/#gh-weblog-1512169175433</guid>
 <pubDate>Fri, 01 Dec 2017 22:59:35 GMT</pubDate>
