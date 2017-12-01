@@ -1125,5 +1125,27 @@
       "Primer",
       "Contributors"
     ]
+  },
+  "2017-03-25-22-35-49": {
+    "id": "2017-03-25-22-35-49",
+    "title": "A beer riddle",
+    "created": 1490481349209,
+    "published": 1490481349209,
+    "updated": 1490481549007,
+    "tags": []
+  },
+  "2017-12-01-22-59-35": {
+    "id": "2017-12-01-22-59-35",
+    "title": "Creating VST/AU/etc audio plugins in 2017",
+    "created": 1512169175433,
+    "published": 1512169175433,
+    "updated": 1512170216051,
+    "tags": [
+      "Audio",
+      "VST",
+      "Programming",
+      "VC++",
+      "2017"
+    ]
   }
 }
