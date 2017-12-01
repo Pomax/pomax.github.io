@@ -5,12 +5,12 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Fri, 01 Dec 2017 23:16:59 GMT</lastBuildDate>
-<pubDate>Fri, 01 Dec 2017 23:16:59 GMT</pubDate>
+<lastBuildDate>Fri, 01 Dec 2017 23:26:25 GMT</lastBuildDate>
+<pubDate>Fri, 01 Dec 2017 23:26:25 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title>Creating VST/AU/etc audio plugins in 2017</title>
-<description>&lt;p&gt;Probably the best tutorial on getting started writing a VST plugins (whether you want to make an instrument or a filter) is Martin Finke's &lt;a href="http://www.martin-finke.de/blog/tags/making_audio_plugins.html"&gt;Making Audio Plugins&lt;/a&gt;. It covers going from zero to hero but it has one downside: it's from 2012, and the tools used have some issues in 2017. Not big issues, just "big enough to make frustrate people who would otherwise dive right in, into doing something else instead". So, what can we do?&lt;/p&gt;
+<description>&lt;p&gt;Probably the best tutorial on getting started writing a VST plugins (whether you want to make an instrument or a filter) is Martin Finke's &lt;a href="http://www.martin-finke.de/blog/tags/making_audio_plugins.html"&gt;Making Audio Plugins&lt;/a&gt;. It covers going from "zero to hero" but it has one downside: it's from 2012, and the tools used have some issues in 2017. Not big issues, just "big enough to frustrate people who would otherwise dive right in, into doing something else instead". So, what can we do?&lt;/p&gt;
 &lt;p&gt;First off, it's 2017 (coming up to 2018) and I'm going to assume you're using Windows mostly because that's what I do (because several audio production tools I use only exist for Windows. I also have a mac, yes I own Ableton, no I'm not covering using XCode in 2017 here. But if you want to do that work for me, I will be more than happy to add your findings to this blog post! (hit me up &lt;a href="https://github.com/pomax/pomax.github.io/issues"&gt;here&lt;/a&gt; to discuss that!).&lt;/p&gt;
 &lt;h2 id="getting-the-right-tools"&gt;Getting the right tools&lt;/h2&gt;
 &lt;p&gt;It's 2017, you're probably on Windows 10, so let's go:&lt;/p&gt;
