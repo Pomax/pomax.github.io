@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Fri, 01 Dec 2017 23:16:13 GMT</lastBuildDate>
-<pubDate>Fri, 01 Dec 2017 23:16:13 GMT</pubDate>
+<lastBuildDate>Fri, 01 Dec 2017 23:16:59 GMT</lastBuildDate>
+<pubDate>Fri, 01 Dec 2017 23:16:59 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title>Creating VST/AU/etc audio plugins in 2017</title>
@@ -27,8 +27,11 @@
 &lt;p&gt;If you don't do this, you'll see errors about SDK_71A things not being set in the registry. They are complete red herrings, because what they really mean is "the project is using an SDK that I don't know about", which is true: we're on Windows 10, we're using SDK version 141, not version 71!&lt;/p&gt;
 &lt;h3 id="update-your-include-path"&gt;Update your include path&lt;/h3&gt;
 &lt;p&gt;Still in &lt;code&gt;Project&lt;/code&gt;/&lt;code&gt;Properties&lt;/code&gt;, in the "VC++ Directories" section, add two directories to the "Includes" path. Specifically, you want to add the &lt;code&gt;mu&lt;/code&gt; and &lt;code&gt;shared&lt;/code&gt; dirs for the Windows 10 SDK that you're working with. As of today, for the Fall creator edition, that would be &lt;code&gt;C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0&lt;/code&gt; so you need to add the following to that path:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;;C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\mu;C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\shared;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;If you don't do this, or use the wrong path, you'll probably see a lot of errors about a missing &lt;code&gt;windows.h&lt;/code&gt; (which is in the &lt;code&gt;mu&lt;/code&gt; directory) and/or a missing &lt;code&gt;winapifamily.h&lt;/code&gt; (which is in the &lt;code&gt;shared&lt;/code&gt; directory).&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\mu;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\shared;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If you don't do this, or use the wrong path, you'll probably see a lot of errors about a missing &lt;code&gt;windows.h&lt;/code&gt; (which is in the &lt;code&gt;mu&lt;/code&gt; directory) and/or a missing &lt;code&gt;winapifamily.h&lt;/code&gt; (which is in the &lt;code&gt;shared&lt;/code&gt; directory).&lt;/p&gt;
 &lt;h3 id="retargeting-the-project"&gt;Retargeting the project&lt;/h3&gt;
 &lt;p&gt;Finally, after accepting these changes to the project properties, we right-click on &lt;code&gt;MyFirstPlugin-app&lt;/code&gt; and choose "retarget projects". This will pop up a dialog that lets you pick the SDK version, and make sure to pick the &lt;code&gt;10.0.....&lt;/code&gt; version that matches what we used for the Platform Tools in the project properties.&lt;/p&gt;
 &lt;h2 id="you-re-good-to-go-"&gt;You're good to go!&lt;/h2&gt;
