@@ -5,9 +5,17 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Wed, 14 Jun 2017 22:11:57 GMT</lastBuildDate>
-<pubDate>Wed, 14 Jun 2017 22:11:57 GMT</pubDate>
+<lastBuildDate>Fri, 01 Dec 2017 22:59:22 GMT</lastBuildDate>
+<pubDate>Fri, 01 Dec 2017 22:59:22 GMT</pubDate>
 <ttl>1440</ttl>
+<item>
+<title>Test entry</title>
+<description></description>
+
+<link>http://pomax.github.io/#gh-weblog-1512169151490</link>
+<guid>http://pomax.github.io/#gh-weblog-1512169151490</guid>
+<pubDate>Fri, 01 Dec 2017 22:59:11 GMT</pubDate>
+</item>
 <item>
 <title>A beer riddle</title>
 <description>&lt;p&gt;Cold beer I promise, if but in name; pour me one for the difference to remain. Lakes of beer I pass in strain - what am I?&lt;/p&gt;
@@ -536,23 +544,5 @@ return React.createClass({
 <link>http://pomax.github.io/#gh-weblog-1462301193409</link>
 <guid>http://pomax.github.io/#gh-weblog-1462301193409</guid>
 <pubDate>Tue, 03 May 2016 18:46:33 GMT</pubDate>
-</item>
-<item>
-<title>I wrote a  script for Photoshop to export paths as SVG files</title>
-<description>&lt;p&gt;Ever drawn some paths in &lt;a href="https://adobe.com"&gt;Adobe&lt;/a&gt;'s &lt;a href="https://adobe.com/photoshop"&gt;Photoshop&lt;/a&gt;, and wanted to export those paths for use in something that &lt;strong&gt;isn't&lt;/strong&gt; Adobe Illustrator? Because that's kind of ... impossible. Photoshop lets you export your working paths specifically for Illustrator, using the &lt;code&gt;.ia&lt;/code&gt; format, but if you want to load it in something else? And heaven forbid, some Open Source package that doesn't even support proprietary formats? You have a problem.&lt;/p&gt;
-&lt;p&gt;Or, "had", because now you can export your paths to SVG instead. I needed this functionality for some glyph tracing I'm doing (tracing in Photoshop, but ultimately the glyph needs to end up in &lt;a href="http://fontforge.github.io"&gt;FontForge&lt;/a&gt;) and as it so happens I know that Photoshop &lt;a href="https://www.adobe.com/content/dam/Adobe/en/products/photoshop/pdfs/cs6/Photoshop-CS6-JavaScript-Ref.pdf"&gt;has a Javascript API&lt;/a&gt;. So how hard could it be to create an "export to SVG" option?&lt;/p&gt;
-&lt;p&gt;Well... sort of hard. While PS supports JS, the API it has uses a &lt;em&gt;&lt;a href="https://en.wikipedia.org/wiki/JavaScript#Version_history"&gt;truly ancient&lt;/a&gt;&lt;/em&gt; version of Javascript (v1.3 from what I can tell.. an almost 20 year old flavour), so there were some things that we pretty much rely on these days that simply didn't exist back then. Basic things like &lt;code&gt;Array.forEach&lt;/code&gt; aren't supported, so after writing shims for &lt;a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach"&gt;forEach&lt;/a&gt;, &lt;a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map"&gt;map&lt;/a&gt; and &lt;a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/keys"&gt;Object.keys&lt;/a&gt;, I was able to write a script that lets you simply call &lt;em&gt;file&lt;/em&gt; → &lt;em&gt;scripts&lt;/em&gt; → &lt;em&gt;browse&lt;/em&gt; and then run it, which immediately generates the SVG code for all your paths as a single SVG document and copies the code for it into your clipboard.&lt;/p&gt;
-&lt;p&gt;Internally, Photoshop stores paths as "multiple paths per document", with "multiple sub-paths per path", and each sub-path consists of an array of points. These points can either be corner points or "smooth" points, meaning they're Bezier curve points, and that's all the information you get.&lt;/p&gt;
-&lt;p&gt;Of course, while this is a normal way to encode data, &lt;a href="https://www.w3.org/TR/SVG/paths.html#PathData"&gt;SVG path instructions&lt;/a&gt; are of the form "Line to x/y" or "Cubic curve over c1 and c2 to x/y", so in order to generate the correct path instructions, the code needs to walk over each sub-path using a two point window, and check whether it's generating code for going from corner to corner, corner to curve, curve to corner, or curve to curve; each of those four has a different way to unpack the information contained by the two points into a single SVG pathing instruction.&lt;/p&gt;
-&lt;p&gt;But, with that done, the result is a Photoshop script that with just a few clicks drops your entire working path collection into an SVG document in your clipboard. If that sounds useful to you, head on over to &lt;a href="https://github.com/Pomax/photoshop-paths-to-SVG"&gt;https://github.com/Pomax/photoshop-paths-to-SVG&lt;/a&gt; and grab the script for yourself.&lt;/p&gt;
-&lt;p&gt;And  of course it's open source, so let me know if you find it useful or have ideas on how to improve it!&lt;/p&gt;
-</description>
-<category>Photoshop</category>
-<category>Javascript</category>
-<category>SVG</category>
-<category>Paths</category>
-<link>http://pomax.github.io/#gh-weblog-1457651549619</link>
-<guid>http://pomax.github.io/#gh-weblog-1457651549619</guid>
-<pubDate>Thu, 10 Mar 2016 23:12:29 GMT</pubDate>
 </item></channel>
 </rss>
