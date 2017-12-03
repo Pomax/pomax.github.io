@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Sun, 03 Dec 2017 23:32:08 GMT</lastBuildDate>
-<pubDate>Sun, 03 Dec 2017 23:32:08 GMT</pubDate>
+<lastBuildDate>Sun, 03 Dec 2017 23:32:37 GMT</lastBuildDate>
+<pubDate>Sun, 03 Dec 2017 23:32:37 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Creating VST/AU/etc audio plugins in 2017</title>
@@ -22,7 +22,12 @@
 &lt;h3 id="update-the-platform"&gt;Update the platform&lt;/h3&gt;
 &lt;p&gt;Go to &lt;code&gt;Project&lt;/code&gt; and then &lt;code&gt;Properties&lt;/code&gt;, and in the "General" settings, change the platform tools from "Visual Studio 2017 - Windows XP (v...)" to just "Visual Studio 2017 (v...)", so that we're not trying to compile against anything Windows-XP-related.&lt;/p&gt;
 &lt;p&gt;If you don't do this, you'll see errors like the following:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;Warning    MSB8003    Could not find WindowsSdkDir_71A variable from the registry.  TargetFrameworkVersion or PlatformToolset may be set to an invalid version number.    MyFirstPlugin-app    C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Platforms\Win32\PlatformToolsets\v141_xp\Toolset.targets    36
+&lt;pre&gt;&lt;code&gt;Warning    MSB8003
+Could not find WindowsSdkDir_71A variable from the registry.
+TargetFrameworkVersion or PlatformToolset may be set to an invalid version number.
+MyFirstPlugin-app
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Platforms\Win32\PlatformToolsets\v141_xp\Toolset.targets
+36
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Which, aside from being horribly poor grammar, is also a red herring: what this really mean is "the project is using an SDK that cannot be found", which is true: we're on Windows 10, we're using SDK version 141 (or perhaps by the time you read this, even higher), rather than version 71.&lt;/p&gt;
 &lt;h3 id="update-your-include-path-probably"&gt;Update your include path, probably&lt;/h3&gt;
 &lt;p&gt;If, after updating the platform tools, you try to compile and you get &lt;code&gt;missing windows.h&lt;/code&gt; and/or &lt;code&gt;missing winapifamily.h&lt;/code&gt; errors, then we need to manually intervene because Visual Studio did not pick the correct paths for including common headers from.&lt;/p&gt;
