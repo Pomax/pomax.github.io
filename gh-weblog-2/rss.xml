@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Sun, 03 Dec 2017 23:32:44 GMT</lastBuildDate>
-<pubDate>Sun, 03 Dec 2017 23:32:44 GMT</pubDate>
+<lastBuildDate>Sun, 03 Dec 2017 23:33:33 GMT</lastBuildDate>
+<pubDate>Sun, 03 Dec 2017 23:33:33 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Creating VST/AU/etc audio plugins in 2017</title>
@@ -27,7 +27,7 @@ Could not find WindowsSdkDir_71A variable from the registry.
 TargetFrameworkVersion or PlatformToolset may be set to an invalid version number.
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Which, aside from being horribly poor grammar, is also a red herring: what this really mean is "the project is using an SDK that cannot be found", which is true: we're on Windows 10, we're using SDK version 141 (or perhaps by the time you read this, even higher), rather than version 71.&lt;/p&gt;
 &lt;h3 id="update-your-include-path-probably"&gt;Update your include path, probably&lt;/h3&gt;
-&lt;p&gt;If, after updating the platform tools, you try to compile and you get &lt;code&gt;missing windows.h&lt;/code&gt; and/or &lt;code&gt;missing winapifamily.h&lt;/code&gt; errors, then we need to manually intervene because Visual Studio did not pick the correct paths for including common headers from.&lt;/p&gt;
+&lt;p&gt;If, after updating the platform tools, you try to compile and you get &lt;code&gt;missing windows.h&lt;/code&gt; and/or &lt;code&gt;missing winapifamily.h&lt;/code&gt; errors, then we need to manually intervene because Visual Studio did not pick the correct paths for including common headers.&lt;/p&gt;
 &lt;p&gt;In the project properties, go to the "VC++ Directories" section, because we'll need to add two directories to the "Includes" path, which is probably already filled in as &lt;code&gt;$(VC_IncludePath);$(WindowsSDK_IncludePath);&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;We'll need to add the &lt;code&gt;\mu&lt;/code&gt; and &lt;code&gt;\shared&lt;/code&gt; directories for the Windows SDK that we're working with, which as of the date of this post is the Windows 10 Fall Creator Edition SDK version 10.0.16299.0, found (by default - if you changed your installation path then you should know what to do here) in:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0
