@@ -5,9 +5,72 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Sun, 03 Dec 2017 23:33:33 GMT</lastBuildDate>
-<pubDate>Sun, 03 Dec 2017 23:33:33 GMT</pubDate>
+<lastBuildDate>Wed, 31 Jan 2018 22:14:50 GMT</lastBuildDate>
+<pubDate>Wed, 31 Jan 2018 22:14:50 GMT</pubDate>
 <ttl>1440</ttl>
+<item>
+<title> Listening to birds... from inside the house!</title>
+<description>&lt;p&gt;We moved to a house on Vancouver Island not too long ago, to a fairly quiet area that's just outside a city, with lots of birdsong going on all day, every day. However, it's January and it's pretty cold out so while birdsong is lovely to listen to, opening a window isn't really an option.&lt;/p&gt;
+&lt;p&gt;What is a couple of tech-minded people to do in a situation like this?&lt;/p&gt;
+&lt;h2 id="-let-s-add-in-all-the-tech-"&gt;"Let's add in *all* the tech"&lt;/h2&gt;
+&lt;p&gt;We ended up setting up an XLR conference microphone (the kind that needs 48V &lt;a href="https://en.wikipedia.org/wiki/Phantom_power"&gt;phantom power&lt;/a&gt; to work) outside, with a long (like, looong) cable running down the side, under the porch, into the house through a ventilation box, into the living room, and into a USB XLR mixer (a Behringer &lt;a href="https://www.long-mcquade.com/67988/Pro_Audio_Recording/Audio_Interfaces/Behringer/U-Phoria_UMC404HD_Audiophile_4x4_24-Bit_192_kHz_USB_Audio_MIDI_Interface.htm"&gt;U-Phoria UMC404HD&lt;/a&gt;), and then using DDMF's &lt;a href="http://www.virtualaudiostream.com"&gt;Virtual Audio Stream&lt;/a&gt; to set up a digital audio filter chain from the microphone input to the speakers, using their "Effect Rack" utility.&lt;/p&gt;
+&lt;p&gt;Now we can listen to birds (oh my god, so many birds) while working inside! (at least until the weather improves and we can open the windows like normal people would =)&lt;/p&gt;
+&lt;h2 id="the-filter-chain"&gt;The filter chain&lt;/h2&gt;
+&lt;p&gt;The following image shows the filter chain we're using in Effect Rack:&lt;/p&gt;
+&lt;p&gt;&lt;img src="/gh-weblog-2/images/bird-vst/ddmf-filter-chain.png" alt=""&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;First, a high-pass filter to cut out definitely-not-related-to-birdsong low frequencies.&lt;/li&gt;
+&lt;li&gt;Then, an automatic noise reduction filter. This does a relative good job are removing unwanted noise, but not quite enough.&lt;/li&gt;
+&lt;li&gt;That's followed by a multi-band compressor, which is used to further cut out any frequencies after noise reduction that are definitely not in the range of bird song.&lt;/li&gt;
+&lt;li&gt;This is followed by a second single-pass compressor that aggressively dampens any sound that's louder than nearby birdsong, such as cars driving by close to the mic, or someone using a chainsaw the next field over.&lt;/li&gt;
+&lt;li&gt;Finally, there's an equaliser that's being used as an aggressive high frequency cut off, throwing away everything that's above 10KHz&lt;/li&gt;
+&lt;li&gt;There's also a little spectrum analyzer, which helps to tune the previous filters, since it's pretty obvious which frequencies bird song is happening at.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;You may have noticed that only the right channel seems to be hooked up, except all the way at the end: this is because the microphone only generates a single channel, it's not a stereo microphone, and so all the processing really only needs to happen to the one channel. However, because it's nice to have the audio come out of both speakers, all the way at the end "all channels" are sent to "all speakers")&lt;/p&gt;
+&lt;p&gt;So, in case you're curious, let's look at each filter in detail.&lt;/p&gt;
+&lt;h2 id="cutting-out-the-low-frequencies-"&gt;Cutting out the low frequencies.&lt;/h2&gt;
+&lt;p&gt;The initial high pass filter (a signal processing term for "thing that lets frequencies above X through, while setting the volume for frequencies below X to zero) is an instance of &lt;a href="https://www.meldaproduction.com/MBandPass"&gt;Melda Production's MBandPass&lt;/a&gt; filter, set pretty aggressively. &lt;/p&gt;
+&lt;p&gt;&lt;img src="/gh-weblog-2/images/bird-vst/bandpass.png" alt=""&gt;&lt;/p&gt;
+&lt;p&gt;Everything under 224Hz gets thrown away, using a 12dB knee, with insanely low quantization. This actually does a great job at removing most car noise without affecting the rest of the audio too much. &lt;/p&gt;
+&lt;h2 id="removing-line-and-signal-noise-"&gt;Removing line and signal noise.&lt;/h2&gt;
+&lt;p&gt;To remove general noise, both because the outside world is noisy, and because there's a long cable on the mic, I'm using &lt;a href="https://acondigital.com/products/restoration-suite"&gt;Acon's noise reduction filter&lt;/a&gt; with a 1.83 second sliding window, meaning that it looks at 1.82 seconds of audio that's come by, tries to find the "noise profile" in that, and then applies it to the current signal.&lt;/p&gt;
+&lt;p&gt;&lt;img src="/gh-weblog-2/images/bird-vst/noise-reduction.png" alt=""&gt;&lt;/p&gt;
+&lt;p&gt;While this is almost guaranteed to always be "wrong", it's long enough to get a decent noise profile, while being short enough to still remove &lt;em&gt;most&lt;/em&gt; noise from the audio signal.  &lt;/p&gt;
+&lt;h2 id="cutting-out-these-are-not-birds-sounds-"&gt;Cutting out "these are not birds!" sounds.&lt;/h2&gt;
+&lt;p&gt;Birdsong is doesn't use a lot of low frequencies, so in order to further weed out any frequencies that we don't actually want to be listening to, I use &lt;a href="https://www.image-line.com/plugins/Effects/Maximus"&gt;Image-Line's "Maximus" multi-band compressor&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;A compressor is a thing that can take an incoming audio signal, look at the volume-per-frequency range, and then change that range. The most common use is to reduce the volume on really loud noises, so that if you talk into a mic it does nothing, but if you yell into the mic, the volume doesn't suddenly blow out your speakers - that's not how it's being used here.&lt;/p&gt;
+&lt;p&gt;Instead, we're applying three different compressor settings to each of the low, mid, and high bands in the audio signal.   &lt;/p&gt;
+&lt;p&gt;&lt;img src="/gh-weblog-2/images/bird-vst/low-compressor.png" alt=""&gt;&lt;/p&gt;
+&lt;p&gt;In the low band (0Hz-200Hz), we change the volume range [0,max] to the volume range [0,0]. We literally just throw &lt;em&gt;all&lt;/em&gt; of it away. The preceding high pass filter should have already taken care of that, but it doesn't hurt to make sure low frequencies stay gone.&lt;/p&gt;
+&lt;p&gt;&lt;img src="/gh-weblog-2/images/bird-vst/mid-compressor.png" alt=""&gt;&lt;/p&gt;
+&lt;p&gt;In the mid band (200Hz-3KHz), we change the volume mapping so that anything that's loud, stays loud, but anything that's soft is pretty much scaled waaaay back down. To zero, in fact, for most volumes. Or somewhere progressively closer to the original level on the high end of the spectrum's "mid" band. &lt;/p&gt;
+&lt;p&gt;&lt;img src="/gh-weblog-2/images/bird-vst/high-compressor.png" alt=""&gt;&lt;/p&gt;
+&lt;p&gt;In the high frequencies band (3KHz and up), which is where most bird song is found, we don't really do much: this is a typical compressor function that just makes sure that things that are too loud to be reasonable get scaled down in volume. In case a bird yells right next to the microphone, mostly.&lt;/p&gt;
+&lt;p&gt;I'm looking at you, Stellar's Jays... =_=&lt;/p&gt;
+&lt;h2 id="making-sure-a-sudden-car-or-chainsaw-doesn-t-give-us-a-heart-attack-"&gt;Making sure a sudden car or chainsaw doesn't give us a heart attack.&lt;/h2&gt;
+&lt;p&gt;Even with all that compressor work, there's still the chance that cars, chainsaws, or people yelling end up generating very loud noises in the same range that bird song occurs in, so we add one more "overall" compressor. &lt;/p&gt;
+&lt;p&gt;&lt;img src="/gh-weblog-2/images/bird-vst/second-compressor.png" alt=""&gt;&lt;/p&gt;
+&lt;p&gt;This is &lt;a href="https://www.meldaproduction.com/MCompressor"&gt;Melda Production's MCompressor&lt;/a&gt;, and its job is to simply take the overall signal, and dampen it when it's too loud.&lt;/p&gt;
+&lt;h2 id="cleaning-up-any-compound-distortion-at-the-high-end-"&gt;Cleaning up any compound distortion at the high end.&lt;/h2&gt;
+&lt;p&gt;You might be wondering about whether all those filters one after another don't generate some kind of artificial noise, and the answer is: oh no, they absolutely do. So to combat the noise that is most audible, I use an equaliser filter (&lt;a href="https://www.image-line.com/support/FLHelp/html/plugins/EQUO.htm"&gt;Image Line's EQUO&lt;/a&gt;) to pretty much throw away anything about 10KHz, with a gentle volume reduction starting at 2.5KHz, which does a nice job at throwing away the high frequency noise that previous filter chain generated.&lt;/p&gt;
+&lt;p&gt;&lt;img src="/gh-weblog-2/images/bird-vst/eq-cutoff.png" alt=""&gt;&lt;/p&gt;
+&lt;p&gt;You might think "well why not use a low pass filter?" as that's essentially what this does, and the reason is mostly because I wanted a little more more control over the knee and ramp coming down from 2.5KHz which is exactly what an equalizer lets you do. &lt;/p&gt;
+&lt;h2 id="and-that-s-it-all-that-s-left-is-to-enjoy-"&gt;And that's it. All that's left is to enjoy.&lt;/h2&gt;
+&lt;p&gt;The last filter is &lt;a href="https://www.meldaproduction.com/MAnalyzer"&gt;Melda Production's "MAnalyzer"&lt;/a&gt;, which doesn't actually do anything to the audio signal (it just lets it pass through unchanged), but instead simply shows what's happening in terms of which frequencies are playing how loud on a moment-to-moment basis. This is very useful to see where unwanted frequencies are still coming through, to optimize any of the previous filters, plus... it looks pretty!&lt;/p&gt;
+&lt;h2 id="so-what-does-it-sound-like-"&gt;So what does it sound like?&lt;/h2&gt;
+&lt;p&gt;Of course, all this talk about bird song leads to the inevitable "okay, but... what does it sound like?". So here are two clips. One is the "raw audio" as simply captured by the mic outside straight from the XLR mixer, on a mildly rainy day - there's some birds twittering, a car drives by, it's mostly unimpressive but it's contrasted against the same audio after it's been run through the filter chain, representing what we hear in our home office through the speakers.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://clyp.it/ksmbapw1?token=5fca3db27da4d26cfea827dbf5295608"&gt;the raw audio&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://clyp.it/2hj4kmfc?token=b535e17e75cc3f535b75927cec1203d1"&gt;the filtered audio&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I'll leave you to decide which sounds better, and while you do, I'll be going back to enjoying our most excellent bird song!&lt;/p&gt;
+&lt;p&gt;(And if you have cleanup recommendations, leave a comment! Tips and tricks are always welcome)&lt;/p&gt;
+</description>
+
+<link>http://pomax.github.io/#gh-weblog-1517436884711</link>
+<guid>http://pomax.github.io/#gh-weblog-1517436884711</guid>
+<pubDate>Wed, 31 Jan 2018 22:14:44 GMT</pubDate>
+</item>
 <item>
 <title> Creating VST/AU/etc audio plugins in 2017</title>
 <description>&lt;p&gt;Probably the best tutorial on getting started writing a VST plugins (whether you want to make an instrument or a filter) is Martin Finke's &lt;a href="http://www.martin-finke.de/blog/tags/making_audio_plugins.html"&gt;Making Audio Plugins&lt;/a&gt;. It covers going from "zero to hero" but it has one downside: it was written in 2012, and using equivalent tools from 2017 leads to some issues when trying to get to a point where you can actually compile your plugin. Mind you, they're not big issues, but they're "big enough to frustrate people who would otherwise dive right in, losing them as they walk away to do something else instead".&lt;/p&gt;
@@ -528,56 +591,5 @@ return React.createClass({
 <link>http://pomax.github.io/#gh-weblog-1464027515789</link>
 <guid>http://pomax.github.io/#gh-weblog-1464027515789</guid>
 <pubDate>Mon, 23 May 2016 18:18:35 GMT</pubDate>
-</item>
-<item>
-<title> HTTPS, Mixed Content, and the real web... oh my!</title>
-<description>&lt;p&gt;We recently fixed something around Mozilla's X-Ray Goggles. A long running problem that caused people headaches and the feeling of lost work, while at the same time doing nothing "wrong", from a technical perspective. This is going to be a story about how modern browsers work, how people use the web, and how those two things... don't always align.&lt;/p&gt;
-&lt;h2 id="x-ray-goggles-by-mozilla"&gt;X-Ray Goggles by Mozilla&lt;/h2&gt;
-&lt;p&gt;So let's start with X-Ray Goggles: the X-Ray Goggles are &lt;a href="https://goggles.mozilla.org"&gt;a tool&lt;/a&gt; made by &lt;a href="https://mozilla.org"&gt;Mozilla&lt;/a&gt; that lets you "remix" web pages after loading them in your browser. You can go to your favourite place on the web, fire up the goggles (similar to how a professional web developer would open up their dev tools), and then change text, styling, images, and whatever else you might want to change, for as long as you want to change things, and then when you're happy with the result and you want to show your remix to your friends, you can publish that remix so that it has its own URL that you can share.&lt;/p&gt;
-&lt;p&gt;However, the X-Ray Goggles use a publishing service that hosts all its content over &lt;code&gt;https&lt;/code&gt;, because we care about secure communication at Mozilla, and using &lt;code&gt;https&lt;/code&gt; is best practice. But in this particular case, it's also kind of bad: large parts of the web still use &lt;code&gt;http&lt;/code&gt;, and even if a website has an &lt;code&gt;https&lt;/code&gt; equivalent, people usually visit the &lt;code&gt;http&lt;/code&gt; version anyway. Unless those websites &lt;em&gt;force&lt;/em&gt; users to the &lt;code&gt;https&lt;/code&gt; version of the site (using a redirect message), then the site they'll be on, and the site they'll be remixing, will use HTTP, and the moment the user publishes their remix with X-Ray Goggles and they get an &lt;code&gt;https&lt;/code&gt; URL back, and then open that URL in their browser....&lt;/p&gt;
-&lt;p&gt;well, let's just say "everything looks broken" is not wrong. &lt;/p&gt;
-&lt;p&gt;But the reason for this is not because Goggles, or even the browser is doing something wrong - ironically, it's because they're doing something right, and in so doing, what the user wants to do turns out incompatible with what the technology wants them to do. So let's look at what's going on here.&lt;/p&gt;
-&lt;h2 id="http-the-basis-upon-which-browsing-is-built"&gt;HTTP, the basis upon which browsing is built&lt;/h2&gt;
-&lt;p&gt;If you're a user of the web, no doubt you'll have heard about &lt;code&gt;http&lt;/code&gt; and &lt;code&gt;https&lt;/code&gt;, even if you can't really say what they technically-precisely mean. In simple terms (but without dumbing it down), &lt;a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol"&gt;HTTP&lt;/a&gt; is the language that servers and browsers use to negotiate data transfers. The original intention was for those two to talk about HTML code, so that's where the &lt;code&gt;h&lt;/code&gt; in &lt;code&gt;http&lt;/code&gt; comes from (it stands for "hypertext" in both &lt;code&gt;http&lt;/code&gt; and &lt;code&gt;html&lt;/code&gt;), but we're mostly ignoring that these days, and HTTP is used by browsers and servers to negotiate transmission of all sorts of files - web pages, stylesheets, javascript source code, raw data, music, video, images, you name it.&lt;/p&gt;
-&lt;p&gt;However, HTTP is a bit like regular English: you can listen in on it. If you go to a bar and sit yourself with a group of people, you can listen to their conversations. The same goes for HTTP: in order for your browser and the server to talk they rely on a chain of other computers connected to the internet to get messages relayed from one ot the other, and any of those computers can listen in on what the browser and server are saying to each other. In an HTTP setting it gets a little stranger even, because any of those computers could look at what the browser or server are saying, &lt;em&gt;replace what is being said with something else&lt;/em&gt; and then forward that on. And you'll have no way of knowing whether that's what happened. It's literally as if the postal service took a letter you sent, opened it, rewrote it, resealed it, and then sent that on. We trust that they won't, and computers connected to the internet trust that other computers don't mess with the communication, but... they can. And sometimes they do.&lt;/p&gt;
-&lt;p&gt;And that's pretty scary, actually. You don't want to have to "trust" that your communication isn't read or tampered with, you want to &lt;em&gt;know&lt;/em&gt; that's the case.  &lt;/p&gt;
-&lt;h2 id="what-can-we-do-to-fix-that-"&gt;What can we do to fix that?&lt;/h2&gt;
-&lt;p&gt;Well, we can use &lt;a href="https://en.wikipedia.org/wiki/HTTPS"&gt;HTTPS&lt;/a&gt;, or "secure HTTP", instead. Now, I need to be very clear here: the term "secure" in "secure HTTP" refers to secure &lt;em&gt;communication&lt;/em&gt;. Rather than talking "in English", the browser and server agree on a secret language that you could listen to, but you won't know what's being said, and so you can't intercept-and-modify the communication willy-nilly without both parties knowing that their communications are being tampered with. However it does &lt;strong&gt;not&lt;/strong&gt; mean that the data the browser and server agree to receive or send is "safe data". It only means that both parties can be sure that what one of them receives is what the other intended to send. All we can be sure of is that no one will have been able to see what got sent, and that no one modified it somewhere along the way without us knowing.&lt;/p&gt;
-&lt;p&gt;However, those are &lt;em&gt;big&lt;/em&gt; certainties, so for this reason the internet's been moving more and more towards preferring HTTPS for everything. But not everyone's using HTTPS yet, and so we run into something called the &lt;a href="https://developer.mozilla.org/en-US/docs/Security/Mixed_content"&gt;"Mixed Content"&lt;/a&gt; issue.&lt;/p&gt;
-&lt;h2 id="let-s-look-at-an-example-"&gt;Let's look at an example.&lt;/h2&gt;
-&lt;p&gt;Imagine I run a web page, much like this one, and I run it on HTTP because I am not aware of the security issues, and my page relies on some external images, and some JavaScript for easy navigation, and maybe an embedded podcast audio file. All of those things are linked as &lt;code&gt;http://......&lt;/code&gt;, and everything worked fine.&lt;/p&gt;
-&lt;p&gt;But then I hear about the problems with HTTP and the privacy and security implications sound horrible! So, to make sure my visitors don't have to worry about whether the page they get from my server is my page, or a modified version of my page, I spring into action, I switch my page over to HTTPS; I get a &lt;a href="https://en.wikipedia.org/wiki/Public_key_certificate"&gt;security certificate&lt;/a&gt;, I set everything on my own server up so that it can "talk" in HTTPS, and done!&lt;/p&gt;
-&lt;p&gt;Except immediately after switching, my web page is completely broken! The page itself loads, but none of the images show up, and the JavaScript doesn't seem to be working, and that podcast embed is gone! What happened??&lt;/p&gt;
-&lt;p&gt;This is a classic case of &lt;strong&gt;mixed-content blocking&lt;/strong&gt;. My web page is being served on HTTPS, so it's indicating that it wants to make sure everything is secure, but the resources I rely on still use HTTP, and now the browser has a problem: it can't trust those resources, because it can't trust that they won't have been inspected or even modified when it requests them, and because the web page that's asking them to be loaded expressed that it cares about secure communication a great deal, the browser can't just fetch those insecure elements, things &lt;em&gt;might&lt;/em&gt; go wrong, and there's no way to tell!&lt;/p&gt;
-&lt;p&gt;So it does the only thing it knows is safe: better safe than sorry, and it flat out refuses to even request them, giving you a warning about "mixed content".&lt;/p&gt;
-&lt;p&gt;Normally, that's great. It lets people who run websites know that they're relying on potentially insecure third party content in an undeniably clear way, but it gets a bit tricky in two situations:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;third party resources that &lt;em&gt;themselves&lt;/em&gt; require other third party resources, and&lt;/li&gt;
-&lt;li&gt;embedding and rehosting&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;The first is things like your web page using a comment thread service: your web page includes a bit of JavaScript from something like &lt;code&gt;www.WeDoCommentsForYou.com&lt;/code&gt; and then that JavaScript then loads content from that site's comment database, for instance &lt;code&gt;comments.WeDoCommentsForYou.com&lt;/code&gt;. If we have a page that uses HTTPS, running on &lt;code&gt;https://ourpage.org&lt;/code&gt; then we can certainly make sure that we load the comment system from &lt;code&gt;https://www.WeDoCommentsForYou.com&lt;/code&gt;, but we don't control the protocol for the URL that the JavaScript we got back uses. If "WeDoCommentsForYou" wrote their script poorly, and they try to load their comments over &lt;code&gt;http://&lt;/code&gt;, then too bad, the browser will block that. Sure, it's a thing that "WeDoCommentsForYou" should fix, but until they do your users can't comment, and that's super annoying.&lt;/p&gt;
-&lt;p&gt;The second issue is kind of like the first, but is about entire web pages. Say you want to embed a page; for instance, you're &lt;a href="https://en.wikipedia.org/wiki/Transclusion"&gt;transcluding&lt;/a&gt; an entire wiki page into another wiki page. If the page you're embedding is &lt;code&gt;http&lt;/code&gt; and the page it's embedded on is &lt;code&gt;https&lt;/code&gt;, too bad, that's not going to work. Or, and that brings us to what I really want to talk about, if you remix a page on &lt;code&gt;http&lt;/code&gt;, with &lt;code&gt;http&lt;/code&gt; resources, and host that remix on a site that uses &lt;code&gt;https&lt;/code&gt;, then that's not going to work either...&lt;/p&gt;
-&lt;h2 id="back-to-the-x-ray-goggles"&gt;Back to the X-Ray Goggles&lt;/h2&gt;
-&lt;p&gt;And that's the problem we were hitting with X-Ray Goggles, too.&lt;/p&gt;
-&lt;p&gt;While the browser is doing the same kind of user protection that it does for any other website, in this particular case it's actually a big problem: if a user remixed an HTTP website, then knowing what we know now, &lt;em&gt;obviously&lt;/em&gt; that's not going to work if we try to view it using HTTPS. But that also means that instead of a cool tool that people can use to start learning about how web pages work "on the inside", the result of which they can share with their friends, they have a tool that lets them look at the insides of a web page and then when they try to share their learning, everything breaks.&lt;/p&gt;
-&lt;p&gt;That's not cool.&lt;/p&gt;
-&lt;p&gt;And so the solution to this problem is based on first meeting the expectations of people, and then educating them on what those expectations actually mean.   &lt;/p&gt;
-&lt;h2 id="give-me-https-unless-i-started-on-http"&gt;Give me HTTPS, unless I started on HTTP&lt;/h2&gt;
-&lt;p&gt;There are quite a few solutions to the mixed-content problem, and some are better than others. There are some that are downright not nice to other people on the web (like making a full copy of someone's website and then hosting that on Mozilla's servers. That's not okay), or may open people up exploits (like running a proxy server, which runs on HTTPS and can fetch HTTP resources, then send them on as if they were on HTTPS, effectively lying about the security of the communication), so the solution we settled on is, really, the simplest one:&lt;/p&gt;
-&lt;p&gt;If you remix an &lt;code&gt;http://...&lt;/code&gt; website, we will give you a URL that starts with &lt;code&gt;http://&lt;/code&gt;, and if you remix an &lt;code&gt;https://&lt;/code&gt; website, we will give you a URL that starts with &lt;code&gt;https://...&lt;/code&gt;. However, we also want you to understand what's going on with the whole "&lt;code&gt;http&lt;/code&gt; vs &lt;code&gt;https&lt;/code&gt;" thing, so when you visit a remix that starts with &lt;code&gt;http://&lt;/code&gt; the remix notice bar at the top of the page also contains a link to the &lt;code&gt;https://&lt;/code&gt; version --same page, just served using HTTPS instead of HTTP-- so that you can see exactly how bad things get if you can't control which protocol gets used for resources on a page.&lt;/p&gt;
-&lt;h2 id="security-vs-usability"&gt;Security vs Usability&lt;/h2&gt;
-&lt;p&gt;&lt;a href="https://www.mozilla.org/en-US/security"&gt;Security is everybody's responsibility&lt;/a&gt;, and explaining the risks on the web that are inherent to the technology we use every day is always worth doing. But that doesn't mean we need to lock everything down so "you can't use it, the end, go home, stop using HTTP". That's not how the real world works.&lt;/p&gt;
-&lt;p&gt;So we want you to be able to remix your favourite sites, even if they're HTTP, and have a learning/teaching opportunity there around security. Yes, things will look bad when you try to load an HTTP site on HTTPS, but there's a reason for that, and it's important to talk about it.&lt;/p&gt;
-&lt;p&gt;And it's equally important to talk about it without making you lose an hour or more of working on your awesome remix.&lt;/p&gt;
-</description>
-<category>Mozilla</category>
-<category>X-Ray Goggles</category>
-<category>http</category>
-<category>https</category>
-<category>browsers</category>
-<category>internet</category>
-<link>http://pomax.github.io/#gh-weblog-1462301193409</link>
-<guid>http://pomax.github.io/#gh-weblog-1462301193409</guid>
-<pubDate>Tue, 03 May 2016 18:46:33 GMT</pubDate>
 </item></channel>
 </rss>
