@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Wed, 31 Jan 2018 22:15:05 GMT</lastBuildDate>
-<pubDate>Wed, 31 Jan 2018 22:15:05 GMT</pubDate>
+<lastBuildDate>Wed, 31 Jan 2018 22:31:05 GMT</lastBuildDate>
+<pubDate>Wed, 31 Jan 2018 22:31:05 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Listening to birds... from inside the house!</title>
@@ -14,6 +14,7 @@
 &lt;p&gt;What is a couple of tech-minded people to do in a situation like this?&lt;/p&gt;
 &lt;h2 id="-let-s-add-in-all-the-tech-"&gt;"Let's add in *all* the tech"&lt;/h2&gt;
 &lt;p&gt;We ended up setting up an XLR conference microphone (the kind that needs 48V &lt;a href="https://en.wikipedia.org/wiki/Phantom_power"&gt;phantom power&lt;/a&gt; to work) outside, with a long (like, looong) cable running down the side, under the porch, into the house through a ventilation box, into the living room, and into a USB XLR mixer (a Behringer &lt;a href="https://www.long-mcquade.com/67988/Pro_Audio_Recording/Audio_Interfaces/Behringer/U-Phoria_UMC404HD_Audiophile_4x4_24-Bit_192_kHz_USB_Audio_MIDI_Interface.htm"&gt;U-Phoria UMC404HD&lt;/a&gt;), and then using DDMF's &lt;a href="http://www.virtualaudiostream.com"&gt;Virtual Audio Stream&lt;/a&gt; to set up a digital audio filter chain from the microphone input to the speakers, using their "Effect Rack" utility.&lt;/p&gt;
+&lt;p&gt;&lt;img src="/gh-weblog-2/images/bird-vst/the-setup.png" alt=""&gt;&lt;/p&gt;
 &lt;p&gt;Now we can listen to birds (oh my god, so many birds) while working inside! (at least until the weather improves and we can open the windows like normal people would =)&lt;/p&gt;
 &lt;h2 id="the-filter-chain"&gt;The filter chain&lt;/h2&gt;
 &lt;p&gt;The following image shows the filter chain we're using in Effect Rack:&lt;/p&gt;
