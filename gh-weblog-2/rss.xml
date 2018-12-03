@@ -5,14 +5,17 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Mon, 03 Dec 2018 19:08:29 GMT</lastBuildDate>
-<pubDate>Mon, 03 Dec 2018 19:08:29 GMT</pubDate>
+<lastBuildDate>Mon, 03 Dec 2018 19:20:23 GMT</lastBuildDate>
+<pubDate>Mon, 03 Dec 2018 19:20:23 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title>Getting a working HDMI cable is harder than you think</title>
 <description>&lt;p&gt;HDMI cables are not all created equal.&lt;/p&gt;
 &lt;p&gt;That sounds obvious, but it's a problem most people won't really run into. If you just need to connect your TV to your bluray player or your game console, almost any HDMI cable will work for you. Get a length that you need, maybe pay a little more to ensure that it's a 18Gbps cable for maximum bandwidth, and done.&lt;/p&gt;
 &lt;p&gt;Things are not so simple when you do videography, though. I have a UHD video source, which sends data at 10 bit, 4:2:2 4k video, at 60 frames per second, to a UHD recorder monitor. That signal has to be perfect: if it's not, frames get dropped and the recorder goes into black screen mode.&lt;/p&gt;
+&lt;p&gt;Over short distances, that's not much of a problem: you can get 60" 18Gbps HDMI cables using copper wire that work perfectly fine. However, over longer distances copper wires aren't good enough: that 30 foot HDMI cable you see advertised might do 1080p, but it certainly won't be able to do 4k without signal corruption that leads to undecodable frames (4k video is literally four times as much data per second compared to a 1080p signal. You need a &lt;em&gt;lot&lt;/em&gt; more bandwidth).&lt;/p&gt;
+&lt;p&gt;For longer distances, you basically need fiber optic cable. But again, not all cables are created equal, and most cables have product descriptions that are outright lies: if a cable says it's 18Gbps and it also says it'll do 4:4:4 4k at 60fps, then those two claims are mutually exclusive. Either it's an 18Gbps cable, or it's a 4:4:4 4k at 60 fps cable, but it cannot be both. In fact, let's look at a simple table from the HDMI manufacturing specification FAQ that explains why:&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.hdmi.org/manufacturer/hdmi_2_0/hdmi_2_0_faq.aspx#146"&gt;&lt;img src="http://pomax.github.io/gh-weblog-2/images/screenshot.282.png" alt=""&gt;&lt;/a&gt;&lt;/p&gt;
 </description>
 
 <link>http://pomax.github.io/#gh-weblog-1543863659809</link>
