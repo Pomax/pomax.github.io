@@ -1118,7 +1118,7 @@
     "title": " Localization is hard.",
     "created": 1489108158510,
     "published": 1489108158510,
-    "updated": 1489108160329,
+    "updated": 1534265680587,
     "tags": [
       "Localization",
       "Bezier",
@@ -1153,11 +1153,23 @@
     "title": " Listening to birds... from inside the house!",
     "created": 1517436884711,
     "published": 1517436884711,
-    "updated": 1517436886850,
+    "updated": 1517438056862,
     "tags": [
       "Audio",
       "VST",
       "Birds"
+    ]
+  },
+  "2018-12-16-21-05-22": {
+    "id": "2018-12-16-21-05-22",
+    "title": " Adventures in HDMI land",
+    "created": 1544994322697,
+    "published": 1544994322697,
+    "updated": 1544994324679,
+    "tags": [
+      "Photo",
+      "Video",
+      "HDMI"
     ]
   }
 }
