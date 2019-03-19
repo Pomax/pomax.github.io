@@ -5,22 +5,39 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Tue, 19 Mar 2019 15:46:01 GMT</lastBuildDate>
-<pubDate>Tue, 19 Mar 2019 15:46:01 GMT</pubDate>
+<lastBuildDate>Tue, 19 Mar 2019 16:04:08 GMT</lastBuildDate>
+<pubDate>Tue, 19 Mar 2019 16:04:08 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title>Using filters with your Lumix G Vario 7-14mm aspherical lens</title>
 <description>&lt;p&gt;I own a &lt;a href="https://www.dpreview.com/reviews/panasonic-lumix-dc-gh5"&gt;Panasonic Lumix GH5&lt;/a&gt;, and it's pretty great, and I also own the &lt;a href="https://www.dpreview.com/reviews/panasonic-7-14-4-o20"&gt;Panasonic Lumix Vario G 7-14mm aspherical lens&lt;/a&gt; and it's &lt;em&gt;also&lt;/em&gt; pretty great, except for one problem: you can't put filters on it. It has a ridiculous integrated sun hood without any sort of screwthread so you can't screw even a clear filter to protect the lens not even from dropping, but from simple things like splash-drops hitting the lens glass and being hard to clean off.&lt;/p&gt;
-&lt;p&gt;So I had a look around at filter adapters and they're either very expensive, or simply non-existent, so I've been trying to figure out something that works. I initially thought of using the lens cap that comes with the lens, trimming off the "cap" and then gluing a filter step ring to it so that I can screw in a filter, but as it turns out: you don't even need to do that.&lt;/p&gt;
-&lt;p&gt;The sun hood &lt;em&gt;just barely&lt;/em&gt; fits in a 72mm step up ring, fitting pretty tight, and while 72-82mm is not big enough of a step (you'll see the edges of the ring at 7mm), 72-86mm works splendidly, so rather than buying a $150 solution to mount a filter to your lens,  I would strongly recommend the following $14 solution instead:&lt;/p&gt;
+&lt;p&gt;So I had a look around at filter adapters and they're either &lt;a href="https://www.amazon.com/Wonderpana-System-Olympus-7-14mm-Thirds/dp/B00AUK8XNG"&gt;very expensive&lt;/a&gt;, or &lt;a href="https://www.newsshooter.com/2014/05/05/dfocus-filter-adapter-for-panasonic-lumix-7-14-f4-0-designed-for-blackmagic-pocket-cinema-camera-users/"&gt;simply non-existent&lt;/a&gt;, so I've been trying to figure out something that works. I initially thought of using the lens cap that comes with the lens, trimming off the "cap" and then gluing a filter step ring to it so that I can screw in a filter, but as it turns out: you don't even need to do that.&lt;/p&gt;
+&lt;p&gt;The sun hood &lt;em&gt;just barely&lt;/em&gt; fits in a 72mm step up ring, fitting pretty tight, and while 72-82mm is not big enough of a step (you'll see the edges of the ring at 7mm), 72-86mm works splendidly, so rather than buying a $100+ solution to mount unaffordable 105mm filters to your lens,  I would strongly recommend the following $14 solution instead:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;get a &lt;a href="https://www.amazon.com/gp/product/B009T1C1IU"&gt;72-86mm filter step-up ring&lt;/a&gt; for $6&lt;/li&gt;
 &lt;li&gt;get an &lt;a href="https://www.amazon.ca/gp/product/B07HJ98MCG"&gt;86mm thin UV filter&lt;/a&gt; for $7&lt;/li&gt;
 &lt;li&gt;you're done.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Well, almost: that sun hood isn't round, it's got some cutouts, so you probably want to still cut up your lens cap and use the resulting "barrel" to cover those holes so light can't get in from behind, reflect off the rear of the filter glass, and make its way into your shot. It's artsy, but probably not what you're going for.&lt;/p&gt;
+&lt;h3 id="a-short-picture-tutorial"&gt;A short picture tutorial&lt;/h3&gt;
+&lt;p&gt;Step 1: get your parts ready!&lt;/p&gt;
+&lt;p&gt;&lt;img src="/gh-weblog-2/images/7-14mm filter/parts.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Step 2: place your step-up ring 86mm down, 72mm up, and press you lens all the way through it.&lt;/p&gt;
+&lt;p&gt;&lt;img src="/gh-weblog-2/images/7-14mm filter/base.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Step 3: screw on your filter&lt;/p&gt;
+&lt;p&gt;&lt;img src="/gh-weblog-2/images/7-14mm filter/filter.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Step 4: you're basically done.&lt;/p&gt;
+&lt;p&gt;&lt;img src="/gh-weblog-2/images/7-14mm filter/done.jpg"&gt;&lt;/p&gt;
 </description>
-
+<category>Photography</category>
+<category>Panasonic</category>
+<category>Lumix</category>
+<category>Vario</category>
+<category>7mm</category>
+<category>14mm</category>
+<category>7-14mm</category>
+<category>Lens</category>
+<category>Filter</category>
 <link>http://pomax.github.io/#gh-weblog-1553009656840</link>
 <guid>http://pomax.github.io/#gh-weblog-1553009656840</guid>
 <pubDate>Tue, 19 Mar 2019 15:34:16 GMT</pubDate>
