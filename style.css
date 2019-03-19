@@ -104,7 +104,7 @@ a:hover {
 }
 
 #projects ul li + li:before {
-  content: " - ";
+  content: " | ";
 }
 
 #gh-weblog button.authenticate {
