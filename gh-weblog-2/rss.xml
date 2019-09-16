@@ -5,12 +5,12 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Mon, 16 Sep 2019 22:26:39 GMT</lastBuildDate>
-<pubDate>Mon, 16 Sep 2019 22:26:39 GMT</pubDate>
+<lastBuildDate>Mon, 16 Sep 2019 22:28:07 GMT</lastBuildDate>
+<pubDate>Mon, 16 Sep 2019 22:28:07 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Speeding up Lightroom catalog work by not using Lightroom</title>
-<description>&lt;p&gt;Lightroom catalogs are &lt;a href="https://sqlite.org/index.html"&gt;SQLite3&lt;/a&gt; files, and some things that take Lightroom effectively forever can be performed in milliseconds if you're willing to ignore Lightroom entirely and just load the catalog in SQLite3, probably using an administrative GUI.&lt;/p&gt;
+<description>&lt;p&gt;&lt;a href="https://www.adobe.com/products/photoshop-lightroom-classic.html"&gt;Adobe Lightroom&lt;/a&gt; catalogs are &lt;a href="https://sqlite.org/index.html"&gt;SQLite3&lt;/a&gt; files, and some things that take Lightroom effectively forever can be performed in milliseconds if you're willing to ignore Lightroom entirely and just load the catalog in SQLite3, probably using &lt;a href="https://sqlitebrowser.org"&gt;an administrative GUI&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;For instance, if you want the list of all filenames for images that haven't been tagged yet, good luck making Lightroom do that. Even if the user script that some people will tell you to use, actually getting Lightroom to perform this for even a low number of photos in a several thousand photo catalog will take excruciatingly long, whereas the SQLite3 query will probably take less than 100 milliseconds:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;SELECT
   originalFilename as filename
@@ -26,7 +26,10 @@ AND
   )
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Load your catalog, run that query, and done.&lt;/p&gt;
 </description>
-
+<category>Adobe</category>
+<category>Lightroom</category>
+<category>SQLite</category>
+<category>SQLite3</category>
 <link>http://pomax.github.io/#gh-weblog-1568672424870</link>
 <guid>http://pomax.github.io/#gh-weblog-1568672424870</guid>
 <pubDate>Mon, 16 Sep 2019 22:20:24 GMT</pubDate>
