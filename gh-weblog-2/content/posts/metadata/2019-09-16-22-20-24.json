@@ -3,6 +3,11 @@
   "title": " Speeding up Lightroom catalog work by not using Lightroom",
   "created": 1568672424870,
   "published": 1568672424870,
-  "updated": 1568672865727,
-  "tags": []
+  "updated": 1568672947366,
+  "tags": [
+    "Adobe",
+    "Lightroom",
+    "SQLite",
+    "SQLite3"
+  ]
 }
