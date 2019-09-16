@@ -5,12 +5,12 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Mon, 16 Sep 2019 22:29:38 GMT</lastBuildDate>
-<pubDate>Mon, 16 Sep 2019 22:29:38 GMT</pubDate>
+<lastBuildDate>Mon, 16 Sep 2019 22:33:08 GMT</lastBuildDate>
+<pubDate>Mon, 16 Sep 2019 22:33:08 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Speeding up Lightroom catalog work by not using Lightroom</title>
-<description>&lt;p&gt;&lt;a href="https://www.adobe.com/products/photoshop-lightroom-classic.html"&gt;Adobe Lightroom&lt;/a&gt; catalogs are &lt;a href="https://sqlite.org/index.html"&gt;SQLite3&lt;/a&gt; files (just with the &lt;code&gt;lrcat&lt;/code&gt; extension rather than the typical &lt;code&gt;.sqlite&lt;/code&gt; or &lt;code&gt;.db&lt;/code&gt; extensions) and some things that take Lightroom effectively forever can be performed in milliseconds if you're willing to ignore Lightroom entirely and just load the catalog in SQLite3, probably using &lt;a href="https://sqlitebrowser.org"&gt;an administrative GUI&lt;/a&gt;.&lt;/p&gt;
+<description>&lt;p&gt;&lt;a href="https://www.adobe.com/products/photoshop-lightroom-classic.html"&gt;Adobe Lightroom&lt;/a&gt; catalogs are &lt;a href="https://sqlite.org/index.html"&gt;SQLite3&lt;/a&gt; files (just with the &lt;code&gt;.lrcat&lt;/code&gt; extension rather than the typical &lt;code&gt;.sqlite&lt;/code&gt; or &lt;code&gt;.db&lt;/code&gt; extensions) and some things that take Lightroom effectively forever can be performed in milliseconds if you're willing to ignore Lightroom entirely and just load the catalog in SQLite3, probably using &lt;a href="https://sqlitebrowser.org"&gt;an administrative GUI&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;For instance, if you want the list of all filenames for images that haven't been tagged yet, good luck making Lightroom do that. Even if the user script that some people will tell you to use, actually getting Lightroom to perform this for even a low number of photos in a several thousand photo catalog will take excruciatingly long, whereas the SQLite3 query will probably take less than a second:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;SELECT
   originalFilename as filename
