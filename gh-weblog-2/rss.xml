@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Mon, 16 Sep 2019 22:34:02 GMT</lastBuildDate>
-<pubDate>Mon, 16 Sep 2019 22:34:02 GMT</pubDate>
+<lastBuildDate>Mon, 16 Sep 2019 22:37:32 GMT</lastBuildDate>
+<pubDate>Mon, 16 Sep 2019 22:37:32 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Speeding up Lightroom catalog work by not using Lightroom</title>
@@ -25,6 +25,9 @@ AND
     FROM AgLibraryKeywordImage
   )
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Load your catalog, run that query, and done.&lt;/p&gt;
+&lt;p&gt;There is in fact a lot more that you can do this way, but you might need to do some table hunting: my lightroom catalog has 112 tables, and finding which table houses what information is "half the fun" (read: quite the chore). However, once you've found where to find what, writing a query that just pulls the data you need in exactly the format you need takes very little time, and the amount of time you save for subsequent occasions you need to do the same thing is incredible.&lt;/p&gt;
+&lt;p&gt;Best of all, you can automate your sqlite. Python, Node, Ruby, all common modern scripting languages can with a sqlite connector, so you can just write a script that loads in the catalog file, runs your query, writes the result to file (or even updates the catalog directly) and all you have to do is execute your script. &lt;/p&gt;
+&lt;p&gt;And really, that's what we wish Adobe just offered out of the box. They don't, but because they use Sqlite3, "also: they do".&lt;/p&gt;
 </description>
 <category>Adobe</category>
 <category>Lightroom</category>
