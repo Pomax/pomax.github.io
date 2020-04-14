@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Tue, 14 Apr 2020 23:13:23 GMT</lastBuildDate>
-<pubDate>Tue, 14 Apr 2020 23:13:23 GMT</pubDate>
+<lastBuildDate>Tue, 14 Apr 2020 23:14:37 GMT</lastBuildDate>
+<pubDate>Tue, 14 Apr 2020 23:14:37 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Fixing Windows 10's "error code 19"</title>
@@ -22,14 +22,10 @@
 &lt;p&gt;And I can only pray that you allowed Remote Desktop connections into your machine, because without that, it's going to be incredibly hard to solve this problem without buying a PS/2 keyboard and/or mouse.  "But I don't have a user password" I hear you say: fret not, &lt;a href="https://superuser.com/questions/106917/remote-desktop-without-a-password"&gt;there's a policy edit&lt;/a&gt; for that. "But I have Windows 10 Home Edition" I hear you say...  well then I got nothing for you. I don't even know why that version exists. Upgrade to Pro, then fix the problem, I guess.  And I really do, because I have no way of testing that.&lt;/p&gt;
 &lt;p&gt;If you use Windows and you're reading this, you should be on Pro. In both senses of the word "should".&lt;/p&gt;
 </description>
-<category>Windows</category>
-<category>Error</category>
-<category>Code 19</category>
-<category>RegEdit</category>
-<category>USB</category>
-<link>http://pomax.github.io/#gh-weblog-1586905169363</link>
-<guid>http://pomax.github.io/#gh-weblog-1586905169363</guid>
-<pubDate>Tue, 14 Apr 2020 22:59:29 GMT</pubDate>
+
+<link>http://pomax.github.io/#gh-weblog-1586906069347</link>
+<guid>http://pomax.github.io/#gh-weblog-1586906069347</guid>
+<pubDate>Tue, 14 Apr 2020 23:14:29 GMT</pubDate>
 </item>
 <item>
 <title> Speeding up Lightroom catalog work by not using Lightroom</title>
