@@ -1177,7 +1177,30 @@
     "title": "Using filters with your Lumix G Vario 7-14mm aspherical lens",
     "created": 1553009656840,
     "published": 1553009656840,
-    "updated": 1553010351306,
-    "tags": []
+    "updated": 1553031409541,
+    "tags": [
+      "Photography",
+      "Panasonic",
+      "Lumix",
+      "Vario",
+      "7mm",
+      "14mm",
+      "7-14mm",
+      "Lens",
+      "Filter"
+    ]
+  },
+  "2019-09-16-22-20-24": {
+    "id": "2019-09-16-22-20-24",
+    "title": " Speeding up Lightroom catalog work by not using Lightroom",
+    "created": 1568672424870,
+    "published": 1568672424870,
+    "updated": 1568673466323,
+    "tags": [
+      "Adobe",
+      "Lightroom",
+      "SQLite",
+      "SQLite3"
+    ]
   }
 }
