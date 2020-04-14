@@ -5,9 +5,32 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Mon, 16 Sep 2019 22:37:49 GMT</lastBuildDate>
-<pubDate>Mon, 16 Sep 2019 22:37:49 GMT</pubDate>
+<lastBuildDate>Tue, 14 Apr 2020 23:13:15 GMT</lastBuildDate>
+<pubDate>Tue, 14 Apr 2020 23:13:15 GMT</pubDate>
 <ttl>1440</ttl>
+<item>
+<title> Fixing Windows 10's "error code 19"</title>
+<description>&lt;p&gt;In a bizarre happenstance, I rebooted my Windows 10 workstation after doing nothing special in particular, and all my USB devices stopped working. Or rather, they worked fine, until Windows 10 got control of the system.  Not having a keyboard or mouse, I had to remote into my workstation from a different computer, but that revealed that for some reason, the "Intel USB 3.0 eXtensible Host Controller Driver" didn't work. And not because the driver was bad, but because a registry setting was wrong:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;"Windows cannot start this hardware device because its configuration information (in the registry) is incomplete or damaged. (Code 19)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Now, if you Google for this error, you will get a million click-bait articles, and a handful of real posts that tell you to uninstall the device in Device Manager, and then reboot - and of course, that does nothing.&lt;/p&gt;
+&lt;p&gt;Then some of them tell you to regedit your way to success by deleting the &lt;code&gt;LowerFilters&lt;/code&gt; and &lt;code&gt;UpperFilters&lt;/code&gt; keys in the HKEY_LOCAL_MACHINE &amp;gt;  System &amp;gt; CurrentControlSet &amp;gt; Control &amp;gt; Class &amp;gt; ... entry, which is invariable for CD-ROM or DVD drives, and that of course does nothing because those are not your problem.&lt;/p&gt;
+&lt;p&gt;Instead, you need to open HKEY_LOCAL_MACHINE &amp;gt;  System &amp;gt; CurrentControlSet &amp;gt; Control &amp;gt; Class, and then simply step through the entries until you find the &lt;code&gt;USB&lt;/code&gt; entry. In my case, that was &lt;code&gt;{36fc9e60-c465-11cf-8056-444553540000}&lt;/code&gt; rather than one of the million &lt;code&gt;{4d36e9xx-e325-11ce-bfc1-xxxxxx}&lt;/code&gt; keys that people tell you to use.&lt;/p&gt;
+&lt;p&gt;Look at the &lt;code&gt;LowerFilters&lt;/code&gt; and &lt;code&gt;UpperFilters&lt;/code&gt; values. Are there any? Delete them. Do they have the wrong case, like &lt;code&gt;UPPERFILTERS&lt;/code&gt;? Delete them. Just delete them. Then in Device manager, uninstall the host controller and then scan for new hardware.&lt;/p&gt;
+&lt;p&gt;Presto, you fixed the problem.&lt;/p&gt;
+&lt;p&gt;And I can only pray that you allowed Remote Desktop connections into your machine, because without that, it's going to be incredibly hard to solve this problem without buying a PS/2 keyboard and/or mouse.  "But I don't have a user password" I hear you say: fret not, &lt;a href="https://superuser.com/questions/106917/remote-desktop-without-a-password"&gt;there's a policy edit&lt;/a&gt; for that. "But I have Windows 10 Home Edition" I hear you say...  well then I got nothing for you. I don't even know why that version exists. Upgrade to Pro, then fix the problem, I guess.  And I really do, because I have no way of testing that.&lt;/p&gt;
+&lt;p&gt;If you use Windows and you're reading this, you should be on Pro. In both senses of the word "should".&lt;/p&gt;
+</description>
+<category>Windows</category>
+<category>Error</category>
+<category>Code 19</category>
+<category>RegEdit</category>
+<category>USB</category>
+<link>http://pomax.github.io/#gh-weblog-1586905169363</link>
+<guid>http://pomax.github.io/#gh-weblog-1586905169363</guid>
+<pubDate>Tue, 14 Apr 2020 22:59:29 GMT</pubDate>
+</item>
 <item>
 <title> Speeding up Lightroom catalog work by not using Lightroom</title>
 <description>&lt;p&gt;&lt;a href="https://www.adobe.com/products/photoshop-lightroom-classic.html"&gt;Adobe Lightroom&lt;/a&gt; catalogs are &lt;a href="https://sqlite.org/index.html"&gt;SQLite3&lt;/a&gt; files (just with the &lt;code&gt;.lrcat&lt;/code&gt; extension rather than the typical &lt;code&gt;.sqlite&lt;/code&gt; or &lt;code&gt;.db&lt;/code&gt; extensions) and some things that take Lightroom effectively forever can be performed in milliseconds if you're willing to ignore Lightroom entirely and just load the catalog in SQLite3, probably using &lt;a href="https://sqlitebrowser.org"&gt;an administrative GUI&lt;/a&gt;.&lt;/p&gt;
@@ -655,24 +678,5 @@ return React.createClass({
 <link>http://pomax.github.io/#gh-weblog-1473270609919</link>
 <guid>http://pomax.github.io/#gh-weblog-1473270609919</guid>
 <pubDate>Wed, 07 Sep 2016 17:50:09 GMT</pubDate>
-</item>
-<item>
-<title>So... I ruined my hands (but they're getting better)</title>
-<description>&lt;p&gt;About two weeks ago, I was fixing my favourite ramen bowl using traditional Japanese pottery repair techniques, which involves working with "urushi", a natural laquer obtained from the &lt;a href="https://en.wikipedia.org/wiki/Chinese_laquer_tree"&gt;Chinese Laquer Tree&lt;/a&gt;. This might not mean anything to you, until I explain to you that there is a compound known to science called "urushiol" that is found in poison ivy, poison oak, poison sumac, cashew trees, and other such nasty plants, and that is causes massive reactions in a large portion of humans.&lt;/p&gt;
-&lt;p&gt;Urushi is what that compound is named after, and while I wore gloves while working on my ramen bowl, I took them off before cleaning up. And so I ended up with &lt;a href="https://en.wikipedia.org/wiki/Urushiol-induced_contact_dermatitis"&gt;urushiol-induced contact dermatitis&lt;/a&gt;. The nasty thing about it is that it doesn't kick in immediately. As an antigen reaction, the first time this happens it takes one to two weeks before your body reacts to it, but like any good antigen reaction, the second time it only takes a few days. However, a "a few days" is not "immediately" and so you don't realise you screwed up until three days later, when it's too late: this is happening, better make your peace with it.&lt;/p&gt;
-&lt;p&gt;And making your peace with it is hard: the affected skin will start to rash and blister, and those blisters will just get bigger and bigger, spawning blisters INSIDE of them, and joining up to form huge finger-spanning blisters with smaller blisters inside of them. If that sounds horrible, good news: it's even worse because it also itches like &lt;em&gt;mad&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;There are some ways to mitigate it, and none of them are drugs or creams: the most effective way to deal with the itching is to soak the affected region (if possible) in super hot water. As hot as you can stand, and then just a fraction hotter. It desensitizes the tissue and alleviates the itching for at least a few hours. And after a week, the blisters start to recede again once the body finally figures out that none of its defenses are actually doing anything (no kidding, if only we could tell it that earlier), and then the rest of your body starts to catch up: any part of your body that undergoes repeated skin stress (bits that chafe up against clothing, a scrape you got from walking into a door handle, and so on) develops a rash, too. No blisters, but you'll enjoy swelling and rashing and massive itchiness a second time over.&lt;/p&gt;
-&lt;p&gt;Now, that sounds horrible, and it kind of is, but the most annoying part is that once you realise what's happening, it's a) too late and b) you're going to lose the functionality of whatever got the blister part of the deal. In my case, my left hand blistered up so badly that I couldn't use it, and my right was pretty close too. I ended up buying curator's gloves just so that moving my fingers ever so slightly wouldn't make blisters rub up against blisters, causing itching and pain.&lt;/p&gt;
-&lt;p&gt;Does that sound gross? Good: &lt;strong&gt;wear gloves when working with urushi, and wear clothes if you're in a poison ivy/poison oak region&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;Seriously, it'll take you down, and if you live in North America, your doctor's just going to prescribe antibiotics and a topical cream, neither of which will actually do anything to make you heal faster - they're just overreactions to "you might scratch yourself open and get an infection O_O" (protip: don't scratch. Yeah it itches like crazy, suck it up. 2 weeks from now you won't remember itching 2 weeks ago). You have to ride it out, and you have to not scratch, and you will be driven close to mad, while not being able to do your job.&lt;/p&gt;
-&lt;p&gt;Don't be like me.&lt;/p&gt;
-</description>
-<category>Urushi</category>
-<category>Poison Ivy</category>
-<category>Poison Oak</category>
-<category>Safety</category>
-<link>http://pomax.github.io/#gh-weblog-1469494036040</link>
-<guid>http://pomax.github.io/#gh-weblog-1469494036040</guid>
-<pubDate>Tue, 26 Jul 2016 00:47:16 GMT</pubDate>
 </item></channel>
 </rss>
