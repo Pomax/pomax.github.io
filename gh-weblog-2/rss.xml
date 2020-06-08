@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Mon, 08 Jun 2020 01:01:26 GMT</lastBuildDate>
-<pubDate>Mon, 08 Jun 2020 01:01:26 GMT</pubDate>
+<lastBuildDate>Mon, 08 Jun 2020 01:03:23 GMT</lastBuildDate>
+<pubDate>Mon, 08 Jun 2020 01:03:23 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title>Automating the build process of the Primer on Bezier Curves</title>
@@ -22,7 +22,7 @@
 &lt;/ol&gt;
 &lt;p&gt;So the only thing I still need to do manually now is sync from the &lt;code&gt;BezierInfo-2&lt;/code&gt; dev repo to the main &lt;code&gt;bezierinfo&lt;/code&gt; repo, which feels sensible: you don't want to indiscriminately push your dev code to prod without review.&lt;/p&gt;
 &lt;p&gt;But this sure makes an involved process a heck of a lot easier.&lt;/p&gt;
-&lt;p&gt;I guess that means I should also add a Github action to automatically build the ToC for this blog site anytime I add a new entry... because that's also a manual step right now.&lt;/p&gt;
+&lt;p&gt;I guess that means I should also add a Github action to automatically build the ToC for this blog site anytime I add a new entry... because that's also a manual step right now... and I can probably offload the RSS generation rather than doing that in-browser every time.&lt;/p&gt;
 </description>
 <category>Bezier</category>
 <category>Github</category>
