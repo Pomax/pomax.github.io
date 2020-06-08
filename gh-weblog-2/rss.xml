@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Mon, 08 Jun 2020 15:43:23 GMT</lastBuildDate>
-<pubDate>Mon, 08 Jun 2020 15:43:23 GMT</pubDate>
+<lastBuildDate>Mon, 08 Jun 2020 15:50:03 GMT</lastBuildDate>
+<pubDate>Mon, 08 Jun 2020 15:50:03 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title>Automating the build process of the Primer on Bezier Curves</title>
@@ -18,9 +18,17 @@
 &lt;li&gt;Pulls the &lt;code&gt;pdf2svg&lt;/code&gt; source code from the web and builds it&lt;/li&gt;
 &lt;li&gt;Grabs &lt;a href="https://github.com/nvm-sh/nvm"&gt;nvm&lt;/a&gt; and uses it to install the latest version of Node and runs &lt;code&gt;npm install&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Runs &lt;code&gt;npm run build&lt;/code&gt;, which:&lt;ul&gt;
-&lt;li&gt;runs &lt;a href="https://github.com/Pomax/BezierInfo-2/blob/master/webpack.config.js"&gt;webpack several times&lt;/a&gt;, for each locale, which&lt;/li&gt;
-&lt;li&gt;preprocesses the souce code to &lt;a href="https://github.com/Pomax/BezierInfo-2/blob/master/lib/latex-loader.js"&gt;replace LaTeX code with &lt;code&gt;&amp;lt;svg&amp;gt;&lt;/code&gt; tags&lt;/a&gt; by literally wrapping it in a LaTeX document and then calling &lt;a href="https://en.wikipedia.org/wiki/XeTeX"&gt;xelatex&lt;/a&gt; on that source, cropping the resulting PDF, converting that crop to an SVG image on disk, and reading in the SVG image's dimensions so the original source can be replaced with &lt;code&gt;&amp;lt;img src="..." width="..." height="..."&amp;gt;&lt;/code&gt;, ensuring the document doesn't constantly reflow as images load in.&lt;/li&gt;
-&lt;li&gt;wraps all example code such that references to the graphics API, which cannot possibly work in isolation, actually point to the right thing. Then finally,&lt;/li&gt;
+&lt;li&gt;runs &lt;a href="https://github.com/Pomax/BezierInfo-2/blob/master/webpack.config.js"&gt;webpack several times&lt;/a&gt;, once for each locale, which:&lt;ul&gt;
+&lt;li&gt;preprocesses the souce code to &lt;a href="https://github.com/Pomax/BezierInfo-2/blob/master/lib/latex-loader.js"&gt;replace LaTeX code with &lt;code&gt;&amp;lt;svg&amp;gt;&lt;/code&gt; tags&lt;/a&gt; by literally wrapping it in a LaTeX document and then calling &lt;a href="https://en.wikipedia.org/wiki/XeTeX"&gt;xelatex&lt;/a&gt; on that source,&lt;/li&gt;
+&lt;li&gt;crops the resulting PDF, then&lt;/li&gt;
+&lt;li&gt;converts that crop to an SVG image on disk, then&lt;/li&gt;
+&lt;li&gt;reads in the SVG image's dimensions so the original source can be replaced with &lt;code&gt;&amp;lt;img src="..." width="..." height="..."&amp;gt;&lt;/code&gt;, ensuring the document doesn't constantly reflow as images load in, then&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;wraps all example code such that references to the graphics API, which cannot possibly work in isolation, actually point to the right thing, and then finally,&lt;ul&gt;
+&lt;li&gt;runs the result through babel and bundles it up as &lt;code&gt;article.js&lt;/code&gt; with its own &lt;code&gt;index.html&lt;/code&gt; (because each locale needs an appropriate&lt;code&gt;lang=...&lt;/code&gt;).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;Commits and pushes the result back up to &lt;code&gt;master&lt;/code&gt;&lt;/li&gt;
