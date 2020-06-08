@@ -5,9 +5,31 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Tue, 14 Apr 2020 23:14:37 GMT</lastBuildDate>
-<pubDate>Tue, 14 Apr 2020 23:14:37 GMT</pubDate>
+<lastBuildDate>Mon, 08 Jun 2020 00:59:18 GMT</lastBuildDate>
+<pubDate>Mon, 08 Jun 2020 00:59:18 GMT</pubDate>
 <ttl>1440</ttl>
+<item>
+<title>Automating the build process of the Primer on Bezier Curves</title>
+<description>&lt;p&gt;If you're reading this, you probably know my &lt;a href="https://pomax.github.io/bezierinfo/"&gt;Primer on Bézier Curves&lt;/a&gt;, but what you probably don't know is that until today this build process for this was entirely manual. A code change would require landing the code, then checking out &lt;code&gt;master&lt;/code&gt;, running &lt;code&gt;npm run build&lt;/code&gt;, then pushing the rebuilt files back up to &lt;code&gt;master&lt;/code&gt;, and then doing the same for the &lt;code&gt;bezierinfo&lt;/code&gt; repo, which exists in parallel.&lt;/p&gt;
+&lt;p&gt;Most of that work has now been automated with &lt;a href="https://github.com/features/actions"&gt;Github actions&lt;/a&gt;. Whenever content or build related files get updated on the master branch, Github will now cause &lt;a href="https://github.com/Pomax/BezierInfo-2/blob/master/.github/workflows/ci.yml"&gt;ci.yml&lt;/a&gt; to kick in, which runs through the following steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;check out &lt;code&gt;master&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Install &lt;a href="https://www.tug.org/texlive"&gt;TeX Live&lt;/a&gt;, which installs all the TeX features that the primer relies on&lt;/li&gt;
+&lt;li&gt;Pulls the &lt;code&gt;pdf2svg&lt;/code&gt; source code from the web and builds it&lt;/li&gt;
+&lt;li&gt;Grabs &lt;a href="https://github.com/nvm-sh/nvm"&gt;nvm&lt;/a&gt; and uses it to install the latest version of Node and runs &lt;code&gt;npm install&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Runs &lt;code&gt;npm run build&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Commits and pushes the result back up to &lt;code&gt;master&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;So the only thing I still need to do manually now is sync from the &lt;code&gt;BezierInfo-2&lt;/code&gt; dev repo to the main &lt;code&gt;bezierinfo&lt;/code&gt; repo, which feels sensible: you don't want to indiscriminately push your dev code to prod without review.&lt;/p&gt;
+&lt;p&gt;But this sure makes an involved process a heck of a lot easier.&lt;/p&gt;
+</description>
+<category>Bezier</category>
+<category>Github</category>
+<category>Automation</category>
+<link>http://pomax.github.io/#gh-weblog-1591576580138</link>
+<guid>http://pomax.github.io/#gh-weblog-1591576580138</guid>
+<pubDate>Mon, 08 Jun 2020 00:36:20 GMT</pubDate>
+</item>
 <item>
 <title> Fixing Windows 10's "error code 19"</title>
 <description>&lt;p&gt;In a bizarre happenstance, I rebooted my Windows 10 workstation after doing nothing special in particular, and all my USB devices stopped working. Or rather, they worked fine, until Windows 10 got control of the system.  Not having a keyboard or mouse, I had to remote into my workstation from a different computer, but that revealed that for some reason, the "Intel USB 3.0 eXtensible Host Controller Driver" didn't work. And not because the driver was bad, but because a registry setting was wrong:&lt;/p&gt;
@@ -22,10 +44,14 @@
 &lt;p&gt;And I can only pray that you allowed Remote Desktop connections into your machine, because without that, it's going to be incredibly hard to solve this problem without buying a PS/2 keyboard and/or mouse.  "But I don't have a user password" I hear you say: fret not, &lt;a href="https://superuser.com/questions/106917/remote-desktop-without-a-password"&gt;there's a policy edit&lt;/a&gt; for that. "But I have Windows 10 Home Edition" I hear you say...  well then I got nothing for you. I don't even know why that version exists. Upgrade to Pro, then fix the problem, I guess.  And I really do, because I have no way of testing that.&lt;/p&gt;
 &lt;p&gt;If you use Windows and you're reading this, you should be on Pro. In both senses of the word "should".&lt;/p&gt;
 </description>
-
-<link>http://pomax.github.io/#gh-weblog-1586906069347</link>
-<guid>http://pomax.github.io/#gh-weblog-1586906069347</guid>
-<pubDate>Tue, 14 Apr 2020 23:14:29 GMT</pubDate>
+<category>Windows</category>
+<category>Error</category>
+<category>Code 19</category>
+<category>RegEdit</category>
+<category>USB</category>
+<link>http://pomax.github.io/#gh-weblog-1586905169363</link>
+<guid>http://pomax.github.io/#gh-weblog-1586905169363</guid>
+<pubDate>Tue, 14 Apr 2020 22:59:29 GMT</pubDate>
 </item>
 <item>
 <title> Speeding up Lightroom catalog work by not using Lightroom</title>
@@ -553,126 +579,5 @@ return React.createClass({
 <link>http://pomax.github.io/#gh-weblog-1480700902037</link>
 <guid>http://pomax.github.io/#gh-weblog-1480700902037</guid>
 <pubDate>Fri, 02 Dec 2016 17:48:22 GMT</pubDate>
-</item>
-<item>
-<title> If you use use document.write, you suck at JavaScript</title>
-<description>&lt;p&gt;Wow, that's an incendiary post title isn't it. Just because you use &lt;code&gt;document.write&lt;/code&gt; doesn't say anything about your JavaScript skills, I mean it's just another function in the official ECMAScript spec, it's just an older one. Why the vitriol?&lt;/p&gt;
-&lt;h2 id="let-s-start-at-the-start"&gt;Let's start at the start&lt;/h2&gt;
-&lt;p&gt;The &lt;code&gt;document.write&lt;/code&gt; function comes to us from the dark ages of the early JavaScript enabled web, and is really nothing like the JS you are likely to be familiar with.  It might be called &lt;code&gt;document.write&lt;/code&gt; and invoked as if it's part of the document API, &lt;a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/write"&gt;its true behaviour is much lower level&lt;/a&gt;: it is a proxy function in to the bytesteam pipe that defines what's even &lt;strong&gt;in&lt;/strong&gt; your &lt;code&gt;document&lt;/code&gt;. The &lt;code&gt;write&lt;/code&gt; function doesn't let you "write some data into the document", it &lt;strong&gt;is&lt;/strong&gt; the document, and that comes with some hilarious side effects.&lt;/p&gt;
-&lt;h2 id="1-write-needs-an-open-pipe"&gt;1: &lt;code&gt;write&lt;/code&gt; needs an open pipe&lt;/h2&gt;
-&lt;p&gt;Say you have a web page, and that webpage has the following code:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;html&amp;gt;
-  &amp;lt;head&amp;gt;&amp;lt;title&amp;gt;whatever&amp;lt;/title&amp;gt;&amp;lt;/head&amp;gt;
-  &amp;lt;body&amp;gt;
-    &amp;lt;script&amp;gt; document.write("&amp;lt;p&amp;gt;oh look a paragraph&amp;lt;/p&amp;gt;"); &amp;lt;/script&amp;gt;
-  &amp;lt;/body&amp;gt;
-&amp;lt;/html&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The browser loads this code by creating a &lt;code&gt;document&lt;/code&gt;, opening it for writing, piping that data into it (which gets parsed into a DOM as it sees bytes flying by) and then closes it to signal the completion of building &lt;a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model"&gt;the DOM&lt;/a&gt; for your page.&lt;/p&gt;
-&lt;p&gt;Given that, you might expect this code to write a paragraph into your document at the time that the &lt;code&gt;document.write&lt;/code&gt; script triggers. And you'd be right, but here is &lt;em&gt;why&lt;/em&gt; you're right: as the document pipe is still open, and the script element gets evaluated &lt;em&gt;while&lt;/em&gt; the document is getting parsed, the document parser simply sees "more bytes" flying by to parse into the DOM.&lt;/p&gt;
-&lt;p&gt;Want to see something hilarious?&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;html&amp;gt;
-  &amp;lt;head&amp;gt;&amp;lt;title&amp;gt;whatever&amp;lt;/title&amp;gt;&amp;lt;/head&amp;gt;
-  &amp;lt;body&amp;gt;
-    &amp;lt;script&amp;gt;
-      document.addEventListener("DOMContentLoaded", function() {
-        document.write("&amp;lt;p&amp;gt;oh look a paragraph&amp;lt;/p&amp;gt;");
-      });
-    &amp;lt;/script&amp;gt;
-  &amp;lt;/body&amp;gt;
-&amp;lt;/html&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Guess what that does. If you thought "it writes a paragraph into the document once it's finished loading" then: no, not really.  While it might look that way if you put this in jsbin or the like that's what it looks like it does, but let's try this:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;html&amp;gt;
-  &amp;lt;head&amp;gt;&amp;lt;title&amp;gt;whatever&amp;lt;/title&amp;gt;&amp;lt;/head&amp;gt;
-  &amp;lt;body&amp;gt;
-    &amp;lt;h1&amp;gt;Second test:&amp;lt;/h1&amp;gt;
-    &amp;lt;script&amp;gt;
-      document.addEventListener("DOMContentLoaded", function() {
-        document.write("&amp;lt;p&amp;gt;oh look a paragraph&amp;lt;/p&amp;gt;");
-      });
-    &amp;lt;/script&amp;gt;
-  &amp;lt;/body&amp;gt;
-&amp;lt;/html&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Run this code. Seriously, hit up &lt;a href="https://jsbin.com"&gt;jsbin&lt;/a&gt; and paste that into the HTML section, then run it. See what happens.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Huh, where did that &lt;code&gt;&amp;lt;h1&amp;gt;&lt;/code&gt; go?&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;Actually, the correct question is "where did &lt;strong&gt;everything&lt;/strong&gt; go?" because your entire document got wiped. After all, &lt;code&gt;document.write&lt;/code&gt; needs an open pipe, and there is no open pipe once all content has loaded. And so it makes one.&lt;/p&gt;
-&lt;p&gt;A new one.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;An empty one&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&lt;code&gt;document&lt;/code&gt; is now an empty, open data pipe&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;What happened? The document got opened, the source code bytes went flying past the parser, it saw the end of the document, the document got closed for writing, and then when it sends the signal "DOM finished building!", our &lt;code&gt;document.write&lt;/code&gt; code kicks in, and the document is reopened as a new, empty, byte stream, and we pump in only the bytes &lt;code&gt;&amp;lt;p&amp;gt;oh look a paragraph&amp;lt;/p&amp;gt;&lt;/code&gt;. The browser knows how to auto-inject missing tags so it'll automatically build the higher level &lt;code&gt;html&lt;/code&gt;, &lt;code&gt;head&lt;/code&gt; and &lt;code&gt;body&lt;/code&gt; nodes in the DOM, but the &lt;em&gt;only&lt;/em&gt; data in our document as far as the browser knows is now &lt;code&gt;&amp;lt;p&amp;gt;oh look a paragraph&amp;lt;/p&amp;gt;&lt;/code&gt;, and &lt;strong&gt;nothing else&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;So congratulations, you actually just wiped the page! And this is not a "quirk", this is literally what it's supposed to do, it's intended and explicit behaviour. If this was code you wrote on your own page, then lucky you, easy to fix (don't use &lt;code&gt;document.write&lt;/code&gt;) but if this was a 3rd party library, good luck finding out which one is  responsible. And then replacing it with a modern library instead.&lt;/p&gt;
-&lt;h2 id="2-document-write-is-insanely-insecure-"&gt;2.  &lt;code&gt;document.write&lt;/code&gt; is insanely insecure.&lt;/h2&gt;
-&lt;p&gt;You probably know that &lt;code&gt;eval()&lt;/code&gt; is really bad because it can evaluate arbitrary JS code, with the same execution rights as the page it's run on. So... you should see this one coming, but &lt;code&gt;document.write&lt;/code&gt; lets you do exactly the same thing. In fact, it's the most low-level version of eval you can come up with: it's &lt;em&gt;literally&lt;/em&gt; the function for injecting data into a page, so let's do that...&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;html&amp;gt;
-  &amp;lt;head&amp;gt;&amp;lt;title&amp;gt;whatever&amp;lt;/title&amp;gt;&amp;lt;/head&amp;gt;
-  &amp;lt;body&amp;gt;
-    &amp;lt;script src="https://third.party.domain/perfectly-safe.js"&amp;gt;&amp;lt;/script&amp;gt;
-  &amp;lt;/body&amp;gt;
-&amp;lt;/html&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;and let's put a &lt;code&gt;document.write&lt;/code&gt; in that "perfectly safe" js file!&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;document.write("&amp;lt;script&amp;gt; do.anything(); &amp;lt;/script&amp;gt;");
-/*
-  awesome,  this injected code will run as if it's part of the page this is run on,
-  not our http://third.party.domain context, so it will have access to everything
-  security related that we shouldn't ever have access to!
-*/
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Good times!&lt;/p&gt;
-&lt;h2 id="3-document-write-is-synchronous"&gt;3.  &lt;code&gt;document.write&lt;/code&gt; is synchronous&lt;/h2&gt;
-&lt;p&gt;Because we can't defer &lt;code&gt;document.write&lt;/code&gt; to after the document is done loading, all the &lt;code&gt;document.write&lt;/code&gt; code &lt;em&gt;has&lt;/em&gt; to run as part of the initial page load, and so anything it puts in your document increases time-to-load. If you are blessed enough to live in a part of the world where you've never noticed page load speed, good for you! But a &lt;em&gt;lot&lt;/em&gt; of people are still on slow connections, and any page blocking before the browser can show an initial view (which it only does once it reaches the &lt;code&gt;&amp;lt;/body&amp;gt;&lt;/code&gt; tag) is extremely obvious.&lt;/p&gt;
-&lt;h2 id="okay-fine-but-say-i-know-all-these-things-why-do-i-suck-at-javascript-if-i-use-it-i-know-what-i-m-doing-"&gt;Okay, fine, but say I know all these things, why do I suck at JavaScript if I use it? I know what I'm doing!&lt;/h2&gt;
-&lt;p&gt;I'm going to  argue that you don't. Not necessarily through any fault of your own, but you can still suck at something even if you don't realise you do.&lt;/p&gt;
-&lt;p&gt;Modern JS has many constructions that are non-destructive, secure, and non-blocking. Why not use those instead? And that's a rhetorical question, really: you &lt;em&gt;should&lt;/em&gt; be using the modern JS equivalents, not a low-level document bytecode writer. It doesn't really matter what you want to do, because I know what you don't want to do: you don't want to "write byte data into the document", you want to do something else.&lt;/p&gt;
-&lt;p&gt;As such, like any proper solution to &lt;a href="http://meta.stackexchange.com/questions/66377/what-is-the-xy-problem"&gt;an XY problem&lt;/a&gt;, solve the right problem with the right tools. In this case, do what you &lt;em&gt;actually&lt;/em&gt; want to get done using the appropriate modern APIs for doing that thing; don't resort to &lt;code&gt;document.write&lt;/code&gt; as some kind of magical hammer, because then you're just abusing &lt;code&gt;document.write&lt;/code&gt; to do something it wasn't designed to do, in a way that is horrendously broken and bug-prone.&lt;/p&gt;
-&lt;p&gt;So what do you use instead?&lt;/p&gt;
-&lt;h3 id="adding-content-to-the-document"&gt;Adding content to the document&lt;/h3&gt;
-&lt;p&gt;The proper way to add content to your document, using modern, non-destructive code, is by using the DOM manipulation API. In vanilla JS, things like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;html&amp;gt;
-  &amp;lt;head&amp;gt;&amp;lt;title&amp;gt;whatever&amp;lt;/title&amp;gt;&amp;lt;/head&amp;gt;
-  &amp;lt;body&amp;gt;
-    &amp;lt;h1&amp;gt;Second test:&amp;lt;/h1&amp;gt;
-    &amp;lt;script&amp;gt;
-      document.addEventListener("DOMContentLoaded", function() {
-        var body = document.body.
-        var p = document.createElement("p");
-        p.textContent = "wow, a new paragraph!";
-        body.appendChild(p);
-      });
-    &amp;lt;/script&amp;gt;
-  &amp;lt;/body&amp;gt;
-&amp;lt;/html&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Is that cumbersome? Sure is, so if you have to manipulate the DOM, use something like jQuery or Zepto or the like instead, because they give you far easier APIs, while making sure to fall through to proper DOM manipulation instead of &lt;code&gt;document.write&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;html&amp;gt;
-  &amp;lt;head&amp;gt;&amp;lt;title&amp;gt;whatever&amp;lt;/title&amp;gt;&amp;lt;/head&amp;gt;
-  &amp;lt;body&amp;gt;
-    &amp;lt;h1&amp;gt;Second test:&amp;lt;/h1&amp;gt;
-    &amp;lt;script&amp;gt;
-      $(function() {
-        $(document.body).append($("&amp;lt;p&amp;gt;Wow, a new paragraph!&amp;lt;/p&amp;gt;");
-      });
-    &amp;lt;/script&amp;gt;
-  &amp;lt;/body&amp;gt;
-&amp;lt;/html&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Done.  And it runs asynchronous, too, so your page isn't blocked from loading.&lt;/p&gt;
-&lt;h3 id="but-i-only-use-document-write-to-see-debug-information-"&gt;But I only use &lt;code&gt;document.write&lt;/code&gt; to see debug information!&lt;/h3&gt;
-&lt;p&gt;Okay... wait, what? Why are you doing that? It's 2016, but even if this was 2010: use the &lt;code&gt;console&lt;/code&gt; API, because that's what it's for.&lt;/p&gt;
-&lt;p&gt;You open your browser's dev tools view, and you use &lt;code&gt;console.log(...)&lt;/code&gt; to write data to the dev tools console. In fact, unlike &lt;code&gt;document.write&lt;/code&gt; which can only write strings (obviously), &lt;code&gt;console.log&lt;/code&gt; can write everything you throw at it, and can write as many things as you need written in a single command. Strings, arrays, full objects, it makes all those things accessible in the console in an explorable way, and in a single call: &lt;code&gt;console.log("test", [1,2,3], {x:0,y:undefined})&lt;/code&gt; just works.&lt;/p&gt;
-&lt;p&gt;In fact, because being explicit about your intent in code is important for your code to make sense not just to others but even to your future self, the console API even has things like &lt;code&gt;console.warn()&lt;/code&gt; and &lt;code&gt;console.error()&lt;/code&gt;, so you can be specific about what your debug is for (just "see the data" vs "strong signal that something's wrong"). And if you want to get &lt;em&gt;really&lt;/em&gt; fancy there's things like &lt;code&gt;console.table()&lt;/code&gt; for pretty-printing specific data in tabulated form. &lt;/p&gt;
-&lt;p&gt;The console is amazing and you should be using it. Not &lt;code&gt;document.write&lt;/code&gt;.&lt;/p&gt;
-&lt;h3 id="but-what-if-i-use-it-for-"&gt;But what if I use it for--&lt;/h3&gt;
-&lt;p&gt;I kind of stopped caring: whatever you're doing, there is a modern JS way to do that without using &lt;strong&gt;a bare-bones byte injection function hooked into the normally inaccessible document byte map&lt;/strong&gt;. &lt;/p&gt;
-&lt;h3 id="no-really-i-m-using-it-for-injecting-a-filesystem-loader-into-an-iframe-that-kicks-in-before-the-document-even-exists-replacing-it-with-a-posix-filesystem-enabled-mini-server-that-"&gt;No really, I'm using it for injecting a filesystem loader into an iframe that kicks in before the document even exists, replacing it with a POSIX filesystem-enabled mini server that--&lt;/h3&gt;
-&lt;p&gt;That sounds awesome, I did the same thing! Also, that's an amazeballs super-ninja insane-o-hack, so I hope you're not counting on that working forever, because &lt;code&gt;document.write&lt;/code&gt; has to go. No matter how neat the thing is we can achieve by abusing the hell out of it. Our exploits of it are not enough to justify keeping it around.&lt;/p&gt;
-&lt;p&gt;Seriously: &lt;em&gt;&lt;code&gt;document.write&lt;/code&gt; has to go.&lt;/em&gt;&lt;/p&gt;
-&lt;h1 id="do-you-really-suck-at-javascript-probably-not-"&gt;Do you &lt;em&gt;really&lt;/em&gt; suck at JavaScript? Probably not.&lt;/h1&gt;
-&lt;p&gt;So back to the original proposition. Do you suck at JavaScript? Well, sort of. You're using a function you shouldn't ever have been taught to use. That happens. We all started at a position of "knowing nothing about JavaScript", so not knowing how bad &lt;code&gt;document.write&lt;/code&gt; is, is kind of a given. However, now you know, and now you need to go and find all those places where you use it.&lt;/p&gt;
-&lt;p&gt;And then do you suck at JavaScript? Well, that depends on what you do next: if you don't stop using &lt;code&gt;document.write&lt;/code&gt; now, and you don't go an correct your past mistakes, then yes; you absolutely suck at JavaScript, and the web world is worse off because of you. No two ways about it: if that's you, you're part of the problem. And not even because of &lt;code&gt;document.write&lt;/code&gt; anymore but because you are unwilling to fix obviously bad behaviour. You have problems well outside of writing JavaScript.&lt;/p&gt;
-&lt;p&gt;So shape up, and help everyone learn better JS by writing better JS. You have the skills and the power, exercise them, make a diffrence.&lt;/p&gt;
-&lt;p&gt;And to all of you already avoiding &lt;code&gt;document.write&lt;/code&gt; like the low-level legacy function that it is: good on you, keep up the good work. Maybe convince a friend to do the same, tweet about it, write a blog post; together we can fix the web.&lt;/p&gt;
-</description>
-<category>JavaScript</category>
-<category>Web dev</category>
-<category>document.write</category>
-<link>http://pomax.github.io/#gh-weblog-1473270609919</link>
-<guid>http://pomax.github.io/#gh-weblog-1473270609919</guid>
-<pubDate>Wed, 07 Sep 2016 17:50:09 GMT</pubDate>
 </item></channel>
 </rss>
