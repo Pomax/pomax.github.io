@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Wed, 28 Oct 2020 15:44:57 GMT</lastBuildDate>
-<pubDate>Wed, 28 Oct 2020 15:44:57 GMT</pubDate>
+<lastBuildDate>Wed, 28 Oct 2020 15:48:32 GMT</lastBuildDate>
+<pubDate>Wed, 28 Oct 2020 15:48:32 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title>Installing Windows 7 in late 2020</title>
@@ -16,10 +16,15 @@
 &lt;p&gt;Thankfully, the advice in &lt;a href="https://answers.microsoft.com/en-us/windows/forum/windows_7-update/kb4516065-installation-fails-with-error-80092004/ef9994ee-7820-436e-b18f-001ae53edf28"&gt;this post&lt;/a&gt; works: &lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;download and manually install &lt;a href="https://www.catalog.update.microsoft.com/search.aspx?q=kb4490628"&gt;kb4490628&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;then download and manually install&lt;/li&gt;
+&lt;li&gt;then download and manually install &lt;a href="https://www.catalog.update.microsoft.com/Search.aspx?q=kb4516065"&gt;kb4516065&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
+&lt;p&gt;Once done, windows update can get back to the "install updates, reboot, install more updates, reboot, etc" dance and all is well.&lt;/p&gt;
+&lt;p&gt;I mean, except for the part where you'll never receive security etc updates ever again, so once you're done installing everything, you &lt;em&gt;prooobably&lt;/em&gt; want to either air gap or network-restrict the machine so it can't reach, or be reached from, the internet. Which is exactly what I need (it just needs to accept audio feeds from a set of microphones that it can then forward on over LAN, no internet required) so happens to be fine for my use-case.&lt;/p&gt;
 </description>
-
+<category>Windows</category>
+<category>Updates</category>
+<category>Software</category>
+<category>OS</category>
 <link>http://pomax.github.io/#gh-weblog-1603899270641</link>
 <guid>http://pomax.github.io/#gh-weblog-1603899270641</guid>
 <pubDate>Wed, 28 Oct 2020 15:34:30 GMT</pubDate>
