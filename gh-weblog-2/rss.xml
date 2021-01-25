@@ -5,9 +5,23 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Fri, 01 Jan 2021 18:38:15 GMT</lastBuildDate>
-<pubDate>Fri, 01 Jan 2021 18:38:15 GMT</pubDate>
+<lastBuildDate>Mon, 25 Jan 2021 23:50:47 GMT</lastBuildDate>
+<pubDate>Mon, 25 Jan 2021 23:50:47 GMT</pubDate>
 <ttl>1440</ttl>
+<item>
+<title>Creating an Arduino-based inline MIDI recorder</title>
+<description>&lt;p&gt;If you’ve ever used audio software on the computer, you probably know that MIDI exists: a signalling protocol that allows controllers to control virtual instruments like synths. It’s also the protocol used by real audio hardware to talk to each, and you can think of it as the language in which, rather than communicating a fluctuating voltage signal or series of discrete sample values, devices talk about what is being done on them (“A4 got pressed”, “F4 got released”, “the mod wheel moved down”, etc).&lt;/p&gt;
+&lt;p&gt;As such, there are two ways to record digital instruments (real or virtual): you can record the sound they’re making, or you can record the MIDI events that cause them to make those sounds, and that’s where things get interesting.&lt;/p&gt;
+&lt;p&gt;There are many, many ways to record audio, from microphones to line monitors to audio interfaces, on dedicated hardware, computers, phones, etc. etc., but there aren’t all that many ways to record MIDI events. Essentially: unless you’re running software that monitors MIDI events, there just isn’t really any way to record MIDI. So I set out to change that: in the same way that you can just hook up an audio field recorder (like a Tascam DR-05) to sit between an audio-out on something that generates audio and an audio-in on something that should be listening to that audio, writing that to an SD card as .wav or .mp3 or the like, I built a MIDI “field recorder” that you plug in between your MIDI-out and some MIDI-in, indiscriminately recording every MIDI event that gets sent over the wire to an SD card as a .mid file.&lt;/p&gt;
+&lt;p&gt;You’d think this would be something that already exists as a product you can just buy (even if at probably quite the markup because it’s made of “powder-coated extruded aluminium” with “audiophile quality” components, but still). Amazingly, it is not. There’s just nothing.&lt;/p&gt;
+&lt;p&gt;So: if you want a MIDI recorder, you’ll have to build one… and if you want to build one, &lt;a href="https://pomax.github.io/arduino-midi-recorder/"&gt;this tutorial&lt;/a&gt; might be useful to you!&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://raw.githubusercontent.com/Pomax/arduino-midi-recorder/master/banner.jpg" alt=""&gt;&lt;/p&gt;
+</description>
+
+<link>http://pomax.github.io/#gh-weblog-1611618580829</link>
+<guid>http://pomax.github.io/#gh-weblog-1611618580829</guid>
+<pubDate>Mon, 25 Jan 2021 23:49:40 GMT</pubDate>
+</item>
 <item>
 <title>Dragging .mid files into FL Studio</title>
 <description>&lt;p&gt;There are a few ways to drag midi files into &lt;a href="https://www.image-line.com/"&gt;FL Studio&lt;/a&gt;, but the best way is also not documented:&lt;/p&gt;
@@ -347,24 +361,5 @@ TargetFrameworkVersion or PlatformToolset may be set to an invalid version numbe
 <link>http://pomax.github.io/#gh-weblog-1512169175433</link>
 <guid>http://pomax.github.io/#gh-weblog-1512169175433</guid>
 <pubDate>Fri, 01 Dec 2017 22:59:35 GMT</pubDate>
-</item>
-<item>
-<title>A beer riddle</title>
-<description>&lt;p&gt;Cold beer I promise, if but in name; pour me one for the difference to remain. Lakes of beer I pass in strain - what am I?&lt;/p&gt;
-&lt;p&gt;&lt;span style="background: black; color: black"&gt;
-My name spells cold yet warm I work, my job to offer beer a fork: swim along or cloud the flow. It is my job to tell it: "no". What am I?
-&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="background: black; color: black"&gt;
-Once in water, I now swim here, holding that which muddles beer. Separate it from what is dear, thrown away once beer is clear. What am I?
-&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;And the answer:&lt;/p&gt;
-&lt;p&gt;&lt;span style="background: black; color: black"&gt;
-From fish we get a jellied web, that filters the last bits of drab, from finished beers sent off for casking: "&lt;a style="color: black" href="https://en.wikipedia.org/wiki/Isinglass"&gt;isinglass&lt;/a&gt;" the name of asking.
-&lt;/span&gt;&lt;/p&gt;
-</description>
-
-<link>http://pomax.github.io/#gh-weblog-1490481349209</link>
-<guid>http://pomax.github.io/#gh-weblog-1490481349209</guid>
-<pubDate>Sat, 25 Mar 2017 22:35:49 GMT</pubDate>
 </item></channel>
 </rss>
