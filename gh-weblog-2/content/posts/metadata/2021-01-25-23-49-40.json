@@ -4,5 +4,9 @@
   "created": 1611618580829,
   "published": 1611618580829,
   "updated": 1611618643055,
-  "tags": []
+  "tags": [
+    "Arduino",
+    "MIDI",
+    "Recording"
+  ]
 }
