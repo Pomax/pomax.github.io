@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Mon, 25 Jan 2021 23:50:47 GMT</lastBuildDate>
-<pubDate>Mon, 25 Jan 2021 23:50:47 GMT</pubDate>
+<lastBuildDate>Mon, 25 Jan 2021 23:51:10 GMT</lastBuildDate>
+<pubDate>Mon, 25 Jan 2021 23:51:10 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title>Creating an Arduino-based inline MIDI recorder</title>
@@ -17,7 +17,9 @@
 &lt;p&gt;So: if you want a MIDI recorder, you’ll have to build one… and if you want to build one, &lt;a href="https://pomax.github.io/arduino-midi-recorder/"&gt;this tutorial&lt;/a&gt; might be useful to you!&lt;/p&gt;
 &lt;p&gt;&lt;img src="https://raw.githubusercontent.com/Pomax/arduino-midi-recorder/master/banner.jpg" alt=""&gt;&lt;/p&gt;
 </description>
-
+<category>Arduino</category>
+<category>MIDI</category>
+<category>Recording</category>
 <link>http://pomax.github.io/#gh-weblog-1611618580829</link>
 <guid>http://pomax.github.io/#gh-weblog-1611618580829</guid>
 <pubDate>Mon, 25 Jan 2021 23:49:40 GMT</pubDate>
