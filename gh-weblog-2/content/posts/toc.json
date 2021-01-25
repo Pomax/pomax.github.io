@@ -1222,11 +1222,42 @@
     "title": "Automating the build process of the Primer on Bezier Curves",
     "created": 1591576580138,
     "published": 1591576580138,
-    "updated": 1591578082400,
+    "updated": 1591631415371,
     "tags": [
       "Bezier",
       "Github",
       "Automation"
+    ]
+  },
+  "2020-10-28-15-34-30": {
+    "id": "2020-10-28-15-34-30",
+    "title": "Installing Windows 7 in late 2020",
+    "created": 1603899270641,
+    "published": 1603899270641,
+    "updated": 1603900903803,
+    "tags": []
+  },
+  "2021-01-01-18-32-33": {
+    "id": "2021-01-01-18-32-33",
+    "title": "Dragging .mid files into FL Studio",
+    "created": 1609525953375,
+    "published": 1609525953375,
+    "updated": 1609526265606,
+    "tags": [
+      "MIDI",
+      "FL Studio"
+    ]
+  },
+  "2021-01-25-23-49-40": {
+    "id": "2021-01-25-23-49-40",
+    "title": "Creating an Arduino-based inline MIDI recorder",
+    "created": 1611618580829,
+    "published": 1611618580829,
+    "updated": 1611618643055,
+    "tags": [
+      "Arduino",
+      "MIDI",
+      "Recording"
     ]
   }
 }
