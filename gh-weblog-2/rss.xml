@@ -5,9 +5,30 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Mon, 25 Jan 2021 23:51:10 GMT</lastBuildDate>
-<pubDate>Mon, 25 Jan 2021 23:51:10 GMT</pubDate>
+<lastBuildDate>Sat, 27 Feb 2021 21:43:23 GMT</lastBuildDate>
+<pubDate>Sat, 27 Feb 2021 21:43:23 GMT</pubDate>
 <ttl>1440</ttl>
+<item>
+<title>My macbook keeps crashing after putting in an NVMe SSD!</title>
+<description>&lt;p&gt;Yours and everyone else's: there are two things you &lt;em&gt;need&lt;/em&gt; to do.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Reset your nvram by restarting macos and holding &lt;code&gt;Command+Option+P+R&lt;/code&gt;: hold all four keys down at the same time while your mac boots, and you'll know it worked when you hear the mac chime. It'll autoreboot after resetting the nvram but just keep those keys pressed until you hear the chime a second time, just for good measure.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Disable macos' drive standby, because your SSD is almost certainly incompatible with the apple hardware instructions. Open a terminal and run:&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;$ sudo pmset -a standby 0
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;You're done, your new (presumably much bigger) NVMe SSD will work just fine now,  and your mac will no longer crash at random&lt;/p&gt;
+</description>
+<category>macos</category>
+<category>nvme</category>
+<category>ssd</category>
+<category>nvram</category>
+<category>standy</category>
+<link>http://pomax.github.io/#gh-weblog-1614461875757</link>
+<guid>http://pomax.github.io/#gh-weblog-1614461875757</guid>
+<pubDate>Sat, 27 Feb 2021 21:37:55 GMT</pubDate>
+</item>
 <item>
 <title>Creating an Arduino-based inline MIDI recorder</title>
 <description>&lt;p&gt;If you’ve ever used audio software on the computer, you probably know that MIDI exists: a signalling protocol that allows controllers to control virtual instruments like synths. It’s also the protocol used by real audio hardware to talk to each, and you can think of it as the language in which, rather than communicating a fluctuating voltage signal or series of discrete sample values, devices talk about what is being done on them (“A4 got pressed”, “F4 got released”, “the mod wheel moved down”, etc).&lt;/p&gt;
@@ -320,48 +341,5 @@ b5 b6   b7 b8
 <link>http://pomax.github.io/#gh-weblog-1517436884711</link>
 <guid>http://pomax.github.io/#gh-weblog-1517436884711</guid>
 <pubDate>Wed, 31 Jan 2018 22:14:44 GMT</pubDate>
-</item>
-<item>
-<title> Creating VST/AU/etc audio plugins in 2017</title>
-<description>&lt;p&gt;Probably the best tutorial on getting started writing a VST plugins (whether you want to make an instrument or a filter) is Martin Finke's &lt;a href="http://www.martin-finke.de/blog/tags/making_audio_plugins.html"&gt;Making Audio Plugins&lt;/a&gt;. It covers going from "zero to hero" but it has one downside: it was written in 2012, and using equivalent tools from 2017 leads to some issues when trying to get to a point where you can actually compile your plugin. Mind you, they're not big issues, but they're "big enough to frustrate people who would otherwise dive right in, losing them as they walk away to do something else instead".&lt;/p&gt;
-&lt;p&gt;So, what can we do?&lt;/p&gt;
-&lt;p&gt;First off, it's 2017 (coming up to 2018) and I'm going to assume you're using Windows mostly because that's what I'm using (because several audio production tools I use only exist for Windows. I also have a mac, yes I own Ableton, no I'm not covering using XCode in 2017 here. But if you want to do that work for me, I will be more than happy to add your findings to this blog post! (hit me up &lt;a href="https://github.com/pomax/pomax.github.io/issues"&gt;here&lt;/a&gt; to discuss that!).&lt;/p&gt;
-&lt;h2 id="getting-the-right-tools"&gt;Getting the right tools&lt;/h2&gt;
-&lt;p&gt;You're probably on Windows 10, so we want to install &lt;a href="https://www.visualstudio.com/downloads/"&gt;Visual Studio 2017 Community Edition&lt;/a&gt; with all the SDKs checked during the installation. That's pretty important. We need those SDKs.&lt;/p&gt;
-&lt;h2 id="following-the-instructions"&gt;Following the instructions&lt;/h2&gt;
-&lt;p&gt;While "Making Audio Plugins &lt;a href="http://www.martin-finke.de/blog/articles/audio-plugins-002-setting-up-wdl-ol/"&gt;part 2&lt;/a&gt;" covers most of it, once you've used python to create the directory with all the files for your first plugin, and you're loading the &lt;code&gt;.sln&lt;/code&gt; file in Visual C++, you're going to hit warnings and errors.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Don't worry, it's okay&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;Accept the suggestion by VC++ to upgrade the project to the modern SDKs (which it will fail at, but again, that's okay), and then instead of trying to compile &lt;code&gt;MyFirstPlugin-app&lt;/code&gt;, first make sure the project and Visual C++ know that we're working on Windows 10.&lt;/p&gt;
-&lt;h3 id="update-the-platform"&gt;Update the platform&lt;/h3&gt;
-&lt;p&gt;Go to &lt;code&gt;Project&lt;/code&gt; and then &lt;code&gt;Properties&lt;/code&gt;, and in the "General" settings, change the platform tools from "Visual Studio 2017 - Windows XP (v...)" to just "Visual Studio 2017 (v...)", so that we're not trying to compile against anything Windows-XP-related.&lt;/p&gt;
-&lt;p&gt;If you don't do this, you'll see errors like the following:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;Warning    MSB8003
-Could not find WindowsSdkDir_71A variable from the registry.
-TargetFrameworkVersion or PlatformToolset may be set to an invalid version number.
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Which, aside from being horribly poor grammar, is also a red herring: what this really mean is "the project is using an SDK that cannot be found", which is true: we're on Windows 10, we're using SDK version 141 (or perhaps by the time you read this, even higher), rather than version 71.&lt;/p&gt;
-&lt;h3 id="update-your-include-path-probably"&gt;Update your include path, probably&lt;/h3&gt;
-&lt;p&gt;If, after updating the platform tools, you try to compile and you get &lt;code&gt;missing windows.h&lt;/code&gt; and/or &lt;code&gt;missing winapifamily.h&lt;/code&gt; errors, then we need to manually intervene because Visual Studio did not pick the correct paths for including common headers.&lt;/p&gt;
-&lt;p&gt;In the project properties, go to the "VC++ Directories" section, because we'll need to add two directories to the "Includes" path, which is probably already filled in as &lt;code&gt;$(VC_IncludePath);$(WindowsSDK_IncludePath);&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;We'll need to add the &lt;code&gt;\mu&lt;/code&gt; and &lt;code&gt;\shared&lt;/code&gt; directories for the Windows SDK that we're working with, which as of the date of this post is the Windows 10 Fall Creator Edition SDK version 10.0.16299.0, found (by default - if you changed your installation path then you should know what to do here) in:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Given that location, we will need to add the following two paths to the include path in the project properties include path:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\mu;&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\shared;&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;So we end up with the Include path string "$(VC_IncludePath);$(WindowsSDK_IncludePath);C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\mu;C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\shared;".&lt;/p&gt;
-&lt;h3 id="retargeting-the-project-possibly"&gt;Retargeting the project, possibly&lt;/h3&gt;
-&lt;p&gt;Finally, it's possible that trying to compile after these two steps still doesn't work. In that case, right-click on &lt;code&gt;MyFirstPlugin-app&lt;/code&gt; and choose "retarget projects". This will pop up a dialog that lets you pick the SDK version. Make sure to pick the &lt;code&gt;10.0.....&lt;/code&gt; version that matches what we used for the Platform Tools in the project properties, and accept that change.&lt;/p&gt;
-&lt;h2 id="you-should-be-good-to-go-"&gt;You should be good to go!&lt;/h2&gt;
-&lt;p&gt;Alright, now we can get back to that awesome tutorial and make some audio plugins. Select &lt;code&gt;MyFirstPlugin-app&lt;/code&gt;, hit F5 to start a compile, and "things should just work(tm)".&lt;/p&gt;
-</description>
-<category>Audio</category>
-<category>VST</category>
-<category>Programming</category>
-<category>VC++</category>
-<category>2017</category>
-<link>http://pomax.github.io/#gh-weblog-1512169175433</link>
-<guid>http://pomax.github.io/#gh-weblog-1512169175433</guid>
-<pubDate>Fri, 01 Dec 2017 22:59:35 GMT</pubDate>
 </item></channel>
 </rss>
