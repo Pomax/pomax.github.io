@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: pomax.github.io
+Token: 4b9845ee151f45ee87a1fe0a5b60f3f33c0a697d0147cec44541808087f5d2f9 
