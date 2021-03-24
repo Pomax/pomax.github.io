@@ -5,9 +5,29 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Sat, 27 Feb 2021 21:49:51 GMT</lastBuildDate>
-<pubDate>Sat, 27 Feb 2021 21:49:51 GMT</pubDate>
+<lastBuildDate>Wed, 24 Mar 2021 17:51:07 GMT</lastBuildDate>
+<pubDate>Wed, 24 Mar 2021 17:51:07 GMT</pubDate>
 <ttl>1440</ttl>
+<item>
+<title> bash_profile for Windows' CMD </title>
+<description>&lt;p&gt;Some folks love powershell. I am not one of those people: powershell breaks on standard command chaining using &lt;code&gt;&amp;amp;&amp;amp;&lt;/code&gt;, making it decidedly useless for the work I do on the daily. Instead I use &lt;code&gt;cmd&lt;/code&gt; for everything terminal-related. No "git bash", no "console2", just plain &lt;code&gt;cmd&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;And did you know that &lt;code&gt;cmd&lt;/code&gt; has autorun functionality just like &lt;code&gt;bash&lt;/code&gt; does? It doesn't use a &lt;code&gt;.bash_profile&lt;/code&gt; (obviously) but it does let you specify what should run any time you start &lt;code&gt;cmd&lt;/code&gt; by looking at two special registry keys mentioned in &lt;a href="https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/cmd"&gt;the documentation for cmd&lt;/a&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Cmd.exe looks for the following registry subkeys:
+
+- HKEY_LOCAL_MACHINE\Software\Microsoft\Command Processor\AutoRun (REG_SZ)
+- HKEY_CURRENT_USER\Software\Microsoft\Command Processor\AutoRun (REG_EXPAND_SZ)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;So, run &lt;code&gt;regedit&lt;/code&gt; and find your way to &lt;code&gt;HKEY_CURRENT_USER\Software\Microsoft&lt;/code&gt;, create the &lt;code&gt;Command Processor&lt;/code&gt; key if it doesn't exist (which it won't if you never used it before), and then create an expandable string value called &lt;code&gt;AutoRun&lt;/code&gt; (paying attention to correct capitalization) and assign it the value &lt;code&gt;%USERPROFILE%\cmd-autorun.bat&lt;/code&gt;, then create a file called &lt;code&gt;cmd-autorun.bat&lt;/code&gt; in your own Windows user directory.&lt;/p&gt;
+&lt;p&gt;Done: you now have the equivalent of a &lt;code&gt;.bash_profile&lt;/code&gt; for &lt;code&gt;cmd&lt;/code&gt; that will run only for your user account (as it should be) any time you (or anything else) starts up &lt;code&gt;cmd&lt;/code&gt;.&lt;/p&gt;
+</description>
+<category>windows</category>
+<category>cmd</category>
+<category>bash</category>
+<category>bash_profile</category>
+<category>autorun</category>
+<link>http://pomax.github.io/#gh-weblog-1616607431740</link>
+<guid>http://pomax.github.io/#gh-weblog-1616607431740</guid>
+<pubDate>Wed, 24 Mar 2021 17:37:11 GMT</pubDate>
+</item>
 <item>
 <title>My macbook keeps crashing after putting in an NVMe SSD!</title>
 <description>&lt;p&gt;Yours and everyone else's: there are two things you &lt;em&gt;need&lt;/em&gt; to do.&lt;/p&gt;
@@ -275,71 +295,5 @@ b5 b6   b7 b8
 <link>http://pomax.github.io/#gh-weblog-1544994322697</link>
 <guid>http://pomax.github.io/#gh-weblog-1544994322697</guid>
 <pubDate>Sun, 16 Dec 2018 21:05:22 GMT</pubDate>
-</item>
-<item>
-<title> Listening to birds... from inside the house!</title>
-<description>&lt;p&gt;We moved to a house on Vancouver Island not too long ago, to a fairly quiet area that's just outside a city, with lots of birdsong going on all day, every day. However, it's January and it's pretty cold out so while birdsong is lovely to listen to, opening a window isn't really an option.&lt;/p&gt;
-&lt;p&gt;What is a couple of tech-minded people to do in a situation like this?&lt;/p&gt;
-&lt;h2 id="-let-s-add-in-all-the-tech-"&gt;"Let's add in *all* the tech"&lt;/h2&gt;
-&lt;p&gt;We ended up setting up an XLR conference microphone (the kind that needs 48V &lt;a href="https://en.wikipedia.org/wiki/Phantom_power"&gt;phantom power&lt;/a&gt; to work) outside, with a long (like, looong) cable running down the side, under the porch, into the house through a ventilation box, into the living room, and into a USB XLR mixer (a Behringer &lt;a href="https://www.long-mcquade.com/67988/Pro_Audio_Recording/Audio_Interfaces/Behringer/U-Phoria_UMC404HD_Audiophile_4x4_24-Bit_192_kHz_USB_Audio_MIDI_Interface.htm"&gt;U-Phoria UMC404HD&lt;/a&gt;), and then using DDMF's &lt;a href="http://www.virtualaudiostream.com"&gt;Virtual Audio Stream&lt;/a&gt; to set up a digital audio filter chain from the microphone input to the speakers, using their "Effect Rack" utility.&lt;/p&gt;
-&lt;p&gt;&lt;img src="/gh-weblog-2/images/bird-vst/the-setup.jpg" alt=""&gt;&lt;/p&gt;
-&lt;p&gt;Now we can listen to birds (oh my god, so many birds) while working inside! (at least until the weather improves and we can open the windows like normal people would =)&lt;/p&gt;
-&lt;h2 id="the-filter-chain"&gt;The filter chain&lt;/h2&gt;
-&lt;p&gt;The following image shows the filter chain we're using in Effect Rack:&lt;/p&gt;
-&lt;p&gt;&lt;img src="/gh-weblog-2/images/bird-vst/ddmf-filter-chain.png" alt=""&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;First, a high-pass filter to cut out definitely-not-related-to-birdsong low frequencies.&lt;/li&gt;
-&lt;li&gt;Then, an automatic noise reduction filter. This does a relative good job are removing unwanted noise, but not quite enough.&lt;/li&gt;
-&lt;li&gt;That's followed by a multi-band compressor, which is used to further cut out any frequencies after noise reduction that are definitely not in the range of bird song.&lt;/li&gt;
-&lt;li&gt;This is followed by a second single-pass compressor that aggressively dampens any sound that's louder than nearby birdsong, such as cars driving by close to the mic, or someone using a chainsaw the next field over.&lt;/li&gt;
-&lt;li&gt;Finally, there's an equaliser that's being used as an aggressive high frequency cut off, throwing away everything that's above 10KHz&lt;/li&gt;
-&lt;li&gt;There's also a little spectrum analyzer, which helps to tune the previous filters, since it's pretty obvious which frequencies bird song is happening at.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;You may have noticed that only the right channel seems to be hooked up, except all the way at the end: this is because the microphone only generates a single channel, it's not a stereo microphone, and so all the processing really only needs to happen to the one channel. However, because it's nice to have the audio come out of both speakers, all the way at the end "all channels" are sent to "all speakers")&lt;/p&gt;
-&lt;p&gt;So, in case you're curious, let's look at each filter in detail.&lt;/p&gt;
-&lt;h2 id="cutting-out-the-low-frequencies-"&gt;Cutting out the low frequencies.&lt;/h2&gt;
-&lt;p&gt;The initial high pass filter (a signal processing term for "thing that lets frequencies above X through, while setting the volume for frequencies below X to zero) is an instance of &lt;a href="https://www.meldaproduction.com/MBandPass"&gt;Melda Production's MBandPass&lt;/a&gt; filter, set pretty aggressively. &lt;/p&gt;
-&lt;p&gt;&lt;img src="/gh-weblog-2/images/bird-vst/bandpass.png" alt=""&gt;&lt;/p&gt;
-&lt;p&gt;Everything under 224Hz gets thrown away, using a 12dB knee, with insanely low quantization. This actually does a great job at removing most car noise without affecting the rest of the audio too much. &lt;/p&gt;
-&lt;h2 id="removing-line-and-signal-noise-"&gt;Removing line and signal noise.&lt;/h2&gt;
-&lt;p&gt;To remove general noise, both because the outside world is noisy, and because there's a long cable on the mic, I'm using &lt;a href="https://acondigital.com/products/restoration-suite"&gt;Acon's noise reduction filter&lt;/a&gt; with a 1.83 second sliding window, meaning that it looks at 1.82 seconds of audio that's come by, tries to find the "noise profile" in that, and then applies it to the current signal.&lt;/p&gt;
-&lt;p&gt;&lt;img src="/gh-weblog-2/images/bird-vst/noise-reduction.png" alt=""&gt;&lt;/p&gt;
-&lt;p&gt;While this is almost guaranteed to always be "wrong", it's long enough to get a decent noise profile, while being short enough to still remove &lt;em&gt;most&lt;/em&gt; noise from the audio signal.  &lt;/p&gt;
-&lt;h2 id="cutting-out-these-are-not-birds-sounds-"&gt;Cutting out "these are not birds!" sounds.&lt;/h2&gt;
-&lt;p&gt;Birdsong is doesn't use a lot of low frequencies, so in order to further weed out any frequencies that we don't actually want to be listening to, I use &lt;a href="https://www.image-line.com/plugins/Effects/Maximus"&gt;Image-Line's "Maximus" multi-band compressor&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;A compressor is a thing that can take an incoming audio signal, look at the volume-per-frequency range, and then change that range. The most common use is to reduce the volume on really loud noises, so that if you talk into a mic it does nothing, but if you yell into the mic, the volume doesn't suddenly blow out your speakers - that's not how it's being used here.&lt;/p&gt;
-&lt;p&gt;Instead, we're applying three different compressor settings to each of the low, mid, and high bands in the audio signal.   &lt;/p&gt;
-&lt;p&gt;&lt;img src="/gh-weblog-2/images/bird-vst/low-compressor.png" alt=""&gt;&lt;/p&gt;
-&lt;p&gt;In the low band (0Hz-200Hz), we change the volume range [0,max] to the volume range [0,0]. We literally just throw &lt;em&gt;all&lt;/em&gt; of it away. The preceding high pass filter should have already taken care of that, but it doesn't hurt to make sure low frequencies stay gone.&lt;/p&gt;
-&lt;p&gt;&lt;img src="/gh-weblog-2/images/bird-vst/mid-compressor.png" alt=""&gt;&lt;/p&gt;
-&lt;p&gt;In the mid band (200Hz-3KHz), we change the volume mapping so that anything that's loud, stays loud, but anything that's soft is pretty much scaled waaaay back down. To zero, in fact, for most volumes. Or somewhere progressively closer to the original level on the high end of the spectrum's "mid" band. &lt;/p&gt;
-&lt;p&gt;&lt;img src="/gh-weblog-2/images/bird-vst/high-compressor.png" alt=""&gt;&lt;/p&gt;
-&lt;p&gt;In the high frequencies band (3KHz and up), which is where most bird song is found, we don't really do much: this is a typical compressor function that just makes sure that things that are too loud to be reasonable get scaled down in volume. In case a bird yells right next to the microphone, mostly.&lt;/p&gt;
-&lt;p&gt;I'm looking at you, Stellar's Jays... =_=&lt;/p&gt;
-&lt;h2 id="making-sure-a-sudden-car-or-chainsaw-doesn-t-give-us-a-heart-attack-"&gt;Making sure a sudden car or chainsaw doesn't give us a heart attack.&lt;/h2&gt;
-&lt;p&gt;Even with all that compressor work, there's still the chance that cars, chainsaws, or people yelling end up generating very loud noises in the same range that bird song occurs in, so we add one more "overall" compressor. &lt;/p&gt;
-&lt;p&gt;&lt;img src="/gh-weblog-2/images/bird-vst/second-compressor.png" alt=""&gt;&lt;/p&gt;
-&lt;p&gt;This is &lt;a href="https://www.meldaproduction.com/MCompressor"&gt;Melda Production's MCompressor&lt;/a&gt;, and its job is to simply take the overall signal, and dampen it when it's too loud.&lt;/p&gt;
-&lt;h2 id="cleaning-up-any-compound-distortion-at-the-high-end-"&gt;Cleaning up any compound distortion at the high end.&lt;/h2&gt;
-&lt;p&gt;You might be wondering about whether all those filters one after another don't generate some kind of artificial noise, and the answer is: oh no, they absolutely do. So to combat the noise that is most audible, I use an equaliser filter (&lt;a href="https://www.image-line.com/support/FLHelp/html/plugins/EQUO.htm"&gt;Image Line's EQUO&lt;/a&gt;) to pretty much throw away anything about 10KHz, with a gentle volume reduction starting at 2.5KHz, which does a nice job at throwing away the high frequency noise that previous filter chain generated.&lt;/p&gt;
-&lt;p&gt;&lt;img src="/gh-weblog-2/images/bird-vst/eq-cutoff.png" alt=""&gt;&lt;/p&gt;
-&lt;p&gt;You might think "well why not use a low pass filter?" as that's essentially what this does, and the reason is mostly because I wanted a little more more control over the knee and ramp coming down from 2.5KHz which is exactly what an equalizer lets you do. &lt;/p&gt;
-&lt;h2 id="and-that-s-it-all-that-s-left-is-to-enjoy-"&gt;And that's it. All that's left is to enjoy.&lt;/h2&gt;
-&lt;p&gt;The last filter is &lt;a href="https://www.meldaproduction.com/MAnalyzer"&gt;Melda Production's "MAnalyzer"&lt;/a&gt;, which doesn't actually do anything to the audio signal (it just lets it pass through unchanged), but instead simply shows what's happening in terms of which frequencies are playing how loud on a moment-to-moment basis. This is very useful to see where unwanted frequencies are still coming through, to optimize any of the previous filters, plus... it looks pretty!&lt;/p&gt;
-&lt;h2 id="so-what-does-it-sound-like-"&gt;So what does it sound like?&lt;/h2&gt;
-&lt;p&gt;Of course, all this talk about bird song leads to the inevitable "okay, but... what does it sound like?". So here are two clips. One is the "raw audio" as simply captured by the mic outside straight from the XLR mixer, on a mildly rainy day - there's some birds twittering, a car drives by, it's mostly unimpressive but it's contrasted against the same audio after it's been run through the filter chain, representing what we hear in our home office through the speakers.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://clyp.it/ksmbapw1?token=5fca3db27da4d26cfea827dbf5295608"&gt;the raw audio&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://clyp.it/2hj4kmfc?token=b535e17e75cc3f535b75927cec1203d1"&gt;the filtered audio&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;I'll leave you to decide which sounds better, and while you do, I'll be going back to enjoying our most excellent bird song!&lt;/p&gt;
-&lt;p&gt;(And if you have cleanup recommendations, leave a comment! Tips and tricks are always welcome)&lt;/p&gt;
-</description>
-<category>Audio</category>
-<category>VST</category>
-<category>Birds</category>
-<link>http://pomax.github.io/#gh-weblog-1517436884711</link>
-<guid>http://pomax.github.io/#gh-weblog-1517436884711</guid>
-<pubDate>Wed, 31 Jan 2018 22:14:44 GMT</pubDate>
 </item></channel>
 </rss>
