@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Thu, 08 Apr 2021 19:10:54 GMT</lastBuildDate>
-<pubDate>Thu, 08 Apr 2021 19:10:54 GMT</pubDate>
+<lastBuildDate>Thu, 08 Apr 2021 19:11:33 GMT</lastBuildDate>
+<pubDate>Thu, 08 Apr 2021 19:11:33 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> If your software still relies on Python 2.7, your software is bad and you should feel bad.</title>
@@ -42,9 +42,9 @@
 &lt;p&gt;It also doesn't say that &lt;em&gt;users&lt;/em&gt; should feel bad if their only choice is an old Python 2.7 piece of code. If that software you rely on is written in Python 2.7, and the maintainers long since abandoned it, then yeah that's your only choice and as a person you are perfectly capable of deciding whether that old software is worth the security liability of python 2.7. More often than not, it will be.&lt;/p&gt;
 &lt;p&gt;What it &lt;em&gt;does&lt;/em&gt; say is that if you are writing python code today, whether that's new code, or maintaining a project that started over a decade ago, and you intend for others to use that code, and you use Python 2.7, you are a bad programmer and you need to stop what you're doing. Step back, take a deep breath, and uplift your code to a version of Python that is still supported (which realistically means first uplifting to v3, and then going through decade of v3 minor versions to make sure you catch any problems caused by v3 getting better and better), while archiving your 2.7 branch so that folks who absolutely still need it can still get it.&lt;/p&gt;
 &lt;h2 id="in-conclusion"&gt;In conclusion&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;If your software still relies on Python 2.7&lt;/strong&gt; , meaning your software that you still work on with the intention of having others make use of it, in 2021, that is written in python 2.7, then&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;your software is bad&lt;/strong&gt; because you are forcing people either into using, or keeping people locked into using, a dead technology that has known security exploits that are only going to increase in number, and&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;you should feel bad&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;If your software still relies on Python 2.7&lt;/strong&gt; , meaning that in 2021, your software that you still work on with the intention of having others make use of it, then&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;your software is bad&lt;/strong&gt; because it forces people into using dead technology that has known security exploits, and&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;you should feel bad&lt;/strong&gt; and do something about that.&lt;/p&gt;
 &lt;p&gt;Go archive your 2.7 release as the last 2.7 release you'll ever do, run 2to3 on your code, and start a new release set for 3.x because that's the safe version of Python that people should be using these days.&lt;/p&gt;
 &lt;p&gt;Not PHP 4. Or Node 0.10. Or Java 1.4. Or Python 2.7&lt;/p&gt;
 </description>
