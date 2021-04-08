@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Thu, 08 Apr 2021 19:12:42 GMT</lastBuildDate>
-<pubDate>Thu, 08 Apr 2021 19:12:42 GMT</pubDate>
+<lastBuildDate>Thu, 08 Apr 2021 19:16:19 GMT</lastBuildDate>
+<pubDate>Thu, 08 Apr 2021 19:16:19 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> If your software still relies on Python 2.7, your software is bad and you should feel bad.</title>
@@ -27,7 +27,7 @@
 &lt;blockquote&gt;
 &lt;p&gt;If your software still relies on Java 1.4 in 2021, your software is bad and you should feel bad.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;You get the point by now. Sure, there is code that got &lt;em&gt;released when Java 1.4 was current&lt;/em&gt; and did great things but if that code is still being maintained or worked on (not, "if that code is still being used", but if that code is still actively maintained, and has new releases pushed out) then that code should have been uplifted &lt;em&gt;several times&lt;/em&gt; over the last two decades.&lt;/p&gt;
+&lt;p&gt;You get the point by now. Sure, there is code that got &lt;em&gt;released when Java 1.4 was current&lt;/em&gt; and did great things but if that code is still being maintained or worked on (not, "if that code is still being used", but if that code is still actively maintained, and has new releases pushed out, requiring Java 1.4) then that code should have been uplifted &lt;em&gt;several times&lt;/em&gt; over the last two decades.&lt;/p&gt;
 &lt;h2 id="so-why-is-python-such-a-touchy-subject-"&gt;So why is Python such a touchy subject?&lt;/h2&gt;
 &lt;p&gt;A lot of people are locked into it, whether they want to or not. And most don't want to.&lt;/p&gt;
 &lt;p&gt;That's not their fault. A lot of software was originally written in 2.7, and again that's fine. But, a lot of companies still haven't uplifted their 2.7 code to v3 now that 2.7 has been dead for over a year, and that &lt;em&gt;&lt;strong&gt;is&lt;/strong&gt;&lt;/em&gt; their fault, and that &lt;em&gt;&lt;strong&gt;is&lt;/strong&gt;&lt;/em&gt; something they need to feel bad about, and address.&lt;/p&gt;
