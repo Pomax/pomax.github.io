@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Thu, 08 Apr 2021 19:06:32 GMT</lastBuildDate>
-<pubDate>Thu, 08 Apr 2021 19:06:32 GMT</pubDate>
+<lastBuildDate>Thu, 08 Apr 2021 19:06:48 GMT</lastBuildDate>
+<pubDate>Thu, 08 Apr 2021 19:06:48 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> If your software still relies on Python 2.7, your software is bad and you should feel bad.</title>
@@ -48,7 +48,8 @@
 &lt;p&gt;Go archive your 2.7 release as the last 2.7 release you'll ever do, run 2to3 on your code, and start a new release set for 3.x because that's the safe version of Python that people should be using these days.&lt;/p&gt;
 &lt;p&gt;Not PHP 4. Or Node 0.10. Or Java 1.4. Or Python 2.7&lt;/p&gt;
 </description>
-
+<category>python</category>
+<category>programming</category>
 <link>http://pomax.github.io/#gh-weblog-1617908788691</link>
 <guid>http://pomax.github.io/#gh-weblog-1617908788691</guid>
 <pubDate>Thu, 08 Apr 2021 19:06:28 GMT</pubDate>
