@@ -5,12 +5,12 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Mon, 06 Dec 2021 18:52:54 GMT</lastBuildDate>
-<pubDate>Mon, 06 Dec 2021 18:52:54 GMT</pubDate>
+<lastBuildDate>Mon, 06 Dec 2021 18:54:06 GMT</lastBuildDate>
+<pubDate>Mon, 06 Dec 2021 18:54:06 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Setting up "lots of HTTPS servers" with Node </title>
-<description>&lt;p&gt;I'm working on a server-client-thinclient project where there is a single server, running an HTTPS and WS server process, with clients that first connect to the web server "Front door" before being sent on to their own dedicated websocket URL. These clients are just "computer programs" that someone can attach to with their browser, so each client also runs its own little websocket server. At some point, the idea is of course that the server runs on one machine, and clients run on however-many secondary machines, but for testing purposes that makes no sense: the server and clients all run on the same hardware.&lt;/p&gt;
+<description>&lt;p&gt;I'm working on a server -client-thinclient project where there is a single server, running an HTTPS and WS server process, with clients that first connect to the web server "Front door" before being sent on to their own dedicated websocket URL. These clients are just "computer programs" that someone can attach to with their browser, so each client also runs its own little websocket server. At some point, the idea is of course that the server runs on one machine, and clients run on however-many secondary machines, but for testing purposes that makes no sense: the server and clients all run on the same hardware.&lt;/p&gt;
 &lt;p&gt;Which means I needed to set up HTTPs/SSL in a way that works for all these things, and thankfully it turns out that Node.js allows you to do this pretty easily. It even has &lt;a href="https://nodejs.org/api/https.html#httpscreateserveroptions-requestlistener"&gt;example code for this&lt;/a&gt; on the API pages for the &lt;code&gt;https&lt;/code&gt; module, which can be used in combination with a Let's Encrypt &lt;a href=""&gt;certbot&lt;/a&gt; key and certificate, and some env vars to regulate whether to use https or not:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;import http from "http";
 import https from "https";
