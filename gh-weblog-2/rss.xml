@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Mon, 06 Dec 2021 18:50:29 GMT</lastBuildDate>
-<pubDate>Mon, 06 Dec 2021 18:50:29 GMT</pubDate>
+<lastBuildDate>Mon, 06 Dec 2021 18:51:01 GMT</lastBuildDate>
+<pubDate>Mon, 06 Dec 2021 18:51:01 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Setting up "lots of HTTPS servers" with Node </title>
@@ -32,7 +32,8 @@ function routHandlers(request, response) {
   // ...
 }
 
-const server = (useHTTPS ? https : http).createServer(useHTTPS ? httpsOptions : undefined, routHandlers);
+const namespace = (useHTTPS ? https : http);
+const server = namespace.createServer(useHTTPS ? httpsOptions : undefined, routHandlers);
 
 server.listen(port, () =&amp;gt; {
   console.log(`Server is listening on ${protocl}//${domain}:${port}`);
