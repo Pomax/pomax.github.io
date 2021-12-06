@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Mon, 06 Dec 2021 18:51:01 GMT</lastBuildDate>
-<pubDate>Mon, 06 Dec 2021 18:51:01 GMT</pubDate>
+<lastBuildDate>Mon, 06 Dec 2021 18:52:26 GMT</lastBuildDate>
+<pubDate>Mon, 06 Dec 2021 18:52:26 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Setting up "lots of HTTPS servers" with Node </title>
@@ -17,7 +17,7 @@ import https from "https";
 
 const useHTTPS = process.env.USE_HTTPS === `true`;
 const protocol = useHTTPS ? `https` : `http`;
-const domain = process.env.USE_DOMAIN || `localhost`;
+const domain = process.env.DOMAIN_NAME || `localhost`;
 const port = parseInt(process.env.PORT) || 8000;
 
 const httpsOptions = {};
