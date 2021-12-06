@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Mon, 06 Dec 2021 18:49:49 GMT</lastBuildDate>
-<pubDate>Mon, 06 Dec 2021 18:49:49 GMT</pubDate>
+<lastBuildDate>Mon, 06 Dec 2021 18:50:29 GMT</lastBuildDate>
+<pubDate>Mon, 06 Dec 2021 18:50:29 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Setting up "lots of HTTPS servers" with Node </title>
@@ -15,12 +15,13 @@
 &lt;pre&gt;&lt;code&gt;import http from "http";
 import https from "https";
 
-const domain = process.env.USE_DOMAIN || `localhost`;
-const port = parseInt(process.env.PORT) || 8000;
 const useHTTPS = process.env.USE_HTTPS === `true`;
 const protocol = useHTTPS ? `https` : `http`;
+const domain = process.env.USE_DOMAIN || `localhost`;
+const port = parseInt(process.env.PORT) || 8000;
 
 const httpsOptions = {};
+
 if (useHTTPS) {
   const certDir = `/etc/letsencrypt/live`;
   httpsOptions.key = fs.readFileSync(`${certDir}/${domain}/privkey.pem`);
