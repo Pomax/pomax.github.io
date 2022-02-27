@@ -5,9 +5,19 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Mon, 06 Dec 2021 19:00:57 GMT</lastBuildDate>
-<pubDate>Mon, 06 Dec 2021 19:00:57 GMT</pubDate>
+<lastBuildDate>Sun, 27 Feb 2022 21:42:40 GMT</lastBuildDate>
+<pubDate>Sun, 27 Feb 2022 21:42:40 GMT</pubDate>
 <ttl>1440</ttl>
+<item>
+<title> Cleaning up your Django migrations</title>
+<description>&lt;p&gt;We use &lt;a href="https://wagtail.org/"&gt;Wagtail&lt;/a&gt;, a Django-based CMS, at the Mozilla Foundation to host &lt;a href="https://foundation.mozilla.org"&gt;https://foundation.mozilla.org&lt;/a&gt;, as well as &lt;a href="http://donate.mozilla.org"&gt;http://donate.mozilla.org&lt;/a&gt;, and as nice as Django is, it is pretty terrible at migration and app management. The official stance is "you shouldn't worry about how many migrations you have", and for a base Django installation, that might very well be true.&lt;/p&gt;
+&lt;p&gt;For Wagtail installations, it very much isn't. Thanks to Wagtail's &lt;a href="https://docs.wagtail.org/en/stable/topics/streamfield.html"&gt;streamfield&lt;/a&gt; concept, which models free-form page body content "out of band" (using a single huge JSON string for each stream, rather than linked table data) you can end up with migrations where your code change may have been a short string update, but the migration for that updates the &lt;em&gt;entire&lt;/em&gt; streamfield definition JSON. As in,&lt;/p&gt;
+</description>
+
+<link>http://pomax.github.io/#gh-weblog-1645994687853</link>
+<guid>http://pomax.github.io/#gh-weblog-1645994687853</guid>
+<pubDate>Sun, 27 Feb 2022 20:44:47 GMT</pubDate>
+</item>
 <item>
 <title> Setting up "lots of HTTPS servers" with Node </title>
 <description>&lt;p&gt;I'm working on a &lt;code&gt;server&lt;/code&gt; ⇆ &lt;code&gt;client&lt;/code&gt; ⇆ &lt;code&gt;browser-as-thin-client&lt;/code&gt; project where there is a single server, running an HTTPS and WS server process, with clients that first connect to the web server "Front door" before being sent on to their own dedicated websocket URL. These clients are just "computer programs" that someone can attach to with their browser if they need a user interface into the client, and so each client also runs their own little websocket server to allow for that.&lt;/p&gt;
@@ -240,34 +250,5 @@ server.listen(port, () =&amp;gt; {
 <link>http://pomax.github.io/#gh-weblog-1586905169363</link>
 <guid>http://pomax.github.io/#gh-weblog-1586905169363</guid>
 <pubDate>Tue, 14 Apr 2020 22:59:29 GMT</pubDate>
-</item>
-<item>
-<title> Speeding up Lightroom catalog work by not using Lightroom</title>
-<description>&lt;p&gt;&lt;a href="https://www.adobe.com/products/photoshop-lightroom-classic.html"&gt;Adobe Lightroom&lt;/a&gt; catalogs are &lt;a href="https://sqlite.org/index.html"&gt;SQLite3&lt;/a&gt; files (just with the &lt;code&gt;.lrcat&lt;/code&gt; extension rather than the typical &lt;code&gt;.sqlite&lt;/code&gt; or &lt;code&gt;.db&lt;/code&gt; extensions) and some things that take Lightroom effectively forever can be performed in milliseconds if you're willing to ignore Lightroom entirely and just load the catalog in SQLite3, probably using &lt;a href="https://sqlitebrowser.org"&gt;an administrative GUI&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;For instance, if you want the list of all filenames for images that haven't been tagged yet, good luck making Lightroom do that. Even with the &lt;a href="http://lightroomsolutions.com/a-quick-list-of-filenames/"&gt;user script that some people will tell you to use&lt;/a&gt;, actually getting Lightroom to perform this for even a low number of photos in a several thousand photo catalog will take excruciatingly long, whereas the SQLite3 query will probably take less than a second:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;SELECT
-  originalFilename as filename
-FROM
-  Adobe_images as i,
-  AgLibraryFile as f
-WHERE
-  i.rootFile = f.id_local
-AND
-  i.id_local NOT IN (
-    SELECT DISTINCT(image) as id_local
-    FROM AgLibraryKeywordImage
-  )
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Load your catalog, run that query, and done.&lt;/p&gt;
-&lt;p&gt;There is in fact a lot more that you can do this way, but you might need to do some table hunting: my lightroom catalog has 112 tables, and finding which table houses what information is "half the fun" (read: quite the chore). However, once you've found where to find what, writing a query that just pulls the data you need in exactly the format you need takes very little time, and the amount of time you save for subsequent occasions you need to do the same thing is incredible.&lt;/p&gt;
-&lt;p&gt;Best of all, you can automate your sqlite. Python, Node, Ruby, all common modern scripting languages can with a sqlite connector, so you can just write a script that loads in the catalog file, runs your query, writes the result to file (or even updates the catalog directly) and all you have to do is execute your script.  And really, that's what we wish Adobe just offered out of the box.&lt;/p&gt;
-&lt;p&gt;They don't, but because they use Sqlite3, "they do".&lt;/p&gt;
-</description>
-<category>Adobe</category>
-<category>Lightroom</category>
-<category>SQLite</category>
-<category>SQLite3</category>
-<link>http://pomax.github.io/#gh-weblog-1568672424870</link>
-<guid>http://pomax.github.io/#gh-weblog-1568672424870</guid>
-<pubDate>Mon, 16 Sep 2019 22:20:24 GMT</pubDate>
 </item></channel>
 </rss>
