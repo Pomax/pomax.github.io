@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Sun, 27 Feb 2022 22:39:33 GMT</lastBuildDate>
-<pubDate>Sun, 27 Feb 2022 22:39:33 GMT</pubDate>
+<lastBuildDate>Tue, 10 May 2022 16:45:14 GMT</lastBuildDate>
+<pubDate>Tue, 10 May 2022 16:45:14 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Cleaning up your Django migrations</title>
@@ -258,7 +258,7 @@ server.listen(port, () =&amp;gt; {
 &lt;p&gt;"Windows cannot start this hardware device because its configuration information (in the registry) is incomplete or damaged. (Code 19)&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Now, if you Google for this error, you will get a million click-bait articles, and a handful of real posts that tell you to uninstall the device in Device Manager, and then reboot - and of course, that does nothing.&lt;/p&gt;
-&lt;p&gt;Then some of them tell you to regedit your way to success by deleting the &lt;code&gt;LowerFilters&lt;/code&gt; and &lt;code&gt;UpperFilters&lt;/code&gt; keys in the HKEY_LOCAL_MACHINE &amp;gt;  System &amp;gt; CurrentControlSet &amp;gt; Control &amp;gt; Class &amp;gt; ... entry, which is invariable for CD-ROM or DVD drives, and that of course does nothing because those are not your problem.&lt;/p&gt;
+&lt;p&gt;Then some of them tell you to regedit your way to success by deleting the &lt;code&gt;LowerFilters&lt;/code&gt; and &lt;code&gt;UpperFilters&lt;/code&gt; keys in the HKEY_LOCAL_MACHINE &amp;gt;  System &amp;gt; CurrentControlSet &amp;gt; Control &amp;gt; Class &amp;gt; ... entry, which is invariably for CD-ROM or DVD drives, and that of course does nothing because those are not your problem.&lt;/p&gt;
 &lt;p&gt;Instead, you need to open HKEY_LOCAL_MACHINE &amp;gt;  System &amp;gt; CurrentControlSet &amp;gt; Control &amp;gt; Class, and then simply step through the entries until you find the &lt;code&gt;USB&lt;/code&gt; entry. In my case, that was &lt;code&gt;{36fc9e60-c465-11cf-8056-444553540000}&lt;/code&gt; rather than one of the million &lt;code&gt;{4d36e9xx-e325-11ce-bfc1-xxxxxx}&lt;/code&gt; keys that people tell you to use.&lt;/p&gt;
 &lt;p&gt;Look at the &lt;code&gt;LowerFilters&lt;/code&gt; and &lt;code&gt;UpperFilters&lt;/code&gt; values. Are there any? Delete them. Do they have the wrong case, like &lt;code&gt;UPPERFILTERS&lt;/code&gt;? Delete them. Just delete them. Then in Device manager, uninstall the host controller and then scan for new hardware.&lt;/p&gt;
 &lt;p&gt;Presto, you fixed the problem.&lt;/p&gt;
