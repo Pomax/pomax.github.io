@@ -5,9 +5,137 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Tue, 10 May 2022 16:45:14 GMT</lastBuildDate>
-<pubDate>Tue, 10 May 2022 16:45:14 GMT</pubDate>
+<lastBuildDate>Sun, 10 Jul 2022 17:07:06 GMT</lastBuildDate>
+<pubDate>Sun, 10 Jul 2022 17:07:06 GMT</pubDate>
 <ttl>1440</ttl>
+<item>
+<title> React is just JavaScript</title>
+<description>&lt;p&gt;React has had a fairly profound effect on the web, whether you like React or not, and whether you like the effect it had or not. However, the one thing it's done that's somewhat puzzling is make people think that React is its own thing, rather than just JS. Things that are trivial become colossal tasks and implementations because folks try to do them "in React". Anything that isn't DOM-update related needs a React solution, instead of using the JS APIs that are right there for you to use. So let's talk about a few.&lt;/p&gt;
+&lt;h2 id="how-do-i-tell-component-x-about-an-update-in-component-y-"&gt;How do I tell component X about an update in component Y?&lt;/h2&gt;
+&lt;p&gt;Imagine this: you wrote a React app that has a status and a whole bunch of different content, and you need to make sure your status bar reflects whatever is active right now. So you add a ref to your status bar, communicate that up to the parent &lt;code&gt;App&lt;/code&gt;, which can then pass down a handler to every component until it makes it down into your components that can be active.&lt;/p&gt;
+&lt;p&gt;Or, you go "oh right, wait, I'm in a browser" and you just use events: your active component just fires-and-forgets a &lt;code&gt;document.dispatchEvent(new CustomEvent(&lt;/code&gt;status:active&lt;code&gt;, { detail: ... }))&lt;/code&gt; and your status bar registers a listener for that event when it mounts. We are done: nothing needs to run up and down an entire virtual DOM tree. And because this is basically just utility functionality, we write it as its own function that any component that needs to update the status bar can use, which we can import &lt;em&gt;from&lt;/em&gt; the Status bar:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// The only code that cares about this event name is the code
+// in this file, so we capture it as a constant and nothing will
+// ever need to care about what it is.
+const STATUS_EVENT_NAME = `app:status:update`;
+
+// yes, this is when you want a class, not a functional component
+export class StatusBar extends React.Component {
+  static getDefaultState() {
+    return { statusMessage: `` };
+  }
+  constructor(props) {
+    super(props);
+    this.state = StatusBar.getDefaultState();
+  }
+  reset() {
+    this.setState(StatusBar.getDefaultState());
+  }
+  componentDidMount() {
+    document.addEventListener(STATUS_EVENT_NAME, evt =&amp;gt; {
+      const { statusMessage } = evt.detail;
+      this.setState({ statusMessage });
+    );
+  }
+  render() {
+    return &amp;lt;footer className=""&amp;gt;{ this.state.statusMessage }&amp;lt;/footer&amp;gt;
+  }
+}
+
+// And a nice function that other components with a status bar text can import and use:
+export function updateStatusBar(msg) {
+  const evt = new CustomEvent(STATUS_EVENT_NAME, { detail: msg });
+  document.dispatchEvent(evt);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And look at that: no refs, no property forwards, or even crazier "sending the handler up to the parent once it's available" nonsense. You want some content to update the status bar? Just do that:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;import { updateStatusBar } from "./StatusBar.js";
+
+export const SomeContent = function(props) {
+  useEffect(() =&amp;gt; updateStatusBar(props.toolTip), props.toolTip);
+  return &amp;lt;......&amp;gt;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Heck, this even works when there is no status bar component on the page. The events just get thrown away if there are no listeners for it, and everything works perfectly fine.&lt;/p&gt;
+&lt;h2 id="how-do-i-synchronize-data-across-components-"&gt;How do I synchronize data across components?&lt;/h2&gt;
+&lt;p&gt;Well, you could use Redux and learn a complex new technology, or you could just use JS, because anything running client-side is running within the same context, and imports are cached, so imports are shared by default. Want to see something that looks like it shouldn't be this simple?&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;export const dataPool = {};
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Boom, done. Anything with &lt;code&gt;import { dataPool } from "datapool.js";&lt;/code&gt; will now be sharing the same object. It's how JS works by design, we get this for free. And you can even get fancy without bolting on a data syncing framework until you absolutely need it:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;const pool = {};
+export const dataPool = {
+  register: listener =&amp;gt; listeners.push(listener);
+  unregister: listener =&amp;gt; {
+    const pos = listeners.indexOf(listener);
+    if (pos &amp;gt; -1) listeners.splice(pos, 1);
+  },
+  getValue: (name) =&amp;gt; pool[name],
+  setValue: (name, value) =&amp;gt; {
+    pool.name = value;
+    for (let listener of listeners) listener.poolUpdated?(name, value);
+  }
+};
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And now you have a synced data pool that uses a pub/sub model for data updates in less than 15 lines of code. &lt;/p&gt;
+&lt;h3 id="but-this-doesn-t-persist-"&gt;But this doesn't persist!&lt;/h3&gt;
+&lt;p&gt;So save the data to &lt;code&gt;localStorage&lt;/code&gt;, that's what it's for:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;const dataKey = `app:dataPool`;
+const pool = JSON.parse(localStorage.getItem(dataKey) ?? `{}`);
+
+export const dataPool = {
+  register: listener =&amp;gt; listeners.push(listener);
+  unregister: listener =&amp;gt; {
+    const pos = listeners.indexOf(listener);
+    if (pos &amp;gt; -1) listeners.splice(pos, 1);
+  },
+  getValue: (name) =&amp;gt; pool[name],
+  setValue: (name, value) =&amp;gt; {
+    pool.name = value;
+    localStorage.setItem(dataKey, JSON.stringify(pool));
+    for (let listener of listeners) listener.poolUpdated?(name, value);
+  }
+};
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Done. And now you have an excellent signal for when it's time to start thinking about more complex solutions, because &lt;code&gt;localStorage&lt;/code&gt; has limited space available. If you're syncing more than a few MB across lots of components, it's probably time to rethink your app architecture.&lt;/p&gt;
+&lt;h2 id="i-want-to-close-my-modal-component-when-someone-clicks-or-taps-outside-of-it"&gt;I want to close my modal component when someone clicks or taps outside of it&lt;/h2&gt;
+&lt;p&gt;This one's close to my heart because I originally wrote react-onclickoutside almost a decade ago now because back in Þe olden times JS was missing a &lt;em&gt;ton&lt;/em&gt; of features that modern JS has. Time has moved on, JS got updated a lot since, and so in modern JS we just.... don't need it anymore. Instead you can make this work with just a few lines of JS:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;import { setupOutsideClickListener } from "./somewhere";
+
+export const Menu = (props) =&amp;gt; {
+  const menuRef = useRef(null);
+
+  // let's assume we're smart and have a const function for toggling
+  // visibility of this component, used by whatever other logic needs
+  // to control visibility
+  const toggle = () =&amp;gt; { ... }
+
+  // set up the event listeners, using `[]` as dependency list so it only runs once.
+  useEffect(() =&amp;gt; setupOutsideClickListener(menuRef, toggle), []);
+
+  return (
+    &amp;lt;dialog ref={menuRef} ... &amp;gt;
+      &amp;lt;span className="close-icon" onClick={toggle}&amp;gt;X&amp;lt;/span&amp;gt;
+        ...
+    &amp;lt;/dialog
+  );
+};
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And here's our plain JavaScript:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;export function setupOutsideClickListener(owner, toggle) {
+  // always remember that if you have "click" handling, you better have a "touchstart", too!
+  for (let type of [`click`, `touchstart`]) {
+     document.addEventListener(type, ({ target }) =&amp;gt; {
+        // if this dialog is not on the page, or the events occur anywhere inside our dialog, we ignore the events.
+        if (owner.current?.contains(target)) return;
+        // if the dialog is on the page and the events are outside of it, toggle its visibility.
+        toggle();
+      });
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="and-so-much-more"&gt;And so much more&lt;/h2&gt;
+&lt;p&gt;Unless you're already a seasoned programmer, you're almost certainly writing way too much code to do what you need, simply because you've been focusing on React too much, and not spending some time with plain JS to understand what this language that you're using can actually do. Once you've spent some time with React, the best thing you can do for yourself is putting React down, and reading up on modern JS on the web - what it can do, what syntax it uses for that, and how a lot of that can replace what you've used &lt;em&gt;a lot&lt;/em&gt; of code for with surprisingly little code.&lt;/p&gt;
+&lt;p&gt;Should you never use Redux? Or HoCs? Or anything else that's complex but full featured and everyone seems to be using? No of course not, but you should know &lt;em&gt;why&lt;/em&gt; you're using them, because they solve specific problems, and those are almost certainly not your problems. &lt;em&gt;Yet&lt;/em&gt;&lt;/p&gt;
+</description>
+<category>React</category>
+<category>JavaScript</category>
+<link>http://pomax.github.io/#gh-weblog-1657467300033</link>
+<guid>http://pomax.github.io/#gh-weblog-1657467300033</guid>
+<pubDate>Sun, 10 Jul 2022 15:35:00 GMT</pubDate>
+</item>
 <item>
 <title> Cleaning up your Django migrations</title>
 <description>&lt;p&gt;We use &lt;a href="https://wagtail.org/"&gt;Wagtail&lt;/a&gt;, a Django-based CMS, at the Mozilla Foundation to host &lt;a href="https://foundation.mozilla.org"&gt;https://foundation.mozilla.org&lt;/a&gt;, as well as &lt;a href="http://donate.mozilla.org"&gt;http://donate.mozilla.org&lt;/a&gt;, and as nice as Django is, it is pretty terrible at migration and app management. The official stance is "you shouldn't worry about how many migrations you have", and for a base Django installation, that might very well be true.&lt;/p&gt;
@@ -250,28 +378,5 @@ server.listen(port, () =&amp;gt; {
 <link>http://pomax.github.io/#gh-weblog-1591576580138</link>
 <guid>http://pomax.github.io/#gh-weblog-1591576580138</guid>
 <pubDate>Mon, 08 Jun 2020 00:36:20 GMT</pubDate>
-</item>
-<item>
-<title> Fixing Windows 10's "error code 19"</title>
-<description>&lt;p&gt;In a bizarre happenstance, I rebooted my Windows 10 workstation after doing nothing special in particular, and all my USB devices stopped working. Or rather, they worked fine, until Windows 10 got control of the system.  Not having a keyboard or mouse, I had to remote into my workstation from a different computer, but that revealed that for some reason, the "Intel USB 3.0 eXtensible Host Controller Driver" didn't work. And not because the driver was bad, but because a registry setting was wrong:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;"Windows cannot start this hardware device because its configuration information (in the registry) is incomplete or damaged. (Code 19)&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Now, if you Google for this error, you will get a million click-bait articles, and a handful of real posts that tell you to uninstall the device in Device Manager, and then reboot - and of course, that does nothing.&lt;/p&gt;
-&lt;p&gt;Then some of them tell you to regedit your way to success by deleting the &lt;code&gt;LowerFilters&lt;/code&gt; and &lt;code&gt;UpperFilters&lt;/code&gt; keys in the HKEY_LOCAL_MACHINE &amp;gt;  System &amp;gt; CurrentControlSet &amp;gt; Control &amp;gt; Class &amp;gt; ... entry, which is invariably for CD-ROM or DVD drives, and that of course does nothing because those are not your problem.&lt;/p&gt;
-&lt;p&gt;Instead, you need to open HKEY_LOCAL_MACHINE &amp;gt;  System &amp;gt; CurrentControlSet &amp;gt; Control &amp;gt; Class, and then simply step through the entries until you find the &lt;code&gt;USB&lt;/code&gt; entry. In my case, that was &lt;code&gt;{36fc9e60-c465-11cf-8056-444553540000}&lt;/code&gt; rather than one of the million &lt;code&gt;{4d36e9xx-e325-11ce-bfc1-xxxxxx}&lt;/code&gt; keys that people tell you to use.&lt;/p&gt;
-&lt;p&gt;Look at the &lt;code&gt;LowerFilters&lt;/code&gt; and &lt;code&gt;UpperFilters&lt;/code&gt; values. Are there any? Delete them. Do they have the wrong case, like &lt;code&gt;UPPERFILTERS&lt;/code&gt;? Delete them. Just delete them. Then in Device manager, uninstall the host controller and then scan for new hardware.&lt;/p&gt;
-&lt;p&gt;Presto, you fixed the problem.&lt;/p&gt;
-&lt;p&gt;And I can only pray that you allowed Remote Desktop connections into your machine, because without that, it's going to be incredibly hard to solve this problem without buying a PS/2 keyboard and/or mouse.  "But I don't have a user password" I hear you say: fret not, &lt;a href="https://superuser.com/questions/106917/remote-desktop-without-a-password"&gt;there's a policy edit&lt;/a&gt; for that. "But I have Windows 10 Home Edition" I hear you say...  well then I got nothing for you. I don't even know why that version exists. Upgrade to Pro, then fix the problem, I guess.  And I really do, because I have no way of testing that.&lt;/p&gt;
-&lt;p&gt;If you use Windows and you're reading this, you should be on Pro. In both senses of the word "should".&lt;/p&gt;
-</description>
-<category>Windows</category>
-<category>Error</category>
-<category>Code 19</category>
-<category>RegEdit</category>
-<category>USB</category>
-<link>http://pomax.github.io/#gh-weblog-1586905169363</link>
-<guid>http://pomax.github.io/#gh-weblog-1586905169363</guid>
-<pubDate>Tue, 14 Apr 2020 22:59:29 GMT</pubDate>
 </item></channel>
 </rss>
