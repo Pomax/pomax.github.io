@@ -5,15 +5,15 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Sun, 10 Jul 2022 17:07:06 GMT</lastBuildDate>
-<pubDate>Sun, 10 Jul 2022 17:07:06 GMT</pubDate>
+<lastBuildDate>Sat, 29 Oct 2022 00:11:51 GMT</lastBuildDate>
+<pubDate>Sat, 29 Oct 2022 00:11:51 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> React is just JavaScript</title>
 <description>&lt;p&gt;React has had a fairly profound effect on the web, whether you like React or not, and whether you like the effect it had or not. However, the one thing it's done that's somewhat puzzling is make people think that React is its own thing, rather than just JS. Things that are trivial become colossal tasks and implementations because folks try to do them "in React". Anything that isn't DOM-update related needs a React solution, instead of using the JS APIs that are right there for you to use. So let's talk about a few.&lt;/p&gt;
 &lt;h2 id="how-do-i-tell-component-x-about-an-update-in-component-y-"&gt;How do I tell component X about an update in component Y?&lt;/h2&gt;
 &lt;p&gt;Imagine this: you wrote a React app that has a status and a whole bunch of different content, and you need to make sure your status bar reflects whatever is active right now. So you add a ref to your status bar, communicate that up to the parent &lt;code&gt;App&lt;/code&gt;, which can then pass down a handler to every component until it makes it down into your components that can be active.&lt;/p&gt;
-&lt;p&gt;Or, you go "oh right, wait, I'm in a browser" and you just use events: your active component just fires-and-forgets a &lt;code&gt;document.dispatchEvent(new CustomEvent(&lt;/code&gt;status:active&lt;code&gt;, { detail: ... }))&lt;/code&gt; and your status bar registers a listener for that event when it mounts. We are done: nothing needs to run up and down an entire virtual DOM tree. And because this is basically just utility functionality, we write it as its own function that any component that needs to update the status bar can use, which we can import &lt;em&gt;from&lt;/em&gt; the Status bar:&lt;/p&gt;
+&lt;p&gt;Or, you go "oh right, wait, I'm in a browser" and you just use events: your active component just fires-and-forgets a &lt;code&gt;document.dispatchEvent(new CustomEvent(`status:active`, { detail: ... }))&lt;/code&gt; and your status bar registers a listener for that event when it mounts. We are done: nothing needs to run up and down an entire virtual DOM tree. And because this is basically just utility functionality, we write it as its own function that any component that needs to update the status bar can use, which we can import &lt;em&gt;from&lt;/em&gt; the Status bar:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;// The only code that cares about this event name is the code
 // in this file, so we capture it as a constant and nothing will
 // ever need to care about what it is.
