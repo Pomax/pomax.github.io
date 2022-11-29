@@ -5,9 +5,26 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Sat, 29 Oct 2022 00:11:51 GMT</lastBuildDate>
-<pubDate>Sat, 29 Oct 2022 00:11:51 GMT</pubDate>
+<lastBuildDate>Tue, 29 Nov 2022 19:29:36 GMT</lastBuildDate>
+<pubDate>Tue, 29 Nov 2022 19:29:36 GMT</pubDate>
 <ttl>1440</ttl>
+<item>
+<title>Flying aeroplanes with JavaScript</title>
+<description>&lt;p&gt;Don't worry, we're not putting JS inside actual aeroplanes... that would probably kill people.&lt;/p&gt;
+&lt;p&gt;Instead, we're implementing an "level and altitude hold" autopilot in JS to control a little virtual aeroplane. And by "little" I actually mean "any aeroplane in [Microsoft Flight Simulator 2020]" because as it turns out, MSFS comes with an API that can be used to both query &lt;em&gt;and set&lt;/em&gt; values relating from anything as simple as the current airspeed to something as complex as spawning a fleet of aircraft and making them perform formation flights while making their smoke pattern spell out the works of Chaucer.&lt;/p&gt;
+&lt;p&gt;So we're not doing that (today), instead we're going to add an autopilot for planes that don't have one, like my favourite real-life plane, the DeHavilland DHC-2 "Beaver", originally made by DeHavilland but these days made by Viking Air. Specifically, the float plane version, which flies between Vancouver and Eastern &lt;a href="https://www.openstreetmap.org/relation/2249770"&gt;Vancouver Island&lt;/a&gt; and locations dotted around the &lt;a href="https://www.openstreetmap.org/relation/13321885"&gt;Strait of Georgia&lt;/a&gt;). I don't have a pilot's license, but I love sitting in the copilot seat and flying over beautiful British Columbia at only 1000 feet.&lt;/p&gt;
+&lt;p&gt;But back to JS: MSFS comes with the &lt;a href="https://docs.flightsimulator.com/html/Programming_Tools/SimConnect/SimConnect_SDK.htm"&gt;SimConnect SDK&lt;/a&gt; which lets people write addons in C, C++, or languages with .NET support, and so of course folks have written connectors that just "proxy" the SimConnect calls and return values to things like Go, Node, Python etc. So of course, the first thought is "cool, find the node-simconnect package and let's goooo" except no, because the node-simconnect package is kind of incomplete, so instead we reach for the next best thing: &lt;a href="https://pypi.org/project/SimConnect/"&gt;python-simconnect&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Using python-simconnect, we can write a tiny Python webserver with &lt;code&gt;GET&lt;/code&gt; calls for querying MSFS, and &lt;code&gt;POST&lt;/code&gt; calls for setting values in-sim. Although it turns out that even python-simconnect is incomplete, so we're actually using &lt;a href="https://github.com/Pomax/Python-SimConnect/tree/edits"&gt;a fork I made&lt;/a&gt; that makes some improvements we need to in order to tell all the different states that MSFS can be in apart. And then we can write some good old static HTML that uses &lt;a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch"&gt;the Fetch API&lt;/a&gt; to talk to the Python server for all its needs.&lt;/p&gt;
+&lt;p&gt;And with that, let's write an autopilot!&lt;/p&gt;
+&lt;p&gt;...&lt;/p&gt;
+&lt;p&gt;But first, let's write something simpler, so we know what we're doing.&lt;/p&gt;
+&lt;h1 id="-"&gt;#&lt;/h1&gt;
+</description>
+
+<link>http://pomax.github.io/#gh-weblog-1669747794580</link>
+<guid>http://pomax.github.io/#gh-weblog-1669747794580</guid>
+<pubDate>Tue, 29 Nov 2022 18:49:54 GMT</pubDate>
+</item>
 <item>
 <title> React is just JavaScript</title>
 <description>&lt;p&gt;React has had a fairly profound effect on the web, whether you like React or not, and whether you like the effect it had or not. However, the one thing it's done that's somewhat puzzling is make people think that React is its own thing, rather than just JS. Things that are trivial become colossal tasks and implementations because folks try to do them "in React". Anything that isn't DOM-update related needs a React solution, instead of using the JS APIs that are right there for you to use. So let's talk about a few.&lt;/p&gt;
@@ -347,36 +364,5 @@ server.listen(port, () =&amp;gt; {
 <link>http://pomax.github.io/#gh-weblog-1603899270641</link>
 <guid>http://pomax.github.io/#gh-weblog-1603899270641</guid>
 <pubDate>Wed, 28 Oct 2020 15:34:30 GMT</pubDate>
-</item>
-<item>
-<title>Automating the build process of the Primer on Bezier Curves</title>
-<description>&lt;p&gt;If you're reading this, you probably know my &lt;a href="https://pomax.github.io/bezierinfo/"&gt;Primer on Bézier Curves&lt;/a&gt;, but what you probably don't know is that until today this build process for this was entirely manual. A code change would require landing the code, then checking out &lt;code&gt;master&lt;/code&gt;, running &lt;code&gt;npm run build&lt;/code&gt;, then pushing the rebuilt files back up to &lt;code&gt;master&lt;/code&gt;, and then doing the same for the &lt;code&gt;bezierinfo&lt;/code&gt; repo, which exists in parallel.&lt;/p&gt;
-&lt;p&gt;Most of that work has now been automated with &lt;a href="https://github.com/features/actions"&gt;Github actions&lt;/a&gt;. Whenever content or build related files get updated on the master branch, Github will now cause &lt;a href="https://github.com/Pomax/BezierInfo-2/blob/master/.github/workflows/ci.yml"&gt;ci.yml&lt;/a&gt; to kick in, which runs through the following steps:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;check out &lt;code&gt;master&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Install &lt;a href="https://www.tug.org/texlive"&gt;TeX Live&lt;/a&gt;, which installs all the TeX features that the primer relies on&lt;/li&gt;
-&lt;li&gt;Pulls the &lt;code&gt;pdf2svg&lt;/code&gt; source code from the web and builds it&lt;/li&gt;
-&lt;li&gt;Grabs &lt;a href="https://github.com/nvm-sh/nvm"&gt;nvm&lt;/a&gt; and uses it to install the latest version of Node and runs &lt;code&gt;npm install&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Runs &lt;code&gt;npm run build&lt;/code&gt;, which runs &lt;a href="https://github.com/Pomax/BezierInfo-2/blob/master/webpack.config.js"&gt;webpack several times&lt;/a&gt;, once for each locale, which:&lt;ul&gt;
-&lt;li&gt;preprocesses the souce code to &lt;a href="https://github.com/Pomax/BezierInfo-2/blob/master/lib/latex-loader.js"&gt;replace LaTeX code with &lt;code&gt;&amp;lt;svg&amp;gt;&lt;/code&gt; tags&lt;/a&gt; by literally wrapping it in a LaTeX document and then calling &lt;a href="https://en.wikipedia.org/wiki/XeTeX"&gt;xelatex&lt;/a&gt; on that source,&lt;/li&gt;
-&lt;li&gt;crops the resulting PDF, then&lt;/li&gt;
-&lt;li&gt;converts that crop to an SVG image on disk, then&lt;/li&gt;
-&lt;li&gt;reads in the SVG image's dimensions so the original source can be replaced with &lt;code&gt;&amp;lt;img src="..." width="..." height="..."&amp;gt;&lt;/code&gt;, ensuring the document doesn't constantly reflow as images load in, then&lt;/li&gt;
-&lt;li&gt;wraps all example code such that references to the graphics API, which cannot possibly work in isolation, actually point to the right thing, and then finally,&lt;/li&gt;
-&lt;li&gt;runs the result through babel and bundles it up as &lt;code&gt;article.js&lt;/code&gt; with its own &lt;code&gt;index.html&lt;/code&gt; (because each locale needs an appropriate&lt;code&gt;lang=...&lt;/code&gt;).&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Commits and pushes the result back up to &lt;code&gt;master&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;So the only thing I still need to do manually now is sync from the &lt;code&gt;BezierInfo-2&lt;/code&gt; dev repo to the main &lt;code&gt;bezierinfo&lt;/code&gt; repo, which feels sensible: you don't want to indiscriminately push your dev code to prod without review.&lt;/p&gt;
-&lt;p&gt;But this sure makes an involved process a heck of a lot easier.&lt;/p&gt;
-&lt;p&gt;I guess that means I should also add a Github action to automatically build the ToC for this blog site anytime I add a new entry... because that's also a manual step right now... and I can probably offload the RSS generation rather than doing that in-browser every time.&lt;/p&gt;
-</description>
-<category>Bezier</category>
-<category>Github</category>
-<category>Automation</category>
-<link>http://pomax.github.io/#gh-weblog-1591576580138</link>
-<guid>http://pomax.github.io/#gh-weblog-1591576580138</guid>
-<pubDate>Mon, 08 Jun 2020 00:36:20 GMT</pubDate>
 </item></channel>
 </rss>
