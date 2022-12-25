@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Sun, 25 Dec 2022 19:09:25 GMT</lastBuildDate>
-<pubDate>Sun, 25 Dec 2022 19:09:25 GMT</pubDate>
+<lastBuildDate>Sun, 25 Dec 2022 19:10:41 GMT</lastBuildDate>
+<pubDate>Sun, 25 Dec 2022 19:10:41 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Structs in Python</title>
@@ -52,6 +52,11 @@ class Brrrrrr():
         self.description = "I'm a plane!"
         self.orientation = Orientation()
         self.trim = Trim()
+
+    def trim(self, e=0, a=0, r=0):
+        self.trim.elevator += e
+        self.trim.aileron += a
+        self.trim.rudder += r
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Done.&lt;/p&gt;
 </description>
 <category>Python</category>
