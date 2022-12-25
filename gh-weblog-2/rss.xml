@@ -5,9 +5,62 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Tue, 29 Nov 2022 19:32:20 GMT</lastBuildDate>
-<pubDate>Tue, 29 Nov 2022 19:32:20 GMT</pubDate>
+<lastBuildDate>Sun, 25 Dec 2022 19:09:25 GMT</lastBuildDate>
+<pubDate>Sun, 25 Dec 2022 19:09:25 GMT</pubDate>
 <ttl>1440</ttl>
+<item>
+<title> Structs in Python</title>
+<description>&lt;p&gt;Python does not have syntax for writing C structs, or things that act like them, but thankfully you can write a class decorator that adds something that feels like it should have been in the language from day one.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;def as_struct(struct_class):
+    # create a new init
+    def struct_init(self, *args):
+        i = 0 # we really don't need enumerate here...
+        for value in list(args):
+            name = field_names[i]
+            default_value = field_values[i]
+            setattr(self, name, value if value is not None else default_value)
+            i += 1 # ...we just need to inc an int
+    # extract the struct fields
+    field_names = []
+    field_values = []
+    for attr_name in dir(struct_class):
+        if not attr_name.startswith('_'):
+            value = getattr(struct_class, attr_name)
+            if not callable(value):
+                field_names.append(attr_name)
+                field_values.append(value)
+    # rebind and return
+    struct_class.__init__ = struct_init
+    return struct_class
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;With this, we can write code with nice Struct-likes:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;from as_struct import as_struct
+
+@as_struct
+class Orientation():
+    pitch = 0
+    roll = 0
+    yaw = 0
+
+@as_struct
+class Trim():
+    elevator = 0
+    aileron = 0
+    rudder = 0
+
+class Brrrrrr():
+    def __init__(self):
+        self.description = "I'm a plane!"
+        self.orientation = Orientation()
+        self.trim = Trim()
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Done.&lt;/p&gt;
+</description>
+<category>Python</category>
+<category>struct</category>
+<category>decorator</category>
+<link>http://pomax.github.io/#gh-weblog-1671995243640</link>
+<guid>http://pomax.github.io/#gh-weblog-1671995243640</guid>
+<pubDate>Sun, 25 Dec 2022 19:07:23 GMT</pubDate>
+</item>
 <item>
 <title> React is just JavaScript</title>
 <description>&lt;p&gt;React has had a fairly profound effect on the web, whether you like React or not, and whether you like the effect it had or not. However, the one thing it's done that's somewhat puzzling is make people think that React is its own thing, rather than just JS. Things that are trivial become colossal tasks and implementations because folks try to do them "in React". Anything that isn't DOM-update related needs a React solution, instead of using the JS APIs that are right there for you to use. So let's talk about a few.&lt;/p&gt;
@@ -347,36 +400,5 @@ server.listen(port, () =&amp;gt; {
 <link>http://pomax.github.io/#gh-weblog-1603899270641</link>
 <guid>http://pomax.github.io/#gh-weblog-1603899270641</guid>
 <pubDate>Wed, 28 Oct 2020 15:34:30 GMT</pubDate>
-</item>
-<item>
-<title>Automating the build process of the Primer on Bezier Curves</title>
-<description>&lt;p&gt;If you're reading this, you probably know my &lt;a href="https://pomax.github.io/bezierinfo/"&gt;Primer on Bézier Curves&lt;/a&gt;, but what you probably don't know is that until today this build process for this was entirely manual. A code change would require landing the code, then checking out &lt;code&gt;master&lt;/code&gt;, running &lt;code&gt;npm run build&lt;/code&gt;, then pushing the rebuilt files back up to &lt;code&gt;master&lt;/code&gt;, and then doing the same for the &lt;code&gt;bezierinfo&lt;/code&gt; repo, which exists in parallel.&lt;/p&gt;
-&lt;p&gt;Most of that work has now been automated with &lt;a href="https://github.com/features/actions"&gt;Github actions&lt;/a&gt;. Whenever content or build related files get updated on the master branch, Github will now cause &lt;a href="https://github.com/Pomax/BezierInfo-2/blob/master/.github/workflows/ci.yml"&gt;ci.yml&lt;/a&gt; to kick in, which runs through the following steps:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;check out &lt;code&gt;master&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Install &lt;a href="https://www.tug.org/texlive"&gt;TeX Live&lt;/a&gt;, which installs all the TeX features that the primer relies on&lt;/li&gt;
-&lt;li&gt;Pulls the &lt;code&gt;pdf2svg&lt;/code&gt; source code from the web and builds it&lt;/li&gt;
-&lt;li&gt;Grabs &lt;a href="https://github.com/nvm-sh/nvm"&gt;nvm&lt;/a&gt; and uses it to install the latest version of Node and runs &lt;code&gt;npm install&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Runs &lt;code&gt;npm run build&lt;/code&gt;, which runs &lt;a href="https://github.com/Pomax/BezierInfo-2/blob/master/webpack.config.js"&gt;webpack several times&lt;/a&gt;, once for each locale, which:&lt;ul&gt;
-&lt;li&gt;preprocesses the souce code to &lt;a href="https://github.com/Pomax/BezierInfo-2/blob/master/lib/latex-loader.js"&gt;replace LaTeX code with &lt;code&gt;&amp;lt;svg&amp;gt;&lt;/code&gt; tags&lt;/a&gt; by literally wrapping it in a LaTeX document and then calling &lt;a href="https://en.wikipedia.org/wiki/XeTeX"&gt;xelatex&lt;/a&gt; on that source,&lt;/li&gt;
-&lt;li&gt;crops the resulting PDF, then&lt;/li&gt;
-&lt;li&gt;converts that crop to an SVG image on disk, then&lt;/li&gt;
-&lt;li&gt;reads in the SVG image's dimensions so the original source can be replaced with &lt;code&gt;&amp;lt;img src="..." width="..." height="..."&amp;gt;&lt;/code&gt;, ensuring the document doesn't constantly reflow as images load in, then&lt;/li&gt;
-&lt;li&gt;wraps all example code such that references to the graphics API, which cannot possibly work in isolation, actually point to the right thing, and then finally,&lt;/li&gt;
-&lt;li&gt;runs the result through babel and bundles it up as &lt;code&gt;article.js&lt;/code&gt; with its own &lt;code&gt;index.html&lt;/code&gt; (because each locale needs an appropriate&lt;code&gt;lang=...&lt;/code&gt;).&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Commits and pushes the result back up to &lt;code&gt;master&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;So the only thing I still need to do manually now is sync from the &lt;code&gt;BezierInfo-2&lt;/code&gt; dev repo to the main &lt;code&gt;bezierinfo&lt;/code&gt; repo, which feels sensible: you don't want to indiscriminately push your dev code to prod without review.&lt;/p&gt;
-&lt;p&gt;But this sure makes an involved process a heck of a lot easier.&lt;/p&gt;
-&lt;p&gt;I guess that means I should also add a Github action to automatically build the ToC for this blog site anytime I add a new entry... because that's also a manual step right now... and I can probably offload the RSS generation rather than doing that in-browser every time.&lt;/p&gt;
-</description>
-<category>Bezier</category>
-<category>Github</category>
-<category>Automation</category>
-<link>http://pomax.github.io/#gh-weblog-1591576580138</link>
-<guid>http://pomax.github.io/#gh-weblog-1591576580138</guid>
-<pubDate>Mon, 08 Jun 2020 00:36:20 GMT</pubDate>
 </item></channel>
 </rss>
