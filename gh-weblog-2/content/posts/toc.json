@@ -1208,7 +1208,7 @@
     "title": " Fixing Windows 10's \"error code 19\"",
     "created": 1586905169363,
     "published": 1586905169363,
-    "updated": 1586905966907,
+    "updated": 1652201105383,
     "tags": [
       "Windows",
       "Error",
@@ -1286,6 +1286,60 @@
       "bash",
       "bash_profile",
       "autorun"
+    ]
+  },
+  "2021-04-08-19-06-28": {
+    "id": "2021-04-08-19-06-28",
+    "title": " If your software still relies on Python 2.7, your software is bad and you should feel bad.",
+    "created": 1617908788691,
+    "published": 1617908788691,
+    "updated": 1617909373889,
+    "tags": [
+      "python",
+      "programming"
+    ]
+  },
+  "2021-12-06-18-37-40": {
+    "id": "2021-12-06-18-37-40",
+    "title": " Setting up \"lots of HTTPS servers\" with Node ",
+    "created": 1638815860591,
+    "published": 1638815860591,
+    "updated": 1638817253812,
+    "tags": [
+      "Node",
+      "HTTPS",
+      "server"
+    ]
+  },
+  "2022-02-27-20-44-47": {
+    "id": "2022-02-27-20-44-47",
+    "title": " Cleaning up your Django migrations",
+    "created": 1645994687853,
+    "published": 1645994687853,
+    "updated": 1646001569824,
+    "tags": []
+  },
+  "2022-07-10-15-35-00": {
+    "id": "2022-07-10-15-35-00",
+    "title": " React is just JavaScript",
+    "created": 1657467300033,
+    "published": 1657467300033,
+    "updated": 1667002308251,
+    "tags": [
+      "React",
+      "JavaScript"
+    ]
+  },
+  "2022-12-25-19-07-23": {
+    "id": "2022-12-25-19-07-23",
+    "title": " Structs in Python",
+    "created": 1671995243640,
+    "published": 1671995243640,
+    "updated": 1671995437548,
+    "tags": [
+      "Python",
+      "struct",
+      "decorator"
     ]
   }
 }
