@@ -5,9 +5,23 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Sun, 25 Dec 2022 19:10:41 GMT</lastBuildDate>
-<pubDate>Sun, 25 Dec 2022 19:10:41 GMT</pubDate>
+<lastBuildDate>Tue, 27 Dec 2022 21:16:59 GMT</lastBuildDate>
+<pubDate>Tue, 27 Dec 2022 21:16:59 GMT</pubDate>
 <ttl>1440</ttl>
+<item>
+<title> Adding a physical drive to a VMware Workstation VM</title>
+<description>&lt;p&gt;If VMWare complains that it has insufficient rights to use a physical drive with adding a hard disk in the VM settings: open computer management with admin rights, then look for that drive in the list. If it has a drive letter: remove the drive letter. &lt;/p&gt;
+&lt;p&gt;Remember: adding a physical drive means literally giving it to the guest OS, not "sharing it between the host and the guest", so remove its drive letter in computer management to &lt;em&gt;guarantee&lt;/em&gt; that your host's Windows can't use it. Once done, you can add it to your VM without any problems.&lt;/p&gt;
+&lt;p&gt;And if you need to &lt;em&gt;share&lt;/em&gt; drives, just use network sharing. That's what it's for.&lt;/p&gt;
+</description>
+<category>VMware</category>
+<category>Workstation</category>
+<category>drive</category>
+<category>errors</category>
+<link>http://pomax.github.io/#gh-weblog-1672175588471</link>
+<guid>http://pomax.github.io/#gh-weblog-1672175588471</guid>
+<pubDate>Tue, 27 Dec 2022 21:13:08 GMT</pubDate>
+</item>
 <item>
 <title> Structs in Python</title>
 <description>&lt;p&gt;Python does not have syntax for writing C structs, or things that act like them, but thankfully you can write a class decorator that adds something that feels like it should have been in the language from day one.&lt;/p&gt;
@@ -387,23 +401,5 @@ server.listen(port, () =&amp;gt; {
 <link>http://pomax.github.io/#gh-weblog-1609525953375</link>
 <guid>http://pomax.github.io/#gh-weblog-1609525953375</guid>
 <pubDate>Fri, 01 Jan 2021 18:32:33 GMT</pubDate>
-</item>
-<item>
-<title>Installing Windows 7 in late 2020</title>
-<description>&lt;p&gt;I needed to install Windows 7 on an old Shuttle computer, for which win10 would be too much of a constant load on the system (it's a completely passive system, and a constant 30% load on the cpu is very much not appreciated), and ran into an interesting problem. For the most part, installation is fine: get the official ISO from Microsoft on their &lt;a href="https://www.microsoft.com/en-ca/software-download/windows7"&gt;dedicated software download page&lt;/a&gt;, which requires supplying your windows 7 key (conveniently a sticker on the inside of the Shuttle case. Inconveniently, a sticker you can't remove and put in an organizer that has all your software keys).&lt;/p&gt;
-&lt;p&gt;Burn the ISO to a USB stick, which can thankfully be any old 4GB stick because windows 7, unlike 10, never grew past 3.5GB as base install (I use &lt;a href="https://sourceforge.net/projects/win32diskimager/"&gt;Win32 Disk Imager&lt;/a&gt;, which can "burn" &lt;code&gt;.iso&lt;/code&gt; files just fine, but you do need to file type filter for all file types, because it'll filter just for &lt;code&gt;.img&lt;/code&gt; files), then boot off of said USB stick.&lt;/p&gt;
-&lt;p&gt;Once up and running, you start Windows Update (start → "all programs" → windows update) and then you go through the "install updates, reboot, install more updates, reboot, etc. etc." motions. Until you hit update &lt;code&gt;kb4516065&lt;/code&gt;, which will fail with an error code 80092004 that has no article to explain what it means, and seemingly has no way to get past.&lt;/p&gt;
-&lt;p&gt;Thankfully, the advice in &lt;a href="https://answers.microsoft.com/en-us/windows/forum/windows_7-update/kb4516065-installation-fails-with-error-80092004/ef9994ee-7820-436e-b18f-001ae53edf28"&gt;this post&lt;/a&gt; works: &lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;download and manually install &lt;a href="https://www.catalog.update.microsoft.com/search.aspx?q=kb4490628"&gt;kb4490628&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;then download and manually install &lt;a href="https://www.catalog.update.microsoft.com/Search.aspx?q=kb4516065"&gt;kb4516065&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Once done, windows update can get back to the "install updates, reboot, install more updates, reboot, etc" dance and all is well.&lt;/p&gt;
-&lt;p&gt;I mean, except for the part where you'll never receive security etc updates ever again, so once you're done installing everything, you &lt;em&gt;prooobably&lt;/em&gt; want to either air gap or network-restrict the machine so it can't reach, or be reached from, the internet. Which is exactly what I need (it just needs to accept audio feeds from a set of microphones that it can then forward on over LAN, no internet required) so happens to be fine for my use-case.&lt;/p&gt;
-</description>
-
-<link>http://pomax.github.io/#gh-weblog-1603899270641</link>
-<guid>http://pomax.github.io/#gh-weblog-1603899270641</guid>
-<pubDate>Wed, 28 Oct 2020 15:34:30 GMT</pubDate>
 </item></channel>
 </rss>
