@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Tue, 27 Dec 2022 21:16:59 GMT</lastBuildDate>
-<pubDate>Tue, 27 Dec 2022 21:16:59 GMT</pubDate>
+<lastBuildDate>Wed, 28 Dec 2022 00:44:17 GMT</lastBuildDate>
+<pubDate>Wed, 28 Dec 2022 00:44:17 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Adding a physical drive to a VMware Workstation VM</title>
@@ -25,26 +25,30 @@
 <item>
 <title> Structs in Python</title>
 <description>&lt;p&gt;Python does not have syntax for writing C structs, or things that act like them, but thankfully you can write a class decorator that adds something that feels like it should have been in the language from day one.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;def as_struct(struct_class):
+&lt;pre&gt;&lt;code&gt;def struct(struct_class):
     # create a new init
-    def struct_init(self, *args):
-        i = 0 # we really don't need enumerate here...
-        for value in list(args):
-            name = field_names[i]
-            default_value = field_values[i]
+    def struct_init(self, *args, **kwargs):
+        i = 0 # we really don't need enumerate() here...
+        for value in args:
+            name = member_names[i]
+            default_value = member_values[i]
             setattr(self, name, value if value is not None else default_value)
             i += 1 # ...we just need to inc an int
-    # extract the struct fields
-    field_names = []
-    field_values = []
+        for key,value in kwargs.items():
+            i = member_names.index(key)
+            default_value = member_values[i]
+            setattr(self, key, value if value is not None else default_value)
+    # extract the struct members
+    member_names = []
+    member_values = []
     for attr_name in dir(struct_class):
         if not attr_name.startswith('_'):
             value = getattr(struct_class, attr_name)
             if not callable(value):
-                field_names.append(attr_name)
-                field_values.append(value)
+                member_names.append(attr_name)
+                member_values.append(value)
     # rebind and return
-    struct_class.__init__ = struct_init
+    struct_class.init = struct_init
     return struct_class
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;With this, we can write code with nice Struct-likes:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;from as_struct import as_struct
