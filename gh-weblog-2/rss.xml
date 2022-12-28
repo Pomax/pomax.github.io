@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Wed, 28 Dec 2022 00:44:17 GMT</lastBuildDate>
-<pubDate>Wed, 28 Dec 2022 00:44:17 GMT</pubDate>
+<lastBuildDate>Wed, 28 Dec 2022 00:44:50 GMT</lastBuildDate>
+<pubDate>Wed, 28 Dec 2022 00:44:50 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Adding a physical drive to a VMware Workstation VM</title>
@@ -51,15 +51,15 @@
     struct_class.init = struct_init
     return struct_class
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;With this, we can write code with nice Struct-likes:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;from as_struct import as_struct
+&lt;pre&gt;&lt;code&gt;from as_struct import struct
 
-@as_struct
+@struct
 class Orientation():
     pitch = 0
     roll = 0
     yaw = 0
 
-@as_struct
+@struct
 class Trim():
     elevator = 0
     aileron = 0
