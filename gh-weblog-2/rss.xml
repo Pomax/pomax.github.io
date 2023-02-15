@@ -5,15 +5,16 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Wed, 15 Feb 2023 04:16:08 GMT</lastBuildDate>
-<pubDate>Wed, 15 Feb 2023 04:16:08 GMT</pubDate>
+<lastBuildDate>Wed, 15 Feb 2023 04:18:49 GMT</lastBuildDate>
+<pubDate>Wed, 15 Feb 2023 04:18:49 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title>MacOS and external SSDs</title>
 <description>&lt;p&gt;Ever had your external SSD refuse to remount when you plug it into MacOS because it's an idiotic OS and remembers you didn't properly ejected it?&lt;/p&gt;
-&lt;p&gt;First, kill &lt;code&gt;fsck&lt;/code&gt; because it's ruining the party right now:&lt;/p&gt;
+&lt;p&gt;First, kill &lt;code&gt;fsck&lt;/code&gt; (the "file system consistency check" with the dumbest command name) because it's ruining the party right now:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;$ ps aux | grep fsck
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;find the process id and &lt;code&gt;sudo kill -9 thatid&lt;/code&gt; because goddamnit, fsck, stop ruining the party. Then, simply remount your drive:&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Find the process id and &lt;code&gt;sudo kill -9 thatid&lt;/code&gt; because goddamnit, fsck, stop ruining the party. It's even going to do a fake out, because there's probably two pids, and only one of them is real. The other's a zombie process.&lt;/p&gt;
+&lt;p&gt;With the main one killed, we can remount the drive:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;$ diskutils mount /Volumes/disk3s2
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Or whatever your disk volume is according to Disk Utility.&lt;/p&gt;
 </description>
