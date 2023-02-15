@@ -5,9 +5,25 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Wed, 28 Dec 2022 00:44:50 GMT</lastBuildDate>
-<pubDate>Wed, 28 Dec 2022 00:44:50 GMT</pubDate>
+<lastBuildDate>Wed, 15 Feb 2023 04:16:08 GMT</lastBuildDate>
+<pubDate>Wed, 15 Feb 2023 04:16:08 GMT</pubDate>
 <ttl>1440</ttl>
+<item>
+<title>MacOS and external SSDs</title>
+<description>&lt;p&gt;Ever had your external SSD refuse to remount when you plug it into MacOS because it's an idiotic OS and remembers you didn't properly ejected it?&lt;/p&gt;
+&lt;p&gt;First, kill &lt;code&gt;fsck&lt;/code&gt; because it's ruining the party right now:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ ps aux | grep fsck
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;find the process id and &lt;code&gt;sudo kill -9 thatid&lt;/code&gt; because goddamnit, fsck, stop ruining the party. Then, simply remount your drive:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ diskutils mount /Volumes/disk3s2
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Or whatever your disk volume is according to Disk Utility.&lt;/p&gt;
+</description>
+<category>MacOS</category>
+<category>SSD</category>
+<category>fsck</category>
+<link>http://pomax.github.io/#gh-weblog-1676434414432</link>
+<guid>http://pomax.github.io/#gh-weblog-1676434414432</guid>
+<pubDate>Wed, 15 Feb 2023 04:13:34 GMT</pubDate>
+</item>
 <item>
 <title> Adding a physical drive to a VMware Workstation VM</title>
 <description>&lt;p&gt;If VMWare complains that it has insufficient rights to use a physical drive with adding a hard disk in the VM settings: open computer management with admin rights, then look for that drive in the list. If it has a drive letter: remove the drive letter. &lt;/p&gt;
@@ -25,19 +41,10 @@
 <item>
 <title> Structs in Python</title>
 <description>&lt;p&gt;Python does not have syntax for writing C structs, or things that act like them, but thankfully you can write a class decorator that adds something that feels like it should have been in the language from day one.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;def struct(struct_class):
-    # create a new init
-    def struct_init(self, *args, **kwargs):
-        i = 0 # we really don't need enumerate() here...
-        for value in args:
-            name = member_names[i]
-            default_value = member_values[i]
-            setattr(self, name, value if value is not None else default_value)
-            i += 1 # ...we just need to inc an int
-        for key,value in kwargs.items():
-            i = member_names.index(key)
-            default_value = member_values[i]
-            setattr(self, key, value if value is not None else default_value)
+&lt;pre&gt;&lt;code&gt;import copy
+
+
+def struct(struct_class):
     # extract the struct members
     member_names = []
     member_values = []
@@ -47,8 +54,37 @@
             if not callable(value):
                 member_names.append(attr_name)
                 member_values.append(value)
+
+    # create a new init
+    def struct_init(self, *args, **kwargs):
+        i = 0  # we really don't need enumerate() here...
+        for value in args:
+            name = member_names[i]
+            default_value = member_values[i]
+            setattr(self, name, value if value is not None else default_value)
+            i += 1  # ...we just need to inc an int
+        for key, value in kwargs.items():
+            if key in member_names:
+                i = member_names.index(key)
+                default_value = member_values[i]
+                setattr(self, key, value if value is not None else default_value)
+        # fall through  to the struct constructor.
+        if hasattr(self.__class__, 'constructor'):
+            self.constructor(**kwargs)
+
+    # A struct can be iterated over, yielding and ordered list
+    # based on member names defined in the struct class.
+    def member_iter(self):
+        return [copy.deepcopy(getattr(self, name)) for name in member_names].__iter__()
+
+    # Structs do not allow shallow copying. All copies are a deep copies.
+    def deep_copy(self):
+        return copy.deepcopy(self)
+
     # rebind and return
-    struct_class.init = struct_init
+    struct_class.__init__ = struct_init
+    struct_class.__iter__ = member_iter
+    struct_class.__copy__ = deep_copy
     return struct_class
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;With this, we can write code with nice Struct-likes:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;from as_struct import struct
@@ -388,22 +424,5 @@ server.listen(port, () =&amp;gt; {
 <link>http://pomax.github.io/#gh-weblog-1611618580829</link>
 <guid>http://pomax.github.io/#gh-weblog-1611618580829</guid>
 <pubDate>Mon, 25 Jan 2021 23:49:40 GMT</pubDate>
-</item>
-<item>
-<title>Dragging .mid files into FL Studio</title>
-<description>&lt;p&gt;There are a few ways to drag midi files into &lt;a href="https://www.image-line.com/"&gt;FL Studio&lt;/a&gt;, but the best way is also not documented:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Drag your .mid onto the program &lt;em&gt;background&lt;/em&gt;, so &lt;strong&gt;not&lt;/strong&gt; onto the channel rack, and &lt;strong&gt;not&lt;/strong&gt; into a pattern, then&lt;/li&gt;
-&lt;li&gt;say "no" when asked to save the current project,&lt;/li&gt;
-&lt;li&gt;make sure "start new project" is unchecked in the MIDI import dialog, and then&lt;/li&gt;
-&lt;li&gt;hit accept: congrats, you're done.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Unlike the &lt;a href="https://www.image-line.com/fl-studio-learning/fl-studio-online-manual/html/automation_midiimport.htm"&gt;officially documented way&lt;/a&gt;, which splits up MIDI events into separate channels for no reason whatsoever, this method preserves the data and will import everything to the same channel if the .mid file had everything in the same channel. No need for the incredibly tedious "importing CC automation one CC at a time" workflow, just drag, drop, click, click, click, done: you now have a new channel rack entry that can play the midi data, and an associated pattern that you can place wherever you want in the arrangement window with all your midi data.&lt;/p&gt;
-</description>
-<category>MIDI</category>
-<category>FL Studio</category>
-<link>http://pomax.github.io/#gh-weblog-1609525953375</link>
-<guid>http://pomax.github.io/#gh-weblog-1609525953375</guid>
-<pubDate>Fri, 01 Jan 2021 18:32:33 GMT</pubDate>
 </item></channel>
 </rss>
