@@ -3,6 +3,15 @@
   "title": " Getting elevation data out of DEM/DSM GeoTIFF files",
   "created": 1678206967957,
   "published": 1678206967957,
-  "updated": 1678207851171,
-  "tags": []
+  "updated": 1678207936587,
+  "tags": [
+    "Node",
+    "GIS",
+    "GDAL",
+    "MSFS",
+    "MSFS 2020",
+    "Elevation",
+    "DEM",
+    "DSM"
+  ]
 }
