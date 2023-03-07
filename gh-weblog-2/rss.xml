@@ -5,12 +5,50 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Tue, 07 Mar 2023 16:40:36 GMT</lastBuildDate>
-<pubDate>Tue, 07 Mar 2023 16:40:36 GMT</pubDate>
+<lastBuildDate>Tue, 07 Mar 2023 16:50:54 GMT</lastBuildDate>
+<pubDate>Tue, 07 Mar 2023 16:50:54 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Getting elevation data out of DEM/DSM GeoTIFF files</title>
-<description>&lt;p&gt;I'm working on a fun little side project implementing an autopilot in JavaScript to "drive" planes in Microsoft Flight Simulator 2020, and one of the things it needs is an altitude computer/terrain follow system. And in order to make that reasonably accurate, I figured I'd download the entire planet's elevation data in the form of the &lt;a href="https://www.eorc.jaxa.jp/ALOS/en/dataset/aw3d30/aw3d30_e.htm"&gt;ALOS Wolrd 3D (30m)&lt;/a&gt; dataset. This is 450GB of DSM, HLG, and mask data, and takes the form of &lt;a href="http://geotiff.maptools.org/spec/geotiff2.html"&gt;GeoTiff&lt;/a&gt; files.&lt;/p&gt;
+<description>&lt;p&gt;I'm working on a fun little side project implementing an autopilot in JavaScript to "drive" planes in Microsoft Flight Simulator 2020, and one of the things it needs is an altitude computer/terrain follow system. And in order to make that reasonably accurate, I figured I'd download the entire planet's elevation data in the form of the &lt;a href="https://www.eorc.jaxa.jp/ALOS/en/dataset/aw3d30/aw3d30_e.htm"&gt;ALOS Wolrd 3D (30m)&lt;/a&gt; dataset. This is around 450GB of DSM data, and takes the form of &lt;a href="http://geotiff.maptools.org/spec/geotiff2.html"&gt;GeoTiff&lt;/a&gt; files.&lt;/p&gt;
+&lt;p&gt;Conventional GIS wisdom says that in order to work with that, you need to use &lt;a href="https://gdal.org/"&gt;GDAL&lt;/a&gt;, which has no Node bindings, but it has a Python API. And Python's not hard to use, but having to use two different programming languages is inconvenient. So after writing working python GDAL code, which takes 23 seconds to get the full file list of available tiles on my NAS, I figured I'd see if there was a Node library that worked with GDAL anyway.&lt;/p&gt;
+&lt;p&gt;Turns out there is, or rather, there are. I ended up using &lt;a href="https://github.com/mmomtchev/node-gdal-async"&gt;gdal-async&lt;/a&gt;, which is a fork of &lt;a href="https://github.com/contra/node-gdal-next"&gt;https://github.com/contra/node-gdal-next&lt;/a&gt;, which is a fork of &lt;a href="https://github.com/naturalatlas/node-gdal"&gt;https://github.com/naturalatlas/node-gdal&lt;/a&gt;,  and reimplementing the logic on the Python side in Node yields a codebase that can index the same files, on the same NAS, in 7 seconds instead of 23. So that's weird, but better than before.&lt;/p&gt;
+&lt;p&gt;I ended up writing out the file index to a 24000 line JSON file as a cache, hoping that'd be faster, and where it takes Python a bit to run through that, Node.js loads that instantly. &lt;em&gt;And&lt;/em&gt; parses it to a JS datastructure. The server's just up the moment I run &lt;code&gt;node server.js&lt;/code&gt; instead of spending a second or two starting up. &lt;/p&gt;
+&lt;p&gt;But it gets better: why am I using GDAL at all if all I want is the elevations for GPS coordinates? Surely, GeoTIFF is not so complex that only giant GIS projects can make sense of them? And it turns out that, no, it's not. It's in fact near-trivial to write your own code for this provided you know a little bit of programming: GeoTIFF put all the information you need in the "fields" section of an IFD block (the kind of blocks a TIFF file is built up from), so we can just use &lt;a href="https://www.npmjs.com/package/tiff"&gt;a tiff parser&lt;/a&gt; to get those fields, and then look up what values we need in order to map GPS coordinates to TIFF pixel indices.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;import tiff from "tiff";
+
+class ALOSTile {
+  constructor(tilePath) {
+    this.tilePath = tilePath;
+    // copy to cache dir for faster loading
+    const filename = join(`.`, CACHE_DIR, basename(tilePath));
+    if (!existsSync(filename)) copyFileSync(tilePath, filename);
+    this.init(filename);
+  }
+
+  init(filename) {
+    const file = readFileSync(filename);
+    const image = tiff.decode(file.buffer);
+    const block = (this.block = image[0]);
+    const fields = block.fields;
+    let [sx, sy, sz] = fields.get(33550);
+    let [px, py, k, gx, gy, gz] = fields.get(33922);
+    sy = -sy;
+    this.reverse = [-gx / sx, 1 / sx, 0, -gy / sy, 0, 1 / sy];
+    this.pixels = block.data;
+  }
+
+  lookup(lat, long) {
+    const { reverse: T, block } = this;
+    const x = T[0] + T[1] * long + T[2] * lat;
+    const y = T[3] + T[4] * long + T[5] * lat;
+    const pos = (x | 0) + (y | 0) * block.width;
+    const value = this.pixels[pos];
+    return value ?? -9999;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;There, that's the entire code &lt;em&gt;plus convenience wrapper&lt;/em&gt; to do an elevation lookup in a GeoTIFF tile. No GDAL, no Python, heck we don't even need to care about which programming language we're using as long as it has a TIFF parser it can use. The rest is just absolutely basic programming.&lt;/p&gt;
 </description>
 
 <link>http://pomax.github.io/#gh-weblog-1678206967957</link>
