@@ -1335,11 +1335,53 @@
     "title": " Structs in Python",
     "created": 1671995243640,
     "published": 1671995243640,
-    "updated": 1671995437548,
+    "updated": 1672188287422,
     "tags": [
       "Python",
       "struct",
       "decorator"
+    ]
+  },
+  "2022-12-27-21-13-08": {
+    "id": "2022-12-27-21-13-08",
+    "title": " Adding a physical drive to a VMware Workstation VM",
+    "created": 1672175588471,
+    "published": 1672175588471,
+    "updated": 1672175797397,
+    "tags": [
+      "VMware",
+      "Workstation",
+      "drive",
+      "errors"
+    ]
+  },
+  "2023-02-15-04-13-34": {
+    "id": "2023-02-15-04-13-34",
+    "title": "MacOS and external SSDs",
+    "created": 1676434414432,
+    "published": 1676434414432,
+    "updated": 1676434723083,
+    "tags": [
+      "MacOS",
+      "SSD",
+      "fsck"
+    ]
+  },
+  "2023-03-07-16-36-07": {
+    "id": "2023-03-07-16-36-07",
+    "title": " Getting elevation data out of DEM/DSM GeoTIFF files",
+    "created": 1678206967957,
+    "published": 1678206967957,
+    "updated": 1678208034165,
+    "tags": [
+      "Node",
+      "GIS",
+      "GDAL",
+      "MSFS",
+      "MSFS 2020",
+      "Elevation",
+      "DEM",
+      "DSM"
     ]
   }
 }
