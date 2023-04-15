@@ -5,9 +5,23 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Tue, 07 Mar 2023 16:53:56 GMT</lastBuildDate>
-<pubDate>Tue, 07 Mar 2023 16:53:56 GMT</pubDate>
+<lastBuildDate>Sat, 15 Apr 2023 19:17:28 GMT</lastBuildDate>
+<pubDate>Sat, 15 Apr 2023 19:17:28 GMT</pubDate>
 <ttl>1440</ttl>
+<item>
+<title>Leaving twitter</title>
+<description>&lt;p&gt;In October of 2022, Elon Musk, a man who failed up harder than anyone else in history, decided to buy Twitter with the express intent to turn it into a completely different product. He laid off thousands of people, devalued the company by 50%, and started pushing through changes that not only changed the experience of the platform, but also made sure that you had no way of actually seeing the content you wanted, while at the same time pushing ads into every single stream presented to you.&lt;/p&gt;
+&lt;p&gt;I signed up for Twitter back in 2009, and it's fun a (mostly) fun ride, but even when it wasn't, there were always two things preventing folks from leaving the platform: (1) it was rarely &lt;em&gt;that&lt;/em&gt; bad, and (2) there was no genuine alternative. &lt;/p&gt;
+&lt;p&gt;Both those things changed in recent years. For several years now, Mastodon has been an alternative to Twitter, and with Elon's destruction of Twitter the number of both Mastodon users and Mastodon servers has exploded. It's now a perfectly fine alternative with plenty of folks to follow. No, they're not all on the same server, but it's not like you had problems sending emails to people who didn't use your email server before, and this is the same. Just follow them, irrespective of which server they happen to use. Done, you just need to know their "homepage", hardly a chore.&lt;/p&gt;
+&lt;p&gt;So as Musk lands more and garbage features in a desperate attempt to short-term claw back money, I'm calling it quits. To prevent people from namesquatting, I'm keeping my twitter account, and I'm not deleting any old tweets, but I'll be using mastodon exclusively from now on. &lt;/p&gt;
+&lt;p&gt;Find me over on &lt;a href="https://mastodon.social/@TheRealPomax"&gt;https://mastodon.social/@TheRealPomax&lt;/a&gt;&lt;/p&gt;
+</description>
+<category>Mastodon</category>
+<category>Twitter</category>
+<link>http://pomax.github.io/#gh-weblog-1681585670331</link>
+<guid>http://pomax.github.io/#gh-weblog-1681585670331</guid>
+<pubDate>Sat, 15 Apr 2023 19:07:50 GMT</pubDate>
+</item>
 <item>
 <title> Getting elevation data out of DEM/DSM GeoTIFF files</title>
 <description>&lt;p&gt;I'm working on a fun little side project implementing an autopilot in JavaScript to "drive" planes in Microsoft Flight Simulator 2020, and one of the things it needs is an altitude computer/terrain follow system. And in order to make that reasonably accurate, I figured I'd download the entire planet's elevation data in the form of the &lt;a href="https://www.eorc.jaxa.jp/ALOS/en/dataset/aw3d30/aw3d30_e.htm"&gt;ALOS Wolrd 3D (30m)&lt;/a&gt; dataset. This is around 450GB of DSM data, and takes the form of &lt;a href="http://geotiff.maptools.org/spec/geotiff2.html"&gt;GeoTiff&lt;/a&gt; files.&lt;/p&gt;
@@ -451,26 +465,5 @@ server.listen(port, () =&amp;gt; {
 <link>http://pomax.github.io/#gh-weblog-1616607431740</link>
 <guid>http://pomax.github.io/#gh-weblog-1616607431740</guid>
 <pubDate>Wed, 24 Mar 2021 17:37:11 GMT</pubDate>
-</item>
-<item>
-<title>My macbook keeps crashing after putting in an NVMe SSD!</title>
-<description>&lt;p&gt;Yours and everyone else's: there are two things you &lt;em&gt;need&lt;/em&gt; to do.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;Reset your mac's nvram, which is a hardware cache that includes SSD hardware information. If you don't reset it, macos is going to apply the old SSD's information to your new SSD, and you're going to have a bad time. Restart macos while holding &lt;code&gt;Command+Option+P+R&lt;/code&gt; (all four keys at the same time) until you hear the mac chime. You won't &lt;em&gt;see&lt;/em&gt; anything, it'll just be a black screen, not an apple logo, so if you don't hear that chime: boot into macos regulary, make sure your audio's not muted, and retry.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Disable macos' drive standby, because your SSD is almost certainly incompatible with the apple hardware instructions. After booting into macos (after resetting the nvram) open a terminal and run:&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre&gt;&lt;code&gt;$ sudo pmset -a standby 0
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;You're done, your new (presumably much bigger) NVMe SSD will work just fine now,  and your mac will no longer crash at random&lt;/p&gt;
-</description>
-<category>macos</category>
-<category>nvme</category>
-<category>ssd</category>
-<category>nvram</category>
-<category>standy</category>
-<link>http://pomax.github.io/#gh-weblog-1614461875757</link>
-<guid>http://pomax.github.io/#gh-weblog-1614461875757</guid>
-<pubDate>Sat, 27 Feb 2021 21:37:55 GMT</pubDate>
 </item></channel>
 </rss>
