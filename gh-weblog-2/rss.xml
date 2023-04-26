@@ -5,9 +5,29 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Sat, 15 Apr 2023 19:17:28 GMT</lastBuildDate>
-<pubDate>Sat, 15 Apr 2023 19:17:28 GMT</pubDate>
+<lastBuildDate>Wed, 26 Apr 2023 20:58:53 GMT</lastBuildDate>
+<pubDate>Wed, 26 Apr 2023 20:58:53 GMT</pubDate>
 <ttl>1440</ttl>
+<item>
+<title> Generating a 3D LUT with Photoshop for OBS/Atomos/etc.</title>
+<description>&lt;p&gt;Have you ever needed a 3D cube LUT, and so you whipped out Photoshop, created a bunch of adjustment layers, exported the color information as a LUT, only for the result to look like this?&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://user-images.githubusercontent.com/177243/234699746-5c492161-e373-4e57-b4fb-a43c7a7c4d42.png" alt="{C9DE6C3A-EC6B-492A-A830-9B29F1A70590}"&gt;&lt;/p&gt;
+&lt;p&gt;The problem you're seeing is caused by having multiple image layers:&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://user-images.githubusercontent.com/177243/234700423-866d74a7-a68a-4c0a-a81d-feea987a42f3.png" alt="image"&gt;&lt;/p&gt;
+&lt;p&gt;And the solution is to just flatten all of those, &lt;em&gt;then&lt;/em&gt; export your color adjustments as a cube LUT:&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://user-images.githubusercontent.com/177243/234700619-56851d7d-04f1-4cf4-96a1-6f84dafaac39.png" alt="image"&gt;&lt;/p&gt;
+&lt;p&gt;And presto, suddenly your LUT works just fine in OBS, or your LUT box, or any other context that needs a cube LUT:&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://user-images.githubusercontent.com/177243/234700798-76327d7a-fa6c-4388-bacc-b4e837789a34.png" alt="image"&gt;&lt;/p&gt;
+</description>
+<category>3D</category>
+<category>cube</category>
+<category>lut</category>
+<category>photoshop</category>
+<category>obs</category>
+<link>http://pomax.github.io/#gh-weblog-1682542272279</link>
+<guid>http://pomax.github.io/#gh-weblog-1682542272279</guid>
+<pubDate>Wed, 26 Apr 2023 20:51:12 GMT</pubDate>
+</item>
 <item>
 <title>Leaving twitter</title>
 <description>&lt;p&gt;In October of 2022, Elon Musk, a man who failed up harder than anyone else in history, decided to buy Twitter with the express intent to turn it into a completely different product. He laid off thousands of people, devalued the company by 50%, and started pushing through changes that not only changed the experience of the platform, but also made sure that you had no way of actually seeing the content you wanted, while at the same time pushing ads into every single stream presented to you.&lt;/p&gt;
@@ -445,25 +465,5 @@ server.listen(port, () =&amp;gt; {
 <link>http://pomax.github.io/#gh-weblog-1617908788691</link>
 <guid>http://pomax.github.io/#gh-weblog-1617908788691</guid>
 <pubDate>Thu, 08 Apr 2021 19:06:28 GMT</pubDate>
-</item>
-<item>
-<title> bash_profile for Windows' CMD </title>
-<description>&lt;p&gt;Some folks love powershell. I am not one of those people: powershell breaks on standard command chaining using &lt;code&gt;&amp;amp;&amp;amp;&lt;/code&gt;, making it decidedly useless for the work I do on the daily. Instead I use &lt;code&gt;cmd&lt;/code&gt; for everything terminal-related. No "git bash", no "console2", just plain &lt;code&gt;cmd&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;And did you know that &lt;code&gt;cmd&lt;/code&gt; has autorun functionality just like &lt;code&gt;bash&lt;/code&gt; does? It doesn't use a &lt;code&gt;.bash_profile&lt;/code&gt; (obviously) but it does let you specify what should run any time you start &lt;code&gt;cmd&lt;/code&gt; by looking at two special registry keys mentioned in &lt;a href="https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/cmd"&gt;the documentation for cmd&lt;/a&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;Cmd.exe looks for the following registry subkeys:
-
-- HKEY_LOCAL_MACHINE\Software\Microsoft\Command Processor\AutoRun (REG_SZ)
-- HKEY_CURRENT_USER\Software\Microsoft\Command Processor\AutoRun (REG_EXPAND_SZ)
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;So, run &lt;code&gt;regedit&lt;/code&gt; and find your way to &lt;code&gt;HKEY_CURRENT_USER\Software\Microsoft&lt;/code&gt;, create the &lt;code&gt;Command Processor&lt;/code&gt; key if it doesn't exist (which it won't if you never used it before), and then create an expandable string value called &lt;code&gt;AutoRun&lt;/code&gt; (paying attention to correct capitalization) and assign it the value &lt;code&gt;%USERPROFILE%\cmd-autorun.bat&lt;/code&gt;, then create a file called &lt;code&gt;cmd-autorun.bat&lt;/code&gt; in your own Windows user directory.&lt;/p&gt;
-&lt;p&gt;Done: you now have the equivalent of a &lt;code&gt;.bash_profile&lt;/code&gt; for &lt;code&gt;cmd&lt;/code&gt; that will run only for your user account (as it should be) any time you (or anything else) starts up &lt;code&gt;cmd&lt;/code&gt;.&lt;/p&gt;
-</description>
-<category>windows</category>
-<category>cmd</category>
-<category>bash</category>
-<category>bash_profile</category>
-<category>autorun</category>
-<link>http://pomax.github.io/#gh-weblog-1616607431740</link>
-<guid>http://pomax.github.io/#gh-weblog-1616607431740</guid>
-<pubDate>Wed, 24 Mar 2021 17:37:11 GMT</pubDate>
 </item></channel>
 </rss>
