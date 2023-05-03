@@ -5,14 +5,14 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Wed, 03 May 2023 17:26:09 GMT</lastBuildDate>
-<pubDate>Wed, 03 May 2023 17:26:09 GMT</pubDate>
+<lastBuildDate>Wed, 03 May 2023 17:40:35 GMT</lastBuildDate>
+<pubDate>Wed, 03 May 2023 17:40:35 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Generating a 3D LUT with Photoshop for OBS/Atomos/etc.</title>
 <description>&lt;p&gt;Have you ever needed a 3D cube LUT? Turns out, all you need is Photoshop! Whip out Photoshop, and created a bunch of "adjustment layers" for your colour correction...&lt;/p&gt;
 &lt;p&gt;&lt;img src="https://user-images.githubusercontent.com/177243/235992202-f9203283-9437-4c28-95f8-70555804c527.png" alt="image"&gt;&lt;/p&gt;
-&lt;p&gt;And then export that to a LUT using "export" -&amp;gt; "Color Lookup Tables..." with only ".cube" as format and 32 points. Brilliant, instance 33 point 3d LUT for use in OBS, your video monitor, a LUT box, etc. etc.!&lt;/p&gt;
+&lt;p&gt;And then export that to a LUT using "export" -&amp;gt; "Color Lookup Tables..." with only "CUBE" as format and 32 points. Brilliant: instant 33 point 3d LUT for use in OBS, your video monitor,  in-camera, through a LUT box, etc. etc.!&lt;/p&gt;
 &lt;p&gt;But then you load it into OBS, or your LUT box, and your video feed suddenly looks like this:&lt;/p&gt;
 &lt;p&gt;&lt;img src="https://user-images.githubusercontent.com/177243/234699746-5c492161-e373-4e57-b4fb-a43c7a7c4d42.png" alt="{C9DE6C3A-EC6B-492A-A830-9B29F1A70590}"&gt;&lt;/p&gt;
 &lt;p&gt;The problem you're seeing is almost certainly caused by having multiple image layers under your adjustment layer(s):&lt;/p&gt;
