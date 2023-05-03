@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Wed, 03 May 2023 17:21:22 GMT</lastBuildDate>
-<pubDate>Wed, 03 May 2023 17:21:22 GMT</pubDate>
+<lastBuildDate>Wed, 03 May 2023 17:21:59 GMT</lastBuildDate>
+<pubDate>Wed, 03 May 2023 17:21:59 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Generating a 3D LUT with Photoshop for OBS/Atomos/etc.</title>
@@ -14,7 +14,7 @@
 &lt;p&gt;&lt;img src="https://user-images.githubusercontent.com/177243/235992202-f9203283-9437-4c28-95f8-70555804c527.png" alt="image"&gt;&lt;/p&gt;
 &lt;p&gt;And then when you went to export the adjustment layers to a LUT, the LUT made things look like this?&lt;/p&gt;
 &lt;p&gt;&lt;img src="https://user-images.githubusercontent.com/177243/234699746-5c492161-e373-4e57-b4fb-a43c7a7c4d42.png" alt="{C9DE6C3A-EC6B-492A-A830-9B29F1A70590}"&gt;&lt;/p&gt;
-&lt;p&gt;The problem you're seeing is caused by having multiple image layers:&lt;/p&gt;
+&lt;p&gt;The problem you're seeing is almost certainly caused by having multiple image layers under your adjustment layer(s):&lt;/p&gt;
 &lt;p&gt;&lt;img src="https://user-images.githubusercontent.com/177243/234700423-866d74a7-a68a-4c0a-a81d-feea987a42f3.png" alt="image"&gt;&lt;/p&gt;
 &lt;p&gt;And the solution is to just flatten all of those, &lt;em&gt;then&lt;/em&gt; export your color adjustments as a cube LUT:&lt;/p&gt;
 &lt;p&gt;&lt;img src="https://user-images.githubusercontent.com/177243/234700619-56851d7d-04f1-4cf4-96a1-6f84dafaac39.png" alt="image"&gt;&lt;/p&gt;
