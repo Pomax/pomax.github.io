@@ -5,9 +5,26 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Wed, 03 May 2023 23:20:16 GMT</lastBuildDate>
-<pubDate>Wed, 03 May 2023 23:20:16 GMT</pubDate>
+<lastBuildDate>Sat, 05 Aug 2023 17:17:33 GMT</lastBuildDate>
+<pubDate>Sat, 05 Aug 2023 17:17:33 GMT</pubDate>
 <ttl>1440</ttl>
+<item>
+<title> Writing a Node package using Rust... on Windows</title>
+<description>&lt;p&gt;Let me preface this by saying that every single person who thinks that mingw or msys are valid excuses for not targeting true windows is actively making life worse for large swathes of developers. You're not helping. Windows applications and libraries should work on Windows, using the Windows platform.&lt;/p&gt;
+&lt;p&gt;With that out of the way, let's write some code in Rust that we can call from Node.js so that we get the best of both worlds: the ease of development of Node.js, with the "I need this to be fast" parts handled by natively compiled code.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;install LLVM because you'll need LLD&lt;/li&gt;
+&lt;li&gt;create a &lt;code&gt;C:\Users\yournamehere\.cargo\config&lt;/code&gt; file and add the following code to it:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;[target.x86_64-pc-windows-msvc]
+linker = "lld-link.exe"
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;-&lt;/p&gt;
+</description>
+
+<link>http://pomax.github.io/#gh-weblog-1691255244859</link>
+<guid>http://pomax.github.io/#gh-weblog-1691255244859</guid>
+<pubDate>Sat, 05 Aug 2023 17:07:24 GMT</pubDate>
+</item>
 <item>
 <title> Generating a 3D LUT with Photoshop for OBS/Atomos/etc.</title>
 <description>&lt;p&gt;Have you ever needed a 3D cube LUT? Turns out, all you need is Photoshop! Whip out Photoshop and create a bunch of "adjustment layers" for your colour correction...&lt;/p&gt;
@@ -422,51 +439,5 @@ server.listen(port, () =&amp;gt; {
 <link>http://pomax.github.io/#gh-weblog-1638815860591</link>
 <guid>http://pomax.github.io/#gh-weblog-1638815860591</guid>
 <pubDate>Mon, 06 Dec 2021 18:37:40 GMT</pubDate>
-</item>
-<item>
-<title> If your software still relies on Python 2.7, your software is bad and you should feel bad.</title>
-<description>&lt;p&gt;If that statement made you think you should tell me I'm wrong, then allow me to elaborate, because I tweeted this a while back and got some really weird responses that demonstrate &lt;em&gt;many&lt;/em&gt; folks don't understand what's wrong here, and that in itself is something worth fixing.&lt;/p&gt;
-&lt;p&gt;Let's start with a bit of tech debt: you need to write a program, which language do you use? Cool, good choice, love it, totally the right call, so: what's your major version upgrade plan? Because the title statement isn't just about Python 2.7, Python 2.7 is just the latest example in a long and never-ending series of programming language versions that either have, are in the process of, or will become, obsolete and almost guaranteed security liabilities.&lt;/p&gt;
-&lt;p&gt;For example, let's look at some statements that are exactly the same as the title, but that almost no one's going to get upset about:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;If your software still relies on PHP 4 in 2021, your software is bad and you should feel bad.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;I mean... obviously. If you're still writing new PHP 4 code, or you're refusing to uplift software that was originally written in PHP 4, instead just keeping on developing it in PHP 4, now you're just an intentional bad actor. The only way people can run your code is by installing software that we, which includes you, &lt;em&gt;know&lt;/em&gt; is a giant security exploit.&lt;/p&gt;
-&lt;p&gt;Of course there will be code that was originally written for PHP 4 that did something incredibly useful back in the early 2000's, but no amount of utility can justify installing PHP 4 in the early 2020's.&lt;/p&gt;
-&lt;p&gt;How about another one?&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;If your software still relies on Node 0.10 in 2021, your software is bad and you should feel bad.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;I mean... have you looked at the list of CVEs for Node 0.10?  If you're still writing Node 0.10 code, or you're refusing to uplift software that was originally written in Node 0.10, instead just keeping on developing it in Node 0.10, then yeah, your software is bad and you should absolutely feel bad. If you're still working on it, why the hell are you not targeting the older of the two LTS versions of Node?&lt;/p&gt;
-&lt;p&gt;Let's do one more.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;If your software still relies on Java 1.4 in 2021, your software is bad and you should feel bad.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;You get the point by now. Sure, there is code that got &lt;em&gt;released when Java 1.4 was current&lt;/em&gt; and did great things but if that code is still being maintained or worked on (not, "if that code is still being used", but if that code is still actively maintained, and has new releases pushed out, requiring Java 1.4) then that code should have been uplifted &lt;em&gt;several times&lt;/em&gt; over the last two decades.&lt;/p&gt;
-&lt;h2 id="so-why-is-python-such-a-touchy-subject-"&gt;So why is Python such a touchy subject?&lt;/h2&gt;
-&lt;p&gt;A lot of people are locked into it, whether they want to or not. And most don't want to.&lt;/p&gt;
-&lt;p&gt;That's not their fault. A lot of software was originally written in 2.7, and again that's fine. But, a lot of companies still haven't uplifted their 2.7 code to v3 now that 2.7 has been dead for over a year, and that &lt;em&gt;&lt;strong&gt;is&lt;/strong&gt;&lt;/em&gt; their fault, and that &lt;em&gt;&lt;strong&gt;is&lt;/strong&gt;&lt;/em&gt; something they need to feel bad about, and address.&lt;/p&gt;
-&lt;p&gt;How we got here is easy: Python 2.7 was around for a very, &lt;em&gt;very&lt;/em&gt; long time. Much too long, in fact, and for the longest of that long time, there wasn't even an end-of-life date for it. During the lifetime of 2.7, the new Python 3.0 got released. And then 3.1 got released as well... and then 3.2... and 3.3.... and 3.4... and 3.5... and 3.6... and 3.7... and 3.8... and 3.9... For an entire &lt;em&gt;decade&lt;/em&gt; of 3.x updates, 2.7 was just as viable a choice, despite being objectively worse in pretty much every way. So thanks to the fact that there was already a ton of 2.7 code being used when 3.0 came out, making people prefer "the old version" because you already needed to have 2.7 installed for the majority of the python code you needed anyway, and installing 3.x on the same machine was actually a royal pain in the backside, people kept developing new codebases in 2.7 and that was unfortunate and definitely a vicious cycle, but entirely understandable.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://github.com/python/devguide/pull/344"&gt;That changed in 2018&lt;/a&gt;, when a real end-of-life date for 2.7 was decided: as of January 1st 2020, python 2.7 would be dead. As in: properly dead. The same kind dead as PHP 4, or Node 0.10, or Java 1.4: any security hole, any exploit, any vulnerability that 2.7 still had is forever part of 2.7, because 2.7 has reached end-of-life. In 2020, we said goodbye to Python 2.7 - it was a glorious run, but it had to go, and it's good that it's gone. Long live Python 3.x, but with EOL dates for each version. Hurray!&lt;/p&gt;
-&lt;p&gt;Now, practically, 2.7 didn't &lt;em&gt;actually&lt;/em&gt; die until April 2020, but throughout 2018 and 2019, people knew 2.7 would be gone soon, but the Python folks are &lt;em&gt;good people&lt;/em&gt;, and they actually created tools to help everyone uplift their code from v2 to v3. The &lt;a href="https://docs.python.org/3/library/2to3.html"&gt;2to3&lt;/a&gt; package is fantastic, and for a great many people, it's all they need. &lt;/p&gt;
-&lt;p&gt;Now it's April 2021, and we reach the original premise:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;If your software still relies on Python 2.7, your software is bad and you should feel bad.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Note what this &lt;em&gt;doesn't&lt;/em&gt; say: it doesn't say that all Python 2.7 software ever written is bad, Python 2.7 code written in 2004 that does a thing no other code does had a damn good reason to exist, but it has zero reason to &lt;em&gt;still be maintained as a 2.7 code base&lt;/em&gt; because 2.7 is gone. Make your peace with that and move to 3.x&lt;/p&gt;
-&lt;p&gt;It also doesn't say that &lt;em&gt;users&lt;/em&gt; should feel bad if their only choice is an old Python 2.7 piece of code. If that software you rely on is written in Python 2.7, and the maintainers long since abandoned it, then yeah that's your only choice and as a person you are perfectly capable of deciding whether that old software is worth the security liability of python 2.7. More often than not, it will be.&lt;/p&gt;
-&lt;p&gt;What it &lt;em&gt;does&lt;/em&gt; say is that if you are writing python code today, whether that's new code, or maintaining a project that started over a decade ago, and you intend for others to use that code, and you use Python 2.7, you are a bad programmer and you need to stop what you're doing. Step back, take a deep breath, and uplift your code to a version of Python that is still supported (which realistically means first uplifting to v3, and then going through decade of v3 minor versions to make sure you catch any problems caused by v3 getting better and better), while archiving your 2.7 branch so that folks who absolutely still need it can still get it.&lt;/p&gt;
-&lt;h2 id="in-conclusion"&gt;In conclusion&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;If your software still relies on Python 2.7&lt;/strong&gt; , meaning that in 2021, your software that you still work on with the intention of having others make use of it, then&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;your software is bad&lt;/strong&gt; because it forces people into using dead technology that has known security exploits, and&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;you should feel bad&lt;/strong&gt; and you should address that.&lt;/p&gt;
-&lt;p&gt;Go archive your 2.7 release as the last 2.7 release you'll ever do, run 2to3 on your code, and start a new release set for 3.x because that's the safe version of Python that people should be using these days.&lt;/p&gt;
-&lt;p&gt;Not PHP 4. Or Node 0.10. Or Java 1.4. Or Python 2.7&lt;/p&gt;
-</description>
-<category>python</category>
-<category>programming</category>
-<link>http://pomax.github.io/#gh-weblog-1617908788691</link>
-<guid>http://pomax.github.io/#gh-weblog-1617908788691</guid>
-<pubDate>Thu, 08 Apr 2021 19:06:28 GMT</pubDate>
 </item></channel>
 </rss>
