@@ -5,17 +5,17 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Fri, 29 Sep 2023 17:32:20 GMT</lastBuildDate>
-<pubDate>Fri, 29 Sep 2023 17:32:20 GMT</pubDate>
+<lastBuildDate>Fri, 29 Sep 2023 17:39:05 GMT</lastBuildDate>
+<pubDate>Fri, 29 Sep 2023 17:39:05 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Writing a Node package using Rust... on Windows</title>
-<description>&lt;p&gt;Let me preface this by saying that every single person who thinks that mingw or msys are valid excuses for not targeting true windows is actively making life worse for large swathes of developers. You're not helping. Windows applications and libraries should work on Windows, using the Windows platform.&lt;/p&gt;
-&lt;p&gt;With that out of the way, let's write some code in Rust that we can call from Node.js so that we get the best of both worlds: the ease of development of Node.js, with the "I need this to be fast" parts handled by natively compiled code.&lt;/p&gt;
+<description>&lt;p&gt;Let me preface this by saying that every single person who claims that &lt;code&gt;mingw&lt;/code&gt;, or &lt;code&gt;msys&lt;/code&gt;, or "you have &lt;code&gt;WSL2&lt;/code&gt;, just use that" are valid excuses to not target actual Windows is actively making life worse for large swathes of developers, and if that's you, you're not making the world a better place. Applications and libraries should work on any OS, including Windows, cross-platform compiled for each =)&lt;/p&gt;
+&lt;p&gt;With that out of the way: let's write some code in Rust that we can call from Node.js so that we get the best of both worlds: the ease of development of Node.js, with the "I need this to be fast" parts handled by natively compiled code.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="https://github.com/llvm/llvm-project/releases/ because you'll need LLD (click &amp;quot;show all ... assets&amp;quot; and download the windows version"&gt;install LLVM&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.rust-lang.org/tools/install"&gt;install Rust&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;check to see if you have a &lt;code&gt;C:\Users\yournamehere\.cargo\config&lt;/code&gt; file, and if not, create one.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/llvm/llvm-project/releases/ because you'll need LLD (click &amp;quot;show all ... assets&amp;quot; and download the windows version"&gt;install LLVM&lt;/a&gt;, because we'll need the LLD tool that comes with it,&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.rust-lang.org/tools/install"&gt;install Rust&lt;/a&gt;, and then&lt;/li&gt;
+&lt;li&gt;check to see if you have a &lt;code&gt;C:\Users\yournamehere\.cargo\config&lt;/code&gt; file. If you don't, create one.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Open the cargo config file, and add the following to it:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;[target.x86_64-pc-windows-msvc]
