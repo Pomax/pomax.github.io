@@ -5,13 +5,14 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Fri, 29 Sep 2023 17:44:26 GMT</lastBuildDate>
-<pubDate>Fri, 29 Sep 2023 17:44:26 GMT</pubDate>
+<lastBuildDate>Fri, 29 Sep 2023 17:55:41 GMT</lastBuildDate>
+<pubDate>Fri, 29 Sep 2023 17:55:41 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Writing a Node package using Rust... on Windows</title>
 <description>&lt;p&gt;Let me preface this by saying that every single person who claims that &lt;code&gt;mingw&lt;/code&gt;, or &lt;code&gt;msys&lt;/code&gt;, or "you have &lt;code&gt;WSL2&lt;/code&gt;, just use that" are valid excuses to not target actual Windows is actively making life worse for large swathes of developers, and if that's you, please be better. Applications and libraries should work on any OS, including Windows: just cross-platform compile your software instead of making it someone else's problem =)&lt;/p&gt;
 &lt;p&gt;With that out of the way: let's write some code in Rust that we can call from Node.js so that we get the best of both worlds: the ease of development of Node.js, with the "I need this to be fast" parts handled by natively compiled code.&lt;/p&gt;
+&lt;p&gt;First up, let's get Rust configured:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://github.com/llvm/llvm-project/releases/ because you'll need LLD (click &amp;quot;show all ... assets&amp;quot; and download the windows version"&gt;install LLVM&lt;/a&gt;, because we'll need the LLD tool that comes with it,&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.rust-lang.org/tools/install"&gt;install Rust&lt;/a&gt;,&lt;/li&gt;
@@ -62,17 +63,15 @@ pub extern fn orientation_test(s: &amp;amp;mut Orientation) -&amp;gt; &amp;amp;m
   return s.add(1.0, 2.0, 3.0);
 }
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you're familiar with Rust none of this should be too surprising, but you might notice the &lt;code&gt;#[repr(C)]&lt;/code&gt;, which tells Rust that we want the library's &lt;a href="https://en.wikipedia.org/wiki/Application_binary_interface"&gt;application binary interface&lt;/a&gt; to conform to the C version, because Node only knows how to work with C flavoured ABIs. You might also notice the &lt;code&gt;#[no_mangle]&lt;/code&gt; which is &lt;em&gt;super&lt;/em&gt; important: by default Rust will optimize function names, which is convenient for generating smaller executables but is &lt;em&gt;disastrous&lt;/em&gt; for libraries, where the point is that we want to call functions that we export &lt;em&gt;using the name we gave them&lt;/em&gt;. So we tell Rust not to mangle the function name. And of course, everything we want to make use of on the Node side gets a &lt;code&gt;pub&lt;/code&gt; so that it's visible to the outside world.&lt;/p&gt;
+&lt;p&gt;If you're familiar with Rust none of this should be too surprising, but you might notice the &lt;code&gt;#[repr(C)]&lt;/code&gt;, which tells Rust that we want the library's &lt;a href="https://en.wikipedia.org/wiki/Application_binary_interface"&gt;application binary interface&lt;/a&gt; (ABI) to conform to the C version, because Node only knows how to work with C flavoured ABIs. You might also notice the &lt;code&gt;#[no_mangle]&lt;/code&gt; which is &lt;em&gt;super&lt;/em&gt; important: by default Rust will optimize function names, which is convenient for generating smaller executables but is &lt;em&gt;disastrous&lt;/em&gt; for libraries, where the point is that we want to call functions that we export &lt;em&gt;using the name we gave them&lt;/em&gt;. So we tell Rust not to mangle the function name. And of course, everything we want to make use of on the Node side gets a &lt;code&gt;pub&lt;/code&gt; so that it's visible to the outside world.&lt;/p&gt;
 &lt;p&gt;And that's it, we can now run &lt;code&gt;cargo build&lt;/code&gt; and it'll generate us a &lt;code&gt;target/debug/testlib.dll&lt;/code&gt; file to use in "whatever knows how to import DLL files"!&lt;/p&gt;
-&lt;p&gt;So let's move on to Node. We're first going to initialize the Rust project as a Node project, too, using &lt;code&gt;npm init&lt;/code&gt;, after which we need to install something that'll let us work with DLL files, i.e. we want an &lt;a href="https://en.wikipedia.org/wiki/Foreign_function_interface"&gt;FFI&lt;/a&gt; solution, and the one we'll be using is &lt;a href="https://koffi.dev/"&gt;koffi&lt;/a&gt;: &lt;code&gt;npm install koffi&lt;/code&gt; and we're good to go.&lt;/p&gt;
+&lt;p&gt;So let's move on to Node. We're first going to initialize the Rust project as a Node project, too, using &lt;code&gt;npm init&lt;/code&gt;, after which we need to install something that'll let us work with DLL files, i.e. we want an &lt;a href="https://en.wikipedia.org/wiki/Foreign_function_interface"&gt;foreign function interface&lt;/a&gt; (FFI) solution, and the one we'll be using is &lt;a href="https://koffi.dev/"&gt;koffi&lt;/a&gt;: &lt;code&gt;npm install koffi&lt;/code&gt; and we're good to go.&lt;/p&gt;
+&lt;p&gt;(There are other options, but after trying pretty much every FFI solution that exists for Node, &lt;code&gt;koffi&lt;/code&gt; was by far the most pleasant to work with. Which is pretty important!)&lt;/p&gt;
 &lt;p&gt;Let's create a &lt;code&gt;test.js&lt;/code&gt; and make it use our DLL file!&lt;/p&gt;
 &lt;pre&gt;&lt;code class="lang-js"&gt;// First we import koffi and load our library, using the extension appropriate to our OS.
 // Remember, just because we're on Windows doesn't mean we should be LOCKED into Windows!
 import koffi from "koffi";
-const { platform } = process;
-const libraryPath = `./target/debug/testlib.${
-  platform === `win32` ? `dll` : `so`
-}`;
+const libraryPath = `./target/debug/testlib.${process.platform === `win32` ? `dll` : `so`}`;
 const lib = koffi.load(libraryPath);
 
 // Then we'll need a JS-equivalent of the struct our library uses:
@@ -87,15 +86,25 @@ const Orientation = koffi.struct(`Orientation`, {
 const orientationTest = lib.func(`orientation_test`, Orientation, [Orientation]);
 
 // And with that we're ready to run some native code!
-const data = { pitch: 0, roll: 0, yaw: 0 };
+const data = {
+  pitch: 0,
+  roll: 0,
+  yaw: 0,
+};
+
 let result = data;
+
 const start = performance.now();
-for(let i=0; i&amp;lt;10000; i++) result = orientationTest(result);
-console.log(`test result:`, result, `- 10,000 iterations took ${(performance.now() - start)|0}ms`);
+for(let i=0; i&amp;lt;10000; i++) {
+  result = orientationTest(result);
+}
+const timeTaken = (performance.now() - start)|0;
+
+console.log(`test result:`, result, `- 10,000 iterations took ${timeTaken}ms`);
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;If we now run this using &lt;code&gt;node test.js&lt;/code&gt; we see:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;test result: { pitch: 10000, roll: 20000, yaw: 30000 } - 10,000 iterations took 13ms
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;How cool is that? We're no longer stuck with running code at the speed of JS, we can run code at &lt;em&gt;native&lt;/em&gt; speed by handing the number-crunchy, resource -intensive parts over to Rust, while keeping the convenient of JS for all the other parts of our code. It's the best of both worlds!&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;How cool is that? We're no longer stuck with running code at the speed of JS, we can run code at &lt;em&gt;native&lt;/em&gt; speed by handing the number-crunchy, resource-intensive parts over to Rust, while keeping the convenience of JS for all the other parts of our code. It's the best of both worlds!&lt;/p&gt;
 </description>
 <category>Node.js</category>
 <category>Rust</category>
@@ -131,7 +140,7 @@ console.log(`test result:`, result, `- 10,000 iterations took ${(performance.now
 <item>
 <title>Leaving twitter</title>
 <description>&lt;p&gt;In October of 2022, Elon Musk, a man who failed up harder than anyone else in history, decided to buy Twitter with the express intent to turn it into a completely different product. He laid off thousands of people, devalued the company by 50%, and started pushing through changes that not only changed the experience of the platform, but also made sure that you had no way of actually seeing the content you wanted, while at the same time pushing ads into every single stream presented to you.&lt;/p&gt;
-&lt;p&gt;I signed up for Twitter back in 2009, and it's fun a (mostly) fun ride, but even when it wasn't, there were always two things preventing folks from leaving the platform: (1) it was rarely &lt;em&gt;that&lt;/em&gt; bad, and (2) there was no genuine alternative. &lt;/p&gt;
+&lt;p&gt;I signed up for Twitter back in 2009, and it's been a (mostly) fun ride, but even when it wasn't, there were always two things preventing folks from leaving the platform: (1) it was rarely &lt;em&gt;that&lt;/em&gt; bad, and (2) there was no genuine alternative. &lt;/p&gt;
 &lt;p&gt;Both those things changed in recent years. For several years now, Mastodon has been an alternative to Twitter, and with Elon's destruction of Twitter the number of both Mastodon users and Mastodon servers has exploded. It's now a perfectly fine alternative with plenty of folks to follow. No, they're not all on the same server, but it's not like you had problems sending emails to people who didn't use your email server before, and this is the same. Just follow them, irrespective of which server they happen to use. Done, you just need to know their "homepage", hardly a chore.&lt;/p&gt;
 &lt;p&gt;So as Musk lands more and garbage features in a desperate attempt to short-term claw back money, I'm calling it quits. To prevent people from namesquatting, I'm keeping my twitter account, and I'm not deleting any old tweets, but I'll be using mastodon exclusively from now on. &lt;/p&gt;
 &lt;p&gt;Find me over on &lt;a href="https://mastodon.social/@TheRealPomax"&gt;https://mastodon.social/@TheRealPomax&lt;/a&gt;&lt;/p&gt;
