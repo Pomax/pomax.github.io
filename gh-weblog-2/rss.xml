@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Fri, 29 Sep 2023 17:31:58 GMT</lastBuildDate>
-<pubDate>Fri, 29 Sep 2023 17:31:58 GMT</pubDate>
+<lastBuildDate>Fri, 29 Sep 2023 17:32:20 GMT</lastBuildDate>
+<pubDate>Fri, 29 Sep 2023 17:32:20 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Writing a Node package using Rust... on Windows</title>
@@ -96,7 +96,10 @@ console.log(`test result:`, result, `- 10,000 iterations took ${(performance.now
 &lt;pre&gt;&lt;code&gt;test result: { pitch: 10000, roll: 20000, yaw: 30000 } - 10,000 iterations took 13ms
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;How cool is that? We're no longer stuck with running code at the speed of JS, we can run code at &lt;em&gt;native&lt;/em&gt; speed by handing the number-crunchy, resource -intensive parts over to Rust, while keeping the convenient of JS for all the other parts of our code. It's the best of both worlds!&lt;/p&gt;
 </description>
-
+<category>Node.js</category>
+<category>Rust</category>
+<category>Koffi</category>
+<category>FFI</category>
 <link>http://pomax.github.io/#gh-weblog-1691255244859</link>
 <guid>http://pomax.github.io/#gh-weblog-1691255244859</guid>
 <pubDate>Sat, 05 Aug 2023 17:07:24 GMT</pubDate>
