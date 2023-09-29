@@ -5,20 +5,96 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Sat, 05 Aug 2023 17:17:33 GMT</lastBuildDate>
-<pubDate>Sat, 05 Aug 2023 17:17:33 GMT</pubDate>
+<lastBuildDate>Fri, 29 Sep 2023 17:31:58 GMT</lastBuildDate>
+<pubDate>Fri, 29 Sep 2023 17:31:58 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Writing a Node package using Rust... on Windows</title>
 <description>&lt;p&gt;Let me preface this by saying that every single person who thinks that mingw or msys are valid excuses for not targeting true windows is actively making life worse for large swathes of developers. You're not helping. Windows applications and libraries should work on Windows, using the Windows platform.&lt;/p&gt;
 &lt;p&gt;With that out of the way, let's write some code in Rust that we can call from Node.js so that we get the best of both worlds: the ease of development of Node.js, with the "I need this to be fast" parts handled by natively compiled code.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;install LLVM because you'll need LLD&lt;/li&gt;
-&lt;li&gt;create a &lt;code&gt;C:\Users\yournamehere\.cargo\config&lt;/code&gt; file and add the following code to it:&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/llvm/llvm-project/releases/ because you'll need LLD (click &amp;quot;show all ... assets&amp;quot; and download the windows version"&gt;install LLVM&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.rust-lang.org/tools/install"&gt;install Rust&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;check to see if you have a &lt;code&gt;C:\Users\yournamehere\.cargo\config&lt;/code&gt; file, and if not, create one.&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;Open the cargo config file, and add the following to it:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;[target.x86_64-pc-windows-msvc]
 linker = "lld-link.exe"
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;-&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Rust now knows that it's building for the Windows platform. Beauty.&lt;/p&gt;
+&lt;p&gt;Next up, we'll need Node.js&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;install &lt;a href="https://github.com/coreybutler/nvm-windows"&gt;nvm-windows&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;run &lt;code&gt;nvm install lts&lt;/code&gt; to install the current &lt;a href="https://en.wikipedia.org/wiki/Long-term_support"&gt;LTS&lt;/a&gt; version of Node&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And we're good to go. Let's start by creating a new project by running &lt;code&gt;cargo new testlib&lt;/code&gt; and then changing a few things because we want Rust to build us a library, not an executable:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;rename &lt;code&gt;src/main.rs&lt;/code&gt; to &lt;code&gt;src/lib.rs&lt;/code&gt;,&lt;/li&gt;
+&lt;li&gt;add a section called &lt;code&gt;[lib]&lt;/code&gt; to the &lt;code&gt;Cargo.toml&lt;/code&gt; file, and&lt;/li&gt;
+&lt;li&gt;add &lt;code&gt;crate-type = ["cdylib"]&lt;/code&gt; in that new section.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This tells Rust that it will be compiling a shared library appropriate to the OS we build it on. Since we're on Windows, it'll be generating &lt;code&gt;.dll&lt;/code&gt; files.&lt;/p&gt;
+&lt;p&gt;And with that, let's put some Rust code in our &lt;code&gt;lib.rs&lt;/code&gt;!&lt;/p&gt;
+&lt;pre&gt;&lt;code class="lang-rust"&gt;// Tell Rust that we want our ABI to be C flavoured:
+#[repr(C)]
+
+// Create the equivalent of a Vec3:
+pub struct Orientation {
+  pitch: f64,
+  roll: f64,
+  yaw: f64,
+}
+
+// Give that struct an .add() function:
+impl Orientation {
+  fn add(&amp;amp;mut self, pitch: f64, roll: f64, yaw:f64) -&amp;gt; &amp;amp;mut Orientation {
+    self.pitch += pitch;
+    self.roll += roll;
+    self.yaw += yaw;
+    return self;
+  }
+}
+
+// And then let's write a function that takes an Orientation as input,
+// does "something", and then returns that Orietation as output:
+#[no_mangle]
+pub extern fn orientation_test(s: &amp;amp;mut Orientation) -&amp;gt; &amp;amp;mut Orientation {
+  return s.add(1.0, 2.0, 3.0);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you're familiar with Rust none of this should be too surprising, but you might notice the &lt;code&gt;#[repr(C)]&lt;/code&gt;, which tells Rust that we want the library's &lt;a href="https://en.wikipedia.org/wiki/Application_binary_interface"&gt;application binary interface&lt;/a&gt; to conform to the C version, because Node only knows how to work with C flavoured ABIs. You might also notice the &lt;code&gt;#[no_mangle]&lt;/code&gt; which is &lt;em&gt;super&lt;/em&gt; important: by default Rust will optimize function names, which is convenient for generating smaller executables but is &lt;em&gt;disastrous&lt;/em&gt; for libraries, where the point is that we want to call functions that we export &lt;em&gt;using the name we gave them&lt;/em&gt;. So we tell Rust not to mangle the function name.&lt;/p&gt;
+&lt;p&gt;And that's it, we can now run &lt;code&gt;cargo build&lt;/code&gt; and it'll generate us a &lt;code&gt;target/debug/testlib.dll&lt;/code&gt; file to use in "whatever knows how to import DLL files"!&lt;/p&gt;
+&lt;p&gt;So let's move on to Node. We're first going to initialize the Rust project as a Node project, too, using &lt;code&gt;npm init&lt;/code&gt;, after which we need to install something that'll let us work with DLL files, i.e. we want an &lt;a href="https://en.wikipedia.org/wiki/Foreign_function_interface"&gt;FFI&lt;/a&gt; solution, and the one we'll be using is &lt;a href="https://koffi.dev/"&gt;koffi&lt;/a&gt;: &lt;code&gt;npm install koffi&lt;/code&gt; and we're good to go.&lt;/p&gt;
+&lt;p&gt;Let's create a &lt;code&gt;test.js&lt;/code&gt; and make it use our DLL file!&lt;/p&gt;
+&lt;pre&gt;&lt;code class="lang-js"&gt;// First we import koffi and load our library, using the extension appropriate to our OS.
+// Remember, just because we're on Windows doesn't mean we should be LOCKED into Windows!
+import koffi from "koffi";
+const { platform } = process;
+const libraryPath = `./target/debug/testlib.${
+  platform === `win32` ? `dll` : `so`
+}`;
+const lib = koffi.load(libraryPath);
+
+// Then we'll need a JS-equivalent of the struct our library uses:
+const Orientation = koffi.struct(`Orientation`, {
+  pitch: `double`,
+  roll: `double`,
+  yaw: `double`,
+});
+
+// And of course, we need a function handle, which requires specifying the function name we
+// want from the library, as well as what output it generates, given which inputs:
+const orientationTest = lib.func(`orientation_test`, Orientation, [Orientation]);
+
+// And with that we're ready to run some native code!
+const data = { pitch: 0, roll: 0, yaw: 0 };
+let result = data;
+const start = performance.now();
+for(let i=0; i&amp;lt;10000; i++) result = orientationTest(result);
+console.log(`test result:`, result, `- 10,000 iterations took ${(performance.now() - start)|0}ms`);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If we now run this using &lt;code&gt;node test.js&lt;/code&gt; we see:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;test result: { pitch: 10000, roll: 20000, yaw: 30000 } - 10,000 iterations took 13ms
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;How cool is that? We're no longer stuck with running code at the speed of JS, we can run code at &lt;em&gt;native&lt;/em&gt; speed by handing the number-crunchy, resource -intensive parts over to Rust, while keeping the convenient of JS for all the other parts of our code. It's the best of both worlds!&lt;/p&gt;
 </description>
 
 <link>http://pomax.github.io/#gh-weblog-1691255244859</link>
