@@ -4,5 +4,10 @@
   "created": 1691255244859,
   "published": 1691255244859,
   "updated": 1696008715076,
-  "tags": []
+  "tags": [
+    "Node.js",
+    "Rust",
+    "Koffi",
+    "FFI"
+  ]
 }
