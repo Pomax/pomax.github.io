@@ -5,18 +5,18 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Fri, 29 Sep 2023 17:40:45 GMT</lastBuildDate>
-<pubDate>Fri, 29 Sep 2023 17:40:45 GMT</pubDate>
+<lastBuildDate>Fri, 29 Sep 2023 17:44:26 GMT</lastBuildDate>
+<pubDate>Fri, 29 Sep 2023 17:44:26 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Writing a Node package using Rust... on Windows</title>
-<description>&lt;p&gt;Let me preface this by saying that every single person who claims that &lt;code&gt;mingw&lt;/code&gt;, or &lt;code&gt;msys&lt;/code&gt;, or "you have &lt;code&gt;WSL2&lt;/code&gt;, just use that" are valid excuses to not target actual Windows is actively making life worse for large swathes of developers, and if that's you, you're not making the world a better place. Applications and libraries should work on any OS, including Windows, cross-platform compiled for each =)&lt;/p&gt;
+<description>&lt;p&gt;Let me preface this by saying that every single person who claims that &lt;code&gt;mingw&lt;/code&gt;, or &lt;code&gt;msys&lt;/code&gt;, or "you have &lt;code&gt;WSL2&lt;/code&gt;, just use that" are valid excuses to not target actual Windows is actively making life worse for large swathes of developers, and if that's you, please be better. Applications and libraries should work on any OS, including Windows: just cross-platform compile your software instead of making it someone else's problem =)&lt;/p&gt;
 &lt;p&gt;With that out of the way: let's write some code in Rust that we can call from Node.js so that we get the best of both worlds: the ease of development of Node.js, with the "I need this to be fast" parts handled by natively compiled code.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://github.com/llvm/llvm-project/releases/ because you'll need LLD (click &amp;quot;show all ... assets&amp;quot; and download the windows version"&gt;install LLVM&lt;/a&gt;, because we'll need the LLD tool that comes with it,&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.rust-lang.org/tools/install"&gt;install Rust&lt;/a&gt;,&lt;/li&gt;
 &lt;li&gt;check to see if you have a &lt;code&gt;C:\Users\yournamehere\.cargo\config&lt;/code&gt; file. If you don't, create one, and&lt;/li&gt;
-&lt;li&gt;run &lt;code&gt;rustup target add x86_64-pc-windows-msvc&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;run &lt;code&gt;rustup target add x86_64-pc-windows-msvc&lt;/code&gt; to download the bits Rust needs to build native Windows binaries.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Then open the cargo config file, and add the following to it:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;[target.x86_64-pc-windows-msvc]
@@ -62,7 +62,7 @@ pub extern fn orientation_test(s: &amp;amp;mut Orientation) -&amp;gt; &amp;amp;m
   return s.add(1.0, 2.0, 3.0);
 }
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you're familiar with Rust none of this should be too surprising, but you might notice the &lt;code&gt;#[repr(C)]&lt;/code&gt;, which tells Rust that we want the library's &lt;a href="https://en.wikipedia.org/wiki/Application_binary_interface"&gt;application binary interface&lt;/a&gt; to conform to the C version, because Node only knows how to work with C flavoured ABIs. You might also notice the &lt;code&gt;#[no_mangle]&lt;/code&gt; which is &lt;em&gt;super&lt;/em&gt; important: by default Rust will optimize function names, which is convenient for generating smaller executables but is &lt;em&gt;disastrous&lt;/em&gt; for libraries, where the point is that we want to call functions that we export &lt;em&gt;using the name we gave them&lt;/em&gt;. So we tell Rust not to mangle the function name.&lt;/p&gt;
+&lt;p&gt;If you're familiar with Rust none of this should be too surprising, but you might notice the &lt;code&gt;#[repr(C)]&lt;/code&gt;, which tells Rust that we want the library's &lt;a href="https://en.wikipedia.org/wiki/Application_binary_interface"&gt;application binary interface&lt;/a&gt; to conform to the C version, because Node only knows how to work with C flavoured ABIs. You might also notice the &lt;code&gt;#[no_mangle]&lt;/code&gt; which is &lt;em&gt;super&lt;/em&gt; important: by default Rust will optimize function names, which is convenient for generating smaller executables but is &lt;em&gt;disastrous&lt;/em&gt; for libraries, where the point is that we want to call functions that we export &lt;em&gt;using the name we gave them&lt;/em&gt;. So we tell Rust not to mangle the function name. And of course, everything we want to make use of on the Node side gets a &lt;code&gt;pub&lt;/code&gt; so that it's visible to the outside world.&lt;/p&gt;
 &lt;p&gt;And that's it, we can now run &lt;code&gt;cargo build&lt;/code&gt; and it'll generate us a &lt;code&gt;target/debug/testlib.dll&lt;/code&gt; file to use in "whatever knows how to import DLL files"!&lt;/p&gt;
 &lt;p&gt;So let's move on to Node. We're first going to initialize the Rust project as a Node project, too, using &lt;code&gt;npm init&lt;/code&gt;, after which we need to install something that'll let us work with DLL files, i.e. we want an &lt;a href="https://en.wikipedia.org/wiki/Foreign_function_interface"&gt;FFI&lt;/a&gt; solution, and the one we'll be using is &lt;a href="https://koffi.dev/"&gt;koffi&lt;/a&gt;: &lt;code&gt;npm install koffi&lt;/code&gt; and we're good to go.&lt;/p&gt;
 &lt;p&gt;Let's create a &lt;code&gt;test.js&lt;/code&gt; and make it use our DLL file!&lt;/p&gt;
