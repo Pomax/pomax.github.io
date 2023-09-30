@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Sat, 30 Sep 2023 18:47:44 GMT</lastBuildDate>
-<pubDate>Sat, 30 Sep 2023 18:47:44 GMT</pubDate>
+<lastBuildDate>Sat, 30 Sep 2023 18:49:07 GMT</lastBuildDate>
+<pubDate>Sat, 30 Sep 2023 18:49:07 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Writing a Node package using Rust... on Windows</title>
@@ -65,9 +65,9 @@ pub extern fn orientation_test(s: &amp;amp;mut Orientation) -&amp;gt; &amp;amp;m
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;If you're familiar with Rust none of this should be too surprising, but you might notice the &lt;code&gt;#[repr(C)]&lt;/code&gt;, which tells Rust that we want the library's &lt;a href="https://en.wikipedia.org/wiki/Application_binary_interface"&gt;application binary interface&lt;/a&gt; (ABI) to conform to the C version, because Node only knows how to work with C flavoured ABIs. You might also notice the &lt;code&gt;#[no_mangle]&lt;/code&gt; which is &lt;em&gt;super&lt;/em&gt; important: by default Rust will optimize function names, which is convenient for generating smaller executables but is &lt;em&gt;disastrous&lt;/em&gt; for libraries, where the point is that we want to call functions that we export &lt;em&gt;using the name we gave them&lt;/em&gt;. So we tell Rust not to mangle the function name. And of course, everything we want to make use of on the Node side gets a &lt;code&gt;pub&lt;/code&gt; so that it's visible to the outside world.&lt;/p&gt;
 &lt;p&gt;And that's it, we can now run &lt;code&gt;cargo build&lt;/code&gt; and it'll generate us a &lt;code&gt;target/debug/testlib.dll&lt;/code&gt; file to use in "whatever knows how to import DLL files"!&lt;/p&gt;
-&lt;p&gt;So let's move on to Node. We're first going to initialize the Rust project as a Node project, too, using &lt;code&gt;npm init&lt;/code&gt;, after which we need to install something that'll let us work with DLL files, i.e. we want an &lt;a href="https://en.wikipedia.org/wiki/Foreign_function_interface"&gt;foreign function interface&lt;/a&gt; (FFI) solution, and the one we'll be using is &lt;a href="https://koffi.dev/"&gt;koffi&lt;/a&gt;: &lt;code&gt;npm install koffi&lt;/code&gt; and we're good to go.&lt;/p&gt;
+&lt;p&gt;So let's move on to Node. We're first going to initialize the Rust project as a Node project, too, using &lt;code&gt;npm init&lt;/code&gt;, after which we need to install something that'll let us work with DLL files, i.e. we want an &lt;a href="https://en.wikipedia.org/wiki/Foreign_function_interface"&gt;foreign function interface&lt;/a&gt; (FFI) solution, and the one we'll be using is &lt;a href="https://koffi.dev/"&gt;koffi&lt;/a&gt;: &lt;code&gt;npm install koffi&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;(There are other options, but after trying pretty much every FFI solution that exists for Node, &lt;code&gt;koffi&lt;/code&gt; was by far the most pleasant to work with. Which is pretty important!)&lt;/p&gt;
-&lt;p&gt;Let's create a &lt;code&gt;test.js&lt;/code&gt; and make it use our DLL file!&lt;/p&gt;
+&lt;p&gt;We then edit our &lt;code&gt;package.json&lt;/code&gt; to include a &lt;code&gt;"type": "module"&lt;/code&gt; because it's 2023 and we'll be writing modern JS with modern ES modules instead of using the legacy Node-only CommonJS module system, and we're good to go, let's create a &lt;code&gt;test.js&lt;/code&gt; and make it use our DLL file!&lt;/p&gt;
 &lt;pre&gt;&lt;code class="lang-js"&gt;// First we import koffi and load our library, using the extension appropriate to our OS.
 // Remember, just because we're on Windows doesn't mean we should be LOCKED into Windows!
 import koffi from "koffi";
