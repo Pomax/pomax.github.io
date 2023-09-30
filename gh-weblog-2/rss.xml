@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Fri, 29 Sep 2023 17:55:41 GMT</lastBuildDate>
-<pubDate>Fri, 29 Sep 2023 17:55:41 GMT</pubDate>
+<lastBuildDate>Sat, 30 Sep 2023 18:47:44 GMT</lastBuildDate>
+<pubDate>Sat, 30 Sep 2023 18:47:44 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Writing a Node package using Rust... on Windows</title>
@@ -142,8 +142,8 @@ console.log(`test result:`, result, `- 10,000 iterations took ${timeTaken}ms`);
 <description>&lt;p&gt;In October of 2022, Elon Musk, a man who failed up harder than anyone else in history, decided to buy Twitter with the express intent to turn it into a completely different product. He laid off thousands of people, devalued the company by 50%, and started pushing through changes that not only changed the experience of the platform, but also made sure that you had no way of actually seeing the content you wanted, while at the same time pushing ads into every single stream presented to you.&lt;/p&gt;
 &lt;p&gt;I signed up for Twitter back in 2009, and it's been a (mostly) fun ride, but even when it wasn't, there were always two things preventing folks from leaving the platform: (1) it was rarely &lt;em&gt;that&lt;/em&gt; bad, and (2) there was no genuine alternative. &lt;/p&gt;
 &lt;p&gt;Both those things changed in recent years. For several years now, Mastodon has been an alternative to Twitter, and with Elon's destruction of Twitter the number of both Mastodon users and Mastodon servers has exploded. It's now a perfectly fine alternative with plenty of folks to follow. No, they're not all on the same server, but it's not like you had problems sending emails to people who didn't use your email server before, and this is the same. Just follow them, irrespective of which server they happen to use. Done, you just need to know their "homepage", hardly a chore.&lt;/p&gt;
-&lt;p&gt;So as Musk lands more and garbage features in a desperate attempt to short-term claw back money, I'm calling it quits. To prevent people from namesquatting, I'm keeping my twitter account, and I'm not deleting any old tweets, but I'll be using mastodon exclusively from now on. &lt;/p&gt;
-&lt;p&gt;Find me over on &lt;a href="https://mastodon.social/@TheRealPomax"&gt;https://mastodon.social/@TheRealPomax&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;So as Musk lands more and more garbage features in a desperate attempt to short-term claw back money, I'm calling it quits. To prevent people from namesquatting, I've deleted my account, waiting the prerequisite 30 day period for it to become available again, and reregistered my name but won't be posting using it. Instead, I'll be using mastodon exclusively from now on. &lt;/p&gt;
+&lt;p&gt;You can find me over on &lt;a href="https://mastodon.social/@TheRealPomax"&gt;https://mastodon.social/@TheRealPomax&lt;/a&gt;&lt;/p&gt;
 </description>
 <category>Mastodon</category>
 <category>Twitter</category>
