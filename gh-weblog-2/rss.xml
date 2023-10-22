@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Sun, 22 Oct 2023 04:28:11 GMT</lastBuildDate>
-<pubDate>Sun, 22 Oct 2023 04:28:11 GMT</pubDate>
+<lastBuildDate>Sun, 22 Oct 2023 04:28:31 GMT</lastBuildDate>
+<pubDate>Sun, 22 Oct 2023 04:28:31 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Socketless, a websocket-based RPC library... without websockets or RPC</title>
@@ -15,7 +15,11 @@
 &lt;p&gt;I still need to set up a website for it (for now, the github repo will do), and I want to swap over my &lt;a href="https://pomax.github.io/are-we-flying/"&gt;"Are we flying?"&lt;/a&gt; article and codebase to make use of this (as well as an unreleased multiplayer Mahjong implementation, more on that in the future, hopefully), which I'm sure will reveal things I still need to add or change, but for now, this is incredibly useful as is, and if you've ever wanted to write a client/server "anything", be it a game, chat server, BBS, whathaveyou, this should make that jobs a ridiculous amount easier.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://github.com/pomax/pomax.github.io/issues"&gt;Let me know what you think!&lt;/a&gt;&lt;/p&gt;
 </description>
-
+<category>Nodejs</category>
+<category>websocket</category>
+<category>websockets</category>
+<category>RPC</category>
+<category>games</category>
 <link>http://pomax.github.io/#gh-weblog-1697948473746</link>
 <guid>http://pomax.github.io/#gh-weblog-1697948473746</guid>
 <pubDate>Sun, 22 Oct 2023 04:21:13 GMT</pubDate>
