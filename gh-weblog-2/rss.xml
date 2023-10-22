@@ -5,9 +5,21 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Thu, 19 Oct 2023 03:39:53 GMT</lastBuildDate>
-<pubDate>Thu, 19 Oct 2023 03:39:53 GMT</pubDate>
+<lastBuildDate>Sun, 22 Oct 2023 04:28:11 GMT</lastBuildDate>
+<pubDate>Sun, 22 Oct 2023 04:28:11 GMT</pubDate>
 <ttl>1440</ttl>
+<item>
+<title> Socketless, a websocket-based RPC library... without websockets or RPC</title>
+<description>&lt;p&gt;I released &lt;a href="https://github.com/pomax/socketless"&gt;socketless&lt;/a&gt; v1.0.0 today, which is a websockets-based RPC library for Node-based client/server implementations, that removes all the websocket and RPC nonsense: you write normal JS code, your client and server see a &lt;code&gt;this.server&lt;/code&gt; and &lt;code&gt;this.clients[...]&lt;/code&gt; respectively, and if they need to call server and client functions respectively, they just... do that. Without ever knowing that the client or server is running on a completely different machine half the world away.&lt;/p&gt;
+&lt;p&gt;Obviously, this solves a problem for me: I hate writing websocket code, I just want to call functions and get return values, so maybe this is useful for you, too. &lt;/p&gt;
+&lt;p&gt;I still need to set up a website for it (for now, the github repo will do), and I want to swap over my &lt;a href="https://pomax.github.io/are-we-flying/"&gt;"Are we flying?"&lt;/a&gt; article and codebase to make use of this (as well as an unreleased multiplayer Mahjong implementation, more on that in the future, hopefully), which I'm sure will reveal things I still need to add or change, but for now, this is incredibly useful as is, and if you've ever wanted to write a client/server "anything", be it a game, chat server, BBS, whathaveyou, this should make that jobs a ridiculous amount easier.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/pomax/pomax.github.io/issues"&gt;Let me know what you think!&lt;/a&gt;&lt;/p&gt;
+</description>
+
+<link>http://pomax.github.io/#gh-weblog-1697948473746</link>
+<guid>http://pomax.github.io/#gh-weblog-1697948473746</guid>
+<pubDate>Sun, 22 Oct 2023 04:21:13 GMT</pubDate>
+</item>
 <item>
 <title> A sweet, mild hot sauce</title>
 <description>&lt;p&gt;We're running out of a mild hot sauce that we quite like, so I figured I might as well try to replicate the recipe. The following makes about 60oz/1.75L&lt;/p&gt;
@@ -495,38 +507,5 @@ export const Menu = (props) =&amp;gt; {
 <link>http://pomax.github.io/#gh-weblog-1657467300033</link>
 <guid>http://pomax.github.io/#gh-weblog-1657467300033</guid>
 <pubDate>Sun, 10 Jul 2022 15:35:00 GMT</pubDate>
-</item>
-<item>
-<title> Cleaning up your Django migrations</title>
-<description>&lt;p&gt;We use &lt;a href="https://wagtail.org/"&gt;Wagtail&lt;/a&gt;, a Django-based CMS, at the Mozilla Foundation to host &lt;a href="https://foundation.mozilla.org"&gt;https://foundation.mozilla.org&lt;/a&gt;, as well as &lt;a href="http://donate.mozilla.org"&gt;http://donate.mozilla.org&lt;/a&gt;, and as nice as Django is, it is pretty terrible at migration and app management. The official stance is "you shouldn't worry about how many migrations you have", and for a base Django installation, that might very well be true.&lt;/p&gt;
-&lt;p&gt;For Wagtail installations, it very much isn't. Thanks to Wagtail's &lt;a href="https://docs.wagtail.org/en/stable/topics/streamfield.html"&gt;streamfield&lt;/a&gt; concept, which models free-form page body content "out of band" (using a single huge JSON string for each stream, rather than linked table data) you can end up with migrations where your code change may have been a short string update, but the migration for that updates the &lt;em&gt;entire&lt;/em&gt; streamfield definition JSON. A four letter change in your code can easily lead to a 12kb change in a migration field. Times every model that uses that same streamfield definition. 50kb+ migrations for tiny code changes are not unusual.&lt;/p&gt;
-&lt;p&gt;So, when you use Wagtail you will almost certain run into the need to squash your migrations much sooner than you ever would if you just used plain Django, and we've had to do this enough times that it's really worth just writing down how to properly do this. So here's a checklist for you to run through:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Use &lt;code&gt;squashmigration&lt;/code&gt; to first extremely-poorly-consolidate all your wagtail app's migrations: &lt;code&gt;python manage.py squashmigrations yourappname 1234&lt;/code&gt; (where 1234 is your most recent migration number). This will create a new &lt;code&gt;0001&lt;/code&gt; migration that is almost certainly not going to work without further editing because squashing does not automatically copy over any of your "run this during a migration" code. So we'll need to create a new migration file for that:&lt;/li&gt;
-&lt;li&gt;Create a new migration file 0002 with a dependency on the new 0001, exclusively for data bootstrapping. Note that you do &lt;em&gt;not&lt;/em&gt; need any of the code that migrated data "between migrations": when squashing your migrations, all your model definitions and data are already up to date with respect to your current code, meaning that none of the migration functions that you had to run in the past to uplift older data to a newer form is relevant anymore. However, migration functions that &lt;em&gt;create&lt;/em&gt; data should all be put in your new 0002 migration. With, of course, the code updated to do what it's supposed to do given your &lt;em&gt;current&lt;/em&gt; code.  And of course, remember to remove all the &lt;code&gt;runPython&lt;/code&gt; instructions from the new 0001 migration&lt;/li&gt;
-&lt;li&gt;After testing (of course), push these changes all the way through to production. &lt;/li&gt;
-&lt;li&gt;We can now remove the old migrations: delete everything except the new 0001 and 0002, and make sure to update 0001 so that it no longer claims that it &lt;code&gt;replaces = ...&lt;/code&gt;, as those migration files will no longer exist.&lt;/li&gt;
-&lt;li&gt;After testing (of course), again push these changes all the way through to production. &lt;/li&gt;
-&lt;li&gt;We can now perform the part that we wanted from the start: move the newly created &lt;code&gt;0001&lt;/code&gt; and &lt;code&gt;0002&lt;/code&gt; migration files to a temp dir so that the &lt;code&gt;migrations&lt;/code&gt; dir is empty, and run &lt;code&gt;python manage.py makemigrations&lt;/code&gt; to create &lt;em&gt;completely new, fresh, clean, model definitions&lt;/em&gt;. Django is pretty terrible at migration optimization (which isn't its fault: that's a hard problem), and this step basically goes "okay, we know the model definitions are a single migration, so a completely new migration will lead to the same model definitions getting set up". Except without needing to optimize anything: you're quite likely to end up with a migration that is 10x smaller than the original squashed migration Django created.&lt;/li&gt;
-&lt;li&gt;Make sure this newest 0001 migration has some name that is unique to when you're doing the work. E.g. &lt;code&gt;0001_2022_02_24_reset_models.py&lt;/code&gt;, and copy the original squash migration &lt;code&gt;0001&lt;/code&gt; and data bootstrap &lt;code&gt;0002&lt;/code&gt; that we moved to a temp dir back into the &lt;code&gt;migrations&lt;/code&gt; dir. Update the super clean migration so that it has a &lt;code&gt;replaces = ...&lt;/code&gt;  list, and have that list be the squashed 0001 and data bootstrap 0002 names.&lt;/li&gt;
-&lt;li&gt;Copy the 0002 data bootstrap migration as a new 0002 file with the same kind of name as our super clean migration, e.g. &lt;code&gt;0002_2022_02_24_reset_data_bootstrap.py&lt;/code&gt; and update its &lt;code&gt;dependencies&lt;/code&gt; field to point to &lt;code&gt;0001_2022_02_24_reset_models&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;After testing (of course), we push these changes all the way through to production for a third time. We are not done yet.&lt;/li&gt;
-&lt;li&gt;We can now delete the original squash migration and its data bootstrap migration, and remove the &lt;code&gt;replaces&lt;/code&gt; field from our super clean 0001 migration.&lt;/li&gt;
-&lt;li&gt;After testing (yet again), we push these changes all the way through to production for the last time.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Congratulations, you probably just cut your &lt;code&gt;python manage.py migrate&lt;/code&gt; runtime in half, if not more. &lt;/p&gt;
-&lt;p&gt;But we're not done, because Django doesn't actually &lt;em&gt;know&lt;/em&gt; what we've done: its migration table still contains all the old migration information despite those files no longer existing, so we're going to have to go into the DB and update that part, too.  First off, connect to your production database, and run:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;gt; SELECT FROM django_migrations WHERE app = 'your_app_name';
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This will show you all the migrations the django has ever see for your app. All but two of those are completely irrelevant now, so we're going to remove them. Take note of the &lt;code&gt;id&lt;/code&gt; for the new clean migration and its data bootstrap migration, and then run:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;gt; DELETE FROM django_migrations WHERE app = 'your_app_name' AND id &amp;lt; 1234567;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Where that &lt;code&gt;1234567&lt;/code&gt; is the lower of the two id numbers for your clean migrations.&lt;/p&gt;
-&lt;p&gt;However, remember to &lt;strong&gt;always have database backups&lt;/strong&gt; before you do something like this. &lt;/p&gt;
-&lt;p&gt;Also note, that this &lt;strong&gt;will cause problems&lt;/strong&gt; if you have multiple apps that have migration cross dependencies to your just-cleaned-up app. You will need to run this clean-squash procedure for &lt;em&gt;every&lt;/em&gt; app with dependencies on any of the apps you're cleaning this way, before you can clean up the &lt;code&gt;django_migrations&lt;/code&gt; table.&lt;/p&gt;
-&lt;p&gt;And yeah: it's absolutely crazy that Django's been around for over fifteen years, but no one's really bothered to actually make this part easy. And don't even get me started on renaming a Django app. Heaven forbid you'd ever want to do that.&lt;/p&gt;
-</description>
-
-<link>http://pomax.github.io/#gh-weblog-1645994687853</link>
-<guid>http://pomax.github.io/#gh-weblog-1645994687853</guid>
-<pubDate>Sun, 27 Feb 2022 20:44:47 GMT</pubDate>
 </item></channel>
 </rss>
