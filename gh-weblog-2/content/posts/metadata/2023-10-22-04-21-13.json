@@ -4,5 +4,11 @@
   "created": 1697948473746,
   "published": 1697948473746,
   "updated": 1697948888100,
-  "tags": []
+  "tags": [
+    "Nodejs",
+    "websocket",
+    "websockets",
+    "RPC",
+    "games"
+  ]
 }
