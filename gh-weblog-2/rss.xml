@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Tue, 28 May 2024 09:18:34 GMT</lastBuildDate>
-<pubDate>Tue, 28 May 2024 09:18:34 GMT</pubDate>
+<lastBuildDate>Tue, 28 May 2024 09:19:12 GMT</lastBuildDate>
+<pubDate>Tue, 28 May 2024 09:19:12 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Dealing with phantom images in Lightroom</title>
@@ -209,7 +209,11 @@ DELETE FROM AgLibraryCollectionImageChangeCounter WHERE image = 1672248;
 &lt;p&gt;&lt;img src="/gh-weblog-2/images/stuck-image/the-result.png" alt="the result"&gt;&lt;/p&gt;
 &lt;p&gt;And that's our problem solved. No more phantom image. It's a good idea to run a (hopefully) quick catalog optimization, but other than that, it's back to not having to deal with this problem hopefully forever!&lt;/p&gt;
 </description>
-
+<category>Adobe</category>
+<category>Lightroom</category>
+<category>SQL</category>
+<category>Sqilte</category>
+<category>Sqlite3</category>
 <link>http://pomax.github.io/#gh-weblog-1716887502084</link>
 <guid>http://pomax.github.io/#gh-weblog-1716887502084</guid>
 <pubDate>Tue, 28 May 2024 09:11:42 GMT</pubDate>
