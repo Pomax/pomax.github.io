@@ -21,6 +21,7 @@
   margin: 0 1em;
   padding: 0.5em;
   color: #180E65;
+  overflow: auto;
 }
 
 .gh-weblog table {
