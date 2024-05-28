@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Tue, 28 May 2024 09:14:01 GMT</lastBuildDate>
-<pubDate>Tue, 28 May 2024 09:14:01 GMT</pubDate>
+<lastBuildDate>Tue, 28 May 2024 09:14:56 GMT</lastBuildDate>
+<pubDate>Tue, 28 May 2024 09:14:56 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Dealing with phantom images in Lightroom</title>
@@ -82,7 +82,7 @@ VALUES
   (     1    ,       1696395     ,       5      ,  1672248  ,    132891      );
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;This tells us that there was a change to the image with its own numerical identifier &lt;code&gt;1672248&lt;/code&gt;, stored in the "collection list" with identifier &lt;code&gt;1696395&lt;/code&gt;, in a collection with identifier &lt;code&gt;5&lt;/code&gt;. So let's quickly make sure this is, indeed, the quick collection using (in this case, but you have plenty of options) &lt;a href=""&gt;db browser for sqlite&lt;/a&gt; &lt;/p&gt;
-&lt;p&gt;&lt;img src="./image-20240523100618223.png" alt="image-20240523100618223"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="./gh-weblog-2/images/stuck-image/quick-check.jpg" alt="a quick check..."&gt;&lt;/p&gt;
 &lt;p&gt;Collection 5 is indeed the quick collection: perfect, we can now confidently say that our offending image has &lt;code&gt;1672248&lt;/code&gt; as its identifier.&lt;/p&gt;
 &lt;h2 id="removing-the-offender-from-the-catalog"&gt;Removing the offender from the catalog&lt;/h2&gt;
 &lt;p&gt;So, let's look up our image: the lrcat database stores this information in the &lt;code&gt;Adobe_images&lt;/code&gt; table, so if we look up the record with &lt;code&gt;id_local=1672248&lt;/code&gt; we get:&lt;/p&gt;
