@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Tue, 28 May 2024 09:14:56 GMT</lastBuildDate>
-<pubDate>Tue, 28 May 2024 09:14:56 GMT</pubDate>
+<lastBuildDate>Tue, 28 May 2024 09:16:29 GMT</lastBuildDate>
+<pubDate>Tue, 28 May 2024 09:16:29 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Dealing with phantom images in Lightroom</title>
@@ -206,7 +206,7 @@ DELETE FROM AgLibraryCollectionImageChangeCounter WHERE image = 1672248;
 &lt;p&gt;Note that we're dealing with the identifier from the &lt;code&gt;Adobe_images&lt;/code&gt; so we're deleting from that table using &lt;code&gt;id_local&lt;/code&gt; whereas we're deleting from every other table using &lt;code&gt;image&lt;/code&gt;.&lt;/p&gt;
 &lt;h2 id="how-did-we-do-"&gt;How did we do?&lt;/h2&gt;
 &lt;p&gt;If we now open Lightroom on our updated catalog, what do we see?&lt;/p&gt;
-&lt;p&gt;&lt;img src="./images/image-20240523111441729.png" alt="image-20240523111441729"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="./gh-weblog-2/images/stuck-image/the-result.png" alt="the result"&gt;&lt;/p&gt;
 &lt;p&gt;And that's our problem solved. No more phantom image. It's a good idea to run a (hopefully) quick catalog optimization, but other than that, it's back to not having to deal with this problem hopefully forever!&lt;/p&gt;
 </description>
 
