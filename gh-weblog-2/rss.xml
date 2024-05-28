@@ -5,13 +5,13 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Tue, 28 May 2024 09:12:34 GMT</lastBuildDate>
-<pubDate>Tue, 28 May 2024 09:12:34 GMT</pubDate>
+<lastBuildDate>Tue, 28 May 2024 09:13:46 GMT</lastBuildDate>
+<pubDate>Tue, 28 May 2024 09:13:46 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Dealing with phantom images in Lightroom</title>
 <description>&lt;p&gt;Ever run into a Lightroom showing you this?&lt;/p&gt;
-&lt;p&gt;&lt;img src="./images/image-20240523094204167.png" alt="image-20240523094204167"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="./images/stuck-image/initial-view.jpg" alt="initial stuck image view"&gt;&lt;/p&gt;
 &lt;p&gt;Lightroom shows you an image in your grid and strip views, but it's also super obvious there isn't actually an image file backing it. No filename, no metadata, just nothing. And you can't remove it: LR just ignores your delete button, and your context-menu-initiated "remove photo", and when you tell LR to optimize your catalog in the hopes of clearing this up, it's still there.&lt;/p&gt;
 &lt;p&gt;When this happens, the quickest solution is to fix your light room catalog by &lt;em&gt;not using lightroom&lt;/em&gt; and instead using one of the most used tools in the industry: Sqlite3. Sqlite is a file-based database management system, where a single file is a single data, which makes it ideal as a file format for applications, and you'll find it everywhere. Including lightroom. In fact...&lt;/p&gt;
 &lt;h2 id="-lrcat-files-are-literally-just-sqlite3-databases"&gt;.lrcat files are literally just Sqlite3 databases&lt;/h2&gt;
