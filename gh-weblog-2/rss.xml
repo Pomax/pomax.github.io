@@ -5,9 +5,40 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Tue, 28 May 2024 09:19:12 GMT</lastBuildDate>
-<pubDate>Tue, 28 May 2024 09:19:12 GMT</pubDate>
+<lastBuildDate>Sun, 14 Jul 2024 17:55:42 GMT</lastBuildDate>
+<pubDate>Sun, 14 Jul 2024 17:55:42 GMT</pubDate>
 <ttl>1440</ttl>
+<item>
+<title> Adding a 2.5GBe NIC to a Synology DiskStation DS1819+</title>
+<description>&lt;p&gt;The DS1819+ is an 8 bay NAS with a PCIe slot, and one of the things you can use that for is to drop in a PCIe 2.5 GBe NIC in order to make your life a lot easier. When you do, you can either use Synology's insanely overpriced own solution, or you can just buy a TP-Link TX201, which is a cheap 2.5GB network card based on the Realtek 8125 chip. &lt;/p&gt;
+&lt;p&gt;The downside is that the NAS does not come with a full linux distro, so it doesn't have drivers for that chip, but the upside is that getting that driver is a github away: head over to &lt;a href="https://github.com/tabrezm/r8125-synology"&gt;https://github.com/tabrezm/r8125-synology&lt;/a&gt; and follow the instructions.&lt;/p&gt;
+&lt;p&gt;However, those instructions might leave you with a solution that requires loading the driver again and again, every time your NAS restarts, which is rather inconvenient, and so my solution for that was to just add a bit to the &lt;code&gt;rc.d&lt;/code&gt; file that does this for us:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#!/bin/sh
+
+case $1 in
+    start)
+        echo "Loading realtek 8125 module"
+        insmod /lib/modules/r8125.ko
+        ip link set up eth4
+        ;;
+    stop)
+        echo "Unloading realtek 8125 module"
+        rmmod r8125
+        ;;
+    *)
+        echo "Usage: $0 {start|stop}"
+        exit 1
+        ;;
+esac
+
+exit 0
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And done. Rebooting the NAS will now load the driver we need and we can enjoy glorious 2.5 GBe connectivity.&lt;/p&gt;
+</description>
+
+<link>http://pomax.github.io/#gh-weblog-1720979278514</link>
+<guid>http://pomax.github.io/#gh-weblog-1720979278514</guid>
+<pubDate>Sun, 14 Jul 2024 17:47:58 GMT</pubDate>
+</item>
 <item>
 <title> Dealing with phantom images in Lightroom</title>
 <description>&lt;p&gt;Ever run into a Lightroom showing you this?&lt;/p&gt;
@@ -511,87 +542,5 @@ class ALOSTile {
 <link>http://pomax.github.io/#gh-weblog-1672175588471</link>
 <guid>http://pomax.github.io/#gh-weblog-1672175588471</guid>
 <pubDate>Tue, 27 Dec 2022 21:13:08 GMT</pubDate>
-</item>
-<item>
-<title> Structs in Python</title>
-<description>&lt;p&gt;Python does not have syntax for writing C structs, or things that act like them, but thankfully you can write a class decorator that adds something that feels like it should have been in the language from day one.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;import copy
-
-
-def struct(struct_class):
-    # extract the struct members
-    member_names = []
-    member_values = []
-    for attr_name in dir(struct_class):
-        if not attr_name.startswith('_'):
-            value = getattr(struct_class, attr_name)
-            if not callable(value):
-                member_names.append(attr_name)
-                member_values.append(value)
-
-    # create a new init
-    def struct_init(self, *args, **kwargs):
-        i = 0  # we really don't need enumerate() here...
-        for value in args:
-            name = member_names[i]
-            default_value = member_values[i]
-            setattr(self, name, value if value is not None else default_value)
-            i += 1  # ...we just need to inc an int
-        for key, value in kwargs.items():
-            if key in member_names:
-                i = member_names.index(key)
-                default_value = member_values[i]
-                setattr(self, key, value if value is not None else default_value)
-        # fall through  to the struct constructor.
-        if hasattr(self.__class__, 'constructor'):
-            self.constructor(**kwargs)
-
-    # A struct can be iterated over, yielding and ordered list
-    # based on member names defined in the struct class.
-    def member_iter(self):
-        return [copy.deepcopy(getattr(self, name)) for name in member_names].__iter__()
-
-    # Structs do not allow shallow copying. All copies are a deep copies.
-    def deep_copy(self):
-        return copy.deepcopy(self)
-
-    # rebind and return
-    struct_class.__init__ = struct_init
-    struct_class.__iter__ = member_iter
-    struct_class.__copy__ = deep_copy
-    return struct_class
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;With this, we can write code with nice Struct-likes:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;from as_struct import struct
-
-@struct
-class Orientation():
-    pitch = 0
-    roll = 0
-    yaw = 0
-
-@struct
-class Trim():
-    elevator = 0
-    aileron = 0
-    rudder = 0
-
-class Brrrrrr():
-    def __init__(self):
-        self.description = "I'm a plane!"
-        self.orientation = Orientation()
-        self.trim = Trim()
-
-    def trim(self, e=0, a=0, r=0):
-        self.trim.elevator += e
-        self.trim.aileron += a
-        self.trim.rudder += r
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Done.&lt;/p&gt;
-</description>
-<category>Python</category>
-<category>struct</category>
-<category>decorator</category>
-<link>http://pomax.github.io/#gh-weblog-1671995243640</link>
-<guid>http://pomax.github.io/#gh-weblog-1671995243640</guid>
-<pubDate>Sun, 25 Dec 2022 19:07:23 GMT</pubDate>
 </item></channel>
 </rss>
