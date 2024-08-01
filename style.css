@@ -14,7 +14,8 @@ body {
   box-shadow: 0 0 50px 5px gray;
 }
 
-body > header h1, h2 {
+body > header h1,
+h2 {
   font-family: "Eagle Lake";
   margin: 0;
 }
@@ -25,7 +26,7 @@ body > header h1 {
 
 body > header h1 .deved {
   font-family: Verdana;
-  color: #CBCBCB;
+  color: #cbcbcb;
   font-size: 65%;
   font-weight: normal;
   display: inline-block;
@@ -38,7 +39,7 @@ body > header h2 {
   font-size: 110%;
   text-indent: 2em;
   margin-bottom: 1em;
-  color: #FFF2E7;
+  color: #fff2e7;
 }
 
 body > header h6 {
@@ -50,7 +51,7 @@ body > header h6 {
 body > header h6 a {
   display: block;
   height: 1.8em;
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
   padding: 4px;
   vertical-align: middle;
   text-align: center;
@@ -69,21 +70,32 @@ body > header h6 a img {
   height: 1.75em !important;
 }
 
-h1,h2,h3,h4,h5,h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: Lustria;
 }
 
-a, a:active, a:hover, a:visited {
+a,
+a:active,
+a:hover,
+a:visited {
   text-decoration: none;
-  color: #0D23CC;
+  color: #0d23cc;
 }
 
-h1 a, h1 a:active, h1 a:hover, h1 a:visited {
-  color: #4494C6;
+h1 a,
+h1 a:active,
+h1 a:hover,
+h1 a:visited {
+  color: #4494c6;
 }
 
 a:hover {
-  color: rgb(80,140,200);
+  color: rgb(80, 140, 200);
 }
 
 #projects {
@@ -125,7 +137,7 @@ a:hover {
   list-style: none;
   padding: 0;
   padding-left: 0.5em;
-  margin:  0;
+  margin: 0;
 }
 
 #gh-weblog-nav ul li {
@@ -134,39 +146,65 @@ a:hover {
 }
 
 #gh-weblog-nav ul li a {
-  color: #4494C6;
+  color: #4494c6;
 }
 
-.pubday { color: #555; }
-.pubyear { color: #CCC; }
+.pubday {
+  color: #555;
+}
+.pubyear {
+  color: #ccc;
+}
 
 /**
 
-  "more" button styling
+  gh-weblog overrides
 
 **/
 
+.gh-weblog {
+  .entry {
+    position: relative;
 
-#gh-weblog .entry {
-  position: relative;
-}
+    &.folder .post {
+      position: relative;
+    }
 
-#gh-weblog .entry.folder .post {
-  position: relative;
-}
+    &.folded {
+      .post :nth-child(n + 8) {
+        display: none;
 
-#gh-weblog .entry.folded .post :nth-child(n+8) {
-    display: none;
-}
+        div.viewmore {
+          position: relative;
+          top: -36px;
+          text-align: center;
+          padding: 10px;
+          box-shadow: 0 -29px 25px 3px white inset;
+          button {
+            box-shadow: 0 0 15px 11px white;
+          }
+        }
+      }
+    }
+  }
 
-#gh-weblog .entry.folded div.viewmore {
-  position: relative;
-  top: -36px;
-  text-align: center;
-  padding: 10px;
-  box-shadow: 0 -29px 25px 3px white inset;
-}
+  pre {
+    background: #f0faff;
+    margin: 0 1em;
+    padding: 0.5em;
+    color: #180e65;
+    overflow: auto;
+    border-radius: 0.5em;
+    padding: 0.5em 1em;
+    border: 1px solid black;
 
-#gh-weblog .entry.folded div.viewmore button {
-  box-shadow: 0 0 15px 11px white;
+    code {
+      background: inherit;
+      padding: 0;
+      color: black;
+      font-weight: 900;
+      font-family: "Courier New";
+      font-size: 0.9rem;
+    }
+  }
 }
