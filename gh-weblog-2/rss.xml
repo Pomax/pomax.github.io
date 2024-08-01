@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Thu, 01 Aug 2024 03:12:00 GMT</lastBuildDate>
-<pubDate>Thu, 01 Aug 2024 03:12:00 GMT</pubDate>
+<lastBuildDate>Thu, 01 Aug 2024 15:54:36 GMT</lastBuildDate>
+<pubDate>Thu, 01 Aug 2024 15:54:36 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Using flight simulation rudder pedals as MIDI pedals</title>
@@ -52,14 +52,15 @@ const rudder = HID.devices().find(({ [v]: a, [p]: b }) =&amp;gt; a + b === 9276)
 const device = await HID.HIDAsync.open(rudder[v], rudder[p]);
 
 // And start mapping data!
-const MIDPOINT = 1020;
-let controller, value, max;
+const MIDPOINT = 1024;
+let controller, value, previous, max;
 device.on("data", (data) =&amp;gt; {
   // convert the controller bytes to a numeric value
-  const v = data[14] * 255 + data[13];
-  if (v !== MIDPOINT) {
+  const v = data[14] * 256 + data[13];
+  if (v !== MIDPOINT &amp;amp;&amp;amp; v !== previous) {
+    previous = v;
     controller = v &amp;lt; MIDPOINT ? 66 : 64;
-    max = v &amp;lt; MIDPOINT ? 0 : 2040;
+    max = v &amp;lt; MIDPOINT ? 0 : 2047;
     value = map(v, MIDPOINT, max, 0, 127);
     out.send("cc", { channel: 1, controller, value });
   }
