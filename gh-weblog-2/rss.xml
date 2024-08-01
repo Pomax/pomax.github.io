@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Thu, 01 Aug 2024 03:09:11 GMT</lastBuildDate>
-<pubDate>Thu, 01 Aug 2024 03:09:11 GMT</pubDate>
+<lastBuildDate>Thu, 01 Aug 2024 03:12:00 GMT</lastBuildDate>
+<pubDate>Thu, 01 Aug 2024 03:12:00 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Using flight simulation rudder pedals as MIDI pedals</title>
@@ -70,7 +70,7 @@ console.log(`\nSustain mapper running. Press ctrl-c to exit.\n\n`);
 &lt;ol&gt;
 &lt;li&gt;First we get a reference to the virtual MIDI device that we created using loopMIDI by the venerable Tobias Erichsen.&lt;/li&gt;
 &lt;li&gt;Then we get a reference to the "Human Input Device" that my rudder pedals are registered as. USB is kind of bizarre in that every. single. USB. device. has to have its own vendor ID and product ID, and those &lt;strong&gt;must&lt;/strong&gt; be registered with the USB consortium. I'm pretty sure that's a racket, but I can't prove it, so we'll leave it at that. VKB Sim's vendor id is 8989 and the product id is 287 so just because I want to write as little code as possible we add those and check if their sum is 9276.&lt;/li&gt;
-&lt;li&gt;Then we map the left and right pedals to &lt;a href="https://en.wikipedia.org/wiki/Piano_pedals#Sostenuto_pedal"&gt;sostenuto&lt;/a&gt; ("only hold the notes that are currently down") and &lt;a href="https://en.wikipedia.org/wiki/Sustain_pedal"&gt;sustain&lt;/a&gt; ("don't dampen every note being played") respectively: the rudder pedals register values 0 through 1020 for the left pedal being down, and 1020 through 2040 for the right pedal being down, so we just map those values to the MIDI value range 0 through 127.&lt;/li&gt;
+&lt;li&gt;Then we map the left and right pedals to &lt;a href="https://en.wikipedia.org/wiki/Piano_pedals#Sostenuto_pedal"&gt;sostenuto&lt;/a&gt; ("only hold the notes that are currently down") and &lt;a href="https://en.wikipedia.org/wiki/Sustain_pedal"&gt;sustain&lt;/a&gt; ("don't dampen any note being played") respectively: the rudder pedals register values 0 through 1020 for the left pedal being down, and 1020 through 2040 for the right pedal being down, so we just map those values to the MIDI value range 0 through 127.&lt;/li&gt;
 &lt;li&gt;We then send the mapped value with either CC66 for sostenuto or CC64 for sustain, on MIDI channel 1. But only when the value isn't 1020, which is the value it'll be when I'm not pressing on either pedal. &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;And... uh... that's it?  We can just run this with &lt;code&gt;node pedals&lt;/code&gt; and done: as long as we enable the "Rudder Sustain" MIDI input  in whatever DAW or standalone instrument we're using, those flight sim pedals are now MIDI pedals. &lt;/p&gt;
