@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Thu, 01 Aug 2024 02:55:04 GMT</lastBuildDate>
-<pubDate>Thu, 01 Aug 2024 02:55:04 GMT</pubDate>
+<lastBuildDate>Thu, 01 Aug 2024 02:55:23 GMT</lastBuildDate>
+<pubDate>Thu, 01 Aug 2024 02:55:23 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Using flight simulation rudder pedals as MIDI pedals</title>
@@ -27,7 +27,7 @@
 &lt;blockquote&gt;
 &lt;p&gt;"Well what about joy2midi?"&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;A JACK-only linux suggestion. I like it. Except I'm on Windows so that's not going to help us much here.&lt;/p&gt;
+&lt;p&gt;A JACK-only linux suggestion. I like where your head's at, except I'm on Windows so that's not going to help us much here.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;"Fine, smartass, so: what, you gonna code your own solution??"&lt;/p&gt;
 &lt;/blockquote&gt;
