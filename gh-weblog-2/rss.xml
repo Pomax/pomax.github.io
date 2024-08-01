@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Thu, 01 Aug 2024 16:31:47 GMT</lastBuildDate>
-<pubDate>Thu, 01 Aug 2024 16:31:47 GMT</pubDate>
+<lastBuildDate>Thu, 01 Aug 2024 16:44:42 GMT</lastBuildDate>
+<pubDate>Thu, 01 Aug 2024 16:44:42 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Using flight simulation rudder pedals as MIDI pedals</title>
@@ -33,11 +33,12 @@
 &lt;/blockquote&gt;
 &lt;p&gt;A JACK-only linux suggestion? I like where your head's at, except I'm on Windows so that's not going to help us much here.&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;"Fine, smartass, so: what, you gonna code your own solution??"&lt;/p&gt;
+&lt;p&gt;"Okay, fine. So: what, you're gonna write your own program??"&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;Actually, as it turns out... yeah? I can write a universal solution that'll work for anything that can deal with more than one MIDI device (which is everything) in like... 25 lines of code, if I'm willing to use &lt;a href="https://nodejs.org/en"&gt;Node.js&lt;/a&gt; and LoopMIDI, &lt;a href="https://www.tobias-erichsen.de/software/loopmidi.html"&gt;a utility that I already use&lt;/a&gt;?&lt;/p&gt;
-&lt;p&gt;Step 1: create a virtual MIDI device called "Rudder Sustain". Inspired name, I know: I'm a programmer, we're fantastic at naming things.&lt;/p&gt;
-&lt;p&gt;Step 2: write some code: &lt;code&gt;npm install node-hid easymidi&lt;/code&gt;, and then something that's a near-trivial &lt;code&gt;pedals.js&lt;/code&gt; file:&lt;/p&gt;
+&lt;p&gt;Actually, after a bit of digging... yeah? I can write a universal solution that'll work for anything that can deal with more than one MIDI device (which is all commercial software and nearly-all freeware) in 25 lines of code, if I'm willing to use &lt;a href="https://nodejs.org/en"&gt;Node.js&lt;/a&gt; and a virtual midi device manager like &lt;a href="https://www.tobias-erichsen.de/software/loopmidi.html"&gt;LoopMIDI&lt;/a&gt;, a utility that I already use anyway. &lt;/p&gt;
+&lt;p&gt;Step 1: Let me create a virtual MIDI device in LoopMIDI called "Rudder Sustain" for this. Inspired name, I know: I'm a programmer, we're fantastic at naming things.&lt;/p&gt;
+&lt;p&gt;Step 2: Install the Node libraries for working with USB devices and MIDI: &lt;code&gt;npm install node-hid easymidi&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Step 3: Write a near-trivial &lt;code&gt;pedals.js&lt;/code&gt; file:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;import HID from "node-hid";
 import easymidi from "easymidi";
 const { abs, round } = Math;
@@ -52,8 +53,8 @@ const device = await HID.HIDAsync.open(8989, 287);
 const MIDPOINT = 1024;
 const scale = 127 / MIDPOINT;
 let value, previous;
-device.on("data", (data) =&amp;gt; {
-  const v = data[14] * 256 + data[13];
+device.on("data", (bytes) =&amp;gt; {
+  const v = bytes[13] + bytes[14] * 256;
   if (v !== previous) {
     previous = v;
     value = round(abs((v - 1024) * scale));
@@ -68,7 +69,7 @@ console.log(`\nSustain mapper running. Press ctrl-c to exit.\n\n`);
 &lt;li&gt;First we get a reference to the virtual MIDI device that we created using loopMIDI by the venerable Tobias Erichsen. The platform check is a bit silly, but the easymidi library itself doesn't perform Windows detection, so it wants "true" for linuxy systems and something falsey for Windows.&lt;/li&gt;
 &lt;li&gt;Then we get a reference to the "Human Input Device" that my rudder pedals are registered as. USB is kind of bizarre in that every. single. USB. device. has to have its own vendor ID and product ID, and those &lt;strong&gt;must&lt;/strong&gt; be registered with the USB consortium. I'm pretty sure that's a racket, but I can't prove it, so we'll leave it at that. VKB Sim's vendor id is 8989 and the product id is 287, and I only have one so it's a straight "get the only instance of this device" call.&lt;/li&gt;
 &lt;li&gt;Then we map the left and right pedals to &lt;a href="https://en.wikipedia.org/wiki/Piano_pedals#Sostenuto_pedal"&gt;sostenuto&lt;/a&gt; ("only hold the notes that are currently down") and &lt;a href="https://en.wikipedia.org/wiki/Sustain_pedal"&gt;sustain&lt;/a&gt; ("don't dampen any note") respectively: the rudder pedals generate values from 0 (left pedal down) to 2047 (right pedal down) with the neutral position generating 1024. so we just can fairly trivially map both ranges to the MIDI value range 0 through 127.&lt;/li&gt;
-&lt;li&gt;We then send the mapped value with either CC66 for sostenuto or CC64 for sustain (or both, if the pedals return to neutral), on MIDI channel 1. With a small bit of overhead to make sure we don't send duplicate values.&lt;/li&gt;
+&lt;li&gt;We then send the mapped value with either controller code 66 for sostenuto or controller code 64 for sustain (or both, if the pedals return to neutral), on MIDI channel 1. With a small bit of overhead to make sure we don't send duplicate values.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;And... uh... that's it?  We can just run this with &lt;code&gt;node pedals&lt;/code&gt; and done: as long as we enable the "Rudder Sustain" MIDI input  in whatever DAW or standalone instrument we're using, those flight sim pedals are now MIDI pedals. &lt;/p&gt;
 &lt;p&gt;In 25 lines of code including comments and console logs.&lt;/p&gt;
