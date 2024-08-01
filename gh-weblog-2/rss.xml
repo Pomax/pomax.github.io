@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Thu, 01 Aug 2024 02:26:53 GMT</lastBuildDate>
-<pubDate>Thu, 01 Aug 2024 02:26:53 GMT</pubDate>
+<lastBuildDate>Thu, 01 Aug 2024 02:27:15 GMT</lastBuildDate>
+<pubDate>Thu, 01 Aug 2024 02:27:15 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Using flight simulation rudder pedals as MIDI pedals</title>
@@ -54,7 +54,12 @@ console.log(`\nSustain mapper running. Press ctrl-c to exit.\n\n`);
 &lt;p&gt;In essentially 20 lines of code.&lt;/p&gt;
 &lt;p&gt;Programming is a superpower.&lt;/p&gt;
 </description>
-
+<category>Node</category>
+<category>JavaScript</category>
+<category>music</category>
+<category>MIDI</category>
+<category>pedals</category>
+<category>controller</category>
 <link>http://pomax.github.io/#gh-weblog-1722477769121</link>
 <guid>http://pomax.github.io/#gh-weblog-1722477769121</guid>
 <pubDate>Thu, 01 Aug 2024 02:02:49 GMT</pubDate>
