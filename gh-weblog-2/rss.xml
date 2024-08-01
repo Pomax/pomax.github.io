@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Thu, 01 Aug 2024 02:27:15 GMT</lastBuildDate>
-<pubDate>Thu, 01 Aug 2024 02:27:15 GMT</pubDate>
+<lastBuildDate>Thu, 01 Aug 2024 02:28:01 GMT</lastBuildDate>
+<pubDate>Thu, 01 Aug 2024 02:28:01 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Using flight simulation rudder pedals as MIDI pedals</title>
@@ -51,7 +51,7 @@ console.log(`\nSustain mapper running. Press ctrl-c to exit.\n\n`);
 &lt;li&gt;We then send the mapped value with either CC66 for sostenuto or CC64 for sustain, on MIDI channel 1. But only when the value isn't 1020, which is the value it'll be when I'm not pressing on either pedal. &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;And... uh... that's it?  We can just run this with &lt;code&gt;node pedals&lt;/code&gt; and done: as long as we enable the "Rudder Sustain" MIDI input  in whatever DAW or standalone instrument we're using, those flight sim pedals are now MIDI pedals. &lt;/p&gt;
-&lt;p&gt;In essentially 20 lines of code.&lt;/p&gt;
+&lt;p&gt;In less than 30 lines of code including vanity comments and console logs.&lt;/p&gt;
 &lt;p&gt;Programming is a superpower.&lt;/p&gt;
 </description>
 <category>Node</category>
