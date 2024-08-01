@@ -5,14 +5,33 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Thu, 01 Aug 2024 02:37:42 GMT</lastBuildDate>
-<pubDate>Thu, 01 Aug 2024 02:37:42 GMT</pubDate>
+<lastBuildDate>Thu, 01 Aug 2024 02:45:32 GMT</lastBuildDate>
+<pubDate>Thu, 01 Aug 2024 02:45:32 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Using flight simulation rudder pedals as MIDI pedals</title>
 <description>&lt;p&gt;Did you know that there isn't just a dumb, simple Windows utility for turning a joystick or game controller into a MIDI device? Sure. you can find 15 year old utilities (that have no docs, so good luck figuring out why they don't work even if they _run), and yes, you can find some dedicated "profile" utils that map specific game controller buttons to specific MIDI outs, but like... I have &lt;a href="https://www.vkbcontrollers.com/products/t-rudders-mk-v-rudder-pedals"&gt;VKB-Sim rudder pedals&lt;/a&gt; because &lt;a href="https://pomax.github.io/are-we-flying/"&gt;I might like flight sim a little too much&lt;/a&gt; and not a minute goes by while I'm sitting at my desk that my feet don't think they're resting on sostenuto and sustain pedals. Because there's also a keyboard sitting on my desk. &lt;/p&gt;
 &lt;p&gt;So can I please just get something that actually turns them into that when I need them to?&lt;/p&gt;
-&lt;p&gt;And it turns out, I can, with like... 30 lines of code if I'm willing to use &lt;a href="https://nodejs.org/en"&gt;Node.js&lt;/a&gt; and LoopMIDI, &lt;a href="https://www.tobias-erichsen.de/software/loopmidi.html"&gt;a utility that I already use&lt;/a&gt;?&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;"Have you tried Fergo JoystickMIDI?"&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I have, it has no documentation, and all the buttons are greyed out. Not a fan.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;"Have you tried mJoy??"&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I have. Have you? Because if you did you wouldn't recommend it.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;"You can do this in Max in Ableton just fine have y-"&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I own nine DAWs and "I stopped counting" standalone VSTi. You think I'm going to configure each of them separately?&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;"Well what about joy2midi?"&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;A JACK-only linux suggestion. I like it. Except I'm on Windows so that's not going to help us much here.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;"Fine, smartass, so: what, you gonna code your own solution??"&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Actually, as it turns out... yeah? I can write a universal solution that'll work for anything that can deal with more than one MIDI device (which is everything) in like... 30 lines of code, if I'm willing to use &lt;a href="https://nodejs.org/en"&gt;Node.js&lt;/a&gt; and LoopMIDI, &lt;a href="https://www.tobias-erichsen.de/software/loopmidi.html"&gt;a utility that I already use&lt;/a&gt;?&lt;/p&gt;
 &lt;p&gt;Step 1: create a virtual MIDI device called "Rudder Sustain". Inspired name, I know: I'm a programmer, we're fantastic at naming things.&lt;/p&gt;
 &lt;p&gt;Step 2: write some code: &lt;code&gt;npm install node-hid easymidi&lt;/code&gt;, and then something that's a near-trivial &lt;code&gt;pedals.js&lt;/code&gt; file:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;import HID from "node-hid";
