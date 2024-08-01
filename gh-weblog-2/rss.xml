@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Thu, 01 Aug 2024 03:00:55 GMT</lastBuildDate>
-<pubDate>Thu, 01 Aug 2024 03:00:55 GMT</pubDate>
+<lastBuildDate>Thu, 01 Aug 2024 03:03:12 GMT</lastBuildDate>
+<pubDate>Thu, 01 Aug 2024 03:03:12 GMT</pubDate>
 <ttl>1440</ttl>
 <item>
 <title> Using flight simulation rudder pedals as MIDI pedals</title>
@@ -17,13 +17,17 @@
 &lt;/blockquote&gt;
 &lt;p&gt;I have, it has no documentation, and all the buttons are greyed out. Not a fan.&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;"Have you tried mJoy??"&lt;/p&gt;
+&lt;p&gt;"Have you tried &lt;a href="http://www.otk.it/mjoy/"&gt;mJoy&lt;/a&gt;??"&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;I have. Have you? Because if you did you wouldn't recommend it.&lt;/p&gt;
+&lt;p&gt;I have. Have you? In 2024? Because if you have you wouldn't recommend it.&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;"You can do this in Max in Ableton just fine have y-"&lt;/p&gt;
+&lt;p&gt;"What about &lt;a href="https://www.kaskobi.com/gamepadmidi"&gt;Gamepad MIDI&lt;/a&gt;?"&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;I own like ten regular DAWs (&lt;a href="https://www.ableton.com/en/"&gt;Ableton&lt;/a&gt;, &lt;a href="https://www.bitwig.com/"&gt;Bitwig&lt;/a&gt;, &lt;a href="https://www.steinberg.net/cubase/"&gt;Cubase&lt;/a&gt;, &lt;a href="https://www.image-line.com"&gt;FL Studio&lt;/a&gt;, &lt;a href="https://serato.com/"&gt;Serrato&lt;/a&gt;, &lt;a href="https://www.presonus.com/en/studio-one.html"&gt;Studio One&lt;/a&gt;, &lt;a href="https://www.reaper.fm/"&gt;Reaper&lt;/a&gt;, &lt;a href="https://www.reasonstudios.com/"&gt;Reason&lt;/a&gt;, &lt;a href="https://www.renoise.com/"&gt;ReNoise&lt;/a&gt;, &lt;a href="https://www.tracktion.com/products/waveform-pro"&gt;Waveform&lt;/a&gt;) plus a bunch of esoteric or now-dead ones like &lt;a href="https://www.flipsampler.com/"&gt;Flip&lt;/a&gt; or &lt;a href="https://warmplace.ru/soft/sunvox/"&gt;SunVox&lt;/a&gt; or &lt;a href="https://www.soundonsound.com/reviews/cakewalk-sonar-x3-producer"&gt;SonarX3&lt;/a&gt; or &lt;a href="https://www.zrythm.org/en/index.html"&gt;ZRhythm&lt;/a&gt; (I know, the last one's free. I signed up to their nightly subscription because I think that effort &lt;em&gt;absolutely&lt;/em&gt; deserves funding) and "I stopped counting" however many standalone VSTi. You think I'm going to configure each of them separately? Because I'm definitely not.&lt;/p&gt;
+&lt;p&gt;I like Ableton, but I dont want a specif-&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;"You can do this in Max in Ableton just fine! Have y-"&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Look, I own something like ten DAWs (&lt;a href="https://www.ableton.com/en/"&gt;Ableton&lt;/a&gt;, &lt;a href="https://www.bitwig.com/"&gt;Bitwig&lt;/a&gt;, &lt;a href="https://www.steinberg.net/cubase/"&gt;Cubase&lt;/a&gt;, &lt;a href="https://www.image-line.com"&gt;FL Studio&lt;/a&gt;, &lt;a href="https://serato.com/"&gt;Serrato&lt;/a&gt;, &lt;a href="https://www.presonus.com/en/studio-one.html"&gt;Studio One&lt;/a&gt;, &lt;a href="https://www.reaper.fm/"&gt;Reaper&lt;/a&gt;, &lt;a href="https://www.reasonstudios.com/"&gt;Reason&lt;/a&gt;, &lt;a href="https://www.renoise.com/"&gt;ReNoise&lt;/a&gt;, &lt;a href="https://www.tracktion.com/products/waveform-pro"&gt;Waveform&lt;/a&gt;) plus a bunch of esoteric or now-dead ones like &lt;a href="https://www.flipsampler.com/"&gt;Flip&lt;/a&gt; or &lt;a href="https://warmplace.ru/soft/sunvox/"&gt;SunVox&lt;/a&gt; or &lt;a href="https://www.soundonsound.com/reviews/cakewalk-sonar-x3-producer"&gt;SonarX3&lt;/a&gt; or &lt;a href="https://www.zrythm.org/en/index.html"&gt;ZRhythm&lt;/a&gt; (I know, the last one's free. I signed up to their nightly subscription because I think that effort &lt;em&gt;absolutely&lt;/em&gt; deserves funding) and "I stopped counting" however many standalone VSTi. You think I'm going to configure each of them separately? Because I'm definitely not.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;"Well what about joy2midi?"&lt;/p&gt;
 &lt;/blockquote&gt;
