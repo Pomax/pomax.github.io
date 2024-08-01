@@ -5,9 +5,60 @@
 <title>Pomax.github.io</title>
 <description>My blog on github</description>
 <link>http://pomax.github.io</link>
-<lastBuildDate>Sun, 14 Jul 2024 17:55:42 GMT</lastBuildDate>
-<pubDate>Sun, 14 Jul 2024 17:55:42 GMT</pubDate>
+<lastBuildDate>Thu, 01 Aug 2024 02:26:53 GMT</lastBuildDate>
+<pubDate>Thu, 01 Aug 2024 02:26:53 GMT</pubDate>
 <ttl>1440</ttl>
+<item>
+<title> Using flight simulation rudder pedals as MIDI pedals</title>
+<description>&lt;p&gt;Did you know that there isn't just a dumb, simple Windows utility for turning a joystick or game controller into a MIDI device? Sure. you can find 15 year old utilities, and yes, you can find some dedicated "profile" utils that map specific game controller buttons to specific MIDI outs, but like... I have &lt;a href="https://www.vkbcontrollers.com/products/t-rudders-mk-v-rudder-pedals"&gt;VKB-Sim rudder pedals&lt;/a&gt; and not a minute goes by while I'm at my desk that my feet don't think they're on sostenuto and sustain pedals. &lt;/p&gt;
+&lt;p&gt;So can I please just get something that actually turns them into that when I need them to?&lt;/p&gt;
+&lt;p&gt;And it turns out, I can, with like... 30 lines of code if I'm willing to use Node.js and &lt;a href="https://www.tobias-erichsen.de/software/loopmidi.html"&gt;a utility that I already use&lt;/a&gt;?&lt;/p&gt;
+&lt;p&gt;Step 1: create a virtual MIDI device called "Rudder Sustain". Inspired name, I know: I'm a programmer, we're fantastic at naming things.&lt;/p&gt;
+&lt;p&gt;Step 2: write some code: &lt;code&gt;npm install node-hid easymidi&lt;/code&gt;, and what is really a near-trivial &lt;code&gt;pedals.js&lt;/code&gt; file:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;import HID from "node-hid";
+import easymidi from "easymidi";
+const map = (v, a, b, c, d) =&amp;gt; (c + ((v - a) * (d - c)) / (b - a)) | 0;
+
+// Get our virtual MIDI device
+const out = new easymidi.Output("Rudder Sustain", process.platform !== "win32");
+
+// Get our VKB-sim rudder
+const v = `vendorId`;
+const p = `productId`;
+const rudder = HID.devices().find(({ [v]: a, [p]: b }) =&amp;gt; a + b === 9276);
+const device = await HID.HIDAsync.open(rudder[v], rudder[p]);
+
+// And start mapping data!
+const MIDPOINT = 1020;
+let controller, value, max;
+device.on("data", (data) =&amp;gt; {
+  // convert the controller bytes to a numeric value
+  const v = data[14] * 255 + data[13];
+  if (v !== MIDPOINT) {
+    controller = v &amp;lt; MIDPOINT ? 66 : 64;
+    max = v &amp;lt; MIDPOINT ? 0 : 2040;
+    value = map(v, MIDPOINT, max, 0, 127);
+    out.send("cc", { channel: 1, controller, value });
+  }
+});
+
+console.log(`\nSustain mapper running. Press ctrl-c to exit.\n\n`);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Let me unpack that script a little:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;First we get a reference to the virtual MIDI device that we created using loopMIDI by the venerable Tobias Erichsen.&lt;/li&gt;
+&lt;li&gt;Then we get a reference to the "Human Input Device" that my rudder pedals are registered as. USB is kind of bizarre in that every. single. USB. device. has to have its own vendor ID and product ID, and those &lt;strong&gt;must&lt;/strong&gt; be registered with the USB consortium. I'm pretty sure that's a racket, but I can't prove it, so we'll leave it at that. VKB Sim's vendor id is 8989 and the product id is 287 so just because I want to write as little code as possible we add those and check if their sum is 9276.&lt;/li&gt;
+&lt;li&gt;Then we map the left and right pedals to &lt;a href="https://en.wikipedia.org/wiki/Piano_pedals#Sostenuto_pedal"&gt;sostenuto&lt;/a&gt; ("only hold the notes that are currently down") and &lt;a href="https://en.wikipedia.org/wiki/Sustain_pedal"&gt;sustain&lt;/a&gt; ("don't dampen every note being played") respectively: the rudder pedals register values 0 through 1020 for the left pedal being down, and 1020 through 2040 for the right pedal being down, so we just map those values to the MIDI value range 0 through 127.&lt;/li&gt;
+&lt;li&gt;We then send the mapped value with either CC66 for sostenuto or CC64 for sustain, on MIDI channel 1. But only when the value isn't 1020, which is the value it'll be when I'm not pressing on either pedal. &lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;And... uh... that's it?  We can just run this with &lt;code&gt;node pedals&lt;/code&gt; and done: as long as we enable the "Rudder Sustain" MIDI input  in whatever DAW or standalone instrument we're using, those flight sim pedals are now MIDI pedals. &lt;/p&gt;
+&lt;p&gt;In essentially 20 lines of code.&lt;/p&gt;
+&lt;p&gt;Programming is a superpower.&lt;/p&gt;
+</description>
+
+<link>http://pomax.github.io/#gh-weblog-1722477769121</link>
+<guid>http://pomax.github.io/#gh-weblog-1722477769121</guid>
+<pubDate>Thu, 01 Aug 2024 02:02:49 GMT</pubDate>
+</item>
 <item>
 <title> Adding a 2.5GBe NIC to a Synology DiskStation DS1819+</title>
 <description>&lt;p&gt;The DS1819+ is an 8 bay NAS with a PCIe slot, and one of the things you can use that for is to drop in a PCIe 2.5 GBe NIC in order to make your life a lot easier. When you do, you can either use Synology's insanely overpriced own solution, or you can just buy a TP-Link TX201, which is a cheap 2.5GB network card based on the Realtek 8125 chip. &lt;/p&gt;
@@ -528,19 +579,5 @@ class ALOSTile {
 <link>http://pomax.github.io/#gh-weblog-1676434414432</link>
 <guid>http://pomax.github.io/#gh-weblog-1676434414432</guid>
 <pubDate>Wed, 15 Feb 2023 04:13:34 GMT</pubDate>
-</item>
-<item>
-<title> Adding a physical drive to a VMware Workstation VM</title>
-<description>&lt;p&gt;If VMWare complains that it has insufficient rights to use a physical drive with adding a hard disk in the VM settings: open computer management with admin rights, then look for that drive in the list. If it has a drive letter: remove the drive letter. &lt;/p&gt;
-&lt;p&gt;Remember: adding a physical drive means literally giving it to the guest OS, not "sharing it between the host and the guest", so remove its drive letter in computer management to &lt;em&gt;guarantee&lt;/em&gt; that your host's Windows can't use it. Once done, you can add it to your VM without any problems.&lt;/p&gt;
-&lt;p&gt;And if you need to &lt;em&gt;share&lt;/em&gt; drives, just use network sharing. That's what it's for.&lt;/p&gt;
-</description>
-<category>VMware</category>
-<category>Workstation</category>
-<category>drive</category>
-<category>errors</category>
-<link>http://pomax.github.io/#gh-weblog-1672175588471</link>
-<guid>http://pomax.github.io/#gh-weblog-1672175588471</guid>
-<pubDate>Tue, 27 Dec 2022 21:13:08 GMT</pubDate>
 </item></channel>
 </rss>
