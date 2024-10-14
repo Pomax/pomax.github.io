@@ -90,7 +90,7 @@ export default createClass({
   },
 
   getPostData() {
-    return `# ${this.state.title}\n\n${this.state.postData}`;
+    return this.state.postData;
   },
 
   getMetaData() {

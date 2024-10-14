@@ -1,4 +1,0 @@
-- Add image drag-and-drop upload, moving them into a "images/postid" folder.
-- Monitor gh actions to see when it's safe to reload?
-  - https://api.github.com/repos/${user}/${repo}/actions/runs
-    - result.workflow_runs[0].status should be "completed"
