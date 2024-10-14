@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>Because chronicling the past using technology is kind of cool.</description>
 <link>https://pomax.github.io/</link>
-<lastBuildDate>Mon, 14 Oct 2024 17:51:46 GMT</lastBuildDate>
-<pubDate>Mon, 14 Oct 2024 17:51:46 GMT</pubDate>
+<lastBuildDate>Mon, 14 Oct 2024 17:52:57 GMT</lastBuildDate>
+<pubDate>Mon, 14 Oct 2024 17:52:57 GMT</pubDate>
 <ttl>1440</ttl><item>
 <title>Updating my blog platform</title>
 <description><![CDATA[<h1 id="updating-my-blog-platform">Updating my blog platform</h1>
@@ -49,7 +49,7 @@
 <p>That&#39;s it. HTML-based mod<em>rewrite. Sure, it&#39;s more files on the repo, but they&#39;re organized extremely obviously, and the blog platform will clean them up if you delete posts, so you click a post link, your browser simply loads a _real html index file</em>, sees the redirect, and instantly loads the homepage again. </p>
 <p>And then the homepage sees it&#39;s supposed to load a single post, runs a <code>history.replaceState</code> to make the URL look like the one you actually clicked (which, remember, is a <em>real URL</em> with a real file at that URL) and everything works as you expect.</p>
 <h3 id="image-uploads">image uploads</h3>
-<p>The one thing I&#39;ve not re-uplifted is image drag-and-drop so that I can just drag images into my blog posts as I&#39;m writing them. It&#39;s not a ton of work, but it&#39;s also not trivial, as there are no convenience plugins available for that, so to upload an image &quot;on drop&quot;, you need to :</p>
+<p>The one thing I&#39;ve not re-uplifted is image drag-and-drop so that I can just drag images into my blog posts as I&#39;m writing them. It&#39;s not a ton of work, but it&#39;s also not trivial, as there are no convenience plugins available for that, so to upload an image &quot;on drop&quot;, you need to:</p>
 <ol>
 <li>create a blob on github</li>
 <li>get the blob sha</li>
