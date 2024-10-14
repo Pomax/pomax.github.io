@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>Because chronicling the past using technology is kind of cool.</description>
 <link>https://pomax.github.io/</link>
-<lastBuildDate>Mon, 14 Oct 2024 17:23:47 GMT</lastBuildDate>
-<pubDate>Mon, 14 Oct 2024 17:23:47 GMT</pubDate>
+<lastBuildDate>Mon, 14 Oct 2024 17:25:28 GMT</lastBuildDate>
+<pubDate>Mon, 14 Oct 2024 17:25:28 GMT</pubDate>
 <ttl>1440</ttl><item>
 <title>Updating my blog platform</title>
 <description><![CDATA[<h1 id="updating-my-blog-platform">Updating my blog platform</h1>
@@ -26,8 +26,9 @@
 <p>The thing I did really have to update was the GithubAPI connector: back in 2014 there was no official JS API for Github. <a href="https://philschatz.com">Phil Schatz</a> had just released <a href="https://philschatz.com/2013/03/10/octokit">octokit</a>, using the same name as Github&#39;s official API libraries for &quot;not JS&quot; languages, which because <a href="https://philschatz.com/2014/05/25/octokat/">octokat</a> not too long after once Github realised that maybe it would make sense to offer their octokit library in the language used by the overwhelming majority of web developers so now <a href="https://www.npmjs.com/package/octokit">octokit is an official Github release</a>, but by the time they pulled that trigger, my blog worked and I had no reason to upgrade.</p>
 <p>But now I do, and it&#39;s frankly a bit of a shit experience, but it works, and it&#39;s got support, so... yay? You have three options:</p>
 <ol>
-<li>use the <code>requests</code> based API, where you write http verbs and enpoint URLs. E.g. <code>await octokit.request(</code>GET /repos/${user}/${repo}/actions/runs<code>)</code></li>
-<li>use the rest API extension, so you can write</li>
+<li>use the <code>requests</code> based API, where you write http verbs and enpoint URLs. E.g. <code>await octokit.request(</code>GET /repos/${user}/${repo}/actions/runs<code>)</code>,</li>
+<li>use the rest API extension, so you can write <code>await octokit.repos(user, repo).actions.runs()</code>, or</li>
+<li>use a plugin if there is one for the exact thing you want, like &quot;uploading a text file without manually running every git step&quot;, e.g. <code>await octokit.createOrUpdateTextFile({ owner, repo, branch, path:</code>${this.path}/rss.xml<code>, content: rss, message:</code>Update to RSS<code>});</code></li>
 </ol>
 ]]></description>
 
