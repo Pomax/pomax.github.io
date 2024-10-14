@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <atom:link href="http://pomax.github.io/gh-blog/undefined/rss.xml" rel="self"
+      type="application/rss+xml" />
+    <title>Github weblogging</title>
+    <description>A free, simple github-based blogging platform</description>
+    <link>http://pomax.github.io/gh-blog</link>
+    <lastBuildDate>Fri, 02 Jan 2015 06:28:03 GMT</lastBuildDate>
+    <pubDate>Fri, 02 Jan 2015 06:28:03 GMT</pubDate>
+    <ttl>1440</ttl>
+    <item>
+      <title>How to set up your own Github blog</title>
+      <description>&lt;h2 id="a-quickstart-guide"&gt;A Quickstart Guide&lt;/h2&gt;
+        &lt;p&gt;By far the easiest way to install your own copy of this Github blog is to
+        head on over to &lt;a
+        href="http://github.com/pomax/gh-blog"&gt;http://github.com/pomax/gh-blog&lt;/a&gt;
+        and click the &amp;quot;fork&amp;quot; button, so that you get a copy of the gh-blog
+        repository, but on your own account. &lt;/p&gt;
+        &lt;p&gt;If you just want to install it to play with it, that&amp;#39;s all you have
+        to do in terms of &amp;quot;getting the code&amp;quot;.&lt;/p&gt;
+        &lt;h2
+        id="getting-credentials-so-that-you-can-edit-modify-delete-posts-directly"&gt;Getting
+        credentials so that you can edit/modify/delete posts directly&lt;/h2&gt;
+        &lt;p&gt;...text goes here...&lt;/p&gt;
+</description>
+      <category>Github</category>
+      <category>Blog</category>
+      <category>Installation</category>
+      <category>Instructions</category>
+      <link>http://pomax.github.io/gh-blog/#gh-weblog-1420179789753</link>
+      <guid>http://pomax.github.io/gh-blog/#gh-weblog-1420179789753</guid>
+      <pubDate>Fri, 02 Jan 2015 06:23:09 GMT</pubDate>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,27 @@
+{
+  "name": "gh-weblog",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "rm -rf dist && esbuild ./components/index.jsx --bundle --platform=browser --format=esm --keep-names --tree-shaking=false --outfile=./dist/gh-weblog.js --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Pomax/gh-blog.git"
+  },
+  "author": "Pomax",
+  "license": "All rights reserved",
+  "bugs": {
+    "url": "https://github.com/Pomax/gh-blog/issues"
+  },
+  "homepage": "https://pomax.github.io/gh-blog",
+  "devDependencies": {
+    "esbuild": "^0.24.0",
+    "express": "^4.21.0"
+  },
+  "dependencies": {
+    "@octokit/core": "^6.1.2",
+    "@octokit/plugin-create-or-update-text-file": "^5.1.0"
+  }
+}

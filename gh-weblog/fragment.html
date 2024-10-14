@@ -1,0 +1,27 @@
+<!-- GH-WebLog content target -->
+<section id="gh-weblog"></section>
+
+<!-- GH-WebLog configuration -->
+<div class="page-requirements">
+  <link rel="stylesheet" href="gh-weblog/style.css" />
+  <script src="gh-weblog/dist/gh-weblog.js" type="module" async></script>
+  <script>
+    var fragmentId = location.hash || false;
+    if (fragmentId) {
+      fragmentId = fragmentId.replace("#gh-weblog-", "");
+    }
+    React.render(
+      <WebLog
+        title="A Github Weblog"
+        description="A simple github blog using markdown and octokit"
+        base="http://pomax.github.io/gh-blog"
+        user="Pomax"
+        repo="gh-blog"
+        branch="gh-pages"
+        path="gh-weblog"
+        entryid={fragmentId}
+      />,
+      document.getElementById("gh-weblog")
+    );
+  </script>
+</div>

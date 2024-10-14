@@ -1,33 +1,19 @@
 <!doctype html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>Pomax.github.io</title>
-    <link rel="stylesheet" href="./gh-weblog-2/style.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lustria">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Eagle+Lake">
-    <link rel="alternate" type="application/rss+xml" title="RSS" href="/gh-weblog-2/rss.xml">
-    <script src="ga.js" async defer></script>
-  </head>
-  <body>
 
-    <header>
-      <h1><a href="/">Pomax.github.io</a></h1>
-      <h2>Because chronicling the past using technology is kind of cool.</h2>
-      <h6>
-        <a href="http://mastodon.social/@TheRealPomax">
-          <img src="gh-weblog-2/images/logo-purple.svg">
-        </a>
-        <a href="./gh-weblog-2/rss.xml">
-          <img src="//upload.wikimedia.org/wikipedia/en/4/43/Feed-icon.svg">
-        </a>
-      </h6>
-    </header>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+      rel="stylesheet"
+      async
+    />
 
-    <!-- Promise shim -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/es6-shim/0.22.2/es6-shim.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="gh-weblog/style.css" />
 
     <!-- my personal blog uses MathJax for maths typesetting. Add that in: -->
     <script type="text/x-mathjax-config">
@@ -39,32 +25,54 @@
         }
       });
     </script>
-
     <script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.3/MathJax.js?config=TeX-AMS_HTML"></script>
-
     <script src="mj.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1><a class="home-link" href=".">Pomax.github.io</a></h1>
+      <h2>Because chronicling the past using technology is kind of cool.</h2>
+      <h3>
+        <a href="http://mastodon.social/@TheRealPomax">
+          <img src="images/logo-purple.svg" />
+        </a>
+        <a href="./gh-weblog/rss.xml">
+          <img src="//upload.wikimedia.org/wikipedia/en/4/43/Feed-icon.svg" />
+        </a>
+      </h3>
+    </header>
 
     <section id="projects">
-      <ul>
-        <li><a href="https://pomax.github.io/bezierinfo">A Primer on Bézier Curves</a></li>
-        <li><a href="https://pomax.github.io/bezierjs/">A Bezier.js library</a></li>
-        <li><a href="http://www.nihongoresources.com">Nihongo Resources</a></li>
-        <li><a href="https://github.com/Pomax?tab=repositories">Github Repositories</a></li>
-        <li><a href="https://www.npmjs.com/~pomax">My npmjs profile</a></li>
-        <li><a href="https://mastodon.social/@TheRealPomax">My twitter stream</a></li>
-      </ul>
+      <span>
+        <a href="https://pomax.github.io/bezierinfo"
+          >A Primer on Bézier Curves</a
+        >
+      </span>
+      <span>
+        <a href="https://pomax.github.io/bezierjs/">A Bezier.js library</a>
+      </span>
+      <span>
+        <a href="https://pomax.github.io/are-we-flying">Are we flying?</a>
+      </span>
+      <span
+        ><a href="http://www.nihongoresources.com">Nihongo Resources</a></span
+      >
+      <span>
+        <a href="https://github.com/Pomax?tab=repositories"
+          >Github Repositories</a
+        >
+      </span>
+      <span><a href="https://www.npmjs.com/~pomax">My npmjs profile</a></span>
     </section>
 
-    <!-- Github gh-pages weblog code: -->
-    <section id="gh-weblog-nav">
-      Loading post history links...
-    </section>
+    <section
+      id="gh-weblog"
+      data-base="https://pomax.github.io"
+      data-site="https://github.com/Pomax/pomax.github.io"
+      data-description="Because chronicling the past using technology is kind of cool."
+    ></section>
 
-    <section id="gh-weblog">
-      Loading mot recent posts...
-    </section>
-
-    <script src="settings.js"></script>
-    <script src='/gh-weblog-2/gh-weblog.js'></script>
+    <!-- wtf, chrome? Why do you not honour the "defer" attribute? -->
+    <script src="gh-weblog/dist/gh-weblog.js" async defer></script>
   </body>
 </html>

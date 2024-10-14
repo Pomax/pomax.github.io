@@ -1,210 +1,98 @@
 html {
   background: white;
-}
+  font-family: Lato, sans-serif;
 
-body {
-  width: 960px;
-  margin: 0 auto;
-  padding: 1em;
-  font-family: Lato;
-  background: #233651;
-  min-height: 100%;
-  border: 1px solid black;
-  border-width: 0 1px;
-  box-shadow: 0 0 50px 5px gray;
-}
-
-body > header h1,
-h2 {
-  font-family: "Eagle Lake";
-  margin: 0;
-}
-
-body > header h1 {
-  font-size: 250%;
-}
-
-body > header h1 .deved {
-  font-family: Verdana;
-  color: #cbcbcb;
-  font-size: 65%;
-  font-weight: normal;
-  display: inline-block;
-  height: 0.5em;
-  vertical-align: 0.25em;
-  margin-left: 1em;
-}
-
-body > header h2 {
-  font-size: 110%;
-  text-indent: 2em;
-  margin-bottom: 1em;
-  color: #fff2e7;
-}
-
-body > header h6 {
-  position: absolute;
-  top: -1em;
-  left: calc(50% + 480px - 3em);
-}
-
-body > header h6 a {
-  display: block;
-  height: 1.8em;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 4px;
-  vertical-align: middle;
-  text-align: center;
-  border-radius: 5px;
-  width: 1.9em;
-  border: 1px solid #555;
-}
-
-body > header h6 a + a {
-  top: 1em;
-  margin-top: 1em;
-}
-
-body > header h6 a img {
-  width: 2em !important;
-  height: 1.75em !important;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: Lustria;
-}
-
-a,
-a:active,
-a:hover,
-a:visited {
-  text-decoration: none;
-  color: #0d23cc;
-}
-
-h1 a,
-h1 a:active,
-h1 a:hover,
-h1 a:visited {
-  color: #4494c6;
-}
-
-a:hover {
-  color: rgb(80, 140, 200);
-}
-
-#projects {
-  background: white;
-  font: Verdana;
-}
-
-#projects ul {
-  list-style: outside none none;
-  margin: 0px;
-  padding: 0;
-  padding-left: 1em;
-  margin-bottom: 10px;
-}
-
-#projects ul li {
-  display: inline-block;
-}
-
-#projects ul li + li:before {
-  content: " | ";
-}
-
-#gh-weblog button.authenticate {
-  font-size: 1rem;
-}
-
-#gh-weblog-nav {
-  max-height: calc(5 * 1.25em);
-  background: white;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  margin: 0;
-  padding: 0;
-  margin-bottom: 1em;
-}
-
-#gh-weblog-nav ul {
-  list-style: none;
-  padding: 0;
-  padding-left: 0.5em;
-  margin: 0;
-}
-
-#gh-weblog-nav ul li {
-  white-space: nowrap;
-  text-overflow: ellipse;
-}
-
-#gh-weblog-nav ul li a {
-  color: #4494c6;
-}
-
-.pubday {
-  color: #555;
-}
-.pubyear {
-  color: #ccc;
-}
-
-/**
-
-  gh-weblog overrides
-
-**/
-
-.gh-weblog {
-  .entry {
+  body {
     position: relative;
+    width: 960px;
+    margin: 0 auto;
+    padding: 1em;
+    background: #233651;
+    min-height: 100%;
+    border: 1px solid black;
+    border-width: 0 1px;
+    box-shadow: 0 0 50px 5px gray;
 
-    &.folder .post {
-      position: relative;
-    }
+    header {
+      h1 {
+        font-size: 250%;
+        a {
+          color: #8fbee8 !important;
+        }
 
-    &.folded {
-      .post :nth-child(n + 8) {
-        display: none;
-
-        div.viewmore {
-          position: relative;
-          top: -36px;
-          text-align: center;
-          padding: 10px;
-          box-shadow: 0 -29px 25px 3px white inset;
-          button {
-            box-shadow: 0 0 15px 11px white;
-          }
+        .deved {
+          color: #cbcbcb;
+          font-size: 65%;
+          font-weight: normal;
+          display: inline-block;
+          height: 0.5em;
+          vertical-align: 0.25em;
+          margin-left: 1em;
+        }
+      }
+      h2 {
+        font-size: 110%;
+        margin-bottom: 1em;
+        color: #fff2e7;
+      }
+      h3 {
+        position: absolute;
+        top: 2rem;
+        right: 1rem;
+        img {
+          width: 2em;
+          height: 2em;
+          margin-right: 1em;
         }
       }
     }
+
+    a {
+      color: rgb(7, 95, 184);
+
+      &:active,
+      &:hover {
+        text-decoration: none;
+        color: rgb(100, 180, 230);
+      }
+
+      &:hover {
+        color: rgb(80, 140, 200);
+      }
+    }
+  }
+}
+
+#projects {
+  display: flex;
+  background: white;
+  text-align: center;
+  padding: 0.5em 1em;
+  margin-bottom: 1rem;
+  justify-content: space-evenly;
+
+  span {
+    display: inline-block;
+    white-space: nowrap;
+  }
+}
+
+/* --------------------------------------------------- */
+
+#gh-weblog {
+  .taglist {
+    display: block;
   }
 
-  pre {
-    background: #f0faff;
-    margin: 0 1em;
-    padding: 0.5em;
-    color: #180e65;
-    overflow: auto;
-    border-radius: 0.5em;
-    padding: 0.5em 1em;
-    border: 1px solid black;
+  blockquote {
+    text-indent: 0;
+    padding-left: 1em;
+    margin: 0;
+    font-style: italic;
+  }
 
-    code {
-      background: inherit;
-      padding: 0;
-      color: black;
-      font-weight: 900;
-      font-family: "Courier New";
-      font-size: 0.9rem;
-    }
+  button.authenticate {
+    top: -6rem !important;
+    opacity: 0.4;
   }
 }
