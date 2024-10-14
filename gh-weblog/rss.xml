@@ -1,36 +1,600 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <atom:link href="http://pomax.github.io/gh-blog/undefined/rss.xml" rel="self"
-      type="application/rss+xml" />
-    <title>Github weblogging</title>
-    <description>A free, simple github-based blogging platform</description>
-    <link>http://pomax.github.io/gh-blog</link>
-    <lastBuildDate>Fri, 02 Jan 2015 06:28:03 GMT</lastBuildDate>
-    <pubDate>Fri, 02 Jan 2015 06:28:03 GMT</pubDate>
-    <ttl>1440</ttl>
-    <item>
-      <title>How to set up your own Github blog</title>
-      <description>&lt;h2 id="a-quickstart-guide"&gt;A Quickstart Guide&lt;/h2&gt;
-        &lt;p&gt;By far the easiest way to install your own copy of this Github blog is to
-        head on over to &lt;a
-        href="http://github.com/pomax/gh-blog"&gt;http://github.com/pomax/gh-blog&lt;/a&gt;
-        and click the &amp;quot;fork&amp;quot; button, so that you get a copy of the gh-blog
-        repository, but on your own account. &lt;/p&gt;
-        &lt;p&gt;If you just want to install it to play with it, that&amp;#39;s all you have
-        to do in terms of &amp;quot;getting the code&amp;quot;.&lt;/p&gt;
-        &lt;h2
-        id="getting-credentials-so-that-you-can-edit-modify-delete-posts-directly"&gt;Getting
-        credentials so that you can edit/modify/delete posts directly&lt;/h2&gt;
-        &lt;p&gt;...text goes here...&lt;/p&gt;
-</description>
-      <category>Github</category>
-      <category>Blog</category>
-      <category>Installation</category>
-      <category>Instructions</category>
-      <link>http://pomax.github.io/gh-blog/#gh-weblog-1420179789753</link>
-      <guid>http://pomax.github.io/gh-blog/#gh-weblog-1420179789753</guid>
-      <pubDate>Fri, 02 Jan 2015 06:23:09 GMT</pubDate>
-    </item>
-  </channel>
-</rss>
+<channel>
+<atom:link href="https://pomax.github.io/gh-weblog/rss.xml" rel="self" type="application/rss+xml" />
+<title>Pomax.github.io</title>
+<description>Because chronicling the past using technology is kind of cool.</description>
+<link>https://pomax.github.io/</link>
+<lastBuildDate>Mon, 14 Oct 2024 05:26:22 GMT</lastBuildDate>
+<pubDate>Mon, 14 Oct 2024 05:26:22 GMT</pubDate>
+<ttl>1440</ttl><item>
+<title>New Entry</title>
+<description><![CDATA[<h1 id="new-entry">New Entry</h1>
+<p>I updated my blog platform, so this is a test message. If it works, I&#39;ll be deleting it again, and that might affect your RSS stream if  you&#39;re subscribed. My apologies.</p>
+]]></description>
+
+<link>https://pomax.github.io?postid=1728883538363</link>
+<guid>https://pomax.github.io?postid=1728883538363</guid>
+<pubDate>Mon, 14 Oct 2024 05:25:38 GMT</pubDate>
+</item>
+<item>
+<title> Using flight simulation rudder pedals as MIDI pedals</title>
+<description><![CDATA[<p>Did you know that there isn&#39;t just a dumb, simple Windows utility for turning a joystick or game controller into a MIDI device? Sure. you can find 15 year old utilities (that have no docs, so good luck figuring out why they don&#39;t work even if they <em>run</em>), and yes, you can find some dedicated &quot;profile&quot; utils that map specific game controller buttons to specific MIDI outs, but like... I have <a href="https://www.vkbcontrollers.com/products/t-rudders-mk-v-rudder-pedals">VKB-Sim rudder pedals</a> because <a href="https://pomax.github.io/are-we-flying/">I might like flight sim a little too much</a> and not a minute goes by while I&#39;m sitting at my desk that my feet don&#39;t think they&#39;re resting on sostenuto and sustain pedals. Because there&#39;s also a keyboard sitting on my desk. </p>
+<p>So can I please just get something that actually turns them into that when I need them to?</p>
+<blockquote>
+<p>&quot;Have you tried <a href="https://www.fergonez.net/softwares/fjoymidi">Fergo JoystickMIDI</a>?&quot;</p>
+</blockquote>
+<p>I have, it has no documentation, and all the buttons are greyed out. Not a fan.</p>
+<blockquote>
+<p>&quot;Have you tried <a href="http://www.otk.it/mjoy/">mJoy</a>??&quot;</p>
+</blockquote>
+<p>I have. Have you? In 2024? Because if you have you wouldn&#39;t recommend it.</p>
+<blockquote>
+<p>&quot;What about <a href="https://www.kaskobi.com/gamepadmidi">Gamepad MIDI</a>?&quot;</p>
+</blockquote>
+<p>I like Ableton, but I dont want a specif-</p>
+<blockquote>
+<p>&quot;You can do this in Max in Ableton just fine! Have y-&quot;</p>
+</blockquote>
+<p>Look, I own something like ten DAWs (<a href="https://www.ableton.com/en/">Ableton</a>, <a href="https://www.bitwig.com/">Bitwig</a>, <a href="https://www.steinberg.net/cubase/">Cubase</a>, <a href="https://www.image-line.com">FL Studio</a>, <a href="https://serato.com/">Serrato</a>, <a href="https://www.presonus.com/en/studio-one.html">Studio One</a>, <a href="https://www.reaper.fm/">Reaper</a>, <a href="https://www.reasonstudios.com/">Reason</a>, <a href="https://www.renoise.com/">ReNoise</a>, <a href="https://www.tracktion.com/products/waveform-pro">Waveform</a>) plus a bunch of esoteric or now-dead ones like <a href="https://www.flipsampler.com/">Flip</a> or <a href="https://warmplace.ru/soft/sunvox/">SunVox</a> or <a href="https://www.soundonsound.com/reviews/cakewalk-sonar-x3-producer">SonarX3</a> or <a href="https://www.zrythm.org/en/index.html">ZRhythm</a> (I know, the last one&#39;s free. I signed up to their nightly subscription because I think that effort <em>absolutely</em> deserves funding) and &quot;I stopped counting&quot; however many standalone VSTi. You think I&#39;m going to configure each of them separately? Because I&#39;m definitely not.</p>
+<blockquote>
+<p>&quot;Well what about <a href="https://github.com/jessecrossen/hautmidi/tree/master/joy2midi">joy2midi</a>?&quot;</p>
+</blockquote>
+<p>A JACK-only linux suggestion? I like where your head&#39;s at, except I&#39;m on Windows so that&#39;s not going to help us much here.</p>
+<blockquote>
+<p>&quot;Okay, fine. So: what, you&#39;re gonna write your own program??&quot;</p>
+</blockquote>
+<p>Actually, after a bit of digging... yeah? I can write a universal solution that&#39;ll work for anything that can deal with more than one MIDI device (which is all commercial software and nearly-all freeware) in 25 lines of code, if I&#39;m willing to use <a href="https://nodejs.org/en">Node.js</a> and a virtual midi device manager like <a href="https://www.tobias-erichsen.de/software/loopmidi.html">LoopMIDI</a>, a utility that I already use anyway. </p>
+<p>Step 1: Let me create a virtual MIDI device in LoopMIDI called &quot;Rudder Sustain&quot; for this. Inspired name, I know: I&#39;m a programmer, we&#39;re fantastic at naming things.</p>
+<p>Step 2: Install the Node libraries for working with USB devices and MIDI: <code>npm install node-hid easymidi</code>.</p>
+<p>Step 3: Write a near-trivial <code>pedals.js</code> file:</p>
+<pre><code>import HID from &quot;node-hid&quot;;
+import easymidi from &quot;easymidi&quot;;
+const { abs, round } = Math;
+
+// Get our virtual MIDI device
+const out = new easymidi.Output(&quot;Rudder Sustain&quot;, process.platform !== &quot;win32&quot;);
+
+// Get our VKB-sim rudder
+const device = await HID.HIDAsync.open(8989, 287);
+
+// And start mapping data!
+const MIDPOINT = 1024;
+const scale = 127 / MIDPOINT;
+let value, previous;
+device.on(&quot;data&quot;, (bytes) =&gt; {
+  const v = bytes[13] + bytes[14] * 256;
+  if (v !== previous) {
+    previous = v;
+    value = round(abs((v - 1024) * scale));
+    if (v &lt;= MIDPOINT) out.send(&quot;cc&quot;, { channel: 1, controller: 66, value });
+    if (v &gt;= MIDPOINT) out.send(&quot;cc&quot;, { channel: 1, controller: 64, value });
+  }
+});
+
+console.log(`\nSustain mapper running. Press ctrl-c to exit.\n\n`);
+</code></pre><p>Let me unpack that script a little:</p>
+<ol>
+<li>First we get a reference to the virtual MIDI device that we created using loopMIDI by the venerable Tobias Erichsen. The platform check is a bit silly, but the easymidi library itself doesn&#39;t perform Windows detection, so it wants &quot;true&quot; for linuxy systems and something falsey for Windows.</li>
+<li>Then we get a reference to the &quot;Human Input Device&quot; that my rudder pedals are registered as. USB is kind of bizarre in that every. single. USB. device. has to have its own vendor ID and product ID, and those <strong>must</strong> be registered with the USB consortium. I&#39;m pretty sure that&#39;s a racket, but I can&#39;t prove it, so we&#39;ll leave it at that. VKB Sim&#39;s vendor id is 8989 and the product id is 287, and I only have one so it&#39;s a straight &quot;get the only instance of this device&quot; call.</li>
+<li>Then we map the left and right pedals to <a href="https://en.wikipedia.org/wiki/Piano_pedals#Sostenuto_pedal">sostenuto</a> (&quot;only hold the notes that are currently down&quot;) and <a href="https://en.wikipedia.org/wiki/Sustain_pedal">sustain</a> (&quot;don&#39;t dampen any note&quot;) respectively: the rudder pedals generate values from 0 (left pedal down) to 2047 (right pedal down) with the neutral position generating 1024. so we just can fairly trivially map both ranges to the MIDI value range 0 through 127.</li>
+<li>We then send the mapped value with either controller code 66 for sostenuto or controller code 64 for sustain (or both, if the pedals return to neutral), on MIDI channel 1. With a small bit of overhead to make sure we don&#39;t send duplicate values.</li>
+</ol>
+<p>And... uh... that&#39;s it?  We can just run this with <code>node pedals</code> and done: as long as we enable the &quot;Rudder Sustain&quot; MIDI input  in whatever DAW or standalone instrument we&#39;re using, those flight sim pedals are now MIDI pedals. </p>
+<p>In 25 lines of code including comments and console logs.</p>
+<p>Programming is a superpower.</p>
+]]></description>
+<category>Node</category>
+<category>JavaScript</category>
+<category>music</category>
+<category>MIDI</category>
+<category>pedals</category>
+<category>controller</category>
+<link>https://pomax.github.io?postid=1722477769121</link>
+<guid>https://pomax.github.io?postid=1722477769121</guid>
+<pubDate>Thu, 01 Aug 2024 02:02:49 GMT</pubDate>
+</item>
+<item>
+<title> Adding a 2.5GBe NIC to a Synology DiskStation DS1819+</title>
+<description><![CDATA[<p>The DS1819+ is an 8 bay NAS with a PCIe slot, and one of the things you can use that for is to drop in a PCIe 2.5 GBe NIC in order to make your life a lot easier. When you do, you can either use Synology&#39;s insanely overpriced own solution, or you can just buy a TP-Link TX201, which is a cheap 2.5GB network card based on the Realtek 8125 chip. </p>
+<p>The downside is that the NAS does not come with a full linux distro, so it doesn&#39;t have drivers for that chip, but the upside is that getting that driver is a github away: head over to <a href="https://github.com/tabrezm/r8125-synology">https://github.com/tabrezm/r8125-synology</a> and follow the instructions.</p>
+<p>However, those instructions might leave you with a solution that requires loading the driver again and again, every time your NAS restarts, which is rather inconvenient, and so my solution for that was to just add a bit to the <code>rc.d</code> file that does this for us:</p>
+<pre><code>#!/bin/sh
+
+case $1 in
+    start)
+        echo &quot;Loading realtek 8125 module&quot;
+        insmod /lib/modules/r8125.ko
+        ip link set up eth4
+        ;;
+    stop)
+        echo &quot;Unloading realtek 8125 module&quot;
+        rmmod r8125
+        ;;
+    *)
+        echo &quot;Usage: $0 {start|stop}&quot;
+        exit 1
+        ;;
+esac
+
+exit 0
+</code></pre><p>And done. Rebooting the NAS will now load the driver we need and we can enjoy glorious 2.5 GBe connectivity.</p>
+]]></description>
+
+<link>https://pomax.github.io?postid=1720979278514</link>
+<guid>https://pomax.github.io?postid=1720979278514</guid>
+<pubDate>Sun, 14 Jul 2024 17:47:58 GMT</pubDate>
+</item>
+<item>
+<title> Dealing with phantom images in Lightroom</title>
+<description><![CDATA[<p>Ever run into a Lightroom showing you this?</p>
+<p><img src="/gh-weblog-2/images/stuck-image/initial-view.jpg" alt="initial stuck image view"></p>
+<p>Lightroom shows you an image in your grid and strip views, but it&#39;s also super obvious there isn&#39;t actually an image file backing it. No filename, no metadata, just nothing. And you can&#39;t remove it: LR just ignores your delete button, and your context-menu-initiated &quot;remove photo&quot;, and when you tell LR to optimize your catalog in the hopes of clearing this up, it&#39;s still there.</p>
+<p>When this happens, the quickest solution is to fix your light room catalog by <em>not using lightroom</em> and instead using one of the most used tools in the industry: Sqlite3. Sqlite is a file-based database management system, where a single file is a single data, which makes it ideal as a file format for applications, and you&#39;ll find it everywhere. Including lightroom. In fact...</p>
+<h2 id="-lrcat-files-are-literally-just-sqlite3-databases">.lrcat files are literally just Sqlite3 databases</h2>
+<p>You can tell any tool that lets you work with Sqlite databases to load your .lrcat file, and it will just do that for you. And because it&#39;s just a database, you can query it: say you wanted the filename list of all your photos that you haven&#39;t tagged yet. You can ask Lightroom to do this, but it&#39;ll take <em>forever</em> if you have a large catalog. Or you can query the lrcat database directly and get the answer in a few milliseconds:</p>
+<pre><code class="lang-sqlite">SELECT
+  originalFilename as filename
+FROM
+  Adobe_images as imageRecord,
+  AgLibraryFile as file
+WHERE
+  imageRecord.rootFile = file.id_local
+AND
+  imageRecord.id_local NOT IN (
+    SELECT DISTINCT(image) FROM AgLibraryKeywordImage
+  )
+</code></pre>
+<p>And that speed is not hyperbole: directly using Sqlite means you&#39;re bypassing everything except the thing you&#39;re interested in, and so it can run <em>really</em> fast compared to running an operation in Lightroom.</p>
+<h2 id="finding-our-bad-image">Finding our bad image</h2>
+<p>There&#39;s a surprisingly simple way to find our bad image: </p>
+<ol>
+<li>With Lightroom closed, copy our lrcat file to a new file called <code>a.db</code>.</li>
+<li>Open Lightroom, and change one thing about the bad image, like flagging it, or adding it to the quick collection.</li>
+<li>Close lightroom, then copy our updated lrcat file to a new file called <code>b.db</code>.</li>
+</ol>
+<p>Then, take advantage of <a href="https://www.sqlite.org/sqldiff.html">sqldiff</a>, which is a tool that comes with sqlite3 that lets you compare two databases in a normal, human readable way.</p>
+<h2 id="adding-our-image-to-the-quick-collection">Adding our image to the quick collection</h2>
+<p>Let&#39;s look at what happens when we use the quick collection as our method of &quot;finding out what changed&quot;:</p>
+<pre><code class="lang-sqlite">UPDATE Adobe_variablesTable SET value=1696396.0 WHERE id_local=1;
+UPDATE Adobe_variablesTable SET value=&#39;5EE3773B-1CC4-400B-8886-336773BA06DB&#39; WHERE id_local=7;
+UPDATE Adobe_variablesTable SET value=&#39;volumeInfo = {&#39;||X&#39;0a09&#39;
+||&#39;[&quot;D:\\&quot;] = {&#39;||X&#39;0a0909&#39;
+||&#39;expanded = true,&#39;||X&#39;0a0909&#39;
+||&#39;freeSpace = 12345678,&#39;||X&#39;0a0909&#39;
+||&#39;name = &quot;Some Drive (C:)&quot;,&#39;||X&#39;0a0909&#39;
+||&#39;offline = false,&#39;||X&#39;0a0909&#39;
+||&#39;size = 12345678,&#39;||X&#39;0a09&#39;
+||&#39;},&#39;||X&#39;0a&#39;
+||&#39;}&#39;||X&#39;0a&#39; WHERE id_local=54;
+UPDATE Adobe_variablesTable SET value=&#39;s = {&#39;||X&#39;0a09&#39;
+||&#39;{&#39;||X&#39;0a0909&#39;
+||&#39;type = &quot;collection&quot;,&#39;||X&#39;0a0909&#39;
+||&#39;value = {&#39;||X&#39;0a090909&#39;
+||&#39;collectionId = 441740,&#39;||X&#39;0a090909&#39;
+||&#39;creationId = &quot;com.adobe.ag.library.smart_collection&quot;,&#39;||X&#39;0a090909&#39;
+||&#39;tableName = &quot;AgLibraryCollection&quot;,&#39;||X&#39;0a0909&#39;
+||&#39;},&#39;||X&#39;0a09&#39;
+||&#39;},&#39;||X&#39;0a&#39;
+||&#39;}&#39;||X&#39;0a&#39; WHERE id_local=55;
+UPDATE Adobe_variablesTable SET value=&#39;C16EE445-1362-4410-9996-617C7092D74A&#39; WHERE id_local=121;
+UPDATE Adobe_variablesTable SET value=738175364.159989 WHERE id_local=131;
+UPDATE AgDNGProxyInfo SET statusDateTime=&#39;2024-05-23 16:41:17&#39; WHERE id_local=1688612;
+UPDATE AgDNGProxyInfo SET statusDateTime=&#39;2024-05-23 16:41:17&#39; WHERE id_local=1688616;
+[...a whole lot more of these statusDateTime update...]
+UPDATE AgDNGProxyInfo SET statusDateTime=&#39;2024-05-23 16:41:17&#39; WHERE id_local=1689090;
+UPDATE AgDNGProxyInfo SET statusDateTime=&#39;2024-05-23 16:41:17&#39; WHERE id_local=1689092;
+DELETE FROM AgLibraryCollectionImage WHERE id_local=1681399;
+INSERT INTO AgLibraryCollectionImage(id_local,collection,image,pick,positionInCollection) VALUES(1696395,5,1672248,0.0,NULL);
+INSERT INTO AgLibraryCollectionImageChangeCounter(rowid,collectionImage,collection,image,changeCounter) VALUES(1,1696395,5,1672248,132891);
+DELETE FROM AgLibraryCollectionImageChangeCounter WHERE rowid=2;
+DELETE FROM AgSpecialSourceContent WHERE id_local=1665;
+INSERT INTO AgSpecialSourceContent(id_local,content,owningModule,source) VALUES(1667,NULL,&#39;com.adobe.ag.library.filter&#39;,&#39;entire_library&#39;);
+UPDATE LrMobileSyncChangeCounter SET changeCounter=132891 WHERE rowid=1;
+</code></pre>
+<p>That&#39;s a lot of stuff, but it&#39;s the <code>AgLibraryCollectionImageChangeCounter</code> bit we care about, because we only changed a single thing for a single image. If we add some white space to make things a little more obvious, we see:</p>
+<pre><code class="lang-sqlite">INSERT INTO AgLibraryCollectionImageChangeCounter
+  (   rowid  ,  collectionImage  ,  collection  ,   image  ,  changeCounter  )
+VALUES
+  (     1    ,       1696395     ,       5      ,  1672248  ,    132891      );
+</code></pre>
+<p>This tells us that there was a change to the image with its own numerical identifier <code>1672248</code>, stored in the &quot;collection list&quot; with identifier <code>1696395</code>, in a collection with identifier <code>5</code>. So let&#39;s quickly make sure this is, indeed, the quick collection using (in this case, but you have plenty of options) <a href="">db browser for sqlite</a> </p>
+<p><img src="/gh-weblog-2/images/stuck-image/quick-check.jpg" alt="a quick check..."></p>
+<p>Collection 5 is indeed the quick collection: perfect, we can now confidently say that our offending image has <code>1672248</code> as its identifier.</p>
+<h2 id="removing-the-offender-from-the-catalog">Removing the offender from the catalog</h2>
+<p>So, let&#39;s look up our image: the lrcat database stores this information in the <code>Adobe_images</code> table, so if we look up the record with <code>id_local=1672248</code> we get:</p>
+<pre><code>id_local: 1672248
+id_global: 42A3E56C-D027-4E71-AFF3-6A1907189580
+aspectRatioCache: 0.654052734375
+bitDepth: 8.0
+captureTime: 2023-12-29T09:32:04
+colorChannels: 3.0
+colorLabels:
+colorMode: 2.0
+copyCreationTime: -63113817600.0
+copyName:
+copyReason:
+developSettingsIDCache: 1675643.0
+fileFormat: JPG
+fileHeight: 4096.0
+fileWidth: 2679.0
+hasMissingSidecars:
+masterImage:
+orientation: AB
+originalCaptureTime:
+originalRootEntity:
+panningDistanceH:
+panningDistanceV:
+pick: 0.0
+positionInFolder: z
+propertiesCache: 1675639.0
+pyramidIDCache: none
+rating:
+rootFile: 1675632
+sidecarStatus: 0.0
+touchCount: 1.0
+touchTime: 731557537.900445
+</code></pre><p>That&#39;s a bunch of stuff! But really what we want to do is delete this image, so most of these values don&#39;t matter, and we really only care about these four:</p>
+<pre><code>id_local: 1672248
+developSettingsIDCache: 1675643.0
+propertiesCache: 1675639.0
+rootFile: 1675632
+</code></pre><ul>
+<li>The first is the image&#39;s identifier in the image table. </li>
+<li>The second is the identifier for the associated record in the <code>Adobe_imageDevelopSettings</code> table</li>
+<li>The third is the identifier for the associated record in the <code>Adobe_imageProperties</code> table</li>
+<li>The last is the identifier for the associated record in the <code>AgLibraryFile</code> table, and <em>that</em> is where the problem will be: this table houses all the information of which real, on-disk files, map to virtual, in-database image records.</li>
+</ul>
+<p>And wouldn&#39;t you know it: if we check the <code>AgLibraryFile</code> table and try to find the record with <code>id_local=1675632</code>,  there isn&#39;t one.</p>
+<h2 id="fixing-this-database">Fixing this database</h2>
+<details>
+<summary>
+In order to find out all the places that we&#39;ll need to update we can dump our catalog as a SQL file, and then search through it with any decent text editor. When we do, we find that there are 19 places where we may need to intervene.
+</summary>
+
+<code>sql
+INSERT INTO &quot;Adobe_variablesTable&quot; (&quot;id_local&quot;,&quot;id_global&quot;,&quot;name&quot;,&quot;type&quot;,&quot;value&quot;) VALUES (58,&#39;221CBFD1-EEB2-43C8-87FC-3F75D3F894D1&#39;,&#39;Adobe_selectedImages&#39;,NULL,&#39;1672248&#39;);
+
+INSERT INTO &quot;Adobe_variablesTable&quot; (&quot;id_local&quot;,&quot;id_global&quot;,&quot;name&quot;,&quot;type&quot;,&quot;value&quot;) VALUES (119,&#39;7C2C8795-99C7-40B0-A09D-2741B7C2A41B&#39;,&#39;Adobe_activeImage&#39;,NULL,1672248.0);
+
+INSERT INTO &quot;Adobe_AdditionalMetadata&quot; (&quot;id_local&quot;,&quot;id_global&quot;,&quot;additionalInfoSet&quot;,&quot;embeddedXmp&quot;,&quot;externalXmpIsDirty&quot;,&quot;image&quot;,&quot;incrementalWhiteBalance&quot;,&quot;internalXmpDigest&quot;,&quot;isRawFile&quot;,&quot;lastSynchronizedHash&quot;,&quot;lastSynchronizedTimestamp&quot;,&quot;metadataPresetID&quot;,&quot;metadataVersion&quot;,&quot;monochrome&quot;,&quot;xmp&quot;) VALUES (1675637,&#39;8AACD130-AD4B-4DCC-8B7D-AA12B813B271&#39;,1,1,0,1672248,1,&#39;4fde0a6f3d30508ca3e261e7cdbd6e68&#39;,0,&#39;86ca238116b8d1f15db8c9b11d2438ed&#39;,725651033.202449,NULL,4.0,0,X&#39;...&#39;);
+
+INSERT INTO &quot;AgMetadataSearchIndex&quot; (&quot;id_local&quot;,&quot;exifSearchIndex&quot;,&quot;image&quot;,&quot;iptcSearchIndex&quot;,&quot;otherSearchIndex&quot;,&quot;searchIndex&quot;) VALUES (1675634,&#39;/t24.7/twindows/tadobe/tphotoshop/t&#39;,1672248,&#39;&#39;,&#39;&#39;,&#39;/t24.7/twindows/tadobe/tphotoshop/t&#39;);
+
+INSERT INTO &quot;Adobe_imageProperties&quot; (&quot;id_local&quot;,&quot;id_global&quot;,&quot;image&quot;,&quot;propertiesString&quot;) VALUES (1675639,&#39;C5995A56-D83B-4011-A4D6-3584FEEF15EA&#39;,1672248,&#39;...&#39;);
+
+INSERT INTO &quot;Adobe_libraryImageDevelopHistoryStep&quot; (&quot;id_local&quot;,&quot;id_global&quot;,&quot;dateCreated&quot;,&quot;digest&quot;,&quot;hasBigData&quot;,&quot;hasDevelopAdjustments&quot;,&quot;image&quot;,&quot;name&quot;,&quot;relValueString&quot;,&quot;text&quot;,&quot;valueString&quot;) VALUES (1675645,&#39;16100BEF-7075-43E8-BAD1-6E25DA321339&#39;,726620486.645848,&#39;35e2f635a9912238fcab57e4278ee1b5&#39;,0,-1.0,1672248,&#39;Import (1/10/2024 3:01:26 PM)&#39;,NULL,X&#39;...&#39;,NULL);
+
+INSERT INTO &quot;Adobe_images&quot; (&quot;id_local&quot;,&quot;id_global&quot;,&quot;aspectRatioCache&quot;,&quot;bitDepth&quot;,&quot;captureTime&quot;,&quot;colorChannels&quot;,&quot;colorLabels&quot;,&quot;colorMode&quot;,&quot;copyCreationTime&quot;,&quot;copyName&quot;,&quot;copyReason&quot;,&quot;developSettingsIDCache&quot;,&quot;fileFormat&quot;,&quot;fileHeight&quot;,&quot;fileWidth&quot;,&quot;hasMissingSidecars&quot;,&quot;masterImage&quot;,&quot;orientation&quot;,&quot;originalCaptureTime&quot;,&quot;originalRootEntity&quot;,&quot;panningDistanceH&quot;,&quot;panningDistanceV&quot;,&quot;pick&quot;,&quot;positionInFolder&quot;,&quot;propertiesCache&quot;,&quot;pyramidIDCache&quot;,&quot;rating&quot;,&quot;rootFile&quot;,&quot;sidecarStatus&quot;,&quot;touchCount&quot;,&quot;touchTime&quot;) VALUES (1672248,&#39;42A3E56C-D027-4E71-AFF3-6A1907189580&#39;,0.654052734375,8.0,&#39;2023-12-29T09:32:04&#39;,3.0,&#39;&#39;,2.0,-63113817600.0,NULL,NULL,1675643.0,&#39;JPG&#39;,4096.0,2679.0,NULL,NULL,&#39;AB&#39;,NULL,NULL,NULL,NULL,0.0,&#39;z&#39;,1675639.0,&#39;none&#39;,NULL,1675632,0.0,1.0,731557537.900445);
+
+INSERT INTO &quot;AgDevelopAdditionalMetadata&quot; (&quot;id_local&quot;,&quot;hasDepthMap&quot;,&quot;image&quot;) VALUES (1675636,0,1672248);
+
+INSERT INTO &quot;AgLibraryCollectionImage&quot; (&quot;id_local&quot;,&quot;collection&quot;,&quot;image&quot;,&quot;pick&quot;,&quot;positionInCollection&quot;) VALUES (1681399,5,1672248,0.0,NULL);
+
+INSERT INTO &quot;AgLibraryIPTC&quot; (&quot;id_local&quot;,&quot;caption&quot;,&quot;copyright&quot;,&quot;image&quot;) VALUES (1675641,NULL,NULL,1672248);
+
+INSERT INTO &quot;AgLibraryImportImage&quot; (&quot;id_local&quot;,&quot;image&quot;,&quot;import&quot;) VALUES (1677291,1672248,1672136);
+
+INSERT INTO &quot;AgSourceColorProfileConstants&quot; (&quot;id_local&quot;,&quot;image&quot;,&quot;profileName&quot;) VALUES (1675635,1672248,&#39;Untagged&#39;);
+
+INSERT INTO &quot;Adobe_imageDevelopSettings&quot; (&quot;id_local&quot;,&quot;allowFastRender&quot;,&quot;beforeSettingsIDCache&quot;,&quot;croppedHeight&quot;,&quot;croppedWidth&quot;,&quot;digest&quot;,&quot;fileHeight&quot;,&quot;fileWidth&quot;,&quot;grayscale&quot;,&quot;hasBigData&quot;,&quot;hasDevelopAdjustments&quot;,&quot;hasDevelopAdjustmentsEx&quot;,&quot;historySettingsID&quot;,&quot;image&quot;,&quot;processVersion&quot;,&quot;profileCorrections&quot;,&quot;removeChromaticAberration&quot;,&quot;settingsID&quot;,&quot;snapshotID&quot;,&quot;text&quot;,&quot;validatedForVersion&quot;,&quot;whiteBalance&quot;) VALUES (1675643,NULL,NULL,NULL,&#39;uncropped&#39;,&#39;35e2f635a9912238fcab57e4278ee1b5&#39;,NULL,NULL,0,0,NULL,-1.0,&#39;16100BEF-7075-43E8-BAD1-6E25DA321339&#39;,1672248,&#39;15.4&#39;,0.0,0.0,&#39;default&#39;,NULL,&#39;...
+&#39;,3.0,&#39;As Shot&#39;);
+
+INSERT INTO &quot;AgHarvestedExifMetadata&quot; (&quot;id_local&quot;,&quot;image&quot;,&quot;aperture&quot;,&quot;cameraModelRef&quot;,&quot;cameraSNRef&quot;,&quot;dateDay&quot;,&quot;dateMonth&quot;,&quot;dateYear&quot;,&quot;flashFired&quot;,&quot;focalLength&quot;,&quot;gpsLatitude&quot;,&quot;gpsLongitude&quot;,&quot;gpsSequence&quot;,&quot;hasGPS&quot;,&quot;isoSpeedRating&quot;,&quot;lensRef&quot;,&quot;shutterSpeed&quot;) VALUES (1675647,1672248,NULL,NULL,NULL,29.0,12.0,2023.0,NULL,NULL,NULL,NULL,0.0,0,NULL,NULL,NULL);
+
+INSERT INTO &quot;AgHarvestedIptcMetadata&quot; (&quot;id_local&quot;,&quot;image&quot;,&quot;cityRef&quot;,&quot;copyrightState&quot;,&quot;countryRef&quot;,&quot;creatorRef&quot;,&quot;isoCountryCodeRef&quot;,&quot;jobIdentifierRef&quot;,&quot;locationDataOrigination&quot;,&quot;locationGPSSequence&quot;,&quot;locationRef&quot;,&quot;stateRef&quot;) VALUES (1675649,1672248,NULL,NULL,NULL,NULL,NULL,NULL,&#39;unset&#39;,-1.0,NULL,NULL);
+
+INSERT INTO &quot;AgHarvestedDNGMetadata&quot; (&quot;id_local&quot;,&quot;image&quot;,&quot;hasFastLoadData&quot;,&quot;hasLossyCompression&quot;,&quot;isDNG&quot;,&quot;isHDR&quot;,&quot;isPano&quot;,&quot;isReducedResolution&quot;) VALUES (1675651,1672248,0,0,0,0,0,0);
+
+INSERT INTO &quot;AgLibraryImageChangeCounter&quot; (&quot;image&quot;,&quot;changeCounter&quot;,&quot;changedAtTime&quot;,&quot;localTimeOffsetSecs&quot;) VALUES (1672248,132734,&#39;2024-03-08T02:25:37.902Z&#39;,-28800);
+
+INSERT INTO &quot;AgLibraryImageSyncedAssetData&quot; (&quot;image&quot;,&quot;payloadKey&quot;,&quot;payloadData&quot;) VALUES (1672248,&#39;/changedOnDevice&#39;,&#39;YvtugebbzQrfxgbc&#39;);
+
+INSERT INTO &quot;AgLibraryCollectionImageChangeCounter&quot; (&quot;collectionImage&quot;,&quot;collection&quot;,&quot;image&quot;,&quot;changeCounter&quot;) VALUES (1681399,5,1672248,132505);</code>
+
+</details>
+
+<p>That&#39;s a lot of text! But also: only 19 places where we need to delete a record, and we can do that pretty efficiently with SQL.</p>
+<h3 id="updating-adobe_variablestable-">Updating <code>Adobe_variablesTable</code></h3>
+<p>We&#39;re going to set both the <code>Adobe_selectedImages</code> and <code>Adobe_activeImage</code> fields that currently point to our non-existent image to empty. Depending on the DB manager you&#39;re using this could be a simple matter of directly editing the field, but you can also do this using SQL (obviously):</p>
+<pre><code class="lang-javascript">UPDATE Adobe_variablesTable SET value = &#39;&#39; WHERE name = &#39;Adobe_selectedImages&#39;;
+UPDATE Adobe_variablesTable SET value = &#39;&#39; WHERE name = &#39;Adobe_activeImage&#39;;
+</code></pre>
+<h3 id="deleting-all-references-to-our-non-existent-image">Deleting all references to our non-existent image</h3>
+<p>All that&#39;s left now is to remove references to our image from the various tables. Again, we can either do this manually, or we can use some SQL:</p>
+<pre><code class="lang-javascript">DELETE FROM Adobe_AdditionalMetadata WHERE image = 1672248;
+DELETE FROM AgMetadataSearchIndex WHERE image = 1672248;
+DELETE FROM Adobe_imageProperties WHERE image = 1672248;
+DELETE FROM Adobe_libraryImageDevelopHistoryStep WHERE image = 1672248;
+DELETE FROM Adobe_images WHERE id_local = 1672248;
+DELETE FROM AgDevelopAdditionalMetadata WHERE image = 1672248;
+DELETE FROM AgLibraryCollectionImage WHERE image = 1672248;
+DELETE FROM AgLibraryIPTC WHERE image = 1672248;
+DELETE FROM AgLibraryImportImage WHERE image = 1672248;
+DELETE FROM AgSourceColorProfileConstants WHERE image = 1672248;
+DELETE FROM Adobe_imageDevelopSettings WHERE image = 1672248;
+DELETE FROM AgHarvestedExifMetadata WHERE image = 1672248;
+DELETE FROM AgHarvestedIptcMetadata WHERE image = 1672248;
+DELETE FROM AgHarvestedDNGMetadata WHERE image = 1672248;
+DELETE FROM AgLibraryImageChangeCounter WHERE image = 1672248;
+DELETE FROM AgLibraryImageSyncedAssetData WHERE image = 1672248;
+DELETE FROM AgLibraryCollectionImageChangeCounter WHERE image = 1672248;
+</code></pre>
+<p>Note that we&#39;re dealing with the identifier from the <code>Adobe_images</code> so we&#39;re deleting from that table using <code>id_local</code> whereas we&#39;re deleting from every other table using <code>image</code>.</p>
+<h2 id="how-did-we-do-">How did we do?</h2>
+<p>If we now open Lightroom on our updated catalog, what do we see?</p>
+<p><img src="/gh-weblog-2/images/stuck-image/the-result.png" alt="the result"></p>
+<p>And that&#39;s our problem solved. No more phantom image. It&#39;s a good idea to run a (hopefully) quick catalog optimization, but other than that, it&#39;s back to not having to deal with this problem hopefully forever!</p>
+]]></description>
+<category>Adobe</category>
+<category>Lightroom</category>
+<category>SQL</category>
+<category>Sqilte</category>
+<category>Sqlite3</category>
+<link>https://pomax.github.io?postid=1716887502084</link>
+<guid>https://pomax.github.io?postid=1716887502084</guid>
+<pubDate>Tue, 28 May 2024 09:11:42 GMT</pubDate>
+</item>
+<item>
+<title> Socketless, a websocket-based RPC library... without websockets or RPC</title>
+<description><![CDATA[<p>I released <a href="https://github.com/pomax/socketless">socketless</a> v1.0.0 today, which is a websockets-based RPC library for Node-based client/server implementations, that removes all the websocket and RPC nonsense: you write normal JS code, your client and server see a <code>this.server</code> and <code>this.clients[...]</code> respectively, and if they need to call server and client functions respectively, they just... do that. Without ever knowing that the client or server is running on a completely different machine half the world away.</p>
+<p>Obviously, this solves a problem for me: I hate writing websocket code, I just want to call functions and get return values, so maybe this is useful for you, too. </p>
+<p>I still need to set up a website for it (for now, the github repo will do), and I want to swap over my <a href="https://pomax.github.io/are-we-flying/">&quot;Are we flying?&quot;</a> article and codebase to make use of this (as well as an unreleased multiplayer Mahjong implementation, more on that in the future, hopefully), which I&#39;m sure will reveal things I still need to add or change, but for now, this is incredibly useful as is, and if you&#39;ve ever wanted to write a client/server &quot;anything&quot;, be it a game, chat server, BBS, whathaveyou, this should make that jobs a ridiculous amount easier.</p>
+<p><a href="https://github.com/pomax/pomax.github.io/issues">Let me know what you think!</a></p>
+]]></description>
+<category>Nodejs</category>
+<category>websocket</category>
+<category>websockets</category>
+<category>RPC</category>
+<category>games</category>
+<link>https://pomax.github.io?postid=1697948473746</link>
+<guid>https://pomax.github.io?postid=1697948473746</guid>
+<pubDate>Sun, 22 Oct 2023 04:21:13 GMT</pubDate>
+</item>
+<item>
+<title> A sweet, mild hot sauce</title>
+<description><![CDATA[<p>We&#39;re running out of a mild hot sauce that we quite like, so I figured I might as well try to replicate the recipe. The following makes about 60oz/1.75L</p>
+<p>Ingredients:</p>
+<ul>
+<li>Jalapeno: x15~x20</li>
+<li>Habanero x6</li>
+<li>Tomatillo: x5 (small)</li>
+<li>Cilantro: 1 bunch (stems and all)</li>
+<li>Cumin: 3 tbsp</li>
+<li>Onion powder: 4 tbsp</li>
+<li>Black pepper: 1 tbsp</li>
+<li>Garlic paste: 5 tbsp</li>
+<li>Rock Salt: 35gr (1.5 tbsp)</li>
+<li>Thick apricot jam: 2.5 cups</li>
+<li>Apple cider vinegar: 1.5 cups</li>
+<li>Apple Juice: 0.5 cup</li>
+<li>Lemon juice:  4 tbsp</li>
+<li>Lime juice: 2 tbsp</li>
+</ul>
+<p>Steps:</p>
+<ol>
+<li>blend</li>
+<li>keep blending.</li>
+<li>keep it up!</li>
+<li>yeah you&#39;re probably done.</li>
+</ol>
+]]></description>
+<category>hot sauce</category>
+<link>https://pomax.github.io?postid=1697686323351</link>
+<guid>https://pomax.github.io?postid=1697686323351</guid>
+<pubDate>Thu, 19 Oct 2023 03:32:03 GMT</pubDate>
+</item>
+<item>
+<title> Writing a Node package using Rust... on Windows</title>
+<description><![CDATA[<p>Let me preface this by saying that every single person who claims that <code>mingw</code>, or <code>msys</code>, or &quot;you have <code>WSL2</code>, just use that&quot; are valid excuses to not target actual Windows is actively making life worse for large swathes of developers, and if that&#39;s you, please be better. Applications and libraries should work on any OS, including Windows: just cross-platform compile your software instead of making it someone else&#39;s problem =)</p>
+<p>With that out of the way: let&#39;s write some code in Rust that we can call from Node.js so that we get the best of both worlds: the ease of development of Node.js, with the &quot;I need this to be fast&quot; parts handled by natively compiled code.</p>
+<p>First up, let&#39;s get Rust configured:</p>
+<ul>
+<li><a href="https://github.com/llvm/llvm-project/releases/ because you&#39;ll need LLD (click &quot;show all ... assets&quot; and download the windows version">install LLVM</a>, because we&#39;ll need the LLD tool that comes with it,</li>
+<li><a href="https://www.rust-lang.org/tools/install">install Rust</a>,</li>
+<li>check to see if you have a <code>C:\Users\yournamehere\.cargo\config</code> file. If you don&#39;t, create one, and</li>
+<li>run <code>rustup target add x86_64-pc-windows-msvc</code> to download the bits Rust needs to build native Windows binaries.</li>
+</ul>
+<p>Then open the cargo config file, and add the following to it:</p>
+<pre><code>[target.x86_64-pc-windows-msvc]
+linker = &quot;lld-link.exe&quot;
+</code></pre><p>Rust now knows that it&#39;s building for the Windows platform. Beauty.</p>
+<p>Next up, we&#39;ll need Node.js</p>
+<ul>
+<li>install <a href="https://github.com/coreybutler/nvm-windows">nvm-windows</a></li>
+<li>run <code>nvm install lts</code> to install the current <a href="https://en.wikipedia.org/wiki/Long-term_support">LTS</a> version of Node</li>
+</ul>
+<p>And we&#39;re good to go. Let&#39;s start by creating a new project by running <code>cargo new testlib</code> and then changing a few things because we want Rust to build us a library, not an executable:</p>
+<ol>
+<li>rename <code>src/main.rs</code> to <code>src/lib.rs</code>,</li>
+<li>add a section called <code>[lib]</code> to the <code>Cargo.toml</code> file, and</li>
+<li>add <code>crate-type = [&quot;cdylib&quot;]</code> in that new section.</li>
+</ol>
+<p>This tells Rust that it will be compiling a shared library appropriate to the OS we build it on. Since we&#39;re on Windows, it&#39;ll be generating <code>.dll</code> files.</p>
+<p>And with that, let&#39;s put some Rust code in our <code>lib.rs</code>!</p>
+<pre><code class="lang-rust">// Tell Rust that we want our ABI to be C flavoured:
+
+#[repr(C)]
+
+// Create the equivalent of a Vec3:
+
+pub struct Orientation {
+  pitch: f64,
+  roll: f64,
+  yaw: f64,
+}
+
+// Give that struct an .add() function:
+
+impl Orientation {
+  fn add(&amp;mut self, pitch: f64, roll: f64, yaw:f64) -&gt; &amp;mut Orientation {
+    self.pitch += pitch;
+    self.roll += roll;
+    self.yaw += yaw;
+    return self;
+  }
+}
+
+// And then let&#39;s write a function that takes an Orientation as input,
+// does &quot;something&quot;, and then returns that Orietation as output:
+
+#[no_mangle]
+pub extern fn orientation_test(s: &amp;mut Orientation) -&gt; &amp;mut Orientation {
+  return s.add(1.0, 2.0, 3.0);
+}
+</code></pre>
+<p>If you&#39;re familiar with Rust none of this should be too surprising, but you might notice the <code>#[repr(C)]</code>, which tells Rust that we want the library&#39;s <a href="https://en.wikipedia.org/wiki/Application_binary_interface">application binary interface</a> (ABI) to conform to the C version, because Node only knows how to work with C flavoured ABIs. You might also notice the <code>#[no_mangle]</code> which is <em>super</em> important: by default Rust will optimize function names, which is convenient for generating smaller executables but is <em>disastrous</em> for libraries, where the point is that we want to call functions that we export <em>using the name we gave them</em>. So we tell Rust not to mangle the function name. And of course, everything we want to make use of on the Node side gets a <code>pub</code> so that it&#39;s visible to the outside world.</p>
+<p>And that&#39;s it, we can now run <code>cargo build</code> and it&#39;ll generate us a <code>target/debug/testlib.dll</code> file to use in &quot;whatever knows how to import DLL files&quot;!</p>
+<p>So let&#39;s move on to Node. We&#39;re first going to initialize the Rust project as a Node project, too, using <code>npm init</code>, after which we need to install something that&#39;ll let us work with DLL files, i.e. we want an <a href="https://en.wikipedia.org/wiki/Foreign_function_interface">foreign function interface</a> (FFI) solution, and the one we&#39;ll be using is <a href="https://koffi.dev/">koffi</a>: <code>npm install koffi</code>.</p>
+<p>(There are other options, but after trying pretty much every FFI solution that exists for Node, <code>koffi</code> was by far the most pleasant to work with. Which is pretty important!)</p>
+<p>We then edit our <code>package.json</code> to include a <code>&quot;type&quot;: &quot;module&quot;</code> because it&#39;s 2023 and we&#39;ll be writing modern JS with modern ES modules instead of using the legacy Node-only CommonJS module system, and we&#39;re good to go, let&#39;s create a <code>test.js</code> and make it use our DLL file!</p>
+<pre><code class="lang-js">// First we import koffi and load our library, using the extension appropriate to our OS.
+// Remember, just because we&#39;re on Windows doesn&#39;t mean we should be LOCKED into Windows!
+
+import koffi from &quot;koffi&quot;;
+const libraryPath = `./target/debug/testlib.${process.platform === `win32` ? `dll` : `so`}`;
+const lib = koffi.load(libraryPath);
+
+// Then we&#39;ll need a JS-equivalent of the struct our library uses:
+
+const Orientation = koffi.struct(`Orientation`, {
+  pitch: `double`,
+  roll: `double`,
+  yaw: `double`,
+});
+
+// And of course, we need a function handle, which requires specifying the function name we
+// want from the library, as well as what output it generates, given which inputs:
+
+const orientationTest = lib.func(`orientation_test`, Orientation, [Orientation]);
+
+// And with that we&#39;re ready to run some native code!
+
+const data = {
+  pitch: 0,
+  roll: 0,
+  yaw: 0,
+};
+
+let result = data;
+
+const start = performance.now();
+for(let i=0; i&lt;10000; i++) {
+  result = orientationTest(result);
+}
+const timeTaken = (performance.now() - start)|0;
+
+console.log(`test result:`, result, `- 10,000 iterations took ${timeTaken}ms`);
+</code></pre>
+<p>If we now run this using <code>node test.js</code> we see:</p>
+<pre><code>test result: { pitch: 10000, roll: 20000, yaw: 30000 } - 10,000 iterations took 13ms
+</code></pre><p>How cool is that? We&#39;re no longer stuck with running code at the speed of JS, we can run code at <em>native</em> speed by handing the number-crunchy, resource-intensive parts over to Rust, while keeping the convenience of JS for all the other parts of our code. It&#39;s the best of both worlds!</p>
+]]></description>
+<category>Node.js</category>
+<category>Rust</category>
+<category>Koffi</category>
+<category>FFI</category>
+<link>https://pomax.github.io?postid=1691255244859</link>
+<guid>https://pomax.github.io?postid=1691255244859</guid>
+<pubDate>Sat, 05 Aug 2023 17:07:24 GMT</pubDate>
+</item>
+<item>
+<title> Generating a 3D LUT with Photoshop for OBS/Atomos/etc.</title>
+<description><![CDATA[<p>Have you ever needed a 3D cube LUT? Turns out, all you need is Photoshop! Whip out Photoshop and create a bunch of &quot;adjustment layers&quot; for your colour correction...</p>
+<p><img src="https://user-images.githubusercontent.com/177243/235992202-f9203283-9437-4c28-95f8-70555804c527.png" alt="image"></p>
+<p>And then export that to a LUT using &quot;export&quot; -&gt; &quot;Color Lookup Tables...&quot; with only &quot;CUBE&quot; as format and 32 points. Brilliant: instant 33 point 3d LUT for use in OBS, your video monitor,  in-camera, through a LUT box, etc. etc.!</p>
+<p>But then you load it into OBS, or your LUT box, and oh no your video feed suddenly looks like this:</p>
+<p><img src="https://user-images.githubusercontent.com/177243/234699746-5c492161-e373-4e57-b4fb-a43c7a7c4d42.png" alt="{C9DE6C3A-EC6B-492A-A830-9B29F1A70590}"></p>
+<p>The problem you&#39;re seeing is almost certainly caused by having multiple image layers under your adjustment layer(s):</p>
+<p><img src="https://user-images.githubusercontent.com/177243/234700423-866d74a7-a68a-4c0a-a81d-feea987a42f3.png" alt="image"></p>
+<p>And the solution is to just flatten all of those, <em>then</em> export your color adjustments as a cube LUT:</p>
+<p><img src="https://user-images.githubusercontent.com/177243/234700619-56851d7d-04f1-4cf4-96a1-6f84dafaac39.png" alt="image"></p>
+<p>And presto, suddenly your LUT works just fine in OBS, or your LUT box, or any other context that needs a cube LUT:</p>
+<p><img src="https://user-images.githubusercontent.com/177243/234700798-76327d7a-fa6c-4388-bacc-b4e837789a34.png" alt="image"></p>
+]]></description>
+<category>3D</category>
+<category>cube</category>
+<category>lut</category>
+<category>photoshop</category>
+<category>obs</category>
+<link>https://pomax.github.io?postid=1682542272279</link>
+<guid>https://pomax.github.io?postid=1682542272279</guid>
+<pubDate>Wed, 26 Apr 2023 20:51:12 GMT</pubDate>
+</item>
+<item>
+<title>Leaving twitter</title>
+<description><![CDATA[<p>In October of 2022, Elon Musk, a man who failed up harder than anyone else in history, decided to buy Twitter with the express intent to turn it into a completely different product. He laid off thousands of people, devalued the company by 50%, and started pushing through changes that not only changed the experience of the platform, but also made sure that you had no way of actually seeing the content you wanted, while at the same time pushing ads into every single stream presented to you.</p>
+<p>I signed up for Twitter back in 2009, and it&#39;s been a (mostly) fun ride, but even when it wasn&#39;t, there were always two things preventing folks from leaving the platform: (1) it was rarely <em>that</em> bad, and (2) there was no genuine alternative. </p>
+<p>Both those things changed in recent years. For several years now, Mastodon has been an alternative to Twitter, and with Elon&#39;s destruction of Twitter the number of both Mastodon users and Mastodon servers has exploded. It&#39;s now a perfectly fine alternative with plenty of folks to follow. No, they&#39;re not all on the same server, but it&#39;s not like you had problems sending emails to people who didn&#39;t use your email server before, and this is the same. Just follow them, irrespective of which server they happen to use. Done, you just need to know their &quot;homepage&quot;, hardly a chore.</p>
+<p>So as Musk lands more and more garbage features in a desperate attempt to short-term claw back money, I&#39;m calling it quits. To prevent people from namesquatting, I&#39;ve deleted my account, waiting the prerequisite 30 day period for it to become available again, and reregistered my name but won&#39;t be posting using it. Instead, I&#39;ll be using mastodon exclusively from now on. </p>
+<p>You can find me over on <a href="https://mastodon.social/@TheRealPomax">https://mastodon.social/@TheRealPomax</a></p>
+]]></description>
+<category>Mastodon</category>
+<category>Twitter</category>
+<link>https://pomax.github.io?postid=1681585670331</link>
+<guid>https://pomax.github.io?postid=1681585670331</guid>
+<pubDate>Sat, 15 Apr 2023 19:07:50 GMT</pubDate>
+</item>
+<item>
+<title> Getting elevation data out of DEM/DSM GeoTIFF files</title>
+<description><![CDATA[<p>I&#39;m working on a fun little side project implementing an autopilot in JavaScript to &quot;drive&quot; planes in Microsoft Flight Simulator 2020, and one of the things it needs is an altitude computer/terrain follow system. And in order to make that reasonably accurate, I figured I&#39;d download the entire planet&#39;s elevation data in the form of the <a href="https://www.eorc.jaxa.jp/ALOS/en/dataset/aw3d30/aw3d30_e.htm">ALOS Wolrd 3D (30m)</a> dataset. This is around 450GB of DSM data, and takes the form of <a href="http://geotiff.maptools.org/spec/geotiff2.html">GeoTiff</a> files.</p>
+<p>Conventional GIS wisdom says that in order to work with that, you need to use <a href="https://gdal.org/">GDAL</a>, which has no Node bindings, but it has a Python API. And Python&#39;s not hard to use, but having to use two different programming languages is inconvenient. So after writing working python GDAL code, which takes 23 seconds to get the full file list of available tiles on my NAS, I figured I&#39;d see if there was a Node library that worked with GDAL anyway.</p>
+<p>Turns out there is, or rather, there are. I ended up using <a href="https://github.com/mmomtchev/node-gdal-async">gdal-async</a>, which is a fork of <a href="https://github.com/contra/node-gdal-next">https://github.com/contra/node-gdal-next</a>, which is a fork of <a href="https://github.com/naturalatlas/node-gdal">https://github.com/naturalatlas/node-gdal</a>,  and reimplementing the logic on the Python side in Node yields a codebase that can index the same files, on the same NAS, in 7 seconds instead of 23. So that&#39;s weird, but better than before.</p>
+<p>I ended up writing out the file index to a 24000 line JSON file as a cache, hoping that&#39;d be faster, and where it takes Python a bit to run through that, Node.js loads that instantly. <em>And</em> parses it to a JS datastructure. The server&#39;s just up the moment I run <code>node server.js</code> instead of spending a second or two starting up. </p>
+<p>But it gets better: why am I using GDAL at all if all I want is the elevations for GPS coordinates? Surely, GeoTIFF is not so complex that only giant GIS projects can make sense of them? And it turns out that, no, it&#39;s not. It&#39;s in fact near-trivial to write your own code for this provided you know a little bit of programming: GeoTIFF put all the information you need in the &quot;fields&quot; section of an IFD block (the kind of blocks a TIFF file is built up from), so we can just use <a href="https://www.npmjs.com/package/tiff">a tiff parser</a> to get those fields, and then look up what values we need in order to map GPS coordinates to TIFF pixel indices (See <a href="https://stackoverflow.com/a/75647596/740553">https://stackoverflow.com/a/75647596/740553</a> for an overly detailed explanation on the how!)</p>
+<p>So, how much code is it when we implement the entire thing, bar the TIFF parser, ourselves? This much code:</p>
+<pre><code class="lang-javascript">import { existsSync, copyFileSync, readFileSync, writeFileSync } from &quot;fs&quot;;
+import { basename, join } from &quot;path&quot;;
+import tiff from &quot;tiff&quot;;
+const { floor, ceil } = Math;
+
+const __dirname = url.fileURLToPath(new URL(&quot;.&quot;, import.meta.url));
+const INDEX_FILE = join(__dirname, `alos-index.json`);
+const CACHE_DIR = join(__dirname, `cache`);
+const ALOS_VOID_VALUE = -9999;
+
+class ALOSTile {
+  constructor(tilePath) {
+    this.tilePath = tilePath;
+    // copy to cache dir for faster loading
+    const filename = join(`.`, CACHE_DIR, basename(tilePath));
+    if (!existsSync(filename)) copyFileSync(tilePath, filename);
+    this.init(filename);
+  }
+
+  init(filename) {
+    const file = readFileSync(filename);
+    const image = tiff.decode(file.buffer);
+    const block = (this.block = image[0]);
+    const fields = block.fields;
+    let [sx, sy, sz] = fields.get(33550);
+    let [px, py, k, gx, gy, gz] = fields.get(33922);
+    sy = -sy;
+    this.reverse = [-gx / sx, 1 / sx, 0, -gy / sy, 0, 1 / sy];
+    this.pixels = block.data;
+  }
+
+  lookup(lat, long) {
+    const { reverse: T, block } = this;
+    const x = T[0] + T[1] * long + T[2] * lat;
+    const y = T[3] + T[4] * long + T[5] * lat;
+    const pos = (x | 0) + (y | 0) * block.width;
+    const value = this.pixels[pos];
+    return value ?? ALOS_VOID_VALUE;
+  }
+}
+</code></pre>
+<p>There, that&#39;s the entire code <em>plus convenience wrapper</em> to do an elevation lookup in a GeoTIFF tile. No GDAL, no Python, heck we don&#39;t even need to care about which programming language we&#39;re using as long as it has a TIFF parser it can use. The rest is just absolutely basic programming.</p>
+]]></description>
+<category>Node</category>
+<category>GIS</category>
+<category>GDAL</category>
+<category>MSFS</category>
+<category>MSFS 2020</category>
+<category>Elevation</category>
+<category>DEM</category>
+<category>DSM</category>
+<link>https://pomax.github.io?postid=1678206967957</link>
+<guid>https://pomax.github.io?postid=1678206967957</guid>
+<pubDate>Tue, 07 Mar 2023 16:36:07 GMT</pubDate>
+</item></channel></rss>
