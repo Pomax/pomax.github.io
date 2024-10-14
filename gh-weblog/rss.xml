@@ -5,19 +5,9 @@
 <title>Pomax.github.io</title>
 <description>Because chronicling the past using technology is kind of cool.</description>
 <link>https://pomax.github.io/</link>
-<lastBuildDate>Mon, 14 Oct 2024 05:26:22 GMT</lastBuildDate>
-<pubDate>Mon, 14 Oct 2024 05:26:22 GMT</pubDate>
+<lastBuildDate>Mon, 14 Oct 2024 05:27:24 GMT</lastBuildDate>
+<pubDate>Mon, 14 Oct 2024 05:27:24 GMT</pubDate>
 <ttl>1440</ttl><item>
-<title>New Entry</title>
-<description><![CDATA[<h1 id="new-entry">New Entry</h1>
-<p>I updated my blog platform, so this is a test message. If it works, I&#39;ll be deleting it again, and that might affect your RSS stream if  you&#39;re subscribed. My apologies.</p>
-]]></description>
-
-<link>https://pomax.github.io?postid=1728883538363</link>
-<guid>https://pomax.github.io?postid=1728883538363</guid>
-<pubDate>Mon, 14 Oct 2024 05:25:38 GMT</pubDate>
-</item>
-<item>
 <title> Using flight simulation rudder pedals as MIDI pedals</title>
 <description><![CDATA[<p>Did you know that there isn&#39;t just a dumb, simple Windows utility for turning a joystick or game controller into a MIDI device? Sure. you can find 15 year old utilities (that have no docs, so good luck figuring out why they don&#39;t work even if they <em>run</em>), and yes, you can find some dedicated &quot;profile&quot; utils that map specific game controller buttons to specific MIDI outs, but like... I have <a href="https://www.vkbcontrollers.com/products/t-rudders-mk-v-rudder-pedals">VKB-Sim rudder pedals</a> because <a href="https://pomax.github.io/are-we-flying/">I might like flight sim a little too much</a> and not a minute goes by while I&#39;m sitting at my desk that my feet don&#39;t think they&#39;re resting on sostenuto and sustain pedals. Because there&#39;s also a keyboard sitting on my desk. </p>
 <p>So can I please just get something that actually turns them into that when I need them to?</p>
@@ -597,4 +587,21 @@ class ALOSTile {
 <link>https://pomax.github.io?postid=1678206967957</link>
 <guid>https://pomax.github.io?postid=1678206967957</guid>
 <pubDate>Tue, 07 Mar 2023 16:36:07 GMT</pubDate>
+</item>
+<item>
+<title>MacOS and external SSDs</title>
+<description><![CDATA[<p>Ever had your external SSD refuse to remount when you plug it into MacOS because it&#39;s an idiotic OS and remembers you didn&#39;t properly ejected it?</p>
+<p>First, kill <code>fsck</code> (the &quot;file system consistency check&quot; with the dumbest command name) because it&#39;s ruining the party right now:</p>
+<pre><code>$ ps aux | grep fsck
+</code></pre><p>Find the process id and <code>sudo kill -9 thatid</code> because goddamnit, fsck, stop ruining the party. It&#39;s even going to do a fake out, because there&#39;s probably two pids, and only one of them is real. The other&#39;s a zombie process.</p>
+<p>With the main one killed, we can remount the drive:</p>
+<pre><code>$ diskutils mount /Volumes/disk3s2
+</code></pre><p>Or whatever your disk volume is according to Disk Utility.</p>
+]]></description>
+<category>MacOS</category>
+<category>SSD</category>
+<category>fsck</category>
+<link>https://pomax.github.io?postid=1676434414432</link>
+<guid>https://pomax.github.io?postid=1676434414432</guid>
+<pubDate>Wed, 15 Feb 2023 04:13:34 GMT</pubDate>
 </item></channel></rss>
