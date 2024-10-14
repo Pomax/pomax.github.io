@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>Because chronicling the past using technology is kind of cool.</description>
 <link>https://pomax.github.io/</link>
-<lastBuildDate>Mon, 14 Oct 2024 17:53:14 GMT</lastBuildDate>
-<pubDate>Mon, 14 Oct 2024 17:53:14 GMT</pubDate>
+<lastBuildDate>Mon, 14 Oct 2024 18:01:29 GMT</lastBuildDate>
+<pubDate>Mon, 14 Oct 2024 18:01:29 GMT</pubDate>
 <ttl>1440</ttl><item>
 <title>Updating my blog platform</title>
 <description><![CDATA[<h1 id="updating-my-blog-platform">Updating my blog platform</h1>
@@ -59,6 +59,11 @@
 <li>then drop the blob sha into the markdown as image code.</li>
 </ol>
 <p>Everything in that list is entirely doable but also the kind of pain I&#39;d rather do &quot;in follow-up&quot; compared to holding the new platform deployment.</p>
+<h3 id="post-folding">post folding</h3>
+<p>Post folds are a pure HTML+CSS solution, no JS involved. It exploits the fact that <code>&lt;details&gt;</code> has been part of HTML 5 since its release, so if a post is over 1500 characters, the first few paragraphs are wrapped in a <code>&lt;summary&gt;</code> tag, and then CSS is used to replace the usual &quot;drop down triangle&quot; to the left of the summary into a normal looking &quot;show entire post&quot; button at the bottom instead. Click it, and the  full <code>&lt;details&gt;</code> element becomes visible, with some CSS that removes the button using the <code>details[open]</code> selector.</p>
+<p>No-JS solutions are the best solutions, even if your website <em>relies</em> on JS to work at all. Heck, I&#39;d argue <em>especially</em> when your site relies on JS, you should aim to not use JS as much as possible.</p>
+<p>Anyway, that&#39;s it, new blog platform, I still have some cleanup and final features left to do, but I&#39;ll probably write another post on it once it&#39;s ready for you to fork. Because that&#39;s all you should have to do: fork it, rename your fork to <code>yourusername.github.io</code>, enable pages for the <code>main</code> branch, and... that&#39;s it. Customize the CSS if you really want (you probably do?) but that&#39;s optional, you already have a blog online now. Sure, you&#39;re going to have to generate a token so you can actually <em>post</em> but the instructions will cover that.</p>
+<p>Until then, I&#39;m hoping to blog more often now that things are back to convenience levels of functional.</p>
 ]]></description>
 <category>blog</category>
 <category>update</category>
