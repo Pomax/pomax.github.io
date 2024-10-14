@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>Because chronicling the past using technology is kind of cool.</description>
 <link>https://pomax.github.io/</link>
-<lastBuildDate>Mon, 14 Oct 2024 17:25:28 GMT</lastBuildDate>
-<pubDate>Mon, 14 Oct 2024 17:25:28 GMT</pubDate>
+<lastBuildDate>Mon, 14 Oct 2024 17:26:33 GMT</lastBuildDate>
+<pubDate>Mon, 14 Oct 2024 17:26:33 GMT</pubDate>
 <ttl>1440</ttl><item>
 <title>Updating my blog platform</title>
 <description><![CDATA[<h1 id="updating-my-blog-platform">Updating my blog platform</h1>
@@ -30,6 +30,7 @@
 <li>use the rest API extension, so you can write <code>await octokit.repos(user, repo).actions.runs()</code>, or</li>
 <li>use a plugin if there is one for the exact thing you want, like &quot;uploading a text file without manually running every git step&quot;, e.g. <code>await octokit.createOrUpdateTextFile({ owner, repo, branch, path:</code>${this.path}/rss.xml<code>, content: rss, message:</code>Update to RSS<code>});</code></li>
 </ol>
+<p>For most of this blog&#39;s work, the latter is perfectly adequate (although I do <a href="">wish it supported createOrUpdateTextFiles`, plural</a>)</p>
 ]]></description>
 
 <link>https://pomax.github.io?postid=1728925663194</link>
