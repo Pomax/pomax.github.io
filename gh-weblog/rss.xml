@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>Because chronicling the past using technology is kind of cool.</description>
 <link>https://pomax.github.io/</link>
-<lastBuildDate>Mon, 14 Oct 2024 17:26:33 GMT</lastBuildDate>
-<pubDate>Mon, 14 Oct 2024 17:26:33 GMT</pubDate>
+<lastBuildDate>Mon, 14 Oct 2024 17:39:49 GMT</lastBuildDate>
+<pubDate>Mon, 14 Oct 2024 17:39:49 GMT</pubDate>
 <ttl>1440</ttl><item>
 <title>Updating my blog platform</title>
 <description><![CDATA[<h1 id="updating-my-blog-platform">Updating my blog platform</h1>
@@ -30,7 +30,24 @@
 <li>use the rest API extension, so you can write <code>await octokit.repos(user, repo).actions.runs()</code>, or</li>
 <li>use a plugin if there is one for the exact thing you want, like &quot;uploading a text file without manually running every git step&quot;, e.g. <code>await octokit.createOrUpdateTextFile({ owner, repo, branch, path:</code>${this.path}/rss.xml<code>, content: rss, message:</code>Update to RSS<code>});</code></li>
 </ol>
-<p>For most of this blog&#39;s work, the latter is perfectly adequate (although I do <a href="">wish it supported createOrUpdateTextFiles`, plural</a>)</p>
+<p>For most of this blog&#39;s work, the latter is perfectly adequate (although I do <a href="https://github.com/octokit/plugin-create-or-update-text-file.js/issues/295#issuecomment-2408704495">wish it supported createOrUpdateTextFiles`, plural</a>), so the client-side code simply figures out which files need to be written with what content, and sends those off as commits. Then it uses option 1 to poll the <code>actions</code> endpoint to see if the gh pages deploy (which github automatically kicks off without a workflow file - handy!) has finished yet, and colours the admin button red to let you know others won&#39;t see your content yet because the website&#39;s still rebuilding.</p>
+<h4 id="-how-does-it-authenticate-">&quot;how does it authenticate?&quot;</h4>
+<p>Auth uses a fine-grained GH token. Another thing that didn&#39;t exist back in 2014: you could generate a token and give that commit write access, and good news you just allowed that for every single repo you had access to. It was... insane? It took Github way too long to finally add normal tokens that let you specify exactly which repo(s) it should apply to, but now that we have those: </p>
+<ol>
+<li>you click the admin button</li>
+<li>you fill in your username, repo name, gh-pages branch, the subdir your gh-weblog content should live in, and that token</li>
+<li>you are now authenticated and you can use the admin interface. </li>
+</ol>
+<p>And note that that works regardless of whether the token is valid or not: if it&#39;s not, nothing you do will actually get saved but you&#39;re free to dick around in the admin &quot;interface&quot;: it&#39;s an open source blog, what are you going to do, discover that it&#39;s actually markdown?</p>
+<h3 id="rss">RSS</h3>
+<p>It&#39;s a blog, it should have RSS. The blog simply grabs the most recent 10 entries, and wraps that in RSS 2.0 XML markup, then sends that off to Github as a regular text file, because it is. Nothing super special there, and because it&#39;s just &quot;more gh-pages content&quot; there&#39;s nothing else to do. Once the site&#39;s redeployed, everyone&#39;s RSS feed readers will see the update(s).</p>
+<h3 id="mod_rewrite">mod_rewrite</h3>
+<p>Since everything&#39;s done through a client-side library, there&#39;s a bit of a problem when it comes to &quot;showing a single blog post&quot;. Obviously if you want the post feed you just to <a href="https://pomax.github.io">https://pomax.github.io</a>, but if you want to see, say, this specific post, you can visit <a href="https://pomax.github.io/pages/1728925663194/updating-my-blog-platform">https://pomax.github.io/pages/1728925663194/updating-my-blog-platform</a> and that works. Even though it&#39;s actually still using <a href="https://pomax.github.io">https://pomax.github.io</a> with a <code>?postid=1728925663194/</code> query argument.</p>
+<p>The way this works is that the blog library literally writes a file called <code>./pages/1728925663194/updating-my-blog-platform/index.html</code> into the repo to handle the redirect. Here&#39;s what&#39;s in it:</p>
+<pre><code class="lang-html">&lt;meta http-equiv=&quot;refresh&quot; content=&quot;0; url=../../../index.html?postid=1728925663194&quot;&gt;
+</code></pre>
+<p>That&#39;s it. HTML-based mod<em>rewrite. Sure, it&#39;s more files on the repo, but they&#39;re organized extremely obviously, and the blog platform will clean them up if you delete posts, so you click a post link, your browser simply loads a _real html index file</em>, sees the redirect, and instantly loads the homepage again. </p>
+<p>And then the homepage sees it&#39;s supposed to load a single post, runs a <code>history.replaceState</code> to make the URL look like the one you actually clicked (which, remember, is a <em>real URL</em> with a real file at that URL) and everything works as you expect.</p>
 ]]></description>
 
 <link>https://pomax.github.io?postid=1728925663194</link>
