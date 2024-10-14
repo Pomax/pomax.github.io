@@ -5,12 +5,11 @@
 <title>Pomax.github.io</title>
 <description>Because chronicling the past using technology is kind of cool.</description>
 <link>https://pomax.github.io/</link>
-<lastBuildDate>Mon, 14 Oct 2024 17:46:57 GMT</lastBuildDate>
-<pubDate>Mon, 14 Oct 2024 17:46:57 GMT</pubDate>
+<lastBuildDate>Mon, 14 Oct 2024 17:51:46 GMT</lastBuildDate>
+<pubDate>Mon, 14 Oct 2024 17:51:46 GMT</pubDate>
 <ttl>1440</ttl><item>
 <title>Updating my blog platform</title>
 <description><![CDATA[<h1 id="updating-my-blog-platform">Updating my blog platform</h1>
-<h1 id="updating-my-blog-platform">Updating my blog platform</h1>
 <p>I updated my blog platform, for reasons. One of them being the current Wordpress shenanigans,  causing the most important person in my life to go &quot;...didn&#39;t you have a github-hosted blog? Is that something I can use too?&quot; and while her eventual solution was to discover that I have a Dreamhost account that comes with a free hosted self-managed WP install (so she can stop funding Automaticc), I spent a bunch of time trying to clean up my blog code so it could be used by others again. </p>
 <p>I originally wrote it back in 2014 back when React was still on version 0.12, and revisiting the code it&#39;s incredible to see how much nicer React was back then, compared to the monster it has become since. So I decided to rewrite it, but keep it React 0.12, and honest, I wish there was a modern &quot;classic React&quot; library, but JS doesn&#39;t stop working this should keep working forever just fine. </p>
 <h3 id="how-does-it-work-">How does it work?</h3>
@@ -177,7 +176,7 @@ exit 0
 <item>
 <title> Dealing with phantom images in Lightroom</title>
 <description><![CDATA[<p>Ever run into a Lightroom showing you this?</p>
-<p><img src="/gh-weblog-2/images/stuck-image/initial-view.jpg" alt="initial stuck image view"></p>
+<p><img src="/images/stuck-image/initial-view.jpg" alt="initial stuck image view"></p>
 <p>Lightroom shows you an image in your grid and strip views, but it&#39;s also super obvious there isn&#39;t actually an image file backing it. No filename, no metadata, just nothing. And you can&#39;t remove it: LR just ignores your delete button, and your context-menu-initiated &quot;remove photo&quot;, and when you tell LR to optimize your catalog in the hopes of clearing this up, it&#39;s still there.</p>
 <p>When this happens, the quickest solution is to fix your light room catalog by <em>not using lightroom</em> and instead using one of the most used tools in the industry: Sqlite3. Sqlite is a file-based database management system, where a single file is a single data, which makes it ideal as a file format for applications, and you&#39;ll find it everywhere. Including lightroom. In fact...</p>
 <h2 id="-lrcat-files-are-literally-just-sqlite3-databases">.lrcat files are literally just Sqlite3 databases</h2>
@@ -196,7 +195,7 @@ AND
 </code></pre>
 <p>And that speed is not hyperbole: directly using Sqlite means you&#39;re bypassing everything except the thing you&#39;re interested in, and so it can run <em>really</em> fast compared to running an operation in Lightroom.</p>
 <h2 id="finding-our-bad-image">Finding our bad image</h2>
-<p>There&#39;s a surprisingly simple way to find our bad image: </p>
+<p>There&#39;s a surprisingly simple way to find our bad image:</p>
 <ol>
 <li>With Lightroom closed, copy our lrcat file to a new file called <code>a.db</code>.</li>
 <li>Open Lightroom, and change one thing about the bad image, like flagging it, or adding it to the quick collection.</li>
@@ -247,8 +246,8 @@ UPDATE LrMobileSyncChangeCounter SET changeCounter=132891 WHERE rowid=1;
 VALUES
   (     1    ,       1696395     ,       5      ,  1672248  ,    132891      );
 </code></pre>
-<p>This tells us that there was a change to the image with its own numerical identifier <code>1672248</code>, stored in the &quot;collection list&quot; with identifier <code>1696395</code>, in a collection with identifier <code>5</code>. So let&#39;s quickly make sure this is, indeed, the quick collection using (in this case, but you have plenty of options) <a href="">db browser for sqlite</a> </p>
-<p><img src="/gh-weblog-2/images/stuck-image/quick-check.jpg" alt="a quick check..."></p>
+<p>This tells us that there was a change to the image with its own numerical identifier <code>1672248</code>, stored in the &quot;collection list&quot; with identifier <code>1696395</code>, in a collection with identifier <code>5</code>. So let&#39;s quickly make sure this is, indeed, the quick collection using (in this case, but you have plenty of options) <a href="">db browser for sqlite</a></p>
+<p><img src="/images/stuck-image/quick-check.jpg" alt="a quick check..."></p>
 <p>Collection 5 is indeed the quick collection: perfect, we can now confidently say that our offending image has <code>1672248</code> as its identifier.</p>
 <h2 id="removing-the-offender-from-the-catalog">Removing the offender from the catalog</h2>
 <p>So, let&#39;s look up our image: the lrcat database stores this information in the <code>Adobe_images</code> table, so if we look up the record with <code>id_local=1672248</code> we get:</p>
@@ -289,7 +288,7 @@ developSettingsIDCache: 1675643.0
 propertiesCache: 1675639.0
 rootFile: 1675632
 </code></pre><ul>
-<li>The first is the image&#39;s identifier in the image table. </li>
+<li>The first is the image&#39;s identifier in the image table.</li>
 <li>The second is the identifier for the associated record in the <code>Adobe_imageDevelopSettings</code> table</li>
 <li>The third is the identifier for the associated record in the <code>Adobe_imageProperties</code> table</li>
 <li>The last is the identifier for the associated record in the <code>AgLibraryFile</code> table, and <em>that</em> is where the problem will be: this table houses all the information of which real, on-disk files, map to virtual, in-database image records.</li>
@@ -372,7 +371,7 @@ DELETE FROM AgLibraryCollectionImageChangeCounter WHERE image = 1672248;
 <p>Note that we&#39;re dealing with the identifier from the <code>Adobe_images</code> so we&#39;re deleting from that table using <code>id_local</code> whereas we&#39;re deleting from every other table using <code>image</code>.</p>
 <h2 id="how-did-we-do-">How did we do?</h2>
 <p>If we now open Lightroom on our updated catalog, what do we see?</p>
-<p><img src="/gh-weblog-2/images/stuck-image/the-result.png" alt="the result"></p>
+<p><img src="/images/stuck-image/the-result.png" alt="the result"></p>
 <p>And that&#39;s our problem solved. No more phantom image. It&#39;s a good idea to run a (hopefully) quick catalog optimization, but other than that, it&#39;s back to not having to deal with this problem hopefully forever!</p>
 ]]></description>
 <category>Adobe</category>
