@@ -71,6 +71,10 @@ export default createClass({
 
   onUpdate() {
     this.props.onIndex(this.state.index);
+    console.log(`deploying?`, this.state.deploying);
+    document
+      .querySelector(`html`)
+      .classList.toggle(`deploying`, !!this.state.deploying);
   },
 
   render() {
@@ -90,7 +94,7 @@ export default createClass({
 
     const adminButton = (
       <button
-        className={`authenticate ${state.deploying ? `deploying` : ``}`}
+        className="authenticate"
         onClick={this.showSettings}
         onClose={this.bindSettings}
       >
@@ -314,7 +318,7 @@ export default createClass({
 
   async saveEntry(entry) {
     const { connector } = this;
-    this.setState({ pending: true, deploying: true });
+    this.setState({ pending: true });
     const metaData = entry.getMetaData();
     const id = metaData.id;
     const postData = entry.getPostData();
@@ -325,7 +329,7 @@ export default createClass({
       async () => {
         console.log("save handled");
         await this.saveRSS();
-        this.setState({ pending: false }, async () => {
+        this.setState({ pending: false, deploying: true }, async () => {
           await connector.waitForDeploy();
           this.setState({ deploying: false });
         });
@@ -336,7 +340,7 @@ export default createClass({
   async deleteEntry(entry) {
     const { connector } = this;
     if (confirm("really delete post?")) {
-      this.setState({ pending: true, deploying: true }, () => {
+      this.setState({ pending: true }, () => {
         const { entryIds, entries, index } = this.state;
         const { id, created, title } = entry.state;
         const pos = entryIds.indexOf(id);
@@ -353,7 +357,7 @@ export default createClass({
             // it reaches entryToRSS(...) for the last entry.
             await this.loadEntries();
             this.saveRSS();
-            this.setState({ pending: false }, async () => {
+            this.setState({ pending: false, deploying: true }, async () => {
               await connector.waitForDeploy();
               this.setState({ deploying: false });
             });

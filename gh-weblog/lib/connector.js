@@ -47,15 +47,17 @@ export default class Connector {
     const { octokit, options } = this;
     const { user, repo } = options;
     return new Promise((resolve) => {
-      (async function checkDeploy(resolve) {
-        const { status } = (
-          await octokit.request(`GET /repos/${user}/${repo}/actions/runs`)
-        ).data.workflow_runs[0];
+      async function checkDeploy(resolve) {
+        const response = await octokit.request(
+          `GET /repos/${user}/${repo}/actions/runs`
+        );
+        const { status } = response.data.workflow_runs[0];
         if (status === `completed`) return resolve();
         // we recheck every 10 seconds, because deploys take long
         // enough that checking more frequently is just pointless.
         setTimeout(() => checkDeploy(resolve), 10000);
-      })(resolve);
+      }
+      setTimeout(() => checkDeploy(resolve), 3000);
     });
   }
 
@@ -102,7 +104,7 @@ export default class Connector {
       {
         message: `Saving static redirect page`,
         path: `pages/${created}/${utils.titleReplace(title)}/index.html`,
-        content: `<meta http-equiv="refresh" content="0; url=../../../index.html?postid=${created}">`,
+        content: `<title>${title}</title><meta http-equiv="refresh" content="0; url=../../../index.html?postid=${created}">`,
       },
     ];
     await this.processCommit(files);

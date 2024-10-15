@@ -1,6 +1,6 @@
-import React from "../lib/vendor/react/react.0.12.min.js";
+import { React, createClass } from "../lib/create-component.js";
 
-export default React.createClass({
+export default createClass({
   getInitialState() {
     return { text: "" };
   },
@@ -27,7 +27,12 @@ export default React.createClass({
   },
 
   record(evt) {
-    this.setState({ text: evt.target.value });
-    this.props.update(evt);
+    const postData = evt.target.value;
+    const [title] = postData
+      .match(/^#\s+[^\n]+\n+/)
+      .replace(`# `, ``)
+      .trim();
+    // this.setState({ text });
+    this.props.update(title, postData);
   },
 });

@@ -7344,8 +7344,8 @@ marked.inlineLexer = InlineLexer.output;
 marked.parse = marked;
 var marked_default = marked;
 
-// components/MarkDown.jsx
-var MarkDown_default = react_0_12_min_default.createClass({
+// components/PlainView.jsx
+var PlainView_default = react_0_12_min_default.createClass({
   render() {
     let { text } = this.props;
     text = text.replace(/^#\s+[^\n]+\n+/, ``);
@@ -7377,14 +7377,11 @@ ${html.substring(cut)}
         dangerouslySetInnerHTML: { __html: html }
       }
     );
-  },
-  getHTML() {
-    return this.refs.post.getDOMNode().innerHTML;
   }
 });
 
 // components/Editor.jsx
-var Editor_default = react_0_12_min_default.createClass({
+var Editor_default = createClass({
   getInitialState() {
     return { text: "" };
   },
@@ -7408,8 +7405,9 @@ var Editor_default = react_0_12_min_default.createClass({
     this.setState({ text }, () => textarea.focus());
   },
   record(evt) {
-    this.setState({ text: evt.target.value });
-    this.props.update(evt);
+    const postData = evt.target.value;
+    const [title2] = postData.match(/^#\s+[^\n]+\n+/).replace(`# `, ``).trim();
+    this.props.update(title2, postData);
   }
 });
 
@@ -7451,7 +7449,7 @@ var Entry_default = createClass({
     const root = document.querySelector(`:root`);
     root.addEventListener(`click`, (evt) => {
       if (evt.target !== root) return;
-      this.view();
+      this.switchView();
     });
   },
   render() {
@@ -7471,9 +7469,8 @@ var Entry_default = createClass({
       },
       state.title
     )), /* @__PURE__ */ react_0_12_min_default.createElement("h2", null, "Originally posted on ", posted, ", last updated on ", updated)), /* @__PURE__ */ react_0_12_min_default.createElement(
-      MarkDown_default,
+      PlainView_default,
       {
-        ref: "markdown",
         hidden: state.editing,
         text: state.postData,
         onClick: this.edit,
@@ -7485,9 +7482,8 @@ var Entry_default = createClass({
       {
         ref: "editor",
         hidden: !state.editing,
-        text: this.getPostData(),
+        text: state.postData,
         update: this.update,
-        view: this.view,
         delete: this.delete
       }
     ), /* @__PURE__ */ react_0_12_min_default.createElement("a", { className: "comments", href: props.issues }, "leave a comment on github"), /* @__PURE__ */ react_0_12_min_default.createElement(
@@ -7511,22 +7507,16 @@ var Entry_default = createClass({
     delete md.postData;
     return md;
   },
-  getHTMLData() {
-    return this.refs.markdown.getHTML();
-  },
-  edit(evt) {
+  edit() {
     if (this.props.editable) {
       this.refs.editor.setText(this.getPostData());
       this.setState({ editing: true });
     }
   },
-  update(evt) {
-    const lines = evt.target.value.split("\n");
-    const title2 = lines.splice(0, 1)[0].replace(/^# */, "").trim();
-    const postData = lines.join("\n").trim();
+  update(title2, postData) {
     this.setState({ title: title2, postData, updated: Date.now() });
   },
-  view() {
+  switchView() {
     if (this.state.editing) {
       this.setState({ editing: false });
       this.props.onSave(this);
@@ -8704,11 +8694,16 @@ var Connector = class {
     const { octokit, options } = this;
     const { user, repo } = options;
     return new Promise((resolve) => {
-      (/* @__PURE__ */ __name(async function checkDeploy(resolve2) {
-        const { status } = (await octokit.request(`GET /repos/${user}/${repo}/actions/runs`)).data.workflow_runs[0];
+      async function checkDeploy(resolve2) {
+        const response = await octokit.request(
+          `GET /repos/${user}/${repo}/actions/runs`
+        );
+        const { status } = response.data.workflow_runs[0];
         if (status === `completed`) return resolve2();
         setTimeout(() => checkDeploy(resolve2), 1e4);
-      }, "checkDeploy"))(resolve);
+      }
+      __name(checkDeploy, "checkDeploy");
+      setTimeout(() => checkDeploy(resolve), 3e3);
     });
   }
   // -----------------------------------------------------------
@@ -8749,7 +8744,7 @@ var Connector = class {
       {
         message: `Saving static redirect page`,
         path: `pages/${created}/${utils_default.titleReplace(title2)}/index.html`,
-        content: `<meta http-equiv="refresh" content="0; url=../../../index.html?postid=${created}">`
+        content: `<title>${title2}</title><meta http-equiv="refresh" content="0; url=../../../index.html?postid=${created}">`
       }
     ];
     await this.processCommit(files);
@@ -8859,6 +8854,8 @@ var WebLog_default = createClass({
   },
   onUpdate() {
     this.props.onIndex(this.state.index);
+    console.log(`deploying?`, this.state.deploying);
+    document.querySelector(`html`).classList.toggle(`deploying`, !!this.state.deploying);
   },
   render() {
     const { state } = this;
@@ -8869,7 +8866,7 @@ var WebLog_default = createClass({
     const adminButton = /* @__PURE__ */ react_0_12_min_default.createElement(
       "button",
       {
-        className: `authenticate ${state.deploying ? `deploying` : ``}`,
+        className: "authenticate",
         onClick: this.showSettings,
         onClose: this.bindSettings
       },
@@ -9029,7 +9026,7 @@ var WebLog_default = createClass({
   },
   async saveEntry(entry) {
     const { connector } = this;
-    this.setState({ pending: true, deploying: true });
+    this.setState({ pending: true });
     const metaData = entry.getMetaData();
     const id2 = metaData.id;
     const postData = entry.getPostData();
@@ -9040,7 +9037,7 @@ var WebLog_default = createClass({
       async () => {
         console.log("save handled");
         await this.saveRSS();
-        this.setState({ pending: false }, async () => {
+        this.setState({ pending: false, deploying: true }, async () => {
           await connector.waitForDeploy();
           this.setState({ deploying: false });
         });
@@ -9050,7 +9047,7 @@ var WebLog_default = createClass({
   async deleteEntry(entry) {
     const { connector } = this;
     if (confirm("really delete post?")) {
-      this.setState({ pending: true, deploying: true }, () => {
+      this.setState({ pending: true }, () => {
         const { entryIds, entries, index } = this.state;
         const { id: id2, created, title: title2 } = entry.state;
         const pos = entryIds.indexOf(id2);
@@ -9063,7 +9060,7 @@ var WebLog_default = createClass({
             console.log("delete handled");
             await this.loadEntries();
             this.saveRSS();
-            this.setState({ pending: false }, async () => {
+            this.setState({ pending: false, deploying: true }, async () => {
               await connector.waitForDeploy();
               this.setState({ deploying: false });
             });

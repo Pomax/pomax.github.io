@@ -43,8 +43,4 @@ ${html.substring(cut)}
       />
     );
   },
-
-  getHTML() {
-    return this.refs.post.getDOMNode().innerHTML;
-  },
 });

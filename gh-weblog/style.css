@@ -1,5 +1,8 @@
 :root {
   --link-color: blue;
+  &.deploying {
+    background-color: #f001;
+  }
 }
 
 @keyframes gh-weblog-pulse {
@@ -86,10 +89,6 @@
       top: -2rem;
       right: 0rem;
       cursor: pointer;
-      &.deploying {
-        background-color: red;
-        border-color: red;
-      }
     }
 
     &.authenticate:hover {

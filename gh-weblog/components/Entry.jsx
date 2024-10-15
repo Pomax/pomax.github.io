@@ -1,6 +1,6 @@
 import { React, createClass } from "../lib/create-component.js";
 import utils from "../lib/utils.js";
-import MarkDown from "./MarkDown.jsx";
+import PlainView from "./PlainView.jsx";
 import Editor from "./Editor.jsx";
 import Tags from "./Tags.jsx";
 
@@ -23,7 +23,7 @@ export default createClass({
     const root = document.querySelector(`:root`);
     root.addEventListener(`click`, (evt) => {
       if (evt.target !== root) return;
-      this.view();
+      this.switchView();
     });
   },
 
@@ -57,8 +57,7 @@ export default createClass({
             Originally posted on {posted}, last updated on {updated}
           </h2>
         </header>
-        <MarkDown
-          ref="markdown"
+        <PlainView
           hidden={state.editing}
           text={state.postData}
           onClick={this.edit}
@@ -68,9 +67,8 @@ export default createClass({
         <Editor
           ref="editor"
           hidden={!state.editing}
-          text={this.getPostData()}
+          text={state.postData}
           update={this.update}
-          view={this.view}
           delete={this.delete}
         />
         <a className="comments" href={props.issues}>
@@ -100,25 +98,18 @@ export default createClass({
     return md;
   },
 
-  getHTMLData() {
-    return this.refs.markdown.getHTML();
-  },
-
-  edit(evt) {
+  edit() {
     if (this.props.editable) {
       this.refs.editor.setText(this.getPostData());
       this.setState({ editing: true });
     }
   },
 
-  update(evt) {
-    const lines = evt.target.value.split("\n");
-    const title = lines.splice(0, 1)[0].replace(/^# */, "").trim();
-    const postData = lines.join("\n").trim();
+  update(title, postData) {
     this.setState({ title, postData, updated: Date.now() });
   },
 
-  view() {
+  switchView() {
     if (this.state.editing) {
       this.setState({ editing: false });
       this.props.onSave(this);
