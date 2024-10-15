@@ -7406,6 +7406,7 @@ var Editor_default = createClass({
   },
   record(evt) {
     const postData = evt.target.value;
+    this.setState({ text: postData });
     const [title2] = postData.match(/^#\s+[^\n]+\n+/);
     postData.replace(title2, ``);
     this.props.update(title2.trim(), postData.trim());
