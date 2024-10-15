@@ -28,11 +28,8 @@ export default createClass({
 
   record(evt) {
     const postData = evt.target.value;
-    const [title] = postData
-      .match(/^#\s+[^\n]+\n+/)
-      .replace(`# `, ``)
-      .trim();
-    // this.setState({ text });
-    this.props.update(title, postData);
+    const [title] = postData.match(/^#\s+[^\n]+\n+/);
+    postData.replace(title, ``);
+    this.props.update(title.trim(), postData.trim());
   },
 });
