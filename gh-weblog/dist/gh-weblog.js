@@ -8854,7 +8854,6 @@ var WebLog_default = createClass({
   },
   onUpdate() {
     this.props.onIndex(this.state.index);
-    console.log(`deploying?`, this.state.deploying);
     document.querySelector(`html`).classList.toggle(`deploying`, !!this.state.deploying);
   },
   render() {
