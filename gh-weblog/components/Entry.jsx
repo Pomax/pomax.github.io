@@ -83,10 +83,6 @@ export default createClass({
     );
   },
 
-  updateTags(tags) {
-    this.setState({ tags }, () => this.props.onSave(this));
-  },
-
   getPostData() {
     return this.state.postData;
   },
@@ -107,6 +103,10 @@ export default createClass({
 
   update(title, postData) {
     this.setState({ title, postData, updated: Date.now() });
+  },
+
+  updateTags(tags) {
+    this.setState({ tags }, () => this.props.onSave(this));
   },
 
   switchView() {

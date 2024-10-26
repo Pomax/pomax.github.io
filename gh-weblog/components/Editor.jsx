@@ -31,6 +31,6 @@ export default createClass({
     this.setState({ text: postData });
     const [title] = postData.match(/^#\s+[^\n]+\n+/);
     postData.replace(title, ``);
-    this.props.update(title.trim(), postData.trim());
+    this.props.update(title.replace(`#`, ``).trim(), postData.trim());
   },
 });

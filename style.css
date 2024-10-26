@@ -39,10 +39,15 @@ html {
         position: absolute;
         top: 2rem;
         right: 1rem;
-        img {
-          width: 2em;
-          height: 2em;
-          margin-right: 1em;
+        a:has(img, svg) {
+          margin: 0 0.5em;
+          * {
+            width: 2em;
+            height: 2em;
+          }
+          &.github {
+            margin: 0 0.35em;
+          }
         }
       }
     }
