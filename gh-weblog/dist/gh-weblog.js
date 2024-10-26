@@ -7409,7 +7409,7 @@ var Editor_default = createClass({
     this.setState({ text: postData });
     const [title2] = postData.match(/^#\s+[^\n]+\n+/);
     postData.replace(title2, ``);
-    this.props.update(title2.trim(), postData.trim());
+    this.props.update(title2.replace(`#`, ``).trim(), postData.trim());
   }
 });
 
@@ -7497,9 +7497,6 @@ var Entry_default = createClass({
       }
     ));
   },
-  updateTags(tags) {
-    this.setState({ tags }, () => this.props.onSave(this));
-  },
   getPostData() {
     return this.state.postData;
   },
@@ -7517,6 +7514,9 @@ var Entry_default = createClass({
   },
   update(title2, postData) {
     this.setState({ title: title2, postData, updated: Date.now() });
+  },
+  updateTags(tags) {
+    this.setState({ tags }, () => this.props.onSave(this));
   },
   switchView() {
     if (this.state.editing) {
@@ -9011,7 +9011,7 @@ var WebLog_default = createClass({
       tags: [],
       draft: void 0
     };
-    const postData = "...click here to start editing your post...";
+    const postData = "# New Entry\n\n...click here to start editing your post...";
     const id2 = metaData.id = timeToId(timestamp);
     this.updateEntry(id2, metaData, postData);
   },

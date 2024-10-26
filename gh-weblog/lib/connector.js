@@ -89,7 +89,7 @@ export default class Connector {
       {
         message: `Saving post data`,
         path: `${path}markdown/${id}.md`,
-        content: `# ${title}\n\n${postData}`,
+        content: postData,
       },
       {
         message: `Saving metadata`,
