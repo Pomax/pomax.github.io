@@ -5,12 +5,12 @@
 <title>Pomax.github.io</title>
 <description>Because chronicling the past using technology is kind of cool.</description>
 <link>https://pomax.github.io/</link>
-<lastBuildDate>Tue, 15 Oct 2024 16:04:11 GMT</lastBuildDate>
-<pubDate>Tue, 15 Oct 2024 16:04:11 GMT</pubDate>
+<lastBuildDate>Sun, 24 Nov 2024 19:20:05 GMT</lastBuildDate>
+<pubDate>Sun, 24 Nov 2024 19:20:05 GMT</pubDate>
 <ttl>1440</ttl><item>
 <title># Updating my blog platform</title>
 <description><![CDATA[<h1 id="updating-my-blog-platform">Updating my blog platform</h1>
-<p>I updated my blog platform, for reasons. One of them being the current Wordpress shenanigans,  causing the most important person in my life to go &quot;...didn&#39;t you have a GitHub-hosted blog? Is that something I can use too?&quot; and while her eventual solution was to discover that I have a Dreamhost account that comes with a free hosted self-managed WP install (so she can stop funding Automaticc), I spent a bunch of time trying to clean up my blog code so it could be used by others again. </p>
+<p>I updated my blog platform, for reasons. One of them being <a href="https://www.theverge.com/2024/9/27/24256361/wordpress-wp-engine-drama-explained-matt-mullenweg">the current Wordpress shenanigans</a>,  causing the most important person in my life to go &quot;...didn&#39;t you have a GitHub-hosted blog? Is that something I can use too?&quot; and while her eventual solution was to discover that I have a Dreamhost account that comes with a free hosted self-managed WP install (so she can stop funding Automaticc), I spent a bunch of time trying to clean up my blog code so it could be used by others again. </p>
 <p>I originally wrote it back in 2014 back when React was still on version 0.12, and revisiting the code it&#39;s incredible to see how much nicer React was back then, compared to the monster it has become since. So I decided to rewrite it, but keep it React 0.12, and honest, I wish there was a modern &quot;classic React&quot; library, but JS doesn&#39;t stop working this should keep working forever just fine. </p>
 <h3 id="how-does-it-work-">How does it work?</h3>
 <p>Some architecture info: my blog platform uses GitHub as its backend, but <em>it</em> uses GitHub as a backend, you don&#39;t. It has a simple &quot;swap out post for a markdown editor&quot; interface when you create/edit posts, and when you save your post the client-side code literally posts commits to GitHub, and then GitHub runs its GitHub pages deploy and things just work. Of course, this requires a bit more than just &quot;save your post&quot;:</p>
