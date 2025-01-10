@@ -1,4 +1,4 @@
-import { React, createClass } from "../lib/create-component.js";
+import { createClass } from "../lib/create-component.js";
 import utils from "../lib/utils.js";
 import PlainView from "./PlainView.jsx";
 import Editor from "./Editor.jsx";
@@ -15,6 +15,7 @@ export default createClass({
     editing: false,
     postData: "",
   },
+  refs: ["editor"],
 
   onMount() {
     const { metaData, postData } = this.props;
@@ -65,7 +66,7 @@ export default createClass({
           editable={editable}
         />
         <Editor
-          ref="editor"
+          ref={this.refs.editor}
           hidden={!state.editing}
           text={state.postData}
           update={this.update}
@@ -100,7 +101,7 @@ export default createClass({
 
   edit() {
     if (this.props.editable) {
-      this.refs.editor.setText(this.getPostData());
+      this.refs.editor.current.setText(this.getPostData());
       this.setState({ editing: true });
     }
   },

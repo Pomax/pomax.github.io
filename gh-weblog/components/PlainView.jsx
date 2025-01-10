@@ -1,7 +1,7 @@
-import React from "../lib/vendor/react/react.0.12.min.js";
+import { createClass } from "../lib/create-component.js";
 import marked from "../lib/vendor/marked/marked.js";
 
-export default React.createClass({
+export default createClass({
   render() {
     let { text } = this.props;
 

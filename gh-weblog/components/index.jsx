@@ -1,4 +1,4 @@
-import React from "../lib/vendor/react/react.0.12.min.js";
+import {render, h} from "preact";
 import WebLog from "./WebLog.jsx";
 import WebLogSettings from "../lib/weblogsettings.js";
 
@@ -18,8 +18,8 @@ if (!target) {
   const msg = `no target element with id '${id}' found to inject gh-weblog into.`;
   console.error(msg);
 } else {
-  React.render(
-    React.createElement(WebLog, {
+  render(
+    h(WebLog, {
       ...settings,
       onTags: handleTags,
       onIndex: handleIndex,

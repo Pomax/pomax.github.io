@@ -1,4 +1,4 @@
-import React from "../lib/vendor/react/react.0.12.min.js";
+import { createClass } from "../lib/create-component.js";
 import WebLogSettings from "../lib/weblogsettings.js";
 
 function stopPropagation(evt) {
@@ -6,7 +6,7 @@ function stopPropagation(evt) {
   evt.preventDefault();
 }
 
-export default React.createClass({
+export default createClass({
   getInitialState() {
     return {
       hidden: true,
@@ -42,7 +42,7 @@ export default React.createClass({
                   type="text"
                   placeholder="yourname"
                   value={this.state.user}
-                  onChange={(evt) => this.update(`user`, evt)}
+                  onInput={(evt) => this.update(`user`, evt)}
                 />
               </td>
             </tr>
@@ -53,7 +53,7 @@ export default React.createClass({
                   type="text"
                   placeholder="yourname.github.io"
                   value={this.state.repo}
-                  onChange={(evt) => this.update(`repo`, evt)}
+                  onInput={(evt) => this.update(`repo`, evt)}
                 />
               </td>
             </tr>
@@ -64,7 +64,7 @@ export default React.createClass({
                   type="text"
                   placeholder="master"
                   value={this.state.branch}
-                  onChange={(evt) => this.update(`branch`, evt)}
+                  onInput={(evt) => this.update(`branch`, evt)}
                 />
               </td>
             </tr>
@@ -74,7 +74,7 @@ export default React.createClass({
                 <input
                   type="text"
                   value={this.state.path}
-                  onChange={(evt) => this.update(`path`, evt)}
+                  onInput={(evt) => this.update(`path`, evt)}
                 />
               </td>
             </tr>
@@ -89,7 +89,7 @@ export default React.createClass({
             type="text"
             className="token"
             value={this.state.token}
-            onChange={(evt) => this.update(`token`, evt)}
+            onInput={(evt) => this.update(`token`, evt)}
           />
           <p>
             Don't give this token more permissions than necessary! gh-weblog

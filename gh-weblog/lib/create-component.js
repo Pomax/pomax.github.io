@@ -1,6 +1,4 @@
-import React from "./vendor/react/react.0.12.min.js";
-
-export { React };
+import {Component, createRef} from "preact/compat";
 
 /**
  * This is a wrapper around React's component creation, so we can
@@ -19,15 +17,37 @@ export { React };
  * @returns
  */
 export function createClass(spec) {
-  const { initialState = {} } = spec;
-  spec.getInitialState = () => initialState;
-  spec.onMount &&
-    (spec.componentDidMount = function (...args) {
-      this.onMount(...args);
-    });
-  spec.onUpdate &&
-    (spec.componentDidUpdate = function (...args) {
-      this.onUpdate(...args);
-    });
-  return React.createClass(spec);
+  const { initialState, getInitialState, onMount, onUpdate, refs, ...methods } = spec;
+
+  const klass = class extends Component {
+    constructor(props) {
+      super(props);
+      this.state = initialState ?? (getInitialState && getInitialState.call(this)) ?? {};
+
+      for (const [name, method] of Object.entries(methods)) {
+        this[name] = method.bind(this);
+      }
+
+      if (refs) {
+        this.refs = {};
+        for (const refName of refs) {
+          this.refs[refName] = createRef(null);
+        }
+      }
+    }
+
+    componentDidMount(...args) {
+      if (onMount) {
+        onMount.call(this, ...args)
+      }
+    }
+
+    componentDidUpdate(...args) {
+      if (onUpdate) {
+        onUpdate.call(this, ...args)
+      }
+    }
+  }
+
+  return klass;
 }

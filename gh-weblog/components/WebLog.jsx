@@ -1,4 +1,4 @@
-import { React, createClass } from "../lib/create-component.js";
+import { createClass } from "../lib/create-component.js";
 import utils from "../lib/utils.js";
 import Admin from "./Admin.jsx";
 import Entry from "./Entry.jsx";
@@ -27,6 +27,7 @@ export default createClass({
     issues: ``,
     tags: undefined,
   },
+  refs: ["admin"],
 
   getPostId() {
     const params = new URLSearchParams(location.search);
@@ -122,12 +123,12 @@ export default createClass({
     }
 
     return (
-      <div ref="weblog" className="gh-weblog">
+      <div className="gh-weblog">
         {this.state.pending ? <div className="pending">pending...</div> : null}
         {this.generateToC()}
         {this.generateTagList()}
         <Admin
-          ref="admin"
+          ref={this.refs.admin}
           hidden="true"
           onClose={this.bindSettings}
           onLogout={this.onLogOut}
@@ -234,7 +235,7 @@ export default createClass({
   },
 
   showSettings() {
-    this.refs.admin.show();
+    this.refs.admin.current.show();
   },
 
   bindSettings(settings) {

@@ -1,6 +1,6 @@
-import React from "../lib/vendor/react/react.0.12.min.js";
+import { createClass } from "../lib/create-component.js";
 
-export default React.createClass({
+export default createClass({
   render() {
     const tags = this.props.tags.map(function (tag, idx) {
       return (

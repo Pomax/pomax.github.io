@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "rm -rf dist && esbuild ./components/index.jsx --bundle --platform=browser --format=esm --keep-names --tree-shaking=false --outfile=./dist/gh-weblog.js --watch"
+    "test": "rm -rf dist && esbuild ./components/index.jsx --bundle --platform=browser --format=esm --keep-names --tree-shaking=false --jsx-factory=h --jsx-fragment=Fragment --jsx=automatic --jsx-import-source=preact --outfile=./dist/gh-weblog.js --watch"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@octokit/core": "^6.1.2",
-    "@octokit/plugin-create-or-update-text-file": "^5.1.0"
+    "@octokit/plugin-create-or-update-text-file": "^5.1.0",
+    "preact": "^10.25.4"
   }
 }
