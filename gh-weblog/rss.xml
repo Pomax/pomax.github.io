@@ -5,12 +5,34 @@
 <title>Pomax.github.io</title>
 <description>Because chronicling the past using technology is kind of cool.</description>
 <link>https://pomax.github.io/</link>
-<lastBuildDate>Wed, 12 Mar 2025 23:25:48 GMT</lastBuildDate>
-<pubDate>Wed, 12 Mar 2025 23:25:48 GMT</pubDate>
+<lastBuildDate>Wed, 12 Mar 2025 23:47:09 GMT</lastBuildDate>
+<pubDate>Wed, 12 Mar 2025 23:47:09 GMT</pubDate>
 <ttl>1440</ttl><item>
+<title>Saying goodbye to Adobe</title>
+<description><![CDATA[<p>I recently got an exciting email from Adobe about an upcoming change to my subscription. Namely that they were nearly doubling the price, and combined with all the other nonsense they&#39;ve been pulling over the last few years that was the final push I needed to just cancel my membership.</p>
+<p>And that sucks, because to this day no one&#39;s made a decent alternative to Lightroom, but I&#39;ll cope. So far, here&#39;s what I&#39;m using instead:</p>
+<ul>
+<li><a href="https://www.blackmagicdesign.com/ca/products/davinciresolve">Davinci Resolve</a> instead of Premiere/After Effects. &quot;It&#39;s free!&quot; except I don&#39;t use the free version, I own the Studio version and have been using it in parallel with After Effects for years now. I guess I get to learn Fusion properly now though, because I&#39;m never touching Adobe&#39;s video editing ever again.</li>
+<li><a href="https://krita.org/en/">Krita</a> and <a href="https://www.gimp.org/">Gimp</a> instead of Photoshop. And let&#39;s be honest, Gimp is still stuck in 1992 so most of the time it&#39;s going to be Krita, even though that was designed to be more of an art production application. Gimp is a fallback, at best. It&#39;s amazing how long it&#39;s been around without actually moving with the times and the needs of folks who want off the Adobe merry-go-round.</li>
+<li>I&#39;m looking at replacing Lightroom with <a href="https://www.dxo.com">DxO</a> now that that finally supports collections and keywords, but I&#39;m going to have to do some digging to see if I can write a lightroom catalogue conversion script or not. If I can&#39;t, then I might end up having to buy a sailboat just so I can keep working with my catalogue files (which are just sqlite3 databases).</li>
+</ul>
+<p>&quot;What about audio?&quot;</p>
+<p>I never used Audition, mostly because I own so much audio software that Adobe can&#39;t possibly have something to offer that I don&#39;t already have much better software for. At least the audio world never had to suffer Adobe lock-in.</p>
+<p>Anyway, we&#39;ll see how it goes. Goodbye forever, Adobe, I&#39;ve been a paying customer since the Photoshop CS3 days (not CC, CS) but at this point there&#39;s just nothing you can do that will make me every pay you for anything again. Short of going back to offering people permanent licenses for your software of course. You&#39;re why everyone else is now doing software rental too, and you know it, and you made the world worse.</p>
+]]></description>
+<category>Adobe</category>
+<category>Lightroom</category>
+<category>Photoshop</category>
+<category>Davinci Resolve</category>
+<category>Krita</category>
+<category>DxO</category>
+<link>https://pomax.github.io?postid=1741822491191</link>
+<guid>https://pomax.github.io?postid=1741822491191</guid>
+<pubDate>Wed, 12 Mar 2025 23:34:51 GMT</pubDate>
+</item>
+<item>
 <title>Writing a mahjong tutorial</title>
-<description><![CDATA[<h1 id="writing-a-mahjong-tutorial">Writing a mahjong tutorial</h1>
-<p>I&#39;m currently in the process of writing a tutorial on how to implement a multiplayer version of &quot;real&quot; <a href="https://en.wikipedia.org/wiki/Mahjong">mahjong</a> (the four player draw-one, play-one game), and while it feels like I&#39;m nearing completion, I started this before Christmas and if you&#39;re familiar with <a href="https://pomax.github.io/bezierinfo">my other writing</a> then <a href="https://pomax.github.io/are-we-flying">you might understand</a> why it&#39;s taken so long.</p>
+<description><![CDATA[<p>I&#39;m currently in the process of writing a tutorial on how to implement a multiplayer version of &quot;real&quot; <a href="https://en.wikipedia.org/wiki/Mahjong">mahjong</a> (the four player draw-one, play-one game), and while it feels like I&#39;m nearing completion, I started this before Christmas and if you&#39;re familiar with <a href="https://pomax.github.io/bezierinfo">my other writing</a> then <a href="https://pomax.github.io/are-we-flying">you might understand</a> why it&#39;s taken so long..</p>
 <p>This tutorial covers:</p>
 <ul>
 <li>RPC-over-websockets without ever writing RPC or websocket code</li>
@@ -597,18 +619,4 @@ console.log(`test result:`, result, `- 10,000 iterations took ${timeTaken}ms`);
 <link>https://pomax.github.io?postid=1682542272279</link>
 <guid>https://pomax.github.io?postid=1682542272279</guid>
 <pubDate>Wed, 26 Apr 2023 20:51:12 GMT</pubDate>
-</item>
-<item>
-<title>Leaving twitter</title>
-<description><![CDATA[<p>In October of 2022, Elon Musk, a man who failed up harder than anyone else in history, decided to buy Twitter with the express intent to turn it into a completely different product. He laid off thousands of people, devalued the company by 50%, and started pushing through changes that not only changed the experience of the platform, but also made sure that you had no way of actually seeing the content you wanted, while at the same time pushing ads into every single stream presented to you.</p>
-<p>I signed up for Twitter back in 2009, and it&#39;s been a (mostly) fun ride, but even when it wasn&#39;t, there were always two things preventing folks from leaving the platform: (1) it was rarely <em>that</em> bad, and (2) there was no genuine alternative. </p>
-<p>Both those things changed in recent years. For several years now, Mastodon has been an alternative to Twitter, and with Elon&#39;s destruction of Twitter the number of both Mastodon users and Mastodon servers has exploded. It&#39;s now a perfectly fine alternative with plenty of folks to follow. No, they&#39;re not all on the same server, but it&#39;s not like you had problems sending emails to people who didn&#39;t use your email server before, and this is the same. Just follow them, irrespective of which server they happen to use. Done, you just need to know their &quot;homepage&quot;, hardly a chore.</p>
-<p>So as Musk lands more and more garbage features in a desperate attempt to short-term claw back money, I&#39;m calling it quits. To prevent people from namesquatting, I&#39;ve deleted my account, waiting the prerequisite 30 day period for it to become available again, and reregistered my name but won&#39;t be posting using it. Instead, I&#39;ll be using mastodon exclusively from now on. </p>
-<p>You can find me over on <a href="https://mastodon.social/@TheRealPomax">https://mastodon.social/@TheRealPomax</a></p>
-]]></description>
-<category>Mastodon</category>
-<category>Twitter</category>
-<link>https://pomax.github.io?postid=1681585670331</link>
-<guid>https://pomax.github.io?postid=1681585670331</guid>
-<pubDate>Sat, 15 Apr 2023 19:07:50 GMT</pubDate>
 </item></channel></rss>
