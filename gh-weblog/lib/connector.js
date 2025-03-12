@@ -90,11 +90,11 @@ export default class Connector {
     metaData.title = metaData.title.replace(/^#+ /, ``);
 
     // ensure there is no title at the top of the post
-    console.log(postData);
+    console.log(`postData:`, postData);
 
     postData = postData.replace(/^#+ .*(\r?\n)+/, ``);
 
-    console.log(postData);
+    console.log(`postData after removing the title:`, postData);
 
     const files = [
       {
