@@ -8727,6 +8727,10 @@ var Connector = class {
   async saveEntry({ id: id2, metaData, postData }, index, saved) {
     const { title: title2, created } = metaData;
     const path2 = `${this.path}/content/posts/`;
+    metaData.title = metaData.title.replace(/^#+ /, ``);
+    console.log(`postData:`, postData);
+    postData = postData.replace(/^#+ .*(\r?\n)+/, ``);
+    console.log(`postData after removing the title:`, postData);
     const files = [
       {
         message: `Saving post data`,
