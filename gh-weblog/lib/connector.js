@@ -85,6 +85,13 @@ export default class Connector {
   async saveEntry({ id, metaData, postData }, index, saved) {
     const { title, created } = metaData;
     const path = `${this.path}/content/posts/`;
+
+    // ensure there is no markdown in the metaData title
+    metaData.title = metaData.title.replace(/^#+ /, ``);
+
+    // ensure there is no title at the top of the post
+    postData = postData.replace(/^#+ .*(\r?\n)+/, ``);
+
     const files = [
       {
         message: `Saving post data`,
