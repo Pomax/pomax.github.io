@@ -5,12 +5,33 @@
 <title>Pomax.github.io</title>
 <description>Because chronicling the past using technology is kind of cool.</description>
 <link>https://pomax.github.io/</link>
-<lastBuildDate>Wed, 12 Mar 2025 20:44:58 GMT</lastBuildDate>
-<pubDate>Wed, 12 Mar 2025 20:44:58 GMT</pubDate>
+<lastBuildDate>Wed, 12 Mar 2025 21:04:55 GMT</lastBuildDate>
+<pubDate>Wed, 12 Mar 2025 21:04:55 GMT</pubDate>
 <ttl>1440</ttl><item>
-<title># Updating my blog platform</title>
-<description><![CDATA[<h1 id="updating-my-blog-platform">Updating my blog platform</h1>
-<p>I updated my blog platform, for reasons. One of them being <a href="https://www.theverge.com/2024/9/27/24256361/wordpress-wp-engine-drama-explained-matt-mullenweg">the current Wordpress shenanigans</a>,  causing the most important person in my life to go &quot;...didn&#39;t you have a GitHub-hosted blog? Is that something I can use too?&quot; and while her eventual solution was to discover that I have a Dreamhost account that comes with a free hosted self-managed WP install (so she can stop funding Automaticc), I spent a bunch of time trying to clean up my blog code so it could be used by others again. </p>
+<title>Writing a mahjong tutorial</title>
+<description><![CDATA[<h1 id="writing-a-mahjong-tutorial">Writing a mahjong tutorial</h1>
+<p>I&#39;m currently in the process of writing a tutorial on how to implement a multiplayer version of &quot;real&quot; mahjong (the four player draw-one, play-one game), and while it feels like I&#39;m nearing completion, I started this before Christmas and if you&#39;re familiar with <a href="https://pomax.github.io/bezierinfo">my other writing</a> then <a href="https://pomax.github.io/are-we-flying">you might understand</a> why it&#39;s taken so long.</p>
+<p>This tutorial covers:</p>
+<ul>
+<li>RPC-over-websockets without ever writing RPC or websocket code</li>
+<li>implementing the mahjong game loop</li>
+<li>implementing game clients using custom HTML elements</li>
+<li>implementing bots</li>
+<li>implementing different &quot;flavours&quot; of mahjong</li>
+<li>implementing a lobby system</li>
+<li>implementing the stupid &quot;solitaire&quot; game &quot;because why not&quot;</li>
+</ul>
+<p>And so it&#39;s really more of a full project book than a tutorial: we&#39;re currently sitting at about 75 thousand words (including code snippets) with everything but the last two parts covered, so hopefully I can publish this soon and get back to <em>playing</em> mahjong in stead =)</p>
+]]></description>
+<category>mahjong</category>
+<category>programming</category>
+<link>https://pomax.github.io?postid=1741813153923</link>
+<guid>https://pomax.github.io?postid=1741813153923</guid>
+<pubDate>Wed, 12 Mar 2025 20:59:13 GMT</pubDate>
+</item>
+<item>
+<title>Updating my blog platform</title>
+<description><![CDATA[<p>I updated my blog platform, for reasons. One of them being <a href="https://www.theverge.com/2024/9/27/24256361/wordpress-wp-engine-drama-explained-matt-mullenweg">the current Wordpress shenanigans</a>,  causing the most important person in my life to go &quot;...didn&#39;t you have a GitHub-hosted blog? Is that something I can use too?&quot; and while her eventual solution was to discover that I have a Dreamhost account that comes with a free hosted self-managed WP install (so she can stop funding Automaticc), I spent a bunch of time trying to clean up my blog code so it could be used by others again. </p>
 <p>I originally wrote it back in 2014 back when React was still on version 0.12, and revisiting the code it&#39;s incredible to see how much nicer React was back then, compared to the monster it has become since. So I decided to rewrite it, but keep it React 0.12, and honest, I wish there was a modern &quot;classic React&quot; library, but JS doesn&#39;t stop working this should keep working forever just fine. </p>
 <h3 id="how-does-it-work-">How does it work?</h3>
 <p>Some architecture info: my blog platform uses GitHub as its backend, but <em>it</em> uses GitHub as a backend, you don&#39;t. It has a simple &quot;swap out post for a markdown editor&quot; interface when you create/edit posts, and when you save your post the client-side code literally posts commits to GitHub, and then GitHub runs its GitHub pages deploy and things just work. Of course, this requires a bit more than just &quot;save your post&quot;:</p>
@@ -590,67 +611,4 @@ console.log(`test result:`, result, `- 10,000 iterations took ${timeTaken}ms`);
 <link>https://pomax.github.io?postid=1681585670331</link>
 <guid>https://pomax.github.io?postid=1681585670331</guid>
 <pubDate>Sat, 15 Apr 2023 19:07:50 GMT</pubDate>
-</item>
-<item>
-<title> Getting elevation data out of DEM/DSM GeoTIFF files</title>
-<description><![CDATA[<p>I&#39;m working on a fun little side project implementing an autopilot in JavaScript to &quot;drive&quot; planes in Microsoft Flight Simulator 2020, and one of the things it needs is an altitude computer/terrain follow system. And in order to make that reasonably accurate, I figured I&#39;d download the entire planet&#39;s elevation data in the form of the <a href="https://www.eorc.jaxa.jp/ALOS/en/dataset/aw3d30/aw3d30_e.htm">ALOS Wolrd 3D (30m)</a> dataset. This is around 450GB of DSM data, and takes the form of <a href="http://geotiff.maptools.org/spec/geotiff2.html">GeoTiff</a> files.</p>
-<p>Conventional GIS wisdom says that in order to work with that, you need to use <a href="https://gdal.org/">GDAL</a>, which has no Node bindings, but it has a Python API. And Python&#39;s not hard to use, but having to use two different programming languages is inconvenient. So after writing working python GDAL code, which takes 23 seconds to get the full file list of available tiles on my NAS, I figured I&#39;d see if there was a Node library that worked with GDAL anyway.</p>
-<p>Turns out there is, or rather, there are. I ended up using <a href="https://github.com/mmomtchev/node-gdal-async">gdal-async</a>, which is a fork of <a href="https://github.com/contra/node-gdal-next">https://github.com/contra/node-gdal-next</a>, which is a fork of <a href="https://github.com/naturalatlas/node-gdal">https://github.com/naturalatlas/node-gdal</a>,  and reimplementing the logic on the Python side in Node yields a codebase that can index the same files, on the same NAS, in 7 seconds instead of 23. So that&#39;s weird, but better than before.</p>
-<p>I ended up writing out the file index to a 24000 line JSON file as a cache, hoping that&#39;d be faster, and where it takes Python a bit to run through that, Node.js loads that instantly. <em>And</em> parses it to a JS datastructure. The server&#39;s just up the moment I run <code>node server.js</code> instead of spending a second or two starting up. </p>
-<p>But it gets better: why am I using GDAL at all if all I want is the elevations for GPS coordinates? Surely, GeoTIFF is not so complex that only giant GIS projects can make sense of them? And it turns out that, no, it&#39;s not. It&#39;s in fact near-trivial to write your own code for this provided you know a little bit of programming: GeoTIFF put all the information you need in the &quot;fields&quot; section of an IFD block (the kind of blocks a TIFF file is built up from), so we can just use <a href="https://www.npmjs.com/package/tiff">a tiff parser</a> to get those fields, and then look up what values we need in order to map GPS coordinates to TIFF pixel indices (See <a href="https://stackoverflow.com/a/75647596/740553">https://stackoverflow.com/a/75647596/740553</a> for an overly detailed explanation on the how!)</p>
-<p>So, how much code is it when we implement the entire thing, bar the TIFF parser, ourselves? This much code:</p>
-<pre><code class="lang-javascript">import { existsSync, copyFileSync, readFileSync, writeFileSync } from &quot;fs&quot;;
-import { basename, join } from &quot;path&quot;;
-import tiff from &quot;tiff&quot;;
-const { floor, ceil } = Math;
-
-const __dirname = url.fileURLToPath(new URL(&quot;.&quot;, import.meta.url));
-const INDEX_FILE = join(__dirname, `alos-index.json`);
-const CACHE_DIR = join(__dirname, `cache`);
-const ALOS_VOID_VALUE = -9999;
-
-class ALOSTile {
-  constructor(tilePath) {
-    this.tilePath = tilePath;
-    // copy to cache dir for faster loading
-    const filename = join(`.`, CACHE_DIR, basename(tilePath));
-    if (!existsSync(filename)) copyFileSync(tilePath, filename);
-    this.init(filename);
-  }
-
-  init(filename) {
-    const file = readFileSync(filename);
-    const image = tiff.decode(file.buffer);
-    const block = (this.block = image[0]);
-    const fields = block.fields;
-    let [sx, sy, sz] = fields.get(33550);
-    let [px, py, k, gx, gy, gz] = fields.get(33922);
-    sy = -sy;
-    this.reverse = [-gx / sx, 1 / sx, 0, -gy / sy, 0, 1 / sy];
-    this.pixels = block.data;
-  }
-
-  lookup(lat, long) {
-    const { reverse: T, block } = this;
-    const x = T[0] + T[1] * long + T[2] * lat;
-    const y = T[3] + T[4] * long + T[5] * lat;
-    const pos = (x | 0) + (y | 0) * block.width;
-    const value = this.pixels[pos];
-    return value ?? ALOS_VOID_VALUE;
-  }
-}
-</code></pre>
-<p>There, that&#39;s the entire code <em>plus convenience wrapper</em> to do an elevation lookup in a GeoTIFF tile. No GDAL, no Python, heck we don&#39;t even need to care about which programming language we&#39;re using as long as it has a TIFF parser it can use. The rest is just absolutely basic programming.</p>
-]]></description>
-<category>Node</category>
-<category>GIS</category>
-<category>GDAL</category>
-<category>MSFS</category>
-<category>MSFS 2020</category>
-<category>Elevation</category>
-<category>DEM</category>
-<category>DSM</category>
-<link>https://pomax.github.io?postid=1678206967957</link>
-<guid>https://pomax.github.io?postid=1678206967957</guid>
-<pubDate>Tue, 07 Mar 2023 16:36:07 GMT</pubDate>
 </item></channel></rss>
