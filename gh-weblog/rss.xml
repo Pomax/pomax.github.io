@@ -5,12 +5,11 @@
 <title>Pomax.github.io</title>
 <description>Because chronicling the past using technology is kind of cool.</description>
 <link>https://pomax.github.io/</link>
-<lastBuildDate>Wed, 12 Mar 2025 23:45:28 GMT</lastBuildDate>
-<pubDate>Wed, 12 Mar 2025 23:45:28 GMT</pubDate>
+<lastBuildDate>Wed, 12 Mar 2025 23:47:09 GMT</lastBuildDate>
+<pubDate>Wed, 12 Mar 2025 23:47:09 GMT</pubDate>
 <ttl>1440</ttl><item>
 <title>Saying goodbye to Adobe</title>
-<description><![CDATA[<h1 id="saying-goodbye-to-adobe">Saying goodbye to Adobe</h1>
-<p>I recently got an exciting email from Adobe about an upcoming change to my subscription. Namely that they were nearly doubling the price, and combined with all the other nonsense they&#39;ve been pulling over the last few years that was the final push I needed to just cancel my membership.</p>
+<description><![CDATA[<p>I recently got an exciting email from Adobe about an upcoming change to my subscription. Namely that they were nearly doubling the price, and combined with all the other nonsense they&#39;ve been pulling over the last few years that was the final push I needed to just cancel my membership.</p>
 <p>And that sucks, because to this day no one&#39;s made a decent alternative to Lightroom, but I&#39;ll cope. So far, here&#39;s what I&#39;m using instead:</p>
 <ul>
 <li><a href="https://www.blackmagicdesign.com/ca/products/davinciresolve">Davinci Resolve</a> instead of Premiere/After Effects. &quot;It&#39;s free!&quot; except I don&#39;t use the free version, I own the Studio version and have been using it in parallel with After Effects for years now. I guess I get to learn Fusion properly now though, because I&#39;m never touching Adobe&#39;s video editing ever again.</li>
@@ -33,8 +32,7 @@
 </item>
 <item>
 <title>Writing a mahjong tutorial</title>
-<description><![CDATA[<h1 id="writing-a-mahjong-tutorial">Writing a mahjong tutorial</h1>
-<p>I&#39;m currently in the process of writing a tutorial on how to implement a multiplayer version of &quot;real&quot; <a href="https://en.wikipedia.org/wiki/Mahjong">mahjong</a> (the four player draw-one, play-one game), and while it feels like I&#39;m nearing completion, I started this before Christmas and if you&#39;re familiar with <a href="https://pomax.github.io/bezierinfo">my other writing</a> then <a href="https://pomax.github.io/are-we-flying">you might understand</a> why it&#39;s taken so long..</p>
+<description><![CDATA[<p>I&#39;m currently in the process of writing a tutorial on how to implement a multiplayer version of &quot;real&quot; <a href="https://en.wikipedia.org/wiki/Mahjong">mahjong</a> (the four player draw-one, play-one game), and while it feels like I&#39;m nearing completion, I started this before Christmas and if you&#39;re familiar with <a href="https://pomax.github.io/bezierinfo">my other writing</a> then <a href="https://pomax.github.io/are-we-flying">you might understand</a> why it&#39;s taken so long..</p>
 <p>This tutorial covers:</p>
 <ul>
 <li>RPC-over-websockets without ever writing RPC or websocket code</li>
