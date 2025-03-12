@@ -1545,12 +1545,20 @@
     ]
   },
   "2024-10-14-17-07-43": {
-    "title": "# Updating my blog platform",
+    "title": "Updating my blog platform",
     "created": 1728925663194,
     "tags": [
       "blog",
       "update",
       "news"
+    ]
+  },
+  "2025-03-12-20-59-13": {
+    "title": "Writing a mahjong tutorial",
+    "created": 1741813153923,
+    "tags": [
+      "mahjong",
+      "programming"
     ]
   }
 }
