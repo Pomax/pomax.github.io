@@ -5,9 +5,22 @@
 <title>Pomax.github.io</title>
 <description>Because chronicling the past using technology is kind of cool.</description>
 <link>https://pomax.github.io/</link>
-<lastBuildDate>Wed, 12 Mar 2025 23:47:09 GMT</lastBuildDate>
-<pubDate>Wed, 12 Mar 2025 23:47:09 GMT</pubDate>
+<lastBuildDate>Thu, 20 Mar 2025 22:48:31 GMT</lastBuildDate>
+<pubDate>Thu, 20 Mar 2025 22:48:31 GMT</pubDate>
 <ttl>1440</ttl><item>
+<title>How to make MacOS remount your external drive properly</title>
+<description><![CDATA[<h1 id="how-to-make-macos-remount-your-external-drive-properly">How to make MacOS remount your external drive properly</h1>
+<p>Ever had MacOS not correctly unmount your external drive and then it remounts it and now even though the icon on your desktop says &quot;SomeVolume&quot; the actual location in the <code>/Volumes</code> list is <code>SomeVolume 1</code> and there&#39;s an orphaned &quot;SomeVolume&quot; that doesn&#39;t actually work or point to anything?</p>
+<p>Maddening. Eject your external drive from the desktop, then open a terminal and <code>cd /Volumes</code>, followed by an <code>ls -l</code> to confirm there is no entry for it on its &quot;... 1&quot; name anymore. Then disconnect the drive from your machine.</p>
+<p>Run a <code>sudo rm -rf SomeVolume</code> to clean up the orphaned volume mount that&#39;s pointing to literally nothing, and wait for that finish (this is rather important. Wait for it to finish. Under no circumstances should you proceed with the next step until then).</p>
+<p>Plug your external drive back in. Congrats, it now has its proper volume binding again.</p>
+]]></description>
+
+<link>https://pomax.github.io?postid=1742510558362</link>
+<guid>https://pomax.github.io?postid=1742510558362</guid>
+<pubDate>Thu, 20 Mar 2025 22:42:38 GMT</pubDate>
+</item>
+<item>
 <title>Saying goodbye to Adobe</title>
 <description><![CDATA[<p>I recently got an exciting email from Adobe about an upcoming change to my subscription. Namely that they were nearly doubling the price, and combined with all the other nonsense they&#39;ve been pulling over the last few years that was the final push I needed to just cancel my membership.</p>
 <p>And that sucks, because to this day no one&#39;s made a decent alternative to Lightroom, but I&#39;ll cope. So far, here&#39;s what I&#39;m using instead:</p>
@@ -596,27 +609,4 @@ console.log(`test result:`, result, `- 10,000 iterations took ${timeTaken}ms`);
 <link>https://pomax.github.io?postid=1691255244859</link>
 <guid>https://pomax.github.io?postid=1691255244859</guid>
 <pubDate>Sat, 05 Aug 2023 17:07:24 GMT</pubDate>
-</item>
-<item>
-<title> Generating a 3D LUT with Photoshop for OBS/Atomos/etc.</title>
-<description><![CDATA[<p>Have you ever needed a 3D cube LUT? Turns out, all you need is Photoshop! Whip out Photoshop and create a bunch of &quot;adjustment layers&quot; for your colour correction...</p>
-<p><img src="https://user-images.githubusercontent.com/177243/235992202-f9203283-9437-4c28-95f8-70555804c527.png" alt="image"></p>
-<p>And then export that to a LUT using &quot;export&quot; -&gt; &quot;Color Lookup Tables...&quot; with only &quot;CUBE&quot; as format and 32 points. Brilliant: instant 33 point 3d LUT for use in OBS, your video monitor,  in-camera, through a LUT box, etc. etc.!</p>
-<p>But then you load it into OBS, or your LUT box, and oh no your video feed suddenly looks like this:</p>
-<p><img src="https://user-images.githubusercontent.com/177243/234699746-5c492161-e373-4e57-b4fb-a43c7a7c4d42.png" alt="{C9DE6C3A-EC6B-492A-A830-9B29F1A70590}"></p>
-<p>The problem you&#39;re seeing is almost certainly caused by having multiple image layers under your adjustment layer(s):</p>
-<p><img src="https://user-images.githubusercontent.com/177243/234700423-866d74a7-a68a-4c0a-a81d-feea987a42f3.png" alt="image"></p>
-<p>And the solution is to just flatten all of those, <em>then</em> export your color adjustments as a cube LUT:</p>
-<p><img src="https://user-images.githubusercontent.com/177243/234700619-56851d7d-04f1-4cf4-96a1-6f84dafaac39.png" alt="image"></p>
-<p>And presto, suddenly your LUT works just fine in OBS, or your LUT box, or any other context that needs a cube LUT:</p>
-<p><img src="https://user-images.githubusercontent.com/177243/234700798-76327d7a-fa6c-4388-bacc-b4e837789a34.png" alt="image"></p>
-]]></description>
-<category>3D</category>
-<category>cube</category>
-<category>lut</category>
-<category>photoshop</category>
-<category>obs</category>
-<link>https://pomax.github.io?postid=1682542272279</link>
-<guid>https://pomax.github.io?postid=1682542272279</guid>
-<pubDate>Wed, 26 Apr 2023 20:51:12 GMT</pubDate>
 </item></channel></rss>
