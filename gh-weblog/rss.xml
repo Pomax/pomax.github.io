@@ -5,17 +5,20 @@
 <title>Pomax.github.io</title>
 <description>Because chronicling the past using technology is kind of cool.</description>
 <link>https://pomax.github.io/</link>
-<lastBuildDate>Thu, 20 Mar 2025 22:48:31 GMT</lastBuildDate>
-<pubDate>Thu, 20 Mar 2025 22:48:31 GMT</pubDate>
+<lastBuildDate>Thu, 20 Mar 2025 22:49:29 GMT</lastBuildDate>
+<pubDate>Thu, 20 Mar 2025 22:49:29 GMT</pubDate>
 <ttl>1440</ttl><item>
 <title>How to make MacOS remount your external drive properly</title>
-<description><![CDATA[<h1 id="how-to-make-macos-remount-your-external-drive-properly">How to make MacOS remount your external drive properly</h1>
-<p>Ever had MacOS not correctly unmount your external drive and then it remounts it and now even though the icon on your desktop says &quot;SomeVolume&quot; the actual location in the <code>/Volumes</code> list is <code>SomeVolume 1</code> and there&#39;s an orphaned &quot;SomeVolume&quot; that doesn&#39;t actually work or point to anything?</p>
+<description><![CDATA[<p>Ever had MacOS not correctly unmount your external drive and then it remounts it and now even though the icon on your desktop says &quot;SomeVolume&quot; the actual location in the <code>/Volumes</code> list is <code>SomeVolume 1</code> and there&#39;s an orphaned &quot;SomeVolume&quot; that doesn&#39;t actually work or point to anything?</p>
 <p>Maddening. Eject your external drive from the desktop, then open a terminal and <code>cd /Volumes</code>, followed by an <code>ls -l</code> to confirm there is no entry for it on its &quot;... 1&quot; name anymore. Then disconnect the drive from your machine.</p>
 <p>Run a <code>sudo rm -rf SomeVolume</code> to clean up the orphaned volume mount that&#39;s pointing to literally nothing, and wait for that finish (this is rather important. Wait for it to finish. Under no circumstances should you proceed with the next step until then).</p>
 <p>Plug your external drive back in. Congrats, it now has its proper volume binding again.</p>
 ]]></description>
-
+<category>MacOS</category>
+<category>Volume</category>
+<category>Mount</category>
+<category>External</category>
+<category>Problem</category>
 <link>https://pomax.github.io?postid=1742510558362</link>
 <guid>https://pomax.github.io?postid=1742510558362</guid>
 <pubDate>Thu, 20 Mar 2025 22:42:38 GMT</pubDate>
