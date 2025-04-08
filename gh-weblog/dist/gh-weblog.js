@@ -8910,7 +8910,7 @@ var WebLog_default = createClass({
       return /* @__PURE__ */ react_0_12_min_default.createElement("tr", null, /* @__PURE__ */ react_0_12_min_default.createElement("td", { className: "year" }, date.getFullYear()), /* @__PURE__ */ react_0_12_min_default.createElement("td", { className: "when" }, when), /* @__PURE__ */ react_0_12_min_default.createElement("td", null, /* @__PURE__ */ react_0_12_min_default.createElement(
         "a",
         {
-          href: `${singleton ? `../../` : ``}pages/${created}/${utils_default.titleReplace(title2)}`
+          href: `${singleton ? `../../` : ``}pages/${created}/${encodeURIComponent(utils_default.titleReplace(title2))}`
         },
         title2
       )));

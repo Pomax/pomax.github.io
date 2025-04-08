@@ -160,7 +160,7 @@ export default createClass({
                   <td className="when">{when}</td>
                   <td>
                     <a
-                      href={`${singleton ? `../../` : ``}pages/${created}/${utils.titleReplace(title)}`}
+                      href={`${singleton ? `../../` : ``}pages/${created}/${encodeURIComponent(utils.titleReplace(title))}`}
                     >
                       {title}
                     </a>
@@ -298,7 +298,8 @@ export default createClass({
       tags: [],
       draft: undefined,
     };
-    const postData = "# New Entry\n\n...click here to start editing your post...";
+    const postData =
+      "# New Entry\n\n...click here to start editing your post...";
     const id = (metaData.id = timeToId(timestamp));
     this.updateEntry(id, metaData, postData);
   },
