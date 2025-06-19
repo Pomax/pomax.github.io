@@ -5,9 +5,36 @@
 <title>Pomax.github.io</title>
 <description>Because chronicling the past using technology is kind of cool.</description>
 <link>https://pomax.github.io/</link>
-<lastBuildDate>Thu, 20 Mar 2025 22:49:29 GMT</lastBuildDate>
-<pubDate>Thu, 20 Mar 2025 22:49:29 GMT</pubDate>
+<lastBuildDate>Thu, 19 Jun 2025 16:41:39 GMT</lastBuildDate>
+<pubDate>Thu, 19 Jun 2025 16:41:39 GMT</pubDate>
 <ttl>1440</ttl><item>
+<title>Wrting an HTML to and from Markdown converter</title>
+<description><![CDATA[<h1 id="wrting-an-html-to-and-from-markdown-converter">Wrting an HTML to and from Markdown converter</h1>
+<p>I&#39;m writing a new &quot;book&quot;, this time about implementing a multiplayer mahjong game using JavaScript. I&#39;m writing it in markdown, because that&#39;s the lowest effort format to write in, but there aren&#39;t a lot of good WYSIWYG, cross-platform standalone markdown editors out there. There&#39;s really only kind of one, Typora, and given their business practice of hiding the fact that they were bought by a Chinese company and then kept that under wraps until I pointed out their terms of service are void unless they identify who the owning party is. Within 24 hours the EULA got updated and the issue closed.</p>
+<p>So yeah, I&#39;d like to not have an auto-updating application that&#39;s installed on my computer with access to everything from networking to file systems, owned by a mystery Chinese company, on my computers. Which leaves me with two options: buy into some &quot;system wide document authoring system&quot; like Obsidian, which is kind of ridiculous if what you want is a standalone markdown editor, or use something like Zettlr, which isn&#39;t WYSIWYG, or use something that seems fine until you ask it to load a 50,000 word document, and they suddenly become completely unreliable pieces of software, like Joplin or Bear, where you can&#39;t even rely on cursor positioning or undo/redo anymore. </p>
+<p>Kind of important that those work.</p>
+<p>So, what are my options? </p>
+<ol>
+<li>I am a career programmer</li>
+<li>I have implemented multiple HTML tokenizers</li>
+<li>I have written binary format parsers</li>
+<li>I have a sneaking suspicion this is another one of those...</li>
+</ol>
+<p>So yeah, time to just buckle up and write my own markdown editor. Except not, because what I <em>need</em> is a document editor, markdown may be the best storage format because it&#39;s human readable and doesn&#39;t technically need special tools, but if I&#39;m going to write an editor I want <em>even less than that</em>, I want something that lets me write in a way where the format is an underpinning that I don&#39;t need to even think about unless I absolutely have to.</p>
+<p>Guess what does that already?</p>
+<p>That&#39;s right: browsers. HTML documents can be editing directly in the browser by using an over 15 year old solution called the <code>contenteditable</code> property, which makes content... well, editable. It doesn&#39;t come with WYSIWYG functions out of the box, but it <em>does</em> come with APIs for working with the global &quot;Selection&quot; object (which includes the empty selection represented by a cursor in an editable element) as well as &quot;ranges&quot;. The combination of these two things let you do stuff like &quot;and then wrap this range in a new tag&quot; or &quot;and then find the word that the cursor is in right now&quot; and all you have to do is write the code that goes &quot;if user presses ctrl-b, wrap the current selection in a strong tag, or if there is no selection, make one consisting of the word the cursor is in. Or, if we&#39;re already inside a strong element, unwrap it instead&quot; and that gets you to something that&#39;s suspiciously close to a WYSIWYG editor <em>really</em> quickly.</p>
+<p><a href="https://pomax.github.io/editable-document-poc">So I made one</a></p>
+<p>But there&#39;s a problem: editable HTML documents are, unsurprisingly, HTML documents. HTML is not markdown. But we <em>want</em> markdown because (a) we can be super precise if we can work in markdown mode when we need to (which ideally is never, of course, but when we have to, it better be possible), and (b) because tracking changes to a markdown document is just a text diffing thing, whereas tracking changes in an HTML DOM tree is ... less easy.</p>
+<p>So, markdown to HTML: easy peazy, we can use <a href="https://marked.js.org">marked</a>. </p>
+<p>HTML to markdown... uh... well there&#39;s showdown.js, it&#39;s not been maintained for three years now which wouldn&#39;t be so bad if it didn&#39;t have a bunch of dependencies that are imminently JS-supply-chain-vulnerabilities and the JS supply chain is nothing if not the poster child of supply chain vulnerabilities. So I guess that means I&#39;m writing my own HTML/markdown converter?</p>
+<p>Guess we&#39;ll see how that goes based on whether the next post is &quot;I&#39;ve released an HTML/markdown converter&quot; or &quot;I gave up, I&#39;m now using ... as my markdown editor&quot;.</p>
+]]></description>
+
+<link>https://pomax.github.io?postid=1750349382985</link>
+<guid>https://pomax.github.io?postid=1750349382985</guid>
+<pubDate>Thu, 19 Jun 2025 16:09:42 GMT</pubDate>
+</item>
+<item>
 <title>How to make MacOS remount your external drive properly</title>
 <description><![CDATA[<p>Ever had MacOS not correctly unmount your external drive and then it remounts it and now even though the icon on your desktop says &quot;SomeVolume&quot; the actual location in the <code>/Volumes</code> list is <code>SomeVolume 1</code> and there&#39;s an orphaned &quot;SomeVolume&quot; that doesn&#39;t actually work or point to anything?</p>
 <p>Maddening. Eject your external drive from the desktop, then open a terminal and <code>cd /Volumes</code>, followed by an <code>ls -l</code> to confirm there is no entry for it on its &quot;... 1&quot; name anymore. Then disconnect the drive from your machine.</p>
@@ -498,118 +525,4 @@ DELETE FROM AgLibraryCollectionImageChangeCounter WHERE image = 1672248;
 <link>https://pomax.github.io?postid=1697686323351</link>
 <guid>https://pomax.github.io?postid=1697686323351</guid>
 <pubDate>Thu, 19 Oct 2023 03:32:03 GMT</pubDate>
-</item>
-<item>
-<title> Writing a Node package using Rust... on Windows</title>
-<description><![CDATA[<p>Let me preface this by saying that every single person who claims that <code>mingw</code>, or <code>msys</code>, or &quot;you have <code>WSL2</code>, just use that&quot; are valid excuses to not target actual Windows is actively making life worse for large swathes of developers, and if that&#39;s you, please be better. Applications and libraries should work on any OS, including Windows: just cross-platform compile your software instead of making it someone else&#39;s problem =)</p>
-<p>With that out of the way: let&#39;s write some code in Rust that we can call from Node.js so that we get the best of both worlds: the ease of development of Node.js, with the &quot;I need this to be fast&quot; parts handled by natively compiled code.</p>
-<p>First up, let&#39;s get Rust configured:</p>
-<ul>
-<li><a href="https://github.com/llvm/llvm-project/releases/ because you&#39;ll need LLD (click &quot;show all ... assets&quot; and download the windows version">install LLVM</a>, because we&#39;ll need the LLD tool that comes with it,</li>
-<li><a href="https://www.rust-lang.org/tools/install">install Rust</a>,</li>
-<li>check to see if you have a <code>C:\Users\yournamehere\.cargo\config</code> file. If you don&#39;t, create one, and</li>
-<li>run <code>rustup target add x86_64-pc-windows-msvc</code> to download the bits Rust needs to build native Windows binaries.</li>
-</ul>
-<p>Then open the cargo config file, and add the following to it:</p>
-<pre><code>[target.x86_64-pc-windows-msvc]
-linker = &quot;lld-link.exe&quot;
-</code></pre><p>Rust now knows that it&#39;s building for the Windows platform. Beauty.</p>
-<p>Next up, we&#39;ll need Node.js</p>
-<ul>
-<li>install <a href="https://github.com/coreybutler/nvm-windows">nvm-windows</a></li>
-<li>run <code>nvm install lts</code> to install the current <a href="https://en.wikipedia.org/wiki/Long-term_support">LTS</a> version of Node</li>
-</ul>
-<p>And we&#39;re good to go. Let&#39;s start by creating a new project by running <code>cargo new testlib</code> and then changing a few things because we want Rust to build us a library, not an executable:</p>
-<ol>
-<li>rename <code>src/main.rs</code> to <code>src/lib.rs</code>,</li>
-<li>add a section called <code>[lib]</code> to the <code>Cargo.toml</code> file, and</li>
-<li>add <code>crate-type = [&quot;cdylib&quot;]</code> in that new section.</li>
-</ol>
-<p>This tells Rust that it will be compiling a shared library appropriate to the OS we build it on. Since we&#39;re on Windows, it&#39;ll be generating <code>.dll</code> files.</p>
-<p>And with that, let&#39;s put some Rust code in our <code>lib.rs</code>!</p>
-<pre><code class="lang-rust">// Tell Rust that we want our ABI to be C flavoured:
-
-#[repr(C)]
-
-// Create the equivalent of a Vec3:
-
-pub struct Orientation {
-  pitch: f64,
-  roll: f64,
-  yaw: f64,
-}
-
-// Give that struct an .add() function:
-
-impl Orientation {
-  fn add(&amp;mut self, pitch: f64, roll: f64, yaw:f64) -&gt; &amp;mut Orientation {
-    self.pitch += pitch;
-    self.roll += roll;
-    self.yaw += yaw;
-    return self;
-  }
-}
-
-// And then let&#39;s write a function that takes an Orientation as input,
-// does &quot;something&quot;, and then returns that Orietation as output:
-
-#[no_mangle]
-pub extern fn orientation_test(s: &amp;mut Orientation) -&gt; &amp;mut Orientation {
-  return s.add(1.0, 2.0, 3.0);
-}
-</code></pre>
-<p>If you&#39;re familiar with Rust none of this should be too surprising, but you might notice the <code>#[repr(C)]</code>, which tells Rust that we want the library&#39;s <a href="https://en.wikipedia.org/wiki/Application_binary_interface">application binary interface</a> (ABI) to conform to the C version, because Node only knows how to work with C flavoured ABIs. You might also notice the <code>#[no_mangle]</code> which is <em>super</em> important: by default Rust will optimize function names, which is convenient for generating smaller executables but is <em>disastrous</em> for libraries, where the point is that we want to call functions that we export <em>using the name we gave them</em>. So we tell Rust not to mangle the function name. And of course, everything we want to make use of on the Node side gets a <code>pub</code> so that it&#39;s visible to the outside world.</p>
-<p>And that&#39;s it, we can now run <code>cargo build</code> and it&#39;ll generate us a <code>target/debug/testlib.dll</code> file to use in &quot;whatever knows how to import DLL files&quot;!</p>
-<p>So let&#39;s move on to Node. We&#39;re first going to initialize the Rust project as a Node project, too, using <code>npm init</code>, after which we need to install something that&#39;ll let us work with DLL files, i.e. we want an <a href="https://en.wikipedia.org/wiki/Foreign_function_interface">foreign function interface</a> (FFI) solution, and the one we&#39;ll be using is <a href="https://koffi.dev/">koffi</a>: <code>npm install koffi</code>.</p>
-<p>(There are other options, but after trying pretty much every FFI solution that exists for Node, <code>koffi</code> was by far the most pleasant to work with. Which is pretty important!)</p>
-<p>We then edit our <code>package.json</code> to include a <code>&quot;type&quot;: &quot;module&quot;</code> because it&#39;s 2023 and we&#39;ll be writing modern JS with modern ES modules instead of using the legacy Node-only CommonJS module system, and we&#39;re good to go, let&#39;s create a <code>test.js</code> and make it use our DLL file!</p>
-<pre><code class="lang-js">// First we import koffi and load our library, using the extension appropriate to our OS.
-// Remember, just because we&#39;re on Windows doesn&#39;t mean we should be LOCKED into Windows!
-
-import koffi from &quot;koffi&quot;;
-const libraryPath = `./target/debug/testlib.${process.platform === `win32` ? `dll` : `so`}`;
-const lib = koffi.load(libraryPath);
-
-// Then we&#39;ll need a JS-equivalent of the struct our library uses:
-
-const Orientation = koffi.struct(`Orientation`, {
-  pitch: `double`,
-  roll: `double`,
-  yaw: `double`,
-});
-
-// And of course, we need a function handle, which requires specifying the function name we
-// want from the library, as well as what output it generates, given which inputs:
-
-const orientationTest = lib.func(`orientation_test`, Orientation, [Orientation]);
-
-// And with that we&#39;re ready to run some native code!
-
-const data = {
-  pitch: 0,
-  roll: 0,
-  yaw: 0,
-};
-
-let result = data;
-
-const start = performance.now();
-for(let i=0; i&lt;10000; i++) {
-  result = orientationTest(result);
-}
-const timeTaken = (performance.now() - start)|0;
-
-console.log(`test result:`, result, `- 10,000 iterations took ${timeTaken}ms`);
-</code></pre>
-<p>If we now run this using <code>node test.js</code> we see:</p>
-<pre><code>test result: { pitch: 10000, roll: 20000, yaw: 30000 } - 10,000 iterations took 13ms
-</code></pre><p>How cool is that? We&#39;re no longer stuck with running code at the speed of JS, we can run code at <em>native</em> speed by handing the number-crunchy, resource-intensive parts over to Rust, while keeping the convenience of JS for all the other parts of our code. It&#39;s the best of both worlds!</p>
-]]></description>
-<category>Node.js</category>
-<category>Rust</category>
-<category>Koffi</category>
-<category>FFI</category>
-<link>https://pomax.github.io?postid=1691255244859</link>
-<guid>https://pomax.github.io?postid=1691255244859</guid>
-<pubDate>Sat, 05 Aug 2023 17:07:24 GMT</pubDate>
 </item></channel></rss>
