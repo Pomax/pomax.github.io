@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>Because chronicling the past using technology is kind of cool.</description>
 <link>https://pomax.github.io/</link>
-<lastBuildDate>Thu, 19 Jun 2025 16:41:39 GMT</lastBuildDate>
-<pubDate>Thu, 19 Jun 2025 16:41:39 GMT</pubDate>
+<lastBuildDate>Thu, 19 Jun 2025 16:56:20 GMT</lastBuildDate>
+<pubDate>Thu, 19 Jun 2025 16:56:20 GMT</pubDate>
 <ttl>1440</ttl><item>
 <title>Wrting an HTML to and from Markdown converter</title>
 <description><![CDATA[<h1 id="wrting-an-html-to-and-from-markdown-converter">Wrting an HTML to and from Markdown converter</h1>
@@ -29,7 +29,10 @@
 <p>HTML to markdown... uh... well there&#39;s showdown.js, it&#39;s not been maintained for three years now which wouldn&#39;t be so bad if it didn&#39;t have a bunch of dependencies that are imminently JS-supply-chain-vulnerabilities and the JS supply chain is nothing if not the poster child of supply chain vulnerabilities. So I guess that means I&#39;m writing my own HTML/markdown converter?</p>
 <p>Guess we&#39;ll see how that goes based on whether the next post is &quot;I&#39;ve released an HTML/markdown converter&quot; or &quot;I gave up, I&#39;m now using ... as my markdown editor&quot;.</p>
 ]]></description>
-
+<category>html</category>
+<category>markdown</category>
+<category>wysiwyg</category>
+<category>editor</category>
 <link>https://pomax.github.io?postid=1750349382985</link>
 <guid>https://pomax.github.io?postid=1750349382985</guid>
 <pubDate>Thu, 19 Jun 2025 16:09:42 GMT</pubDate>
