@@ -5,8 +5,8 @@
 <title>Pomax.github.io</title>
 <description>Because chronicling the past using technology is kind of cool.</description>
 <link>https://pomax.github.io/</link>
-<lastBuildDate>Sat, 17 Oct 2026 16:13:56 GMT</lastBuildDate>
-<pubDate>Sat, 17 Oct 2026 16:13:56 GMT</pubDate>
+<lastBuildDate>Sat, 17 Oct 2026 16:14:23 GMT</lastBuildDate>
+<pubDate>Sat, 17 Oct 2026 16:14:23 GMT</pubDate>
 <ttl>1440</ttl><item>
 <title>Auto-checkpoints for Hyper-V virtual machines</title>
 <description><![CDATA[<h1 id="auto-checkpoints-for-hyper-v-virtual-machines">Auto-checkpoints for Hyper-V virtual machines</h1>
@@ -40,7 +40,9 @@ if (Get-VMSnapshot -VMName $VM) { exit }
 ...
 </code></pre>
 ]]></description>
-
+<category>Windows</category>
+<category>Hyper-V</category>
+<category>VM</category>
 <link>https://pomax.github.io?postid=1792253628093</link>
 <guid>https://pomax.github.io?postid=1792253628093</guid>
 <pubDate>Sat, 17 Oct 2026 16:13:48 GMT</pubDate>
