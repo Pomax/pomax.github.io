@@ -5,12 +5,49 @@
 <title>Pomax.github.io</title>
 <description>Because chronicling the past using technology is kind of cool.</description>
 <link>https://pomax.github.io/</link>
-<lastBuildDate>Thu, 19 Jun 2025 16:56:20 GMT</lastBuildDate>
-<pubDate>Thu, 19 Jun 2025 16:56:20 GMT</pubDate>
+<lastBuildDate>Sat, 17 Oct 2026 16:13:56 GMT</lastBuildDate>
+<pubDate>Sat, 17 Oct 2026 16:13:56 GMT</pubDate>
 <ttl>1440</ttl><item>
+<title>Auto-checkpoints for Hyper-V virtual machines</title>
+<description><![CDATA[<h1 id="auto-checkpoints-for-hyper-v-virtual-machines">Auto-checkpoints for Hyper-V virtual machines</h1>
+<p>You know how Hyper-V has an automatic checkpoint option, and how it&#39;s completely useless because what it actually does is &quot;make sure there is at least one checkpoint&quot;, so the moment you have one, it&#39;ll do nothing? Why can&#39;t it just take an actual snapshot automatically every time you start up the VM, so that if you do something stupid that session, you just reset to the <em>latest</em> snapshot?</p>
+<p>So let&#39;s just set that up shall we? This is a repost of the answer I posted for this over on SupeUser:</p>
+<p>Step one: we write a powershell script that tells Hyper-V to takes a snapshot for your VM.</p>
+<pre><code class="lang-powershell">$VM = &quot;YOUR_VM_NAME&quot;
+
+# Get the event properties
+$Event = Get-WinEvent -LogName &quot;Microsoft-Windows-Hyper-V-Worker-Admin&quot; -MaxEvents 1
+$EventVM = $Event.Properties[0].Value
+
+# Is this about the correct VM?
+if ($EventVM -ne $VM) { exit 1 }
+
+# Start event for the correct VM: take a snapshot.
+$now = Get-Date -Format &quot;M/d/yyyy - h:mm:ss tt&quot;
+$snapshot = &quot;Automatic Checkpoint - ${VM} - (${now})&quot;
+Checkpoint-VM -Name &quot;${VM}&quot; -SnapshotName &quot;${snapshot}&quot;
+</code></pre>
+<p>Step two: we run Event Viewer with admin rights, and look at the &quot;Applications and Services Logs&quot;, specifically <code>Microsoft\Windows\Hyper-V-Worker\admin</code>. When we start a VM, we should see an event with id <code>18609</code>: &quot;... properties were successfully initialized&quot;. This event fires as part of VM startup, but <em>before</em> the VM boots, so that&#39;s when we want to take the snapshot. Right click the event and pick &quot;Attach Task To This Event&quot;.</p>
+<p>Give that a name and description, then hit next. The event trigger will already be filled in, so next again. As our action we&#39;ll start a program, specifically <code>powershell.exe</code> with the following arguments to load the script we just made: <code>-ExecutionPolicy Bypass -WindowStyle Hidden -File &quot;...\your-script.ps1&quot;</code>, then hit next, check the &quot;open the properties dialog&quot; option, and hit finish.</p>
+<p>In the new task properties, we now need to make sure this will run &quot;whether the user is logged in or not&quot;, with the &quot;run with highest privileges&quot; turned on. Hit &quot;OK&quot; and you&#39;re good to go.</p>
+<p>Or, if you <em>really</em> want to preserve the original automatic snapshot behaviour, i.e. &quot;only take a snapshot if there aren&#39;t any yet&quot;, then update the snapshot script to check whether or not there&#39;s already a snapshot for your VM and if there is, exit early:</p>
+<pre><code class="lang-powershell">...
+
+# Are we snapshot-free?
+if (Get-VMSnapshot -VMName $VM) { exit }
+
+# Okay, *now* we can take a snapshot.
+...
+</code></pre>
+]]></description>
+
+<link>https://pomax.github.io?postid=1792253628093</link>
+<guid>https://pomax.github.io?postid=1792253628093</guid>
+<pubDate>Sat, 17 Oct 2026 16:13:48 GMT</pubDate>
+</item>
+<item>
 <title>Wrting an HTML to and from Markdown converter</title>
-<description><![CDATA[<h1 id="wrting-an-html-to-and-from-markdown-converter">Wrting an HTML to and from Markdown converter</h1>
-<p>I&#39;m writing a new &quot;book&quot;, this time about implementing a multiplayer mahjong game using JavaScript. I&#39;m writing it in markdown, because that&#39;s the lowest effort format to write in, but there aren&#39;t a lot of good WYSIWYG, cross-platform standalone markdown editors out there. There&#39;s really only kind of one, Typora, and given their business practice of hiding the fact that they were bought by a Chinese company and then kept that under wraps until I pointed out their terms of service are void unless they identify who the owning party is. Within 24 hours the EULA got updated and the issue closed.</p>
+<description><![CDATA[<p>I&#39;m writing a new &quot;book&quot;, this time about implementing a multiplayer mahjong game using JavaScript. I&#39;m writing it in markdown, because that&#39;s the lowest effort format to write in, but there aren&#39;t a lot of good WYSIWYG, cross-platform standalone markdown editors out there. There&#39;s really only kind of one, Typora, and given their business practice of hiding the fact that they were bought by a Chinese company and then kept that under wraps until I pointed out their terms of service are void unless they identify who the owning party is. Within 24 hours the EULA got updated and the issue closed.</p>
 <p>So yeah, I&#39;d like to not have an auto-updating application that&#39;s installed on my computer with access to everything from networking to file systems, owned by a mystery Chinese company, on my computers. Which leaves me with two options: buy into some &quot;system wide document authoring system&quot; like Obsidian, which is kind of ridiculous if what you want is a standalone markdown editor, or use something like Zettlr, which isn&#39;t WYSIWYG, or use something that seems fine until you ask it to load a 50,000 word document, and they suddenly become completely unreliable pieces of software, like Joplin or Bear, where you can&#39;t even rely on cursor positioning or undo/redo anymore. </p>
 <p>Kind of important that those work.</p>
 <p>So, what are my options? </p>
@@ -495,37 +532,4 @@ DELETE FROM AgLibraryCollectionImageChangeCounter WHERE image = 1672248;
 <link>https://pomax.github.io?postid=1697948473746</link>
 <guid>https://pomax.github.io?postid=1697948473746</guid>
 <pubDate>Sun, 22 Oct 2023 04:21:13 GMT</pubDate>
-</item>
-<item>
-<title> A sweet, mild hot sauce</title>
-<description><![CDATA[<p>We&#39;re running out of a mild hot sauce that we quite like, so I figured I might as well try to replicate the recipe. The following makes about 60oz/1.75L</p>
-<p>Ingredients:</p>
-<ul>
-<li>Jalapeno: x15~x20</li>
-<li>Habanero x6</li>
-<li>Tomatillo: x5 (small)</li>
-<li>Cilantro: 1 bunch (stems and all)</li>
-<li>Cumin: 3 tbsp</li>
-<li>Onion powder: 4 tbsp</li>
-<li>Black pepper: 1 tbsp</li>
-<li>Garlic paste: 5 tbsp</li>
-<li>Rock Salt: 35gr (1.5 tbsp)</li>
-<li>Thick apricot jam: 2.5 cups</li>
-<li>Apple cider vinegar: 1.5 cups</li>
-<li>Apple Juice: 0.5 cup</li>
-<li>Lemon juice:  4 tbsp</li>
-<li>Lime juice: 2 tbsp</li>
-</ul>
-<p>Steps:</p>
-<ol>
-<li>blend</li>
-<li>keep blending.</li>
-<li>keep it up!</li>
-<li>yeah you&#39;re probably done.</li>
-</ol>
-]]></description>
-<category>hot sauce</category>
-<link>https://pomax.github.io?postid=1697686323351</link>
-<guid>https://pomax.github.io?postid=1697686323351</guid>
-<pubDate>Thu, 19 Oct 2023 03:32:03 GMT</pubDate>
 </item></channel></rss>
