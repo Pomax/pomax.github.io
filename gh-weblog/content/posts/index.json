@@ -1593,5 +1593,10 @@
       "wysiwyg",
       "editor"
     ]
+  },
+  "2026-10-17-15-48-27": {
+    "title": "Auto-checkpoints for Hyper-V virtual machines",
+    "created": 1792252107786,
+    "tags": []
   }
 }
