@@ -4,5 +4,9 @@
   "created": 1792253628093,
   "published": 1792253628093,
   "updated": 1792253629618,
-  "tags": []
+  "tags": [
+    "Windows",
+    "Hyper-V",
+    "VM"
+  ]
 }
